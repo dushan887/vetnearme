@@ -742,17 +742,17 @@
     },
     {
         "name": "laravel/framework",
-        "version": "v5.6.12",
-        "version_normalized": "5.6.12.0",
+        "version": "v5.6.15",
+        "version_normalized": "5.6.15.0",
         "source": {
             "type": "git",
             "url": "https://github.com/laravel/framework.git",
-            "reference": "82d8165d1ea86bdd81ddfa1db9343fa19e7d1450"
+            "reference": "baa42cf6bdd942523fafece21ec16a1843c6db0f"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/laravel/framework/zipball/82d8165d1ea86bdd81ddfa1db9343fa19e7d1450",
-            "reference": "82d8165d1ea86bdd81ddfa1db9343fa19e7d1450",
+            "url": "https://api.github.com/repos/laravel/framework/zipball/baa42cf6bdd942523fafece21ec16a1843c6db0f",
+            "reference": "baa42cf6bdd942523fafece21ec16a1843c6db0f",
             "shasum": ""
         },
         "require": {
@@ -846,7 +846,7 @@
             "symfony/dom-crawler": "Required to use most of the crawler integration testing tools (~4.0).",
             "symfony/psr-http-message-bridge": "Required to psr7 bridging features (~1.0)."
         },
-        "time": "2018-03-14T17:29:38+00:00",
+        "time": "2018-03-30T13:29:58+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1335,17 +1335,17 @@
     },
     {
         "name": "nunomaduro/collision",
-        "version": "v2.0.0",
-        "version_normalized": "2.0.0.0",
+        "version": "v2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nunomaduro/collision.git",
-            "reference": "4e310ef9384f53ee8dda8736afb3cbaf320753a0"
+            "reference": "245958b02c6a9edf24627380f368333ac5413a51"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nunomaduro/collision/zipball/4e310ef9384f53ee8dda8736afb3cbaf320753a0",
-            "reference": "4e310ef9384f53ee8dda8736afb3cbaf320753a0",
+            "url": "https://api.github.com/repos/nunomaduro/collision/zipball/245958b02c6a9edf24627380f368333ac5413a51",
+            "reference": "245958b02c6a9edf24627380f368333ac5413a51",
             "shasum": ""
         },
         "require": {
@@ -1358,7 +1358,7 @@
             "laravel/framework": "5.6.*",
             "phpunit/phpunit": "~7.0"
         },
-        "time": "2018-02-18T12:29:27+00:00",
+        "time": "2018-03-21T20:11:24+00:00",
         "type": "library",
         "extra": {
             "laravel": {
@@ -2037,17 +2037,17 @@
     },
     {
         "name": "phpunit/phpunit",
-        "version": "7.0.2",
-        "version_normalized": "7.0.2.0",
+        "version": "7.0.3",
+        "version_normalized": "7.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/sebastianbergmann/phpunit.git",
-            "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9"
+            "reference": "536f4d853c12d8189963435088e8ff7c0daeab2e"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
-            "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
+            "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/536f4d853c12d8189963435088e8ff7c0daeab2e",
+            "reference": "536f4d853c12d8189963435088e8ff7c0daeab2e",
             "shasum": ""
         },
         "require": {
@@ -2061,7 +2061,7 @@
             "phar-io/version": "^1.0",
             "php": "^7.1",
             "phpspec/prophecy": "^1.7",
-            "phpunit/php-code-coverage": "^6.0",
+            "phpunit/php-code-coverage": "^6.0.1",
             "phpunit/php-file-iterator": "^1.4.3",
             "phpunit/php-text-template": "^1.2.1",
             "phpunit/php-timer": "^2.0",
@@ -2082,7 +2082,7 @@
             "ext-xdebug": "*",
             "phpunit/php-invoker": "^2.0"
         },
-        "time": "2018-02-26T07:03:12+00:00",
+        "time": "2018-03-26T07:36:48+00:00",
         "bin": [
             "phpunit"
         ],
@@ -2327,17 +2327,17 @@
     },
     {
         "name": "psy/psysh",
-        "version": "v0.8.17",
-        "version_normalized": "0.8.17.0",
+        "version": "v0.8.18",
+        "version_normalized": "0.8.18.0",
         "source": {
             "type": "git",
             "url": "https://github.com/bobthecow/psysh.git",
-            "reference": "5069b70e8c4ea492c2b5939b6eddc78bfe41cfec"
+            "reference": "5357b1cffc8fb375d6a9e3c86d5c82dd38a40834"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/bobthecow/psysh/zipball/5069b70e8c4ea492c2b5939b6eddc78bfe41cfec",
-            "reference": "5069b70e8c4ea492c2b5939b6eddc78bfe41cfec",
+            "url": "https://api.github.com/repos/bobthecow/psysh/zipball/5357b1cffc8fb375d6a9e3c86d5c82dd38a40834",
+            "reference": "5357b1cffc8fb375d6a9e3c86d5c82dd38a40834",
             "shasum": ""
         },
         "require": {
@@ -2360,7 +2360,7 @@
             "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
             "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
         },
-        "time": "2017-12-28T16:14:16+00:00",
+        "time": "2018-04-02T05:41:44+00:00",
         "bin": [
             "bin/psysh"
         ],

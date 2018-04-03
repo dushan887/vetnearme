@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\AdminMenu\\Menu' => $baseDir . '/app/AdminMenu/Menu.php',
+    'App\\Components\\AdminPanelMenu' => $baseDir . '/app/Components/AdminPanelMenu.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -13,6 +15,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
+    'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -1034,11 +1037,13 @@ return array(
     'Illuminate\\Foundation\\Console\\TestMakeCommand' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Console/TestMakeCommand.php',
     'Illuminate\\Foundation\\Console\\UpCommand' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Console/UpCommand.php',
     'Illuminate\\Foundation\\Console\\VendorPublishCommand' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Console/VendorPublishCommand.php',
+    'Illuminate\\Foundation\\Console\\ViewCacheCommand' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Console/ViewCacheCommand.php',
     'Illuminate\\Foundation\\Console\\ViewClearCommand' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Console/ViewClearCommand.php',
     'Illuminate\\Foundation\\EnvironmentDetector' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/EnvironmentDetector.php',
     'Illuminate\\Foundation\\Events\\Dispatchable' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Events/Dispatchable.php',
     'Illuminate\\Foundation\\Events\\LocaleUpdated' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Events/LocaleUpdated.php',
     'Illuminate\\Foundation\\Exceptions\\Handler' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php',
+    'Illuminate\\Foundation\\Exceptions\\WhoopsHandler' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Exceptions/WhoopsHandler.php',
     'Illuminate\\Foundation\\Http\\Events\\RequestHandled' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Http/Events/RequestHandled.php',
     'Illuminate\\Foundation\\Http\\Exceptions\\MaintenanceModeException' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Http/Exceptions/MaintenanceModeException.php',
     'Illuminate\\Foundation\\Http\\FormRequest' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Http/FormRequest.php',
@@ -1070,6 +1075,7 @@ return array(
     'Illuminate\\Foundation\\Testing\\Concerns\\MakesHttpRequests' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MakesHttpRequests.php',
     'Illuminate\\Foundation\\Testing\\Concerns\\MocksApplicationServices' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/Concerns/MocksApplicationServices.php',
     'Illuminate\\Foundation\\Testing\\Constraints\\HasInDatabase' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/Constraints/HasInDatabase.php',
+    'Illuminate\\Foundation\\Testing\\Constraints\\SeeInOrder' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/Constraints/SeeInOrder.php',
     'Illuminate\\Foundation\\Testing\\Constraints\\SoftDeletedInDatabase' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/Constraints/SoftDeletedInDatabase.php',
     'Illuminate\\Foundation\\Testing\\DatabaseMigrations' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/DatabaseMigrations.php',
     'Illuminate\\Foundation\\Testing\\DatabaseTransactions' => $vendorDir . '/laravel/framework/src/Illuminate/Foundation/Testing/DatabaseTransactions.php',
