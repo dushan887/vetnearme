@@ -1,5 +1,7 @@
 <?php
 
+use App\App\Components\AdminPanelMenu;
+
 return [
 
     /*
@@ -106,7 +108,7 @@ return [
     | layout. The 'can' is a filter on Laravel's built in Gate functionality.
     |
     */
-
+    
     'menu' => [],
 
     /*

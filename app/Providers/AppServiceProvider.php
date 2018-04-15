@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
-use App\AdminMenu\Menu;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +14,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
-        Menu::admin($events);
     }
 
     /**

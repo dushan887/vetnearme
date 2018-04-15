@@ -11,6 +11,11 @@ class SuperAdminSeed extends Seeder
      */
     public function run()
     {
+        $superAdmin = \App\User::where('email', '=', 'super_admin_test@supertest.com')->first();
+
+        if($superAdmin)
+            return true;
+
         $role = \App\Role::where('name', '=', 'super_admin')->first();
         $date = Carbon\Carbon::now();
 

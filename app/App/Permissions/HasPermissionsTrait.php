@@ -76,11 +76,11 @@ trait HasPermissionsTrait
 
     public function roles()
     {
-         return $this->belongsToMany(Role::class, 'user_roles');
+         return $this->belongsToMany(Role::class, 'users_roles');
     }
 
     public function permissions()
     {
-       return $this->belongsToMany(Permissions::class, 'user_permissions');
+       return $this->belongsToMany(Permissions::class, 'users_permissions');
     }
 }

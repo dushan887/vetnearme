@@ -9,46 +9,53 @@ use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
  */
 class AdminPanelMenu {
 
-    static public function superAdmin($events){
-
-        $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-
-            $event->menu->add('MAIN NAVIGATION');
-
-            $event->menu->add([
-                'text' => 'Profile',
-                'url' => 'user/',
-            ]);
-        });
-
-    }
-
-    static public function admin($events)
+    static function menu($user)
     {
-       $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
 
-            $event->menu->add('MAIN NAVIGATION');
+        if($user->hasRole('super_admin'))
+            return self::superAdmin();
 
-            $event->menu->add([
-                'text' => 'Profile',
-                'url' => 'user/',
-            ]);
-        });
+        if($user->hasRole('admin'))
+            return self::admin();
+
+        if($user->hasRole('user'))
+            return self::user();
+
+        return [];
 
     }
 
-    static public function user($events){
-
-        $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
-
+    private static function superAdmin()
+    {
+        \Event::listen('JeroenNoten\LaravelAdminLte\Events\BuildingMenu', function ($event) {
             $event->menu->add('MAIN NAVIGATION');
-
             $event->menu->add([
-                'text' => 'Profile',
-                'url' => 'user/',
+                'text' => 'Blog',
+                'url'  => 'admin/blog',
             ]);
         });
+    }
 
+    private static function admin()
+    {
+        \Event::listen('JeroenNoten\LaravelAdminLte\Events\BuildingMenu', function ($event) {
+            $event->menu->add('MAIN NAVIGATION');
+            $event->menu->add([
+                'text' => 'Blog',
+                'url'  => 'admin/blog',
+            ]);
+        });
+    }
+
+    private static function user()
+    {
+        \Event::listen('JeroenNoten\LaravelAdminLte\Events\BuildingMenu', function ($event) {
+            $event->menu->add('MAIN NAVIGATION');
+            $event->menu->add([
+                'text' => 'Blog',
+                'url'  => 'admin/blog',
+            ]);
+        });
     }
 
 }

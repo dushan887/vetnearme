@@ -11,17 +11,10 @@ class UserRolesSeeder extends Seeder
      */
     public function run()
     {
-        $date = Carbon\Carbon::now();
+        App\Role::firstOrCreate(['name' => 'super_admin']);
+        App\Role::firstOrCreate(['name' => 'admin']);
+        App\Role::firstOrCreate(['name' => 'moderator']);
+        App\Role::firstOrCreate(['name' => 'user']);
 
-        DB::table('roles')->delete();
-
-        DB::table('roles')->insert([
-
-            ['name' => 'super_admin', 'created_at' => $date, 'updated_at' => $date],
-            ['name' => 'admin', 'created_at' => $date, 'updated_at' => $date],
-            ['name' => 'moderator', 'created_at' => $date, 'updated_at' => $date],
-            ['name' => 'user', 'created_at' => $date, 'updated_at' => $date],
-
-        ]);
     }
 }
