@@ -1,9 +1,8 @@
 <?php 
 
-Route::group(['prefix' => 'admin', 'middleware' => 'menu.admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], function () {
 
-    Route::get('home', function () {
-        return view('home');
-    });
+    Route::get('services', 'ServicesController@index')->name('services');
+    Route::get('services/all', 'ServicesController@all');
     
 });

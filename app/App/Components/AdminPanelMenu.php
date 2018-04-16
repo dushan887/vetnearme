@@ -11,7 +11,6 @@ class AdminPanelMenu {
 
     static function menu($user)
     {
-
         if($user->hasRole('super_admin'))
             return self::superAdmin();
 
@@ -32,6 +31,10 @@ class AdminPanelMenu {
             $event->menu->add([
                 'text' => 'Blog',
                 'url'  => 'admin/blog',
+            ]);
+            $event->menu->add([
+                'text' => 'Services',
+                'url'  => 'admin/services',
             ]);
         });
     }

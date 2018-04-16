@@ -14,7 +14,7 @@
 ][config('adminlte.layout')] : '') . (config('adminlte.collapse_sidebar') ? ' sidebar-collapse ' : ''))
 
 @section('body')
-    <div class="wrapper">
+    <div class="wrapper" id=admin-app>
 
         <!-- Main Header -->
         <header class="main-header">
@@ -123,10 +123,12 @@
             </div>
             <!-- /.container -->
             @endif
+            
         </div>
         <!-- /.content-wrapper -->
-
+    <admin-modal></admin-modal>
     </div>
+    
     <!-- ./wrapper -->
 @stop
 

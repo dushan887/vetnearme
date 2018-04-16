@@ -9,6 +9,16 @@ use App\{Role, Permission};
  */
 trait HasPermissionsTrait
 {
+
+    public function giveRole($role = 'user')
+    {
+        $role = DB::table('users_roles')->where('name', '=', $role)->first();
+
+        $this->roles()->saveMany([$role->id]);
+
+        return $this;
+    }
+
     public function givePermission(...$permissions)
     {
         $permissions = $this->getPermissions(\array_flatten($permissions));
