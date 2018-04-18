@@ -1,29 +1,40 @@
 <template>
-    
-    <transition name="modal">
-        <div class="modal-mask" @click="close" v-show="show">
-            <div class="modal-container" @click.stop>
-              <slot></slot>
-            </div>
-        </div>
-    </transition>
-  
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="main-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <span v-html="body"></span>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 </template>
 
 <script>
     export default {
-        props: ['show'],
         methods: {
-            close: function () {
-            this.$emit('close');
+            test(){
+                alert(1)
             }
         },
-        mounted: function () {
-            document.addEventListener("keydown", (e) => {
-            if (this.show && e.keyCode == 27) {
-                this.close();
+        data(){
+            return {
+                body: ''
             }
-            });
+        },
+        mounted(){
+
+            let mainModal = $('#main-modal')
+
+            Event.$on('modal:show', (html) => {
+                this.body = html
+                mainModal.modal('show')
+            })
+
+            Event.$on('modal:hide', () => {
+                mainModal.modal('hide')
+            })
+
         }
     }
 </script>
