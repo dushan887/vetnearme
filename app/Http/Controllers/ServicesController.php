@@ -26,7 +26,7 @@ class ServicesController extends Controller
     public function all(Request $request)
     {
         return response()
-            ->json(Service::all());
+            ->json(Service::orderBy('count', 'desc')->get());
     }
 
     /**
@@ -55,5 +55,51 @@ class ServicesController extends Controller
         $service = Service::create($data);
 
         return response()->json($service);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        return response()
+            ->json(view('services/partials/_editForm', [
+                'service' => Service::find($id),
+            ])->render());
+    }
+
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $service = Service::find($id);
+
+        $data = $request->validate([
+            'name' => 'required|min:3|max:255|unique:services,name,' . $service->id,
+        ]);
+
+        $service->update($data);
+
+        return $service;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if(Service::destroy($id))
+            return response()->json('Service Deleted', 200);
     }
 }

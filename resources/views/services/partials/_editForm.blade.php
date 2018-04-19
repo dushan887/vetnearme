@@ -5,17 +5,16 @@
 
 <div class="modal-body">
     <form id=service-store
-        action='/admin/services/store'
+        action='/admin/services/update/{{ $service->id }}'
         role=form
-        data-action=store
-        onsubmit="event.preventDefault(); Event.$emit('service:save')">
+        onsubmit="event.preventDefault(); Event.$emit('service:save')"
+        data-action=update>
 
         <div class="box-body">
             <div class="form-group" data-group=name>
 
                 <label for="name">Name</label>
-                <input type="text" name=name id=name class=form-control>
-
+                <input type="text" name=name id=name class=form-control value="{{ $service->name }}">
             </div>
         </div>
 
@@ -24,5 +23,5 @@
 
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" onclick="window.Event.$emit('service:save')">Save Service</button>
+    <button type="button" class="btn btn-primary" onclick="window.Event.$emit('service:save')">Update Service</button>
 </div>

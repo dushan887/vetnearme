@@ -1,10 +1,14 @@
 import Vue from 'vue'
+import VuejsDialog from "vuejs-dialog"
 
-window.Event = new Vue();
+Vue.use(VuejsDialog)
 
-window.axios = require('axios');
+window.Event = new Vue()
+window.Vue   = Vue
 
-let token = document.head.querySelector('meta[name="csrf-token"]');
+window.axios = require('axios')
+
+let token = document.head.querySelector('meta[name="csrf-token"]')
 
 if (token) {
 
