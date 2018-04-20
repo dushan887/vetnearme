@@ -8,6 +8,12 @@ use App\Service;
 
 class ServicesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkRole:super_admin');
+    }
+
     /**
      * Show the dashboard services.
      *
@@ -54,7 +60,12 @@ class ServicesController extends Controller
 
         $service = Service::create($data);
 
-        return response()->json($service);
+        return response()->json([
+            'service'      => $service,
+            'messageTitle' => 'Service Created',
+            'messageText'  => 'The service has been created',
+            'class'        => 'success'
+        ]);
     }
 
     /**
@@ -88,7 +99,12 @@ class ServicesController extends Controller
 
         $service->update($data);
 
-        return $service;
+        return response()->json([
+            'service'      => $service,
+            'messageTitle' => 'Service Updated',
+            'messageText'  => 'The service has been updated',
+            'class'        => 'success'
+        ]);
     }
 
     /**
@@ -100,6 +116,16 @@ class ServicesController extends Controller
     public function destroy($id)
     {
         if(Service::destroy($id))
-            return response()->json('Service Deleted', 200);
+            return response()->json([
+                'messageTitle' => 'Service Deleted',
+                'messageText'  => 'The service has been deleted',
+                'class'        => 'success'
+            ]);
+
+         return response()->json([
+                'messageTitle' => 'Alert',
+                'messageText'  => 'Something went wrong. Please try again a bit later',
+                'class'        => 'error'
+            ]);
     }
 }

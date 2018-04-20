@@ -109,6 +109,7 @@
 
             <!-- Content Header (Page header) -->
             <section class="content-header">
+                <admin-alerts></admin-alerts>
                 @yield('content_header')
             </section>
 

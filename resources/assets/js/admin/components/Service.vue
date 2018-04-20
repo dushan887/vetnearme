@@ -74,15 +74,21 @@ export default {
                             id: serviceID
                         })
                         .then((response) => {
+
+                            let data = response.data
                             dialog.close()
 
                             let serviceIndex = this.services.findIndex(service => serviceID)
 
                             Vue.delete(this.services, serviceIndex);
+
+                            Event.$emit('message:show', {
+                                messageTitle: data.messageTitle,
+                                messageText:  data.messageText
+                            }, data.class)
                         })
                         .catch((error) => {
-                            console.log(error);
-                            
+
                             alert('Something went wrong. Please try again a bit later')
                             dialog.close()
                         })
@@ -108,19 +114,24 @@ export default {
 
                switch (action) {
                    case 'store':
-                        this.services.unshift({id : data.id, name : data.name, count: 0})
+                        this.services.unshift({id : data.service.id, name : data.service.name, count: 0})
                        break;
 
                     case 'update':
 
-                        let serviceIndex = this.services.findIndex(service => service.id === data.id)
+                        let serviceIndex = this.services.findIndex(service => service.id === data.service.id)
 
-                        this.services[serviceIndex].name = data.name
+                        this.services[serviceIndex].name = data.service.name
 
                        break;
                }
 
                Event.$emit('modal:hide')
+
+               Event.$emit('message:show', {
+                                messageTitle: data.messageTitle,
+                                messageText:  data.messageText
+                        }, data.class)
             })
             .catch((error) => {
                 Event.$emit('form:errors:show', form, error.response.data.errors)

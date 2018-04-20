@@ -26,13 +26,15 @@ let Form = require('./methods/Form.js');
 // Components
 import Service from './components/Service.vue'
 import Modal from './components/Modal.vue'
+import EventMessages from './components/EventMessages.vue'
 
 let adminVue = new Vue({
     el: '#admin-app',
     mixins: [Form],
     components: {
         adminService: Service,
-        adminModal: Modal
+        adminModal: Modal,
+        adminAlerts: EventMessages
     },
     mounted(){
         Event.$on('form:errors:show', (form, errors) => {
