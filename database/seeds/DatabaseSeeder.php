@@ -13,5 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserRolesSeeder::class);
         $this->call(SuperAdminSeed::class);
+
+        $this->call('CountriesSeeder');
+        $this->command->info('Seeded the countries!'); 
     }
 }
