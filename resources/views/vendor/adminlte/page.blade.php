@@ -57,24 +57,185 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                          <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-envelope-o"></i>
+                              <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li class="header">You have 4 messages</li>
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li><!-- start message -->
+                                    <a href="#">
+                                      <div class="pull-left">
+                                        <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+                                      </div>
+                                      <h4>
+                                        Support Team
+                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                      </h4>
+                                      <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li>
+                                  <!-- end message -->
+                                  <li>
+                                    <a href="#">
+                                      <div class="pull-left">
+                                        <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+                                      </div>
+                                      <h4>
+                                        AdminLTE Design Team
+                                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
+                                      </h4>
+                                      <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <div class="pull-left">
+                                        <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+                                      </div>
+                                      <h4>
+                                        Developers
+                                        <small><i class="fa fa-clock-o"></i> Today</small>
+                                      </h4>
+                                      <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <div class="pull-left">
+                                        <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+                                      </div>
+                                      <h4>
+                                        Sales Department
+                                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
+                                      </h4>
+                                      <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <div class="pull-left">
+                                        <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+                                      </div>
+                                      <h4>
+                                        Reviewers
+                                        <small><i class="fa fa-clock-o"></i> 2 days</small>
+                                      </h4>
+                                      <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li class="footer"><a href="#">See All Messages</a></li>
+                            </ul>
+                          </li>
+                          <!-- Notifications: style can be found in dropdown.less -->
+                          <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-bell-o"></i>
+                              <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li class="header">You have 10 notifications</li>
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li>
+                                    <a href="#">
+                                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                      page and may cause design problems
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <i class="fa fa-users text-red"></i> 5 new members joined
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="#">
+                                      <i class="fa fa-user text-red"></i> You changed your username
+                                    </a>
+                                  </li>
+                                </ul>
+                              </li>
+                              <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                          </li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                              <img src="http://via.placeholder.com/160x160" class="user-image" alt="User Image">
+                              <span class="hidden-xs">Name Surname</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <!-- User image -->
+                              <li class="user-header">
+                                <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+
+                                <p>
+                                  Name Surname - Position
+                                  <small>Member since April 2018</small>
+                                </p>
+                              </li>
+                              <!-- Menu Body -->
+                              <li class="user-body">
+                                <div class="row">
+                                  <div class="col-xs-4 text-left">
+                                    <a href="#"> <img src="http://via.placeholder.com/160x160" class="img-responsive" alt="Clinic Image"></a>
+                                  </div>
+                                  <div class="col-xs-8 text-left">
+                                    <small>Practice</small><br />
+                                    <a href="#"  class="lead"><strong>Clinic Name</strong></a>
+                                  </div>
+                                </div>
+                                <!-- /.row -->
+                              </li>
+                              <!-- Menu Footer-->
+                              <li class="user-footer">
+                                <div class="row" style="margin-right: -10px;margin-left: -10px;">
+                                    <div class="col-xs-6">
+                                      <a href="#" class="btn btn-default btn-flat btn-block "><i class="fa fa-fw fa-user"></i>  My Profile</a>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
+                                            <a class="btn btn-default btn-flat btn-block" 
+                                                href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" >
+                                                <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-default btn-flat btn-block"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                            >
+                                                <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
+                                                @if(config('adminlte.logout_method'))
+                                                    {{ method_field(config('adminlte.logout_method')) }}
+                                                @endif
+                                                {{ csrf_field() }}
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </li>
                         <li>
-                            @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
-                                </a>
-                            @else
-                                <a href="#"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                >
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
-                                </a>
-                                <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
-                                    @if(config('adminlte.logout_method'))
-                                        {{ method_field(config('adminlte.logout_method')) }}
-                                    @endif
-                                    {{ csrf_field() }}
-                                </form>
-                            @endif
+                            
                         </li>
                     </ul>
                 </div>
@@ -90,6 +251,17 @@
 
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
+
+                 <!-- Sidebar user panel -->
+                  <div class="user-panel">
+                    <div class="pull-left image">
+                      <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                      <p>Name Surname</p>
+                      <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    </div>
+                  </div>
 
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">

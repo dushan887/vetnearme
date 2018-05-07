@@ -29,12 +29,60 @@ class AdminPanelMenu {
         \Event::listen('JeroenNoten\LaravelAdminLte\Events\BuildingMenu', function ($event) {
             $event->menu->add('MAIN NAVIGATION');
             $event->menu->add([
-                'text' => 'Blog',
-                'url'  => 'admin/blog',
+                'text' => 'Dashboard',
+                'url'  => '/',
+                'icon' => 'dashboard'
+            ]);
+            $event->menu->add([
+                'text' => 'My Account',
+                'url'  => 'admin/user',
+                'icon' => 'user'
+            ]);
+            $event->menu->add([
+                'text' => 'My Clinic',
+                'url'  => 'admin/my-clinic',
+                'icon' => 'hospital-o'
+            ]);
+            $event->menu->add([
+                'text' => 'Mailbox',
+                'url'  => 'admin/mailbox',
+                'icon' => 'envelope-o'
+            ]);
+            $event->menu->add([
+                'text' => 'Notifications',
+                'url'  => 'admin/notifications',
+                'icon' => 'bell-o'
+            ]);
+            $event->menu->add('ADMIN NAVIGATION');
+            $event->menu->add([
+                'text' => 'Users',
+                'url'  => 'admin/users',
+                'icon' => 'users'
+            ]);
+            $event->menu->add([
+                'text' => 'Clinics',
+                'url'  => 'admin/clinics',
+                'icon' => 'hospital-o'
             ]);
             $event->menu->add([
                 'text' => 'Services',
                 'url'  => 'admin/services',
+                'icon' => 'plus-square'
+            ]);
+            $event->menu->add([
+                'text' => 'Media',
+                'url'  => 'admin/media',
+                'icon' => 'picture-o'
+            ]);
+            $event->menu->add([
+                'text' => 'Blog',
+                'url'  => 'admin/blog',
+                'icon' => 'newspaper-o'
+            ]);
+            $event->menu->add([
+                'text' => 'Settings',
+                'url'  => 'admin/settings',
+                'icon' => 'cogs'
             ]);
         });
     }

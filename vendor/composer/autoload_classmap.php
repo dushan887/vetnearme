@@ -20,6 +20,7 @@ return array(
     'App\\Http\\Controllers\\ClinicsController' => $baseDir . '/app/Http/Controllers/ClinicsController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
+    'App\\Http\\Controllers\\Front\\FrontPartController' => $baseDir . '/app/Http/Controllers/Front/FrontPartController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\ServicesController' => $baseDir . '/app/Http/Controllers/ServicesController.php',
     'App\\Http\\Controllers\\TestController' => $baseDir . '/app/Http/Controllers/TestController.php',

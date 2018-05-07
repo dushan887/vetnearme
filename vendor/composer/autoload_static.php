@@ -366,6 +366,7 @@ class ComposerStaticInitefe6f2cb13157103f66246e1d2130f24
         'App\\Http\\Controllers\\ClinicsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClinicsController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
+        'App\\Http\\Controllers\\Front\\FrontPartController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/FrontPartController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ServicesController' => __DIR__ . '/../..' . '/app/Http/Controllers/ServicesController.php',
         'App\\Http\\Controllers\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/TestController.php',
