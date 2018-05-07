@@ -22,7 +22,7 @@
 	})
 	$('#search .submit').on('click', function(e) {
 		e.preventDefault();
-		window.location.href='results.php'; 
+		window.location.href='/'; 
 
 	})
 	$('#f-option1').on('change', function() {
@@ -55,6 +55,6 @@
 	function getMessage() {
 	   return background[Math.floor(Math.random() * background.length)];
 	}
-	var newbg = 'url(/assets/images/'+getMessage()+'.jpg)';
+	var newbg = 'url(/img/'+getMessage()+'.jpg)';
 	$('#swap-bg').css('background-image', newbg)
 </script>

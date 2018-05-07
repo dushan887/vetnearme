@@ -3,7 +3,7 @@
 		<div class="col col-50">
 			<article>
 				<header>
-					<a href="/blog-single.php">
+					<a href="#">
 						<div class="cover-img" style="background-image: url(/assets/images/banner.jpg);"></div>
 					</a>
 				</header>
@@ -17,7 +17,7 @@
 							<a href="#">CATGEGORY</a>
 						</div>
 						<div class="col col-50 align-right">
-							<a href="/blog-single.php">read more...</a>
+							<a href="#">read more...</a>
 						</div>
 					</div>
 				</footer>
@@ -27,7 +27,7 @@
 		<div class="col col-50">
 			<article>
 				<header>
-					<a href="/blog-single.php">
+					<a href="#">
 						<div class="cover-img" style="background-image: url(/assets/images/banner4.jpg);"></div>
 					</a>
 				</header>
@@ -41,7 +41,7 @@
 							<a href="#">CATGEGORY</a>
 						</div>
 						<div class="col col-50 align-right">
-							<a href="/blog-single.php">read more...</a>
+							<a href="#">read more...</a>
 						</div>
 					</div>
 				</footer>
@@ -53,7 +53,7 @@
 		<div class="col col-50">
 			<article>
 				<header>
-					<a href="/blog-single.php">
+					<a href="#">
 						<div class="cover-img" style="background-image: url(/assets/images/banner3.jpg);"></div>
 					</a>
 				</header>
@@ -67,7 +67,7 @@
 							<a href="#">CATGEGORY</a>
 						</div>
 						<div class="col col-50 align-right">
-							<a href="/blog-single.php">read more...</a>
+							<a href="#">read more...</a>
 						</div>
 					</div>
 				</footer>
@@ -76,7 +76,7 @@
 		<div class="col col-50">
 			<article>
 				<header>
-					<a href="/blog-single.php">
+					<a href="#">
 						<div class="cover-img" style="background-image: url(/assets/images/banner5.jpg);"></div>
 					</a>
 				</header>
@@ -90,7 +90,7 @@
 							<a href="#">CATGEGORY</a>
 						</div>
 						<div class="col col-50 align-right">
-							<a href="/blog-single.php">read more...</a>
+							<a href="#">read more...</a>
 						</div>
 					</div>
 				</footer>

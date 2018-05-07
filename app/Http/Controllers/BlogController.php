@@ -24,5 +24,15 @@ class BlogController extends Controller
         return view('blog/index');
     }
 
+    /**
+     * Show the dashboard New Blog.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request)
+    {
+        return view('blog/create');
+    }
+
     
 }

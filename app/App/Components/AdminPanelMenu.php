@@ -46,7 +46,7 @@ class AdminPanelMenu {
             $event->menu->add([
                 'text' => 'Mailbox',
                 'url'  => 'admin/mailbox',
-                'icon' => 'envelope-o'
+                'icon' => 'envelope-o',
             ]);
             $event->menu->add([
                 'text' => 'Notifications',

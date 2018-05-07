@@ -16,7 +16,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="{{ url('/admin/practices/new_practice') }}" class="btn btn-primary btn-block margin-bottom">Add New Practice</a>
+          <a href="{{ url('/admin/clinics/create') }}" class="btn btn-primary btn-block margin-bottom">Add New Practice</a>
 
           <div class="box box-solid">
             <div class="box-header with-border">
@@ -99,8 +99,8 @@
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/user') }}"'><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
+                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-edit"></i></button>
+                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-envelope-o"></i></button>
                   <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                 </div>
                 <!-- /.btn-group -->
@@ -132,8 +132,93 @@
                       <td>Australia</td>
                       <td width="150">
                         <div class="btn-group pull-right">
-                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/practice') }}"'><i class="fa fa-eye"></i></button>
-                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/practices/edit_practice') }}"'><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
+                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width="35"><input type="checkbox"></td>
+                      <td width="47"><img src="http://via.placeholder.com/160x160" alt="Practice Image" width="30" height="30"></td>
+                      <td>Practice Name</td>
+                      <td>Name Surname</td>
+                      <td>April, 2018</td>
+                      <td>Australia</td>
+                      <td width="150">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
+                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width="35"><input type="checkbox"></td>
+                      <td width="47"><img src="http://via.placeholder.com/160x160" alt="Practice Image" width="30" height="30"></td>
+                      <td>Practice Name</td>
+                      <td>Name Surname</td>
+                      <td>April, 2018</td>
+                      <td>Australia</td>
+                      <td width="150">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
+                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width="35"><input type="checkbox"></td>
+                      <td width="47"><img src="http://via.placeholder.com/160x160" alt="Practice Image" width="30" height="30"></td>
+                      <td>Practice Name</td>
+                      <td>Name Surname</td>
+                      <td>April, 2018</td>
+                      <td>Australia</td>
+                      <td width="150">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
+                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width="35"><input type="checkbox"></td>
+                      <td width="47"><img src="http://via.placeholder.com/160x160" alt="Practice Image" width="30" height="30"></td>
+                      <td>Practice Name</td>
+                      <td>Name Surname</td>
+                      <td>April, 2018</td>
+                      <td>Australia</td>
+                      <td width="150">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-edit"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
+                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width="35"><input type="checkbox"></td>
+                      <td width="47"><img src="http://via.placeholder.com/160x160" alt="Practice Image" width="30" height="30"></td>
+                      <td>Practice Name</td>
+                      <td>Name Surname</td>
+                      <td>April, 2018</td>
+                      <td>Australia</td>
+                      <td width="150">
+                        <div class="btn-group pull-right">
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-edit"></i></button>
                           <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
                           <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
                         </div>

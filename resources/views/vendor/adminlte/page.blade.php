@@ -69,7 +69,7 @@
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                   <li><!-- start message -->
-                                    <a href="#">
+                                    <a href="{{ url('/admin/mailbox/message') }}">
                                       <div class="pull-left">
                                         <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
                                       </div>
@@ -77,61 +77,61 @@
                                         Support Team
                                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                                       </h4>
-                                      <p>Why not buy a new awesome theme?</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis distinctio, eum velit accusamus a cumque molestiae, aspernatur deleniti itaque tempora ut ipsa. Doloribus veritatis incidunt expedita repellendus soluta maiores harum.</p>
                                     </a>
                                   </li>
                                   <!-- end message -->
                                   <li>
-                                    <a href="#">
+                                    <a href="{{ url('/admin/mailbox/message') }}">
                                       <div class="pull-left">
                                         <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
                                       </div>
                                       <h4>
-                                        AdminLTE Design Team
+                                        Support Team
                                         <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                       </h4>
-                                      <p>Why not buy a new awesome theme?</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit quisquam, corporis modi dicta sed. Non, ex vitae in doloribus voluptas sequi, expedita animi veritatis, nulla vero nisi culpa exercitationem explicabo.</p>
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
+                                    <a href="{{ url('/admin/mailbox/message') }}">
                                       <div class="pull-left">
                                         <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
                                       </div>
                                       <h4>
-                                        Developers
+                                        Support Team
                                         <small><i class="fa fa-clock-o"></i> Today</small>
                                       </h4>
-                                      <p>Why not buy a new awesome theme?</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum et, ut illo expedita ipsa praesentium totam, architecto minima labore eligendi obcaecati, dolor sapiente possimus dolorem. Vero quidem itaque, qui fugit.</p>
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
+                                    <a href="{{ url('/admin/mailbox/message') }}">
                                       <div class="pull-left">
                                         <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
                                       </div>
                                       <h4>
-                                        Sales Department
+                                        Support Team
                                         <small><i class="fa fa-clock-o"></i> Yesterday</small>
                                       </h4>
-                                      <p>Why not buy a new awesome theme?</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate in tempore veritatis qui non! Quo repellendus, numquam totam, aspernatur deserunt hic earum a. Hic error facilis ipsam. Assumenda fugit, eaque.</p>
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
+                                    <a href="{{ url('/admin/mailbox/message') }}">
                                       <div class="pull-left">
                                         <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
                                       </div>
                                       <h4>
-                                        Reviewers
+                                        Support Team
                                         <small><i class="fa fa-clock-o"></i> 2 days</small>
                                       </h4>
-                                      <p>Why not buy a new awesome theme?</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate delectus quisquam repellendus, ipsam temporibus provident, deserunt officia! Dignissimos, impedit? Asperiores quas, assumenda. Architecto aperiam, assumenda. Blanditiis, iure odit cum deleniti!</p>
                                     </a>
                                   </li>
                                 </ul>
                               </li>
-                              <li class="footer"><a href="#">See All Messages</a></li>
+                              <li class="footer"><a href="{{ url('/admin/mailbox') }}">See All Messages</a></li>
                             </ul>
                           </li>
                           <!-- Notifications: style can be found in dropdown.less -->
@@ -146,34 +146,34 @@
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
                                   <li>
-                                    <a href="#">
+                                    <a href="{{ url('/admin/notifications/notification') }}">
                                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
+                                    <a href="{{ url('/admin/notifications/notification') }}">
                                       <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
                                       page and may cause design problems
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i class="fa fa-users text-red"></i> 5 new members joined
+                                    <a href="{{ url('/admin/notifications/notification') }}">
+                                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
+                                    <a href="{{ url('/admin/notifications/notification') }}">
+                                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
-                                      <i class="fa fa-user text-red"></i> You changed your username
+                                    <a href="{{ url('/admin/notifications/notification') }}">
+                                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                     </a>
                                   </li>
                                 </ul>
                               </li>
-                              <li class="footer"><a href="#">View all</a></li>
+                              <li class="footer"><a href="{{ url('/admin/notifications/notification') }}">View all</a></li>
                             </ul>
                           </li>
                         <li class="dropdown user user-menu">
@@ -195,7 +195,7 @@
                               <li class="user-body">
                                 <div class="row">
                                   <div class="col-xs-4 text-left">
-                                    <a href="#"> <img src="http://via.placeholder.com/160x160" class="img-responsive" alt="Clinic Image"></a>
+                                    <a href="{{ url('/admin/user') }}"> <img src="http://via.placeholder.com/160x160" class="img-responsive" alt="Clinic Image"></a>
                                   </div>
                                   <div class="col-xs-8 text-left">
                                     <small>Practice</small><br />
@@ -208,7 +208,7 @@
                               <li class="user-footer">
                                 <div class="row" style="margin-right: -10px;margin-left: -10px;">
                                     <div class="col-xs-6">
-                                      <a href="#" class="btn btn-default btn-flat btn-block "><i class="fa fa-fw fa-user"></i>  My Profile</a>
+                                      <a href="{{ url('/admin/user') }}" class="btn btn-default btn-flat btn-block "><i class="fa fa-fw fa-user"></i>  My Profile</a>
                                     </div>
                                     <div class="col-xs-6">
                                         @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))

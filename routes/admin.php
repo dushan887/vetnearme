@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
 
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog');
+    Route::get('blog/create', 'BlogController@create');
 
 
 });

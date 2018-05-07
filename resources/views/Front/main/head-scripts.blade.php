@@ -12,5 +12,5 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600" rel="stylesheet">
 
 <!-- CUSTOM STYLES -->
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}">
 
