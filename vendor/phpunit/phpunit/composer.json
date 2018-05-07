@@ -36,7 +36,11 @@
         "phpunit/php-text-template": "^1.2.1",
         "phpunit/php-timer": "^2.0",
         "phpunit/phpunit-mock-objects": "^6.1.1",
+<<<<<<< HEAD
         "sebastian/comparator": "^3.0",
+=======
+        "sebastian/comparator": "^2.1 || ^3.0",
+>>>>>>> 2eede3e72d206f72b0e494cf8e05747b02f7160e
         "sebastian/diff": "^3.0",
         "sebastian/environment": "^3.1",
         "sebastian/exporter": "^3.1",

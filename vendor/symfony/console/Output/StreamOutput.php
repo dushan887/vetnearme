@@ -93,6 +93,9 @@ class StreamOutput extends Output
      */
     protected function hasColorSupport()
     {
+        if (function_exists('stream_isatty') && !@stream_isatty($this->stream)) {
+            return false;
+        }
         if (DIRECTORY_SEPARATOR === '\\') {
             return (function_exists('sapi_windows_vt100_support')
                 && @sapi_windows_vt100_support($this->stream))

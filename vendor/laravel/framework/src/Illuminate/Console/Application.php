@@ -173,10 +173,13 @@ class Application extends SymfonyApplication implements ApplicationContract
             $command = $this->laravel->make($command)->getName();
         }
 
+<<<<<<< HEAD
         if (! $this->has($command)) {
             throw new CommandNotFoundException(sprintf('The command "%s" does not exist.', $command));
         }
 
+=======
+>>>>>>> 2eede3e72d206f72b0e494cf8e05747b02f7160e
         array_unshift($parameters, $command);
 
         $this->lastOutput = $outputBuffer ?: new BufferedOutput;
