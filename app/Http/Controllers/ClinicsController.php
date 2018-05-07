@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 
 class ClinicsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkRole:super_admin');
+    }
+
     /**
-     * Display a listing of the resource.
+     * Show the dashboard Clinics.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('clinics/index');
     }
@@ -81,4 +86,5 @@ class ClinicsController extends Controller
     {
         //
     }
+
 }
