@@ -13,7 +13,7 @@ class ClinicsController extends Controller
      */
     public function index()
     {
-        //
+        return view('clinics/index');
     }
 
     /**

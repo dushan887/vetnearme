@@ -9,5 +9,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
     Route::post('services/store', 'ServicesController@store');
     Route::post('services/update/{id}', 'ServicesController@update');
     Route::post('services/destroy/{id}', 'ServicesController@destroy');
+
+    Route::get('clinics', 'ClinicsController@index')->name('clinics');
     
 });
