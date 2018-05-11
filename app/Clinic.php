@@ -21,7 +21,7 @@ class Clinic extends Model
      */
     public function country()
     {
-        return $this->hasOne('Countries');
+        return $this->hasOne('Country');
     }
 
     public function services()

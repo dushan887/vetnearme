@@ -36,9 +36,26 @@ let adminVue = new Vue({
         adminModal: Modal,
         adminAlerts: EventMessages
     },
+    methods: {
+        notWorking(day){
+            $('[data-hoursday=' + day + '] input[type=text]')
+                .prop('disabled', (i, v) => { return !v } )
+                .val('00:00')
+        }
+    },
     mounted(){
         Event.$on('form:errors:show', (form, errors) => {
             Form.showErrors(form, errors)
         })
     }
+})
+
+
+
+//Timepicker
+$('.timepicker').timepicker({
+    timeFormat: 'HH:mm',
+    interval: 5,
+    defaultTime: '00',
+
 })

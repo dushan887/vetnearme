@@ -34,329 +34,454 @@
 
                   <div class="col-md-12">
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                       <label for=name>Clinic Name</label>
-                      <input type="text" id=name name=name class="form-control" placeholder="Clinic Name">
+                      <input type="text" id=name name=name class="form-control" placeholder="Clinic Name" value="{{ old('name')}}">
+                      {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
                       <label for=description>Description</label>
-                      <textarea class="form-control" id=description name=description placeholder="Description"></textarea>
+                      <textarea class="form-control" id=description name=description placeholder="Description">{{ old('description') }}</textarea>
+                      {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                       <label for=email>Email Address</label>
-                      <input type="email" id=email name=email class="form-control" placeholder="Email">
+                      <input type="email" id=email name=email class="form-control" placeholder="Email" value="{{ old('email')}}">
+                      {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('phoneNumber') ? 'has-error' : ''}}">
                       <label name=phoneNumber>Phone Number</label>
-                      <input type="text" id=phoneNumber name=phoneNumber class="form-control" placeholder="Phone Number">
+                      <input type="text" id=phoneNumber name=phoneNumber class="form-control" placeholder="Phone Number" value="{{ old('phoneNumber') }}">
+                      {!! $errors->first('phoneNumber', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('hours.emergencyNumber') ? 'has-error' : ''}}">
                       <label for=emergencyNumber>Emergency Number</label>
-                      <input type="text" id=emergencyNumber name=emergencyNumber class="form-control" placeholder="Emergency Number">
+                      <input type="text" id=emergencyNumber name=emergencyNumber class="form-control" placeholder="Emergency Number" value="{{ old('emergencyNumber') }}">
+                      {!! $errors->first('emergencyNumber', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('url') ? 'has-error' : ''}}">
                       <label for=url>Web URL</label>
-                      <input type="text" id=url name=url class="form-control" placeholder="Web URL">
+                      <input type="text" id=url name=url class="form-control" placeholder="Web URL" value="{{ old('url')}}">
+                      {!! $errors->first('url', '<p class="help-block">:message</p>') !!}
                     </div>
 
                     <hr>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('city') ? 'has-error' : ''}}">
                       <label for=city>City</label>
-                      <input type="text" id=city name=city class="form-control" placeholder="City">
+                      <input type="text" id=city name=city class="form-control" placeholder="City" value="{{ old('city')}}">
+                      {!! $errors->first('city', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
                       <label for=address>Address</label>
-                      <input type="text" id=address name=address class="form-control" placeholder="Address">
+                      <input type="text" id=address name=address class="form-control" placeholder="Address" value="{{ old('address')}}">
+                      {!! $errors->first('address', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('zip') ? 'has-error' : ''}}">
                       <label for=zip>Postal Code</label>
-                      <input type="text" id=zip name=zip class="form-control" placeholder="Postal Code">
+                      <input type="text" id=zip name=zip class="form-control" placeholder="Postal Code" value="{{ old('zip')}}">
+                      {!! $errors->first('zip', '<p class="help-block">:message</p>') !!}
                     </div>
 
                     <div class="form-group">
                       <label for=country>Country</label>
-                      <input type="text" id=country name=country class="form-control" placeholder="Country">
+                      <select name="country" id="country" class="form-control">
+                        @foreach($countries as $key => $value)
+                          <option value="<?php
+                            if($key === old('country')) echo old('country')
+                          ?>">{{$value}}</option>
+                        @endforeach
+                      </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('gmap') ? 'has-error' : ''}}">
                       <label for=gmap>Google Map URL</label>
-                      <input type="text" id=gmap id=gmap class="form-control" placeholder="Google Map URL">
+                      <input type="text" id=gmap id=gmap class="form-control" placeholder="Google Map URL" value="{{ old('gmap') }}">
+                      {!! $errors->first('gmap', '<p class="help-block">:message</p>') !!}
                     </div>
 
                     <hr>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('social.facebook) ? 'has-error' : ''}}">
                       <label for=socialFacebook>Facebook</label>
-                      <input type="text" id=socialFacebook name=social[facebook] class="form-control" placeholder="Facebook">
+                      <input type="text" id=socialFacebook name=social[facebook] class="form-control" placeholder="Facebook" value="{{ old('social.facebook') }}">
+                      {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('social.twitter') ? 'has-error' : ''}}">
                       <label for=socialTwitter>Twitter</label>
-                      <input type="text" id=socialTwitter name=social[twitter] class="form-control" placeholder="Twitter">
+                      <input type="text" id=socialTwitter name=social[twitter] class="form-control" placeholder="Twitter" value="{{ old('social.twitter') }}">
+                      {!! $errors->first('social.twitter', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('hours.social.twitter') ? 'has-error' : ''}}">
                       <label for=socialInstagram>Instagram</label>
-                      <input type="text" id=socialInstagram name=social[instagram] class="form-control" placeholder="Instagram">
+                      <input type="text" id=socialInstagram name=social[instagram] class="form-control" placeholder="Instagram" value="{{ old('social.instagram') }}">
+                      {!! $errors->first('social.instagram', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('social.linkedin') ? 'has-error' : ''}}">
                       <label for=socialLinkedin>Linkedin</label>
-                      <input type="text" id=socialLinkedin name=social[linkedin] class="form-control" placeholder="Linkedin">
+                      <input type="text" id=socialLinkedin name=social[linkedin] class="form-control" placeholder="Linkedin" value="{{ old('social.linkedin') }}">
+                      {!! $errors->first('social.linkedin', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('social.youtube') ? 'has-error' : ''}}">
                       <label for=socialYoutube>YouTube</label>
-                      <input type="text" id=socialYoutube name=social[youtube] class="form-control" placeholder="YouTube">
+                      <input type="text" id=socialYoutube name=social[youtube] class="form-control" placeholder="YouTube" value="{{ old('social.youtube') }}">
+                      {!! $errors->first('social.youtube', '<p class="help-block">:message</p>') !!}
                     </div>
 
                     <hr>
 
-                    <div class="row">
-                      <p  align="center"><strong>Monday</strong></p>
+                    <div class="row" data-hoursday=monday>
+                      <p  align="center">
+                        <strong>Monday</strong>
+                      </p>
+
+                      <p class=text-center>
+                        <label for="not-working-monday">
+                          <input type="checkbox" value=not-working-monday id=not-working-monday @change="notWorking('monday')">
+                            We are not working on Monday
+                        </label>
+                      </p>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.monday-from') ? 'has-error' : ''}}">
                           <label for=hoursMondayFrom>From</label>
-                          <input type="time" id=hoursMonday name=hours[monday-from] class="form-control" value="00:00">
+                          <input
+                            type="text"
+                            id=hoursMonday name=hours[monday-from]
+                            class="form-control timepicker">
+                            {!! $errors->first('hours.monday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.monday-to') ? 'has-error' : ''}}">
                           <label for=hoursMondayTo>To</label>
-                          <input type="time" id=hoursMondayTo name=hours[monday-to] class="form-control" value="00:00">
+                          <input
+                            type="text" id=hoursMondayTo name=hours[monday-to]
+                            class="form-control timepicker">
+                            {!! $errors->first('hours.monday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.monday-from2') ? 'has-error' : ''}}">
                           <label for=hoursMondayFrom2>From</label>
-                          <input type="time" id=hoursMondayFrom2 name=hours[monday-from2]  class="form-control" value="00:00">
+                          <input
+                            type="text"
+                            id=hoursMondayFrom2 name=hours[monday-from2]
+                            class="form-control timepicker"
+                            >
+                            {!! $errors->first('hours.monday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.monday-to2') ? 'has-error' : ''}}">
                           <label for=hoursMondayTo2>To</label>
-                          <input type="time" id=hoursMondayTo2 name=hours[monday-to2] class="form-control" value="00:00">
+                          <input
+                            type="text"
+                            id=hoursMondayTo2
+                            name=hours[monday-to2]
+                            class="form-control timepicker"
+                            >
+                            {!! $errors->first('hours.monday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" data-hoursday=tuesday>
                       <p  align="center"><strong>Tuesday</strong></p>
 
+                      <p class=text-center>
+                        <label for="not-working-tuesday">
+                          <input type="checkbox" value=not-working-tuesday id=not-working-tuesday @change="notWorking('tuesday')">
+                            We are not working on Tuesday
+                        </label>
+                      </p>
+
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.tuesday-from') ? 'has-error' : ''}}">
                           <label for=hoursTuesdayFrom>From</label>
-                          <input type="time" id=hoursTuesdayFrom name=hours[tuesday-from] class="form-control" value="00:00">
+                          <input type="text" id=hoursTuesdayFrom name=hours[tuesday-from]
+                          class="form-control timepicker">
+                          {!! $errors->first('hours.tuesday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.tuesday-to') ? 'has-error' : ''}}">
                           <label for=hoursTuesdayTo>To</label>
-                          <input type="time" id=hoursTuesdayTo name=hours[tuesday-to] class="form-control" value="00:00">
+                          <input type="text"
+                          id=hoursTuesdayTo
+                          name=hours[tuesday-to]
+                          class="form-control timepicker">
+                          {!! $errors->first('hours.tuesday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.tuesday-from2') ? 'has-error' : ''}}">
                           <label for=hoursTuesdayFrom2>From</label>
-                          <input type="time" id=hoursTuesdayFrom2  name=hours[tuesday-from2] class="form-control" value="00:00">
+                          <input type="text"
+                          id=hoursTuesdayFrom2
+                          name=hours[tuesday-from2]
+                          class="form-control timepicker">
+                          {!! $errors->first('hours.tuesday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.tuesday-to2') ? 'has-error' : ''}}">
                           <label for=hoursTuesdayTo2>To</label>
-                          <input type="time" id=hoursTuesdayTo2 name=hours[tuesday-to2] class="form-control" value="00:00">
+                          <input type="text" id=hoursTuesdayTo2 name=hours[tuesday-to2]
+                          class="form-control timepicker">
+                          {!! $errors->first('hours.tuesday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" data-hoursday=wednesday>
                       <p  align="center"><strong>Wednesday</strong></p>
+
+                      <p class=text-center>
+                        <label for="not-working-wednesday">
+                          <input type="checkbox" value=not-working-wednesday id=not-working-wednesday @change="notWorking('tuesday')">
+                            We are not working on Wednesday
+                        </label>
+                      </p>
+
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.wednesday-from') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayFrom>From</label>
-                          <input type="time" id=hoursWednesdayFrom name=hours[wednesday-from] class="form-control" value="00:00">
+                          <input type="text" id=hoursWednesdayFrom name=hours[wednesday-from] class="form-control timepicker">
+                          {!! $errors->first('hours.wednesday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.wednesday-to') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayTo>To</label>
-                          <input type="time" id=hoursWednesdayTo name=hours[wednesday-to] class="form-control" value="00:00">
+                          <input type="text" id=hoursWednesdayTo name=hours[wednesday-to] class="form-control timepicker">
+                          {!! $errors->first('hours.wednesday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.wednesday-from2') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayFrom2>From</label>
-                          <input type="time" id=hoursWednesdayFrom2 name=hours[wednesday-from2] class="form-control" value="00:00">
+                          <input type="text" id=hoursWednesdayFrom2 name=hours[wednesday-from2] class="form-control timepicker">
+                          {!! $errors->first('hours.wednesday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.wednesday-to2') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayTo2>To</label>
-                          <input type="time" id=hoursWednesdayTo2 name=hours[wednesday-to2] class="form-control" value="00:00">
+                          <input type="text" id=hoursWednesdayTo2 name=hours[wednesday-to2] class="form-control timepicker">
+                          {!! $errors->first('hours.wednesday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" data-hoursday=thursday>
                       <p  align="center"><strong>Thursday</strong></p>
 
+                      <p class=text-center>
+                        <label for="not-working-thursday">
+                          <input type="checkbox" value=not-working-thursday id=not-working-thursday @change="notWorking('thursday')">
+                            We are not working on Thursday
+                        </label>
+                      </p>
+
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.thursday-from') ? 'has-error' : ''}}">
                           <label for=hoursThursdayFrom>From</label>
-                          <input type="time" id=hoursThursdayFrom name=hours[thursday-from] class="form-control" value="00:00">
+                          <input type="text" id=hoursThursdayFrom name=hours[thursday-from] class="form-control timepicker">
+                          {!! $errors->first('hours.thursday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
                           <label for=hoursThursdayTo>To</label>
-                          <input type="time"  id=hoursThursdayTo name=hours[thursday-to] class="form-control" value="00:00">
+                          <input type="text"  id=hoursThursdayTo name=hours[thursday-to] class="form-control timepicker">
+                          {!! $errors->first('hours.thursday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.thursday-from2') ? 'has-error' : ''}}">
                           <label for=hoursThursdayFrom2>From</label>
-                          <input type="time" id=hoursThursdayFrom2 name=hours[thursday-from2] class="form-control" value="00:00">
+                          <input type="text" id=hoursThursdayFrom2 name=hours[thursday-from2] class="form-control timepicker">
+                          {!! $errors->first('hours.thursday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
                           <label for=hoursThursdayTo2>To</label>
-                          <input type="time" id=hoursThursdayTo2 name=hours[thursday-to2] class="form-control" value="00:00">
+                          <input type="text" id=hoursThursdayTo2 name=hours[thursday-to2] class="form-control timepicker">
+                          {!! $errors->first('hours.thursday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" data-hoursday=friday>
                       <p  align="center"><strong>Friday</strong></p>
 
+                      <p class=text-center>
+                        <label for="not-working-friday">
+                          <input type="checkbox" value=not-working-friday id=not-working-friday @change="notWorking('friday')">
+                            We are not working on Friday
+                        </label>
+                      </p>
+
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.friday-from') ? 'has-error' : ''}}">
                           <label for=hoursFridayFrom>From</label>
-                          <input type="time" id=hoursFridayFrom name=hours[friday-from] class="form-control" value="00:00">
+                          <input type="text" id=hoursFridayFrom name=hours[friday-from] class="form-control timepicker">
+                          {!! $errors->first('hours.friday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.friday-to') ? 'has-error' : ''}}">
                           <label for=hoursFridayTo>To</label>
-                          <input type="time" id=hoursFridayTo name=hours[friday-to] class="form-control" value="00:00">
+                          <input type="text" id=hoursFridayTo name=hours[friday-to] class="form-control timepicker">
+                          {!! $errors->first('hours.friday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.friday-from2') ? 'has-error' : ''}}">
                           <label for=hoursFridayFrom2>From</label>
-                          <input type="time" d=hoursFridayFrom2 name=hours[friday-from2] class="form-control" value="00:00">
+                          <input type="text" d=hoursFridayFrom2 name=hours[friday-from2] class="form-control timepicker">
+                          {!! $errors->first('hours.friday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.friday-to2') ? 'has-error' : ''}}">
                           <label for=hoursFridayTo2>To</label>
-                          <input type="time" id=hoursFridayTo2 name=hours[friday-to2] class="form-control" value="00:00">
+                          <input type="text" id=hoursFridayTo2 name=hours[friday-to2] class="form-control timepicker">
+                          {!! $errors->first('hours.friday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                     </div>
 
-                    <div class="row">
+                    <div class="row" data-hoursday=saturday>
                       <p  align="center"><strong>Saturday</strong></p>
 
+                      <p class=text-center>
+                        <label for="not-working-saturday">
+                          <input type="checkbox" value=not-working-saturday id=not-working-saturday @change="notWorking('saturday')">
+                            We are not working on Saturday
+                        </label>
+                      </p>
+
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayFrom>From</label>
-                          <input type="time" id=hoursSaturdayFrom name=hours[saturday-from] class="form-control" value="00:00">
+                          <input type="text" id=hoursSaturdayFrom name=hours[saturday-from] class="form-control timepicker">
+                          {!! $errors->first('hours.saturday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayTo>To</label>
-                          <input type="time" id=hoursSaturdayTo name=hours[saturday-to] class="form-control" value="00:00">
+                          <input type="text" id=hoursSaturdayTo name=hours[saturday-to] class="form-control timepicker">
+                          {!! $errors->first('hours.saturday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayFrom2>From</label>
-                          <input type="time" id=hoursSaturdayFrom2 name=hours[saturday-from2] class="form-control" value="00:00">
+                          <input type="text" id=hoursSaturdayFrom2 name=hours[saturday-from2] class="form-control timepicker">
+                          {!! $errors->first('hours.saturday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayTo2>To</label>
-                          <input type="time" id=hoursSaturdayTo2 name=hours[saturday-to2] class="form-control" value="00:00">
+                          <input type="text" id=hoursSaturdayTo2 name=hours[saturday-to2] class="form-control timepicker">
+                          {!! $errors->first('hours.saturday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                     </div>
 
-                    <div class="row">
+                    <div class="row" data-hoursday=sunday>
                       <p  align="center"><strong>Sunday</strong></p>
 
+                      <p class=text-center>
+                        <label for="not-working-sunday">
+                          <input type="checkbox" value=not-working-sunday id=not-working-sunday @change="notWorking('sunday')">
+                            We are not working on Sunday
+                        </label>
+                      </p>
+
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayFrom>From</label>
-                          <input type="time" id=hoursSundayFrom name=hours[sunday-from] class="form-control" value="00:00">
+                          <input type="text" id=hoursSundayFrom name=hours[sunday-from] class="form-control timepicker">
+                          {!! $errors->first('hours.sunday-from', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayTo>To</label>
-                          <input type="time" id=hoursSundayTo name=hours[sunday-to] class="form-control" value="00:00">
+                          <input type="text" id=hoursSundayTo name=hours[sunday-to] class="form-control timepicker">
+                          {!! $errors->first('hours.sunday-to', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayFrom2>From</label>
-                          <input type="time" id=hoursSundayFrom2 name=hours[sunday-from2] class="form-control" value="00:00">
+                          <input type="text" id=hoursSundayFrom2 name=hours[sunday-from2] class="form-control timepicker">
+                          {!! $errors->first('hours.sunday-from2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                       <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayTo2>To</label>
-                          <input type="time" id=hoursSundayTo2 name=hours[sunday-to2] class="form-control" value="00:00">
+                          <input type="text" id=hoursSundayTo2 name=hours[sunday-to2] class="form-control timepicker">
+                          {!! $errors->first('hours.sunday-to2', '<p class="help-block">:message</p>') !!}
                         </div>
                       </div>
 
                     </div>
 
-                    <div class="form-group">
-                      <label>Special Notes</label>
-                      <input type="text" class="form-control" placeholder="Special Notes">
+                    <div class="form-group {{ $errors->has('special-notes') ? 'has-error' : ''}}">
+                      <label for=special-notes>Special Notes</label>
+                      <input type="text" id=special-notes name=special-notes class="form-control" placeholder="Special Notes" value="{{ old('special-notes') }}">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group {{ $errors->has('logo') ? 'has-error' : ''}}">
                       <label for="logo">Logo input</label>
                       <input type="file" id="logo" name=logo>
                     </div>
 
                   </div>
+
+                  <button type="submit" class="btn btn-primary" >Create Clinic</button>
               </form>
             </div>
 

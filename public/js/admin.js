@@ -182,11 +182,26 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         adminModal: __WEBPACK_IMPORTED_MODULE_3__components_Modal_vue___default.a,
         adminAlerts: __WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue___default.a
     },
+    methods: {
+        notWorking: function notWorking(day) {
+            $('[data-hoursday=' + day + '] input[type=text]').prop('disabled', function (i, v) {
+                return !v;
+            }).val('00:00');
+        }
+    },
     mounted: function mounted() {
         Event.$on('form:errors:show', function (form, errors) {
             Form.showErrors(form, errors);
         });
     }
+});
+
+//Timepicker
+$('.timepicker').timepicker({
+    timeFormat: 'HH:mm',
+    interval: 5,
+    defaultTime: '00'
+
 });
 
 /***/ }),

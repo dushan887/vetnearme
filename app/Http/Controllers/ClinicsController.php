@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreClinic;
+use App\Country;
 
 class ClinicsController extends Controller
 {
@@ -28,18 +30,23 @@ class ClinicsController extends Controller
      */
     public function create()
     {
-        return view('clinics/create');
+
+        return view('clinics/create', [
+            'countries' => Country::pluck('name', 'id'),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreClinic $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClinic $request)
     {
-        //
+        // $validated = $request->validated();
+
+        dd($request->post());
     }
 
     /**
