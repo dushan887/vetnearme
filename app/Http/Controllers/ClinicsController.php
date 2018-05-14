@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClinic;
 use App\Country;
+use App\Helpers\XSS;
+use App\Helpers\Geolocation;
+use App\ModelQueries\ClinicQuery;
 
 class ClinicsController extends Controller
 {
@@ -44,7 +47,14 @@ class ClinicsController extends Controller
      */
     public function store(StoreClinic $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
+
+        $model = new ClinicQuery;
+
+        if($request->hasFile('logo'))
+            $validated['logo'] = $model->uploadLogo($request->file('logo'), $validated['name']);
+
+        $model->store( XSS::clean($validated, ['logo']), $request);
 
         dd($request->post());
     }

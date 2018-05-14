@@ -25,36 +25,33 @@ class StoreClinic extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|min:3|max:255|string',
-            'description'   => 'string',
-            'email'         => 'required|email|unique:clinics,email',
-            'phoneNumber'   => 'required',
-            'url'           => 'url',
-            'gmap'          => 'url',
-            'social.*'      => 'url',
-            'city'          => 'required|string|min:2|max:255',
-            'address'       => 'required|string|min:2|max:255',
-            'zip'           => 'required|string|min:2|max:255',
-            'hours.*'       => ['required', new Hours],
-            'special-notes' => 'string|min:3|max:1024',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-
+            'name'             => 'required|min:3|max:255|string',
+            'description'      => 'string',
+            'email'            => 'required|email|unique:clinics,email',
+            'phone_number'     => 'required|string|min:3|max:255',
+            'emergency_number' => 'nullable|string|min:3|max:255',
+            'url'              => 'nullable|url',
+            'gmaps_link'       => 'nullable|url',
+            'social.*'         => 'nullable|url',
+            'city'             => 'required|string|min:2|max:255',
+            'address'          => 'required|string|min:2|max:255',
+            'zip'              => 'required|string|min:2|max:255',
+            'country_id'       => 'integer',
+            'hours.*'          => ['required', new Hours],
+            'special-notes'    => 'nullable|string|min:3|max:1024',
+            'logo'             => 'nullable|image',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name'                  => 'Clinic Name',
-            'phoneNumber'           => 'phone number',
-            'emergencyNumber'       => 'emergency number',
+            'name'                  => 'clinic name',
+            'phone_number'          => 'phone number',
+            'emergency_number'      => 'emergency number',
             'url'                   => 'Clinic Site URL',
             'zip'                   => 'Postal Code',
+            'gmaps_link'            => 'Google Maps ULR',
             'special-notes'         => 'Special Notes',
             'social.facebook'       => 'Facebook',
             'social.twitter'        => 'Twitter',

@@ -29,6 +29,7 @@
                 action="/admin/clinics/store"
                 method=post
                 role=form
+                enctype="multipart/form-data"
               >
               @csrf
 
@@ -52,16 +53,16 @@
                       {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group {{ $errors->has('phoneNumber') ? 'has-error' : ''}}">
-                      <label name=phoneNumber>Phone Number</label>
-                      <input type="text" id=phoneNumber name=phoneNumber class="form-control" placeholder="Phone Number" value="{{ old('phoneNumber') }}">
-                      {!! $errors->first('phoneNumber', '<p class="help-block">:message</p>') !!}
+                    <div class="form-group {{ $errors->has('phone_number') ? 'has-error' : ''}}">
+                      <label name=phone_number>Phone Number</label>
+                      <input type="text" id=phone_number name=phone_number class="form-control" placeholder="Phone Number" value="{{ old('phone_number') }}">
+                      {!! $errors->first('phone_number', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    <div class="form-group {{ $errors->has('hours.emergencyNumber') ? 'has-error' : ''}}">
-                      <label for=emergencyNumber>Emergency Number</label>
-                      <input type="text" id=emergencyNumber name=emergencyNumber class="form-control" placeholder="Emergency Number" value="{{ old('emergencyNumber') }}">
-                      {!! $errors->first('emergencyNumber', '<p class="help-block">:message</p>') !!}
+                    <div class="form-group {{ $errors->has('hours.emergency_number') ? 'has-error' : ''}}">
+                      <label for=emergency_number>Emergency Number</label>
+                      <input type="text" id=emergency_number name=emergency_number class="form-control" placeholder="Emergency Number" value="{{ old('emergency_number') }}">
+                      {!! $errors->first('emergency_number', '<p class="help-block">:message</p>') !!}
                     </div>
 
                     <div class="form-group {{ $errors->has('url') ? 'has-error' : ''}}">
@@ -91,25 +92,26 @@
                     </div>
 
                     <div class="form-group">
-                      <label for=country>Country</label>
-                      <select name="country" id="country" class="form-control">
+                      <label for=country_id>Country</label>
+                      <select name="country_id" id="country_id" class="form-control">
                         @foreach($countries as $key => $value)
                           <option value="<?php
-                            if($key === old('country')) echo old('country')
+                            if($key === old('country')) echo old('country');
+                            else echo $key
                           ?>">{{$value}}</option>
                         @endforeach
                       </select>
                     </div>
 
                     <div class="form-group {{ $errors->has('gmap') ? 'has-error' : ''}}">
-                      <label for=gmap>Google Map URL</label>
-                      <input type="text" id=gmap id=gmap class="form-control" placeholder="Google Map URL" value="{{ old('gmap') }}">
+                      <label for= gmaps_link>Google Map URL</label>
+                      <input type="text" id= gmaps_link id= gmaps_link class="form-control" placeholder="Google Map URL" value="{{ old('gmap') }}">
                       {!! $errors->first('gmap', '<p class="help-block">:message</p>') !!}
                     </div>
 
                     <hr>
 
-                    <div class="form-group {{ $errors->has('social.facebook) ? 'has-error' : ''}}">
+                    <div class="form-group {{ $errors->has('social.facebook') ? 'has-error' : ''}}">
                       <label for=socialFacebook>Facebook</label>
                       <input type="text" id=socialFacebook name=social[facebook] class="form-control" placeholder="Facebook" value="{{ old('social.facebook') }}">
                       {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
@@ -148,7 +150,7 @@
 
                       <p class=text-center>
                         <label for="not-working-monday">
-                          <input type="checkbox" value=not-working-monday id=not-working-monday @change="notWorking('monday')">
+                          <input type="checkbox" name=not-working-monday value=not-working-monday id=not-working-monday @change="notWorking('monday')">
                             We are not working on Monday
                         </label>
                       </p>
@@ -205,7 +207,7 @@
 
                       <p class=text-center>
                         <label for="not-working-tuesday">
-                          <input type="checkbox" value=not-working-tuesday id=not-working-tuesday @change="notWorking('tuesday')">
+                          <input type="checkbox" name=not-working-tuesday value=not-working-tuesday id=not-working-tuesday @change="notWorking('tuesday')">
                             We are not working on Tuesday
                         </label>
                       </p>
@@ -256,7 +258,7 @@
 
                       <p class=text-center>
                         <label for="not-working-wednesday">
-                          <input type="checkbox" value=not-working-wednesday id=not-working-wednesday @change="notWorking('tuesday')">
+                          <input type="checkbox" name=not-working-wednesday value=not-working-wednesday id=not-working-wednesday @change="notWorking('tuesday')">
                             We are not working on Wednesday
                         </label>
                       </p>
@@ -299,7 +301,7 @@
 
                       <p class=text-center>
                         <label for="not-working-thursday">
-                          <input type="checkbox" value=not-working-thursday id=not-working-thursday @change="notWorking('thursday')">
+                          <input type="checkbox" name=not-working-thursday value=not-working-thursday id=not-working-thursday @change="notWorking('thursday')">
                             We are not working on Thursday
                         </label>
                       </p>
@@ -342,7 +344,7 @@
 
                       <p class=text-center>
                         <label for="not-working-friday">
-                          <input type="checkbox" value=not-working-friday id=not-working-friday @change="notWorking('friday')">
+                          <input type="checkbox" name=not-working-friday value=not-working-friday id=not-working-friday @change="notWorking('friday')">
                             We are not working on Friday
                         </label>
                       </p>
@@ -386,7 +388,7 @@
 
                       <p class=text-center>
                         <label for="not-working-saturday">
-                          <input type="checkbox" value=not-working-saturday id=not-working-saturday @change="notWorking('saturday')">
+                          <input type="checkbox" name=not-working-saturday value=not-working-saturday id=not-working-saturday @change="notWorking('saturday')">
                             We are not working on Saturday
                         </label>
                       </p>
@@ -430,7 +432,7 @@
 
                       <p class=text-center>
                         <label for="not-working-sunday">
-                          <input type="checkbox" value=not-working-sunday id=not-working-sunday @change="notWorking('sunday')">
+                          <input type="checkbox" name=not-working-sunday value=not-working-sunday id=not-working-sunday @change="notWorking('sunday')">
                             We are not working on Sunday
                         </label>
                       </p>
