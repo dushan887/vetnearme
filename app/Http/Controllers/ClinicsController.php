@@ -91,6 +91,9 @@ class ClinicsController extends Controller
      */
     public function edit(int $id)
     {
+        if(!\Auth::user()->hasRole('super_admin') && \Auth::user()->clinic->owner_id !== $id)
+            return redirect('admin/clinics/' . $id);
+
         $clinic = Clinic::find($id);
 
         return view('clinics/edit', [

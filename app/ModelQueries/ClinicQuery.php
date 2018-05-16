@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Clinic;
 use App\Helpers\Geolocation;
 
+private $_logoDirectory;
+
+public function __construct()
+{
+    $this->_logoDirectory = public_path('/img/logo/');
+}
+
 class ClinicQuery extends Clinic
 {
     protected $table = 'clinics';
@@ -17,6 +24,47 @@ class ClinicQuery extends Clinic
         if($request->hasFile('logo'))
             $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
 
+        $data = $this->formatData($data);
+
+        if($this->create($data))
+            return $this->id;
+
+        return false;
+    }
+
+    public function update($data, $request, $clinicID)
+    {
+        $clinic = self::find($clinicID);
+
+        if($request->hasFile('logo')){
+
+            if($clinic->logo)
+                $this->deleteOldLogo($clinic->logo);
+
+            $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
+
+        }
+
+        $data = $this->formatData($data);
+
+        if($clinic->update($data))
+            return $clinic->id;
+
+        return false;
+
+    }
+
+    public function uploadLogo($logo, $clinicName)
+    {
+        $name = strtolower(str_replace(' ', '_', $clinicName)) . ' . ' . $logo->getClientOriginalExtension();
+
+        $logo->move($this->_logoDirectory, $name);
+
+        return $name;
+    }
+
+    private function formatData($data)
+    {
         $coordinates = Geolocation::getCoordinates($data);
 
         $data['owner_id']      = \Auth::id();
@@ -28,34 +76,7 @@ class ClinicQuery extends Clinic
             $data['lng'] = $coordinates->longitude();
         }
 
-        if($this->create($data))
-            return $data->id;
-
-        return false;
-    }
-
-    public function update($data, $request, $clinicID)
-    {
-        $clinic = self::find($clinicID);
-
-        if($request->hasFile('logo')){
-            $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
-
-            if($clinic->logo)
-                $this->deleteOldLogo($clinic->logo);
-        }
-
-    }
-
-    public function uploadLogo($logo, $clinicName)
-    {
-        $destinationPath = public_path('/img/logo');
-
-        $name = strtolower(str_replace(' ', '_', $clinicName)) . ' . ' . $logo->getClientOriginalExtension();
-
-        $logo->move($destinationPath, $name);
-
-        return $name;
+        return $data;
     }
 
     private function cleanSocialLinks($socialLinks)
@@ -73,5 +94,10 @@ class ClinicQuery extends Clinic
         }
 
         return json_encode($data);
+    }
+
+    private function deleteOldLogo($logo)
+    {
+        File::delete($this->_logoDirectory . $logo);
     }
 }
