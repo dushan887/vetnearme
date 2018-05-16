@@ -28,5 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
+    public function clinic()
+    {
+       return $this->hasOne(Clinic::class, 'owner_id');
+    }
+
 }

@@ -13,6 +13,10 @@ class ClinicQuery extends Clinic
 
     public function store($data, $request)
     {
+
+        if($request->hasFile('logo'))
+            $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
+
         $coordinates = Geolocation::getCoordinates($data);
 
         $data['owner_id']      = \Auth::id();
@@ -30,11 +34,24 @@ class ClinicQuery extends Clinic
         return false;
     }
 
+    public function update($data, $request, $clinicID)
+    {
+        $clinic = self::find($clinicID);
+
+        if($request->hasFile('logo')){
+            $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
+
+            if($clinic->logo)
+                $this->deleteOldLogo($clinic->logo);
+        }
+
+    }
+
     public function uploadLogo($logo, $clinicName)
     {
         $destinationPath = public_path('/img/logo');
 
-        $name = md5($clinicName . time()) .' . ' . $logo->getClientOriginalExtension();
+        $name = strtolower(str_replace(' ', '_', $clinicName)) . ' . ' . $logo->getClientOriginalExtension();
 
         $logo->move($destinationPath, $name);
 

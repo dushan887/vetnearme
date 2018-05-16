@@ -33,6 +33,13 @@ class ClinicsController extends Controller
      */
     public function create()
     {
+        // Super admin can make as many clinics as he wants
+        // Clinic owner can make only one clinic
+        if(!\Auth::user()->hasRole('super_admin')){
+            if($clinic = Clinic::where('owner_id', \Auth::user()->id)->first())
+                return redirect('admin/clinics/' . $clinic->id);
+        }
+
         return view('clinics/create', [
             'countries' => Country::pluck('name', 'id'),
         ]);
@@ -48,10 +55,7 @@ class ClinicsController extends Controller
     {
         $validated = $request->validated();
 
-        $model = new ClinicQuery;
-
-        if($request->hasFile('logo'))
-            $validated['logo'] = $model->uploadLogo($request->file('logo'), $validated['name']);
+        $model     = new ClinicQuery;
 
         $clinicID = $model->store( XSS::clean($validated, ['logo']), $request);
 
@@ -85,21 +89,46 @@ class ClinicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
-        //
+        $clinic = Clinic::find($id);
+
+        return view('clinics/edit', [
+            'clinic'    => $clinic,
+            'social'    => json_decode($clinic->social_media),
+            'hours'     => json_decode($clinic->opening_hours),
+            'countries' => Country: :pluck('name', 'id'),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\StoreClinic  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreClinic $request, int $id)
     {
-        //
+        // User can update only his clinic
+        if(!\Auth::user()->hasRole('super_admin') && \Auth::user()->clinic->owner_id !== $id)
+            return redirect('admin/clinics/' . $id);
+
+        $validated = $request->validated();
+
+        $model     = new ClinicQuery;
+
+        $clinicID = $model->update( XSS::clean($validated, ['logo']), $request, $id);
+
+        if(!$clinicID){
+            Session::flash('alert', [
+                'message' => 'Something went wrong. Please try again',
+                'type'    => 'danger'
+            ]);
+            return Redirect::back();
+        }
+
+        return redirect('admin/clinics/' . $clinicID);
     }
 
     /**
