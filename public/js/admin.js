@@ -184,7 +184,7 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     },
     methods: {
         notWorking: function notWorking(day) {
-            $('[data-hoursday=' + day + '] input[type=text]').prop('disabled', function (i, v) {
+            $('[data-hoursday=' + day + '] input[type=text]').prop('readOnly', function (i, v) {
                 return !v;
             }).val('00:00');
         }

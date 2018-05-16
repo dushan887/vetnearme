@@ -16,7 +16,7 @@ class ClinicQuery extends Clinic
         $coordinates = Geolocation::getCoordinates($data);
 
         $data['owner_id']      = \Auth::id();
-        $data['opening_hours'] = $this->formatHours($data, $request);
+        $data['opening_hours'] = $this->formatHours($data['hours'], $request);
         $data['social_media']  = json_encode($this->cleanSocialLinks(($data['social'])));
 
         if($coordinates){
@@ -24,7 +24,10 @@ class ClinicQuery extends Clinic
             $data['lng'] = $coordinates->longitude();
         }
 
-        $this->create($data);
+        if($this->create($data))
+            return $data->id;
+
+        return false;
     }
 
     public function uploadLogo($logo, $clinicName)
@@ -45,7 +48,13 @@ class ClinicQuery extends Clinic
 
     private function formatHours($data, $request)
     {
-        var_dump('<pre>', $request->input('not-working-friday'), '</pre>');
-        var_dump('<pre>', $request->input('not-working-sunday'), '</pre>');die;
+        foreach ($request->post('not-working') as $day) {
+            $data[$day . '-from']  = null;
+            $data[$day . '-to']    = null;
+            $data[$day . '-from2'] = null;
+            $data[$day . '-to2']   = null;
+        }
+
+        return json_encode($data);
     }
 }

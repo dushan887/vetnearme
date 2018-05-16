@@ -39,7 +39,7 @@ let adminVue = new Vue({
     methods: {
         notWorking(day){
             $('[data-hoursday=' + day + '] input[type=text]')
-                .prop('disabled', (i, v) => { return !v } )
+                .prop('readOnly', (i, v) => { return !v } )
                 .val('00:00')
         }
     },

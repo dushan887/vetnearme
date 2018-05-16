@@ -24,6 +24,10 @@
               <h3 class="box-title">New Clinic</h3>
             </div>
 
+            @if (Session::has('type'))
+              @include('partials._alert')
+            @endif
+
             <div class="box-body">
               <form class="form-horizontal"
                 action="/admin/clinics/store"
@@ -150,7 +154,7 @@
 
                       <p class=text-center>
                         <label for="not-working-monday">
-                          <input type="checkbox" name=not-working-monday value=not-working-monday id=not-working-monday @change="notWorking('monday')">
+                          <input type="checkbox" name="not-working[monday]" value=monday id=not-working-monday @change="notWorking('monday')">
                             We are not working on Monday
                         </label>
                       </p>
@@ -207,7 +211,7 @@
 
                       <p class=text-center>
                         <label for="not-working-tuesday">
-                          <input type="checkbox" name=not-working-tuesday value=not-working-tuesday id=not-working-tuesday @change="notWorking('tuesday')">
+                          <input type="checkbox" name="not-working[tuesday]" value=tuesday id=not-working-tuesday @change="notWorking('tuesday')">
                             We are not working on Tuesday
                         </label>
                       </p>
@@ -258,7 +262,7 @@
 
                       <p class=text-center>
                         <label for="not-working-wednesday">
-                          <input type="checkbox" name=not-working-wednesday value=not-working-wednesday id=not-working-wednesday @change="notWorking('tuesday')">
+                          <input type="checkbox" name="not-working[wednesday]" value=wednesday id=not-working-wednesday @change="notWorking('wednesday')">
                             We are not working on Wednesday
                         </label>
                       </p>
@@ -301,7 +305,7 @@
 
                       <p class=text-center>
                         <label for="not-working-thursday">
-                          <input type="checkbox" name=not-working-thursday value=not-working-thursday id=not-working-thursday @change="notWorking('thursday')">
+                          <input type="checkbox" name="not-working[thursday]" value=thursday id=not-working-thursday @change="notWorking('thursday')">
                             We are not working on Thursday
                         </label>
                       </p>
@@ -344,7 +348,7 @@
 
                       <p class=text-center>
                         <label for="not-working-friday">
-                          <input type="checkbox" name=not-working-friday value=not-working-friday id=not-working-friday @change="notWorking('friday')">
+                          <input type="checkbox" name="not-working[friday]" value=friday id=not-working-friday @change="notWorking('friday')">
                             We are not working on Friday
                         </label>
                       </p>
@@ -388,7 +392,7 @@
 
                       <p class=text-center>
                         <label for="not-working-saturday">
-                          <input type="checkbox" name=not-working-saturday value=not-working-saturday id=not-working-saturday @change="notWorking('saturday')">
+                          <input type="checkbox" name="not-working[saturday]" value=saturday id=not-working-saturday @change="notWorking('saturday')">
                             We are not working on Saturday
                         </label>
                       </p>
@@ -432,7 +436,7 @@
 
                       <p class=text-center>
                         <label for="not-working-sunday">
-                          <input type="checkbox" name=not-working-sunday value=not-working-sunday id=not-working-sunday @change="notWorking('sunday')">
+                          <input type="checkbox" name="not-working[sunday]" value=sunday id=not-working-sunday @change="notWorking('sunday')">
                             We are not working on Sunday
                         </label>
                       </p>

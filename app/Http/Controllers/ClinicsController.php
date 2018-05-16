@@ -54,7 +54,17 @@ class ClinicsController extends Controller
         if($request->hasFile('logo'))
             $validated['logo'] = $model->uploadLogo($request->file('logo'), $validated['name']);
 
-        $model->store( XSS::clean($validated, ['logo']), $request);
+        $clinicID = $model->store( XSS::clean($validated, ['logo']), $request);
+
+        if(!$clinicID){
+            Session::flash('alert', [
+                'message' => 'Something went wrong. Please try again',
+                'type'    => 'danger'
+            ]);
+            return Redirect::back();
+        }
+
+        return redirect('admin/clinic/'.$vehicle->id);
 
         dd($request->post());
     }
