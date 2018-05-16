@@ -33,7 +33,6 @@ class ClinicsController extends Controller
      */
     public function create()
     {
-
         return view('clinics/create', [
             'countries' => Country::pluck('name', 'id'),
         ]);
@@ -64,9 +63,7 @@ class ClinicsController extends Controller
             return Redirect::back();
         }
 
-        return redirect('admin/clinic/'.$vehicle->id);
-
-        dd($request->post());
+        return redirect('admin/clinics/' . $clinicID);
     }
 
     /**
@@ -75,9 +72,11 @@ class ClinicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        return view('clinics/show', [
+            'clinic' => Clinic::find($id),
+        ]);
     }
 
     /**
