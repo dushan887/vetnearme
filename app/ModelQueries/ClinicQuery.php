@@ -47,8 +47,10 @@ class ClinicQuery extends Clinic
 
         $data = $this->formatData($data);
 
-        if($clinic->update($data))
+        if($clinic->update($data)){
+            $clinic->services->attach($request->input('services'));
             return $clinic->id;
+        }
 
         return false;
 

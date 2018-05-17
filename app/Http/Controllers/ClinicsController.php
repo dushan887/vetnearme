@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClinic;
 use App\Country;
+use App\Service;
 use App\Helpers\XSS;
 use App\Helpers\Geolocation;
 use App\ModelQueries\ClinicQuery;
@@ -42,6 +43,7 @@ class ClinicsController extends Controller
 
         return view('clinics/create', [
             'countries' => Country::pluck('name', 'id'),
+            'services'  => Service::pluck('id', 'name'),
         ]);
     }
 
@@ -100,7 +102,7 @@ class ClinicsController extends Controller
             'clinic'    => $clinic,
             'social'    => json_decode($clinic->social_media),
             'hours'     => json_decode($clinic->opening_hours),
-            'countries' => Country: :pluck('name', 'id'),
+            'countries' => Country::pluck('name', 'id'),
         ]);
     }
 

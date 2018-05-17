@@ -475,6 +475,15 @@
 
                     </div>
 
+                    <div class="form-group">
+                      <label for="services">Services</label>
+                      <select name="services[]" id="services" multiple class="form-control">
+                        @foreach($services as $key => $value)
+                          <option value="{{ $value }}">{{ $key }}</option>
+                        @endforeach
+                      </select>
+                    </div>
+
                     <div class="form-group {{ $errors->has('special-notes') ? 'has-error' : ''}}">
                       <label for=special-notes>Special Notes</label>
                       <input type="text" id=special-notes name=special-notes class="form-control" placeholder="Special Notes" value="{{ old('special-notes') }}">
