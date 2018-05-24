@@ -37,6 +37,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
 
     // MEDIA
     Route::get('media', 'MediaController@index')->name('media');
+    Route::get('media/all', 'MediaController@all');
+    Route::post('media/store', 'MediaController@store');
+    Route::post('media/destroy/{id}', 'MediaController@destroy');
 
 
     // Blog

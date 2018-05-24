@@ -5,7 +5,7 @@
         <h4><i class="icon fa fa-check"></i>{{ messageTitle }}</h4>
         {{ messageText }}
     </div>
-  
+
 </template>
 
 <script>
@@ -23,13 +23,14 @@ export default {
 
           this.messageTitle = message.messageTitle
           this.messageText  = message.messageText
-          this.visible         = true
+          this.classType    = classType
+          this.visible      = true
 
       },
       hide(){
           this.messageTitle = ''
           this.messageText  = ''
-          this.visible         = false
+          this.visible      = false
       }
   },
   mounted(){

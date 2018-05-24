@@ -6,7 +6,7 @@ Vue.use(VuejsDialog)
 window.Event = new Vue()
 window.Vue   = Vue
 
-window.axios = require('axios')
+window.axios  = require('axios')
 
 let token = document.head.querySelector('meta[name="csrf-token"]')
 
@@ -27,12 +27,14 @@ let Form = require('./methods/Form.js');
 import Service from './components/Service.vue'
 import Modal from './components/Modal.vue'
 import EventMessages from './components/EventMessages.vue'
+import Media from './components/Media.vue'
 
 let adminVue = new Vue({
     el: '#admin-app',
     mixins: [Form],
     components: {
         adminService: Service,
+        adminMedia: Media,
         adminModal: Modal,
         adminAlerts: EventMessages
     },

@@ -124,7 +124,7 @@ class ServicesController extends Controller
 
          return response()->json([
                 'messageTitle' => 'Alert',
-                'messageText'  => 'Something went wrong. Please try again a bit later',
+                'messageText'  => '',
                 'class'        => 'error'
             ]);
     }

@@ -14,4 +14,9 @@ class Media extends Model
     protected $fillable = [
         'name', 'extension', 'user_id', 'clinic_id',
     ];
+
+    public function user()
+    {
+    return $this->belongsTo('App\User');
+    }
 }

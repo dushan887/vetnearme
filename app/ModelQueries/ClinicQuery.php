@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use App\Clinic;
 use App\Helpers\Geolocation;
 
-private $_logoDirectory;
-
-public function __construct()
-{
-    $this->_logoDirectory = public_path('/img/logo/');
-}
-
 class ClinicQuery extends Clinic
 {
     protected $table = 'clinics';
+
+    private $_logoDirectory;
+
+    public function __construct()
+    {
+        $this->_logoDirectory = public_path('/img/logo/');
+    }
 
     public function store($data, $request)
     {

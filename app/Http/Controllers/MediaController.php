@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Media;
+use App\ModelQueries\MediaQuery;
+use App\Http\Requests\MediaUploadRequest;
 use Illuminate\Http\Request;
 
 class MediaController extends Controller
@@ -14,17 +16,9 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('media/index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('media/index', [
+            'files' => Media::paginate(30),
+        ]);
     }
 
     /**
@@ -33,20 +27,28 @@ class MediaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MediaUploadRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $model = new MediaQuery;
+
+        $model->upload($request->file('files'));
+
+        var_dump('<pre>', \File::makeDirectory(public_path('/media/logo/'), 0644), '</pre>');die;
+
+        dd($validated['files']);
     }
 
     /**
-     * Display the specified resource.
+     * Get all Services.
      *
-     * @param  \App\Media  $media
      * @return \Illuminate\Http\Response
      */
-    public function show(Media $media)
+    public function all(Request $request)
     {
-        //
+        return response()
+            ->json(Media::orderBy('created_at', 'desc')->with('user')->get());
     }
 
     /**
@@ -78,8 +80,21 @@ class MediaController extends Controller
      * @param  \App\Media  $media
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Media $media)
+    public function destroy(int $id)
     {
-        //
+        $model = new MediaQuery;
+
+        if($model->destroyFile($id))
+            return response()->json([
+                    'messageTitle' => 'File Deleted',
+                    'messageText'  => 'The file has been deleted',
+                    'class'        => 'success'
+                ]);
+
+        return response()->json([
+                'messageTitle' => 'Alert',
+                'messageText'  => 'Something went wrong. Please try again a bit later',
+                'class'        => 'error'
+            ]);
     }
 }

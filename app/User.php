@@ -34,4 +34,9 @@ class User extends Authenticatable
        return $this->hasOne(Clinic::class, 'owner_id');
     }
 
+    public function files()
+    {
+       return $this->hasMany('App/Media');
+    }
+
 }
