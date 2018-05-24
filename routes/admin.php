@@ -35,6 +35,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
     Route::get('clinics/create', 'ClinicsController@create');
     Route::post('clinics/store', 'ClinicsController@store');
 
+    // MEDIA
+    Route::get('media', 'MediaController@index')->name('media');
+
 
     // Blog
     Route::get('blog', 'BlogController@index')->name('blog');

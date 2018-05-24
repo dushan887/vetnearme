@@ -161,6 +161,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PermissionsServiceProvider::class,
         Jcf\Geocode\GeocodeServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -211,6 +212,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Geocode' => Jcf\Geocode\Facades\Geocode::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 
