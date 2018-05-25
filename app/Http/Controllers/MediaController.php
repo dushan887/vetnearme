@@ -16,9 +16,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        return view('media/index', [
-            'files' => Media::paginate(30),
-        ]);
+        return view('media/index');
     }
 
     /**
@@ -35,9 +33,7 @@ class MediaController extends Controller
 
         $model->upload($request->file('files'));
 
-        var_dump('<pre>', \File::makeDirectory(public_path('/media/logo/'), 0644), '</pre>');die;
-
-        dd($validated['files']);
+        return redirect()->route('media');
     }
 
     /**
@@ -48,7 +44,7 @@ class MediaController extends Controller
     public function all(Request $request)
     {
         return response()
-            ->json(Media::orderBy('created_at', 'desc')->with('user')->get());
+            ->json(Media::orderBy('created_at', 'desc')->with(['user', 'clinic'])->get());
     }
 
     /**

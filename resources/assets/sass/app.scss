@@ -3,3 +3,9 @@
 .services {
     margin-top: 20px
 }
+.image-preview-container {
+    width: 720px;
+    position: fixed; /* or absolute */
+    top: 30%;
+    left: 25%;
+}

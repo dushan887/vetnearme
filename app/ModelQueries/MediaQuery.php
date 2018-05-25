@@ -42,24 +42,25 @@ class MediaQuery extends Media
 
             if(!in_array($file->getClientOriginalExtension(), $this->_suportedImageExtensions)){
                 $result = $this->uploadFile($file);
-
             } else {
                 $result = $this->uploadImage($file);
             }
 
+            $data[] = [
+                'name'       => $result['name'],
+                'extension'  => $result['extension'],
+                'user_id'    => $userID,
+                'clinic_id'  => $clinicID,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
         }
 
-        $data[] = [
-            'name'       => $result['name'],
-            'extension'  => $result['extension'],
-            'user_id'    => $userID,
-            'clinic_id'  => $clinicID,
-            'created_at' => $now,
-            'updated_at' => $now,
-        ];
+        if($this->insert($data))
+            return true;
 
-        $this->insert($data);
-        dd($data);
+        return false;
     }
 
     public function destroyFile(int $id)
@@ -126,7 +127,7 @@ class MediaQuery extends Media
             $uploadName = $name . $i . ".{$extension}";
             $i++;
         }
-        var_dump('<pre>', $uploadName, '</pre>');
+
         return ['name' => $uploadName, 'extension' => $extension];
     }
 }

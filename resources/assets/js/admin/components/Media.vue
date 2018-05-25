@@ -1,9 +1,9 @@
 <template>
     <div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 clearfix">
             <div class="box">
-                <div class="box-body table-responsive no-padding">
+                <div class="box-body table-responsive no-padding media">
                     <table class="table table-hover">
 
                         <tbody>
@@ -16,7 +16,8 @@
                             </tr>
 
                             <tr v-for="(file, index) in files" :key=file.id>
-                                <th>{{ file.name }}</th>
+                                <th @mouseenter="imagePreview(file, $event)"
+                                    @mouseout="removePreview">{{ file.name }}</th>
                                 <th>{{ file.extension }}</th>
                                 <th>{{ file.user.name }}</th>
                                 <th>{{ getHumanDate(file.created_at)  }}</th>
@@ -30,10 +31,12 @@
                         </tbody>
 
                     </table>
+
+                    <img class="image-preview-container" style="display:none;" src="">
                 </div>
             </div>
-        </div>
 
+        </div>
 
     </div>
 </template>
@@ -44,12 +47,26 @@ import moment from 'moment'
 export default {
     data(){
         return {
-            files: []
+            files: [],
+            imageExtensions: ['jpg', 'jpeg', 'png', 'gif']
         }
     },
     methods: {
-        getHumanDate : function (date) {
+        getHumanDate(date) {
             return moment(date, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY');
+        },
+        imagePreview(file, event) {
+
+            let imageContainer = $('.image-preview-container')
+            let folder = file.clinic_id ? '/media/' + file.clinic.name.trim().toLowerCase().replace('/ /g', "_")  :
+                '/media/general/'
+
+            if (this.imageExtensions.includes(file.extension))
+                imageContainer.attr('src',  folder + file.name).show()
+
+        },
+        removePreview(){
+            $('.image-preview-container').hide()
         },
         getAll(){
             axios.get('/admin/media/all', {})

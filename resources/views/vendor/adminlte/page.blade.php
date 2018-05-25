@@ -212,7 +212,7 @@
                                     </div>
                                     <div class="col-xs-6">
                                         @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                            <a class="btn btn-default btn-flat btn-block" 
+                                            <a class="btn btn-default btn-flat btn-block"
                                                 href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" >
                                                 <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
                                             </a>
@@ -235,7 +235,7 @@
                             </ul>
                           </li>
                         <li>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -274,7 +274,7 @@
         @endif
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper clearfix">
             @if(config('adminlte.layout') == 'top-nav')
             <div class="container">
             @endif
@@ -296,12 +296,12 @@
             </div>
             <!-- /.container -->
             @endif
-            
+
         </div>
         <!-- /.content-wrapper -->
     <admin-modal></admin-modal>
     </div>
-    
+
     <!-- ./wrapper -->
 @stop
 
