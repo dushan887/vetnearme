@@ -16,6 +16,17 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg">{{ trans('adminlte::adminlte.login_message') }}</p>
+            @if (session('warning'))
+                <div class="alert alert-danger">
+                    {{ session('warning') }}
+                </div>
+            @endif
+
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             <form action="{{ url(config('adminlte.login_url', 'login')) }}" method="post">
                 {!! csrf_field() !!}
 

@@ -1,3 +1,3 @@
 <?php
-	
-    Route::get('/home', 'Front\FrontPartController@index');
+
+    // Route::get('/home', 'Front\FrontPartController@index');

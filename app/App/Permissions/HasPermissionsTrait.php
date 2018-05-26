@@ -12,9 +12,7 @@ trait HasPermissionsTrait
 
     public function giveRole($role = 'user')
     {
-        $role = DB::table('users_roles')->where('name', '=', $role)->first();
-
-        $this->roles()->saveMany([$role->id]);
+        $this->roles()->saveMany([Role::where('name', '=', $role)->first()]);
 
         return $this;
     }
@@ -86,7 +84,7 @@ trait HasPermissionsTrait
 
     public function roles()
     {
-         return $this->belongsToMany(Role::class, 'users_roles');
+         return $this->belongsToMany(Role::class, 'users_roles', 'user_id', 'role_id');
     }
 
     public function permissions()

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
@@ -13,8 +13,9 @@ class FrontPartController extends Controller {
      */
     public function index()
     {
+        dd(333);
         return view('Front.home.index');
     }
 
-   
+
 }
