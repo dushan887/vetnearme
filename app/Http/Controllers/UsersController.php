@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Users;
 use App\Statics\Titles;
 
+use App\Http\Requests\UserUpdateRequest;
+
 class UsersController extends Controller
 {
     /**
@@ -28,8 +30,11 @@ class UsersController extends Controller
      */
     public function profile()
     {
+        $user = \Auth::user();
+
         return view('users/edit', [
-            'user'   => \Auth::user(),
+            'user'   => $user,
+            'social' => json_decode($user->social),
             'titles' => Titles::TITLES,
         ]);
     }
@@ -54,9 +59,13 @@ class UsersController extends Controller
         return view('users/new_user');
     }
 
-    public function update(Request $request)
+    public function update(UserUpdateRequest $request)
     {
-        dd(333);
+        $validated = $request->validated();
+
+        $model = new UserQuery;
+
+        $model->update($validated);
     }
 
 

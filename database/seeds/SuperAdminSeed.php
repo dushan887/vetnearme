@@ -24,6 +24,7 @@ class SuperAdminSeed extends Seeder
             'last_name'  => "Admin",
             'email'      => 'super_admin_test@supertest.com',
             'password'   => bcrypt('kAP7phKAeGsaXZBN'),
+            'verified'   => 1,
             'created_at' => $date,
             'updated_at' => $date,
         ]);

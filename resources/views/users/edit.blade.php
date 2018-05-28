@@ -109,20 +109,32 @@
                       </select>
                     </div>
                   </div>
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                     <label for="first_name" class="col-sm-2 control-label">First Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="first_name" name=first_name placeholder="First Name">
+                      <input type="text"
+                        class="form-control"
+                        id="first_name"
+                        value="{{ old('first_name') ?? $user->first_name }}"
+                        name=first_name placeholder="First Name">
                     </div>
+
+                    {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
                     <label for="last_name" class="col-sm-2 control-label">Last Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name=last_name id="last_name" placeholder="Last Name">
+                      <input type="text"
+                        class="form-control"
+                        name=last_name id="last_name"
+                        value="{{ old('last_name') ?? $user->last_name }}"
+                        placeholder="Last Name">
                     </div>
+
+                     {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group">
@@ -130,77 +142,127 @@
 
                     <div class="col-sm-10">
                       <select id="gender" name=gender class="form-control">
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
+                        <option value="0" {{ $user->gender === 0 ? "selected" : "" }}>Male</option>
+                        <option value="1" {{ $user->gender === 1 ? "selected" : "" }}>Female</option>
                       </select>
                     </div>
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('position') ? 'has-error' : '' }}">
                     <label for="position" class="col-sm-2 control-label">Position</label>
 
                     <div class="col-sm-10">
-                      <input type="text" name=position class="form-control" id="position" placeholder="Position">
+                      <input type="text"
+                      name=position
+                      class="form-control"
+                      value="{{ old('position') ?? $user->position }}"
+                      id="position" placeholder="Position">
                     </div>
+
+                     {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
                     <label for="phone" class="col-sm-2 control-label">Phone</label>
 
                     <div class="col-sm-10">
-                      <input type="text" name=phone class="form-control" id="phone" placeholder="Phone Number">
+                      <input type="text"
+                        name=phone
+                        class="form-control"
+                        id="phone"
+                        value="{{ old('phone') ?? $user->phone }}"
+                        placeholder="Phone Number">
                     </div>
+
+                    {!! $errors->first('phone', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
                     <label for="location" class="col-sm-2 control-label">Location</label>
 
                     <div class="col-sm-10">
-                      <input type="text" name=location class="form-control" id="location" placeholder="Location">
+                      <input type="text"
+                        name=location
+                        class="form-control"
+                        id="location"
+                        value="{{ old('location') ?? $user->location }}"
+                        placeholder="Location">
                     </div>
+
+                    {!! $errors->first('location', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('about') ? 'has-error' : '' }}">
                     <label for="about" class="col-sm-2 control-label">Bio</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" name=about id="about" rows=10 placeholder="Bio"></textarea>
+                      <textarea class="form-control" name=about id="about" rows=10 placeholder="Bio">{{ old('about') ?? $user->about }}</textarea>
                     </div>
+
+                    {!! $errors->first('about', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('social.facebook') ? 'has-error' : '' }}">
                     <label for="socialFacebook" class="col-sm-2 control-label">Facebook URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name=social[facebook] id="socialFacebook" placeholder="Facebook URL">
+                      <input type="text"
+                        class="form-control"
+                        name=social[facebook]
+                        id="socialFacebook"
+                        value="{{ old('social.facebook') ?? $social['facebook'] }}"
+                        placeholder="Facebook URL">
                     </div>
+
+                    {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('social.twitter') ? 'has-error' : '' }}">
                     <label for="scoialTwitter" class="col-sm-2 control-label">Twitter URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" name=social[twitter] class="form-control" id="scoialTwitter" placeholder="Twitter URL">
+                      <input type="text"
+                        name=social[twitter]
+                        class="form-control"
+                        id="scoialTwitter"
+                        value="{{ old('social.twitter') ?? $social['twitter'] }}"
+                        placeholder="Twitter URL">
                     </div>
+
+                    {!! $errors->first('social.twitter', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('social.linkedin') ? 'has-error' : '' }}">
                     <label for="socialLinkedin" class="col-sm-2 control-label">Linkedin URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="social[linkedin]" id="socialLinkedin" placeholder="Linkedin URL">
+                      <input type="text"
+                        class="form-control"
+                        name="social[linkedin]"
+                        id="socialLinkedin"
+                        value="{{ old('social.linkedin') ?? $social['linkedin'] }}"
+                        placeholder="Linkedin URL">
                     </div>
+
+                    {!! $errors->first('social.linkedin', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('social.instagram') ? 'has-error' : '' }}">
                     <label for="socialInstagram" class="col-sm-2 control-label">Instagram URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" name="social[instagram]" id="socialInstagram" placeholder="Instagram URL">
+                      <input type="text"
+                        class="form-control"
+                        name="social[instagram]"
+                        id="socialInstagram"
+                        value="{{ old('social.instagram') ?? $social['instagram'] }}"
+                         placeholder="Instagram URL">
                     </div>
+
+                    {!! $errors->first('social.instagram', '<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
                     <label for="avatar" class="col-sm-2 control-label">Profile Image</label>
 
                     <div class="col-sm-10">
@@ -208,6 +270,7 @@
                       <p class="help-block">Upload your profile image.</p>
                     </div>
 
+                    {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <hr>
