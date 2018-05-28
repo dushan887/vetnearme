@@ -9,11 +9,6 @@ use App\User;
 class UserController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('checkRole:super_admin');
-    }
-
     /**
      * Show the dashboard User.
      *
@@ -21,8 +16,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return view('user/index');
+        return view('users/edit');
     }
 
-    
+
 }

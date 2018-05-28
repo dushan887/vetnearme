@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+<php dd(333) ?>
 @section('content')
  <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -27,7 +27,7 @@
                 </button>
               </div>
             </div>
-            <div class="box-body">              
+            <div class="box-body">
               <div class="form-group">
                 <label for="filter-opt3">Show entries:</label>
                 <select class="form-control" id="filter-opt3">
@@ -69,7 +69,7 @@
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
-          
+
         </div>
         <!-- /.col -->
         <div class="col-md-9">
@@ -234,7 +234,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer no-padding">
-              
+
             </div>
           </div>
           <!-- /. box -->
@@ -245,6 +245,6 @@
     </section>
     <!-- /.content -->
 
-    
-  
+
+
 @stop

@@ -20,7 +20,8 @@ class SuperAdminSeed extends Seeder
         $date = Carbon\Carbon::now();
 
         $userID = DB::table('users')->insertGetId([
-            'name'       => "Super Admin",
+            'first_name' => "Super",
+            'last_name'  => "Admin",
             'email'      => 'super_admin_test@supertest.com',
             'password'   => bcrypt('kAP7phKAeGsaXZBN'),
             'created_at' => $date,

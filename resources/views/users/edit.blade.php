@@ -24,18 +24,18 @@
             <div class="box-body box-profile">
               <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/250x250" alt="User profile picture">
 
-              <h3 class="profile-username text-center">Name Surname</h3>
+              <h3 class="profile-username text-center">{{ $user->first_name . " " . $user->last_name }}</h3>
 
               <p class="text-muted text-center"><a href="#"><strong>Vet Clinic</strong></a></p>
 
-              <p class="text-muted text-center">Position</p>
+              <p class="text-muted text-center">{{ $user->position }}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
-                  <i class="fa fa-envelope-square"></i> <a class="pull-right">email@domain.com</a>
+                  <i class="fa fa-envelope-square"></i> <a class="pull-right">{{ $user->email }}</a>
                 </li>
                 <li class="list-group-item">
-                  <i class="fa fa-phone-square"></i> <a class="pull-right">(02) 999 9999</a>
+                  <i class="fa fa-phone-square"></i> <a class="pull-right">{{ $user->phone ?? "not available" }}</a>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-globe"></i> <ul class="list-inline pull-right">
@@ -58,11 +58,11 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              {{-- <li><a href="#about-me" data-toggle="tab">About Me</a></li> --}}
+              <li><a href="#about-me" data-toggle="tab">About Me</a></li>
               <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
             </ul>
             <div class="tab-content">
-              {{-- <div class="tab-pane" id="about-me">
+              <div class="tab-pane" id="about-me">
                 <strong><i class="fa fa-file-text-o margin-r-5"></i> Bio</strong>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -82,82 +82,89 @@
                 <p class="text-muted">Sydney, Australia</p>
 
 
-              </div> --}}
+              </div>
               <!-- /.tab-pane -->
 
               <div class="active tab-pane" id="settings">
-                <form class="form-horizontal">
+                <form class="form-horizontal"
+                  action="/admin/users/update"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                @csrf
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Title</label>
+                    <label for="title" class="col-sm-2 control-label">Title</label>
 
                     <div class="col-sm-10">
-                      <select id="filter-opt3" class="form-control">
-                        <option></option>
-                        <option>Mr</option>
-                        <option>Ms</option>
-                        <option>Mrs</option>
-                        <option>Dr</option>
+                      <select id="title" name="title" class="form-control">
+                        <option value=null></option>
+                        @foreach($titles as $key => $value)
+                          <option
+                            value="{{ $value }}"
+                            @if($value === $user->title)
+                              selected="selected"
+                            @endif
+                          >{{ ucfirst($key) }}</option>
+                        @endforeach
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">First Name</label>
+                    <label for="first_name" class="col-sm-2 control-label">First Name</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputName" placeholder="First Name">
+                      <input type="text" class="form-control" id="first_name" name=first_name placeholder="First Name">
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputSurname" class="col-sm-2 control-label">Last Name</label>
+                    <label for="last_name" class="col-sm-2 control-label">Last Name</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputSurname" placeholder="Last Name">
+                      <input type="text" class="form-control" name=last_name id="last_name" placeholder="Last Name">
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputGender" class="col-sm-2 control-label">Gender</label>
+                    <label for="gender" class="col-sm-2 control-label">Gender</label>
 
                     <div class="col-sm-10">
-                      <select id="inputGender" class="form-control">
-                        <option></option>
-                        <option>Male</option>
-                        <option>Female</option>
+                      <select id="gender" name=gender class="form-control">
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
                       </select>
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputPosition" class="col-sm-2 control-label">Position</label>
+                    <label for="position" class="col-sm-2 control-label">Position</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputPosition" placeholder="Position">
+                      <input type="text" name=position class="form-control" id="position" placeholder="Position">
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                    <label for="phone" class="col-sm-2 control-label">Phone</label>
 
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" placeholder="Email Address">
+                      <input type="text" name=phone class="form-control" id="phone" placeholder="Phone Number">
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputPhone" class="col-sm-2 control-label">Phone</label>
+                    <label for="location" class="col-sm-2 control-label">Location</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number">
+                      <input type="text" name=location class="form-control" id="location" placeholder="Location">
                     </div>
                   </div>
+
                   <div class="form-group">
-                    <label for="inputLocation" class="col-sm-2 control-label">Location</label>
+                    <label for="about" class="col-sm-2 control-label">Bio</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputLocation" placeholder="Location">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="inputBio" class="col-sm-2 control-label">Bio</label>
-
-                    <div class="col-sm-10">
-                      <textarea class="form-control" id="inputBio" placeholder="Bio"></textarea>
+                      <textarea class="form-control" name=about id="about" rows=10 placeholder="Bio"></textarea>
                     </div>
                   </div>
 
@@ -165,7 +172,7 @@
                     <label for="socialFacebook" class="col-sm-2 control-label">Facebook URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="socialFacebook" placeholder="Facebook URL">
+                      <input type="text" class="form-control" name=social[facebook] id="socialFacebook" placeholder="Facebook URL">
                     </div>
                   </div>
 
@@ -173,7 +180,7 @@
                     <label for="scoialTwitter" class="col-sm-2 control-label">Twitter URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="scoialTwitter" placeholder="Twitter URL">
+                      <input type="text" name=social[twitter] class="form-control" id="scoialTwitter" placeholder="Twitter URL">
                     </div>
                   </div>
 
@@ -181,7 +188,7 @@
                     <label for="socialLinkedin" class="col-sm-2 control-label">Linkedin URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="socialLinkedin" placeholder="Linkedin URL">
+                      <input type="text" class="form-control" name="social[linkedin]" id="socialLinkedin" placeholder="Linkedin URL">
                     </div>
                   </div>
 
@@ -189,15 +196,15 @@
                     <label for="socialInstagram" class="col-sm-2 control-label">Instagram URL</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="socialInstagram" placeholder="Instagram URL">
+                      <input type="text" class="form-control" name="social[instagram]" id="socialInstagram" placeholder="Instagram URL">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="exampleInputFile" class="col-sm-2 control-label">Profile Image</label>
+                    <label for="avatar" class="col-sm-2 control-label">Profile Image</label>
 
                     <div class="col-sm-10">
-                      <input type="file" id="exampleInputFile">
+                      <input type="file" name=avatar id="avatar">
                       <p class="help-block">Upload your profile image.</p>
                     </div>
 
@@ -205,31 +212,37 @@
 
                   <hr>
 
-                  <div class="form-group has-warning">
-                    <label for="userType" class="col-sm-2 control-label">User Type</label>
+                  @if($user->hasRole('super_admin'))
 
-                    <div class="col-sm-10">
-                    <select id="userType" class="form-control">
-                      <option>Super Admin</option>
-                      <option>Admin</option>
-                      <option>User</option>
-                    </select>
-                    </div>
-                  </div>
-                  <div class="form-group has-warning">
-                    <label for="asignClinic" class="col-sm-2 control-label">Clinic</label>
+                    <div class="form-group has-warning">
+                      <label for="userType" class="col-sm-2 control-label">User Type</label>
 
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="asignClinic" placeholder="Clinic Name">
+                      <div class="col-sm-10">
+                      <select id="userType" class="form-control">
+                        <option>Super Admin</option>
+                        <option>Admin</option>
+                        <option>User</option>
+                      </select>
+                      </div>
                     </div>
-                  </div>
-                  <div class="form-group has-warning">
-                    <label for="inputPaswoord" class="col-sm-2 control-label">Pasword</label>
 
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPaswoord" placeholder="********">
+                    <div class="form-group has-warning">
+                      <label for="asignClinic" class="col-sm-2 control-label">Clinic</label>
+
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="asignClinic" placeholder="Clinic Name">
+                      </div>
                     </div>
-                  </div>
+                    <div class="form-group has-warning">
+                      <label for="inputPaswoord" class="col-sm-2 control-label">Pasword</label>
+
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputPaswoord" placeholder="********">
+                      </div>
+                    </div>
+
+                  @endif
+
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                       <div class="checkbox">

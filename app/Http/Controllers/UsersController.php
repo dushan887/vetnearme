@@ -5,15 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Users;
+use App\Statics\Titles;
 
 class UsersController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('checkRole:super_admin');
-    }
-
     /**
      * Show the dashboard Users.
      *
@@ -21,7 +16,22 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        return view('users/index');
+        return view('users/index', [
+            'users' => \Auth::user(),
+        ]);
+    }
+
+     /**
+     * Show the dashboard Users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        return view('users/edit', [
+            'user'   => \Auth::user(),
+            'titles' => Titles::TITLES,
+        ]);
     }
 
     /**
@@ -29,7 +39,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit_user(Request $request)
+    public function edit(Request $request)
     {
         return view('users/edit_user');
     }
@@ -39,10 +49,15 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function new_user(Request $request)
+    public function create(Request $request)
     {
         return view('users/new_user');
     }
 
-    
+    public function update(Request $request)
+    {
+        dd(333);
+    }
+
+
 }

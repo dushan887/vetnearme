@@ -35,7 +35,7 @@ class AdminPanelMenu {
             ]);
             $event->menu->add([
                 'text' => 'My Account',
-                'url'  => 'admin/user',
+                'url'  => 'admin/profile',
                 'icon' => 'user'
             ]);
             $event->menu->add([
