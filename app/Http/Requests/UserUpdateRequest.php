@@ -31,7 +31,7 @@ class UserUpdateRequest extends FormRequest
             'position'   => 'string|max:255|nullable',
             'phone'      => 'string|max:255|nullable',
             'location'   => 'string|max:255|nullable',
-            'about'      => 'string',
+            'about'      => 'string|nullable',
             'social.*'   => 'url|nullable',
             'avatar'     => 'nullable|image|mimes:jpeg,jpg,png,gif',
         ];

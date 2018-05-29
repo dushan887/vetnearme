@@ -118,9 +118,10 @@
                         id="first_name"
                         value="{{ old('first_name') ?? $user->first_name }}"
                         name=first_name placeholder="First Name">
+
+                        {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
@@ -132,9 +133,9 @@
                         name=last_name id="last_name"
                         value="{{ old('last_name') ?? $user->last_name }}"
                         placeholder="Last Name">
+                        {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                     {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group">
@@ -157,9 +158,9 @@
                       class="form-control"
                       value="{{ old('position') ?? $user->position }}"
                       id="position" placeholder="Position">
+                      {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                     {!! $errors->first('position', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('phone') ? 'has-error' : '' }}">
@@ -172,9 +173,9 @@
                         id="phone"
                         value="{{ old('phone') ?? $user->phone }}"
                         placeholder="Phone Number">
+                        {!! $errors->first('phone', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('phone', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
@@ -187,9 +188,9 @@
                         id="location"
                         value="{{ old('location') ?? $user->location }}"
                         placeholder="Location">
+                        {!! $errors->first('location', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('location', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('about') ? 'has-error' : '' }}">
@@ -197,9 +198,9 @@
 
                     <div class="col-sm-10">
                       <textarea class="form-control" name=about id="about" rows=10 placeholder="Bio">{{ old('about') ?? $user->about }}</textarea>
+                      {!! $errors->first('about', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('about', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('social.facebook') ? 'has-error' : '' }}">
@@ -212,9 +213,9 @@
                         id="socialFacebook"
                         value="{{ old('social.facebook') ?? $social['facebook'] }}"
                         placeholder="Facebook URL">
+                        {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('social.twitter') ? 'has-error' : '' }}">
@@ -227,9 +228,9 @@
                         id="scoialTwitter"
                         value="{{ old('social.twitter') ?? $social['twitter'] }}"
                         placeholder="Twitter URL">
+                        {!! $errors->first('social.twitter', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('social.twitter', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('social.linkedin') ? 'has-error' : '' }}">
@@ -242,9 +243,9 @@
                         id="socialLinkedin"
                         value="{{ old('social.linkedin') ?? $social['linkedin'] }}"
                         placeholder="Linkedin URL">
+                        {!! $errors->first('social.linkedin', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('social.linkedin', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('social.instagram') ? 'has-error' : '' }}">
@@ -257,9 +258,9 @@
                         id="socialInstagram"
                         value="{{ old('social.instagram') ?? $social['instagram'] }}"
                          placeholder="Instagram URL">
+                         {!! $errors->first('social.instagram', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('social.instagram', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
@@ -268,9 +269,9 @@
                     <div class="col-sm-10">
                       <input type="file" name=avatar id="avatar">
                       <p class="help-block">Upload your profile image.</p>
+                      {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                     </div>
 
-                    {!! $errors->first('avatar', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <hr>

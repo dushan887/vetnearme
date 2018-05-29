@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Users;
+use App\ModelQueries\UserQuery;
 use App\Statics\Titles;
 
 use App\Http\Requests\UserUpdateRequest;
@@ -65,7 +66,7 @@ class UsersController extends Controller
 
         $model = new UserQuery;
 
-        $model->update($validated);
+        $model->updateUser($validated, $request);
     }
 
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Clinic;
 use App\Helpers\Geolocation;
+use App\Helpers\Strings;
 
 class ClinicQuery extends Clinic
 {
@@ -71,7 +72,7 @@ class ClinicQuery extends Clinic
 
         $data['owner_id']      = \Auth::id();
         $data['opening_hours'] = $this->formatHours($data['hours'], $request);
-        $data['social_media']  = json_encode($this->cleanSocialLinks(($data['social'])));
+        $data['social_media']  = Strings::arrayToJson($data['social']);
 
         if($coordinates){
             $data['lat'] = $coordinates->latitude();
@@ -79,11 +80,6 @@ class ClinicQuery extends Clinic
         }
 
         return $data;
-    }
-
-    private function cleanSocialLinks($socialLinks)
-    {
-        return array_filter(array_map('trim', $socialLinks));
     }
 
     private function formatHours($data, $request)
