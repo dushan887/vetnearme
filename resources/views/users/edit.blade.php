@@ -17,12 +17,19 @@
     <section class="content">
 
       <div class="row">
+
+        @if (Session::has('type'))
+          @include('partials._alert')
+        @endif
+
         <div class="col-md-3" >
 
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="http://via.placeholder.com/250x250" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle"
+                src="{{ $user->avatar ? '/avatars/thumbs/' . $user->avatar : 'http://via.placeholder.com/250x250' }}"
+                alt="User profile picture">
 
               <h3 class="profile-username text-center">{{ $user->first_name . " " . $user->last_name }}</h3>
 
@@ -38,12 +45,34 @@
                   <i class="fa fa-phone-square"></i> <a class="pull-right">{{ $user->phone ?? "not available" }}</a>
                 </li>
                 <li class="list-group-item">
-                  <i class="fa fa-globe"></i> <ul class="list-inline pull-right">
-                            <li><a><i class="fa fa-facebook-square"></i></a></li>
-                            <li><a><i class="fa fa-twitter"></i></a></li>
-                            <li><a><i class="fa fa-linkedin"></i></a></li>
-                            <li><a><i class="fa fa-instagram"></i></a></li>
-                          </ul>
+
+                  <i class="fa fa-globe"></i>
+                    <ul class="list-inline pull-right">
+                      @if(isset($social['facebook']))
+                        <li>
+                          <a href="{{ $social['facebook'] }}"><i class="fa fa-facebook-square"></i></a>
+                        </li>
+                      @endif
+
+                      @if(isset($social['twitter']))
+                        <li>
+                          <a href="{{ $social['twitter'] }}"><i class="fa fa-twitter"></i></a>
+                        </li>
+                      @endif
+
+                      @if(isset($social['linkedin']))
+                        <li>
+                          <a href="{{ $social['linkedin'] }}"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                      @endif
+
+                      @if(isset($social['instagram']))
+                        <li>
+                          <a href="{{ $social['instagram'] }}"><i class="fa fa-instagram"></i></a>
+                        </li>
+                      @endif
+
+                    </ul>
                 </li>
               </ul>
 
@@ -65,21 +94,19 @@
               <div class="tab-pane" id="about-me">
                 <strong><i class="fa fa-file-text-o margin-r-5"></i> Bio</strong>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>{{$user->about}}</p>
 
                 <hr>
 
                 <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
 
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </p>
+                <p class="text-muted">{{$user->education}}</p>
 
                 <hr>
 
                 <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-                <p class="text-muted">Sydney, Australia</p>
+                <p class="text-muted">{{$user->location}}</p>
 
 
               </div>
@@ -211,7 +238,7 @@
                         class="form-control"
                         name=social[facebook]
                         id="socialFacebook"
-                        value="{{ old('social.facebook') ?? $social['facebook'] }}"
+                        value="{{ old('social.facebook') ?? $social['facebook'] ?? "" }}"
                         placeholder="Facebook URL">
                         {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -226,7 +253,7 @@
                         name=social[twitter]
                         class="form-control"
                         id="scoialTwitter"
-                        value="{{ old('social.twitter') ?? $social['twitter'] }}"
+                        value="{{ old('social.twitter') ?? $social['twitter'] ?? "" }}"
                         placeholder="Twitter URL">
                         {!! $errors->first('social.twitter', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -241,7 +268,7 @@
                         class="form-control"
                         name="social[linkedin]"
                         id="socialLinkedin"
-                        value="{{ old('social.linkedin') ?? $social['linkedin'] }}"
+                        value="{{ old('social.linkedin') ?? $social['linkedin'] ?? "" }}"
                         placeholder="Linkedin URL">
                         {!! $errors->first('social.linkedin', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -256,7 +283,7 @@
                         class="form-control"
                         name="social[instagram]"
                         id="socialInstagram"
-                        value="{{ old('social.instagram') ?? $social['instagram'] }}"
+                        value="{{ old('social.instagram') ?? $social['instagram'] ?? "" }}"
                          placeholder="Instagram URL">
                          {!! $errors->first('social.instagram', '<p class="help-block">:message</p>') !!}
                     </div>
@@ -279,31 +306,30 @@
                   @if($user->hasRole('super_admin'))
 
                     <div class="form-group has-warning">
-                      <label for="userType" class="col-sm-2 control-label">User Type</label>
+                      <label for="user_role" class="col-sm-2 control-label">User Type</label>
 
                       <div class="col-sm-10">
-                      <select id="userType" class="form-control">
-                        <option>Super Admin</option>
-                        <option>Admin</option>
-                        <option>User</option>
-                      </select>
+                        <select id="user_role" name="user_role" class="form-control">
+                          <option value="super_admin"
+                            @if($user->hasRole('super_admin'))
+                              selected=selected
+                            @endif
+                          >Super Admin</option>
+                          <option value="admin"
+                            @if($user->hasRole('admin'))
+                              selected=selected
+                            @endif
+                          >Admin</option>
+                          <option value="user"
+                            @if($user->hasRole('user'))
+                              selected=selected
+                            @endif
+                          >User</option>
+                        </select>
                       </div>
                     </div>
 
-                    <div class="form-group has-warning">
-                      <label for="asignClinic" class="col-sm-2 control-label">Clinic</label>
-
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="asignClinic" placeholder="Clinic Name">
-                      </div>
-                    </div>
-                    <div class="form-group has-warning">
-                      <label for="inputPaswoord" class="col-sm-2 control-label">Pasword</label>
-
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputPaswoord" placeholder="********">
-                      </div>
-                    </div>
+                    <admin-clinics-list></admin-clinics-list>
 
                   @endif
 

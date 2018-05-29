@@ -16505,6 +16505,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Media_vue__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Media_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Media_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue__);
 
 
 
@@ -16535,6 +16537,7 @@ var Form = __webpack_require__(162);
 
 
 
+
 var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#admin-app',
     mixins: [Form],
@@ -16542,7 +16545,8 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         adminService: __WEBPACK_IMPORTED_MODULE_2__components_Service_vue___default.a,
         adminMedia: __WEBPACK_IMPORTED_MODULE_5__components_Media_vue___default.a,
         adminModal: __WEBPACK_IMPORTED_MODULE_3__components_Modal_vue___default.a,
-        adminAlerts: __WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue___default.a
+        adminAlerts: __WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue___default.a,
+        adminClinicsList: __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default.a
     },
     methods: {
         notWorking: function notWorking(day) {
@@ -17781,6 +17785,202 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-37485d06", module.exports)
+  }
+}
+
+/***/ }),
+/* 177 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(178)
+/* template */
+var __vue_template__ = __webpack_require__(179)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/admin/components/ClinicsList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9d905bbc", Component.options)
+  } else {
+    hotAPI.reload("data-v-9d905bbc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 178 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            searchValue: '',
+            clinics: []
+        };
+    },
+
+    methods: {
+        search: function search(value) {
+            this.searchValue = value;
+        },
+        getClinics: function getClinics() {
+            var _this = this;
+
+            axios.get('/admin/clinics/all', {}).then(function (response) {
+                _this.clinics = response.data;
+            });
+        }
+    },
+    computed: {
+        filteredList: function filteredList() {
+            var _this2 = this;
+
+            return this.clinics.filter(function (clinic) {
+                return clinic.name.toLowerCase().includes(_this2.searchValue.toLowerCase());
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.getClinics();
+    }
+});
+
+/***/ }),
+/* 179 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group has-warning" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-sm-2 control-label",
+          attrs: { for: "asignClinic" }
+        },
+        [_vm._v("Clinic")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            type: "text",
+            id: "asignClinic",
+            placeholder: "Clinic Name"
+          },
+          on: {
+            input: function($event) {
+              _vm.search($event.target.value)
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "col-sm-2 control-label", attrs: { for: "clinic" } },
+        [_vm._v("Clinics")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-10" }, [
+        _c(
+          "select",
+          {
+            staticClass: "form-control",
+            attrs: { name: "clinic", id: "clinic", size: "10" }
+          },
+          _vm._l(_vm.filteredList, function(clinic) {
+            return _c(
+              "option",
+              { key: clinic.id, domProps: { value: clinic.id } },
+              [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(clinic.name) +
+                    "\n                "
+                )
+              ]
+            )
+          })
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9d905bbc", module.exports)
   }
 }
 

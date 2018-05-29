@@ -11,10 +11,12 @@ class UserQuery extends User
     protected $table = 'users';
 
     private $_avatarDirectory;
+    private $_avatarThumbsDirectory;
 
     public function __construct()
     {
-        $this->_avatarDirectory = public_path('/img/avatars/');
+        $this->_avatarDirectory       = public_path('/avatars/');
+        $this->_avatarThumbsDirectory = $this->_avatarDirectory . "thumbs/";
     }
 
     public function updateUser($data, $request, $userID = null)
@@ -32,13 +34,12 @@ class UserQuery extends User
         $user->first_name = $data['first_name'];
         $user->last_name  = $data['last_name'];
         $user->gender     = $data['gender'];
+        $user->title      = $data['title'];
         $user->position   = $data['position'];
         $user->phone      = $data['phone'];
         $user->location   = $data['location'];
         $user->about      = $data['about'] ?? '';
         $user->social     = Strings::arrayToJson($data['social']);
-
-        dd($user);
 
         if($user->update())
             return true;
@@ -48,9 +49,15 @@ class UserQuery extends User
 
     private function uploadAvatar($avatar)
     {
-        $name = uniqid('avatar_') . ' . ' . $avatar->getClientOriginalExtension();
+        $image = \Image::make($avatar->getPathName());
 
-        $logo->move($this->_avatarDirectory, $name);
+        $name  = uniqid('avatar_') . '.' . $avatar->getClientOriginalExtension();
+
+        $image->save($this->_avatarDirectory . $name);
+
+        // Make thumbs
+        $image->fit(250, 250);
+        $image->save($this->_avatarThumbsDirectory  . "/" . $name);
 
         return $name;
     }
@@ -58,6 +65,7 @@ class UserQuery extends User
     private function deleteOldAvatar($avatar)
     {
         File::delete($this->_avatarDirectory . $avatar);
+        File::delete($this->_avatarThumbsDirectory . $avatar);
     }
 
 

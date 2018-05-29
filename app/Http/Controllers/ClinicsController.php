@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClinic;
+use App\Clinic;
 use App\Country;
 use App\Service;
 use App\Helpers\XSS;
@@ -145,6 +146,12 @@ class ClinicsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function all()
+    {
+        return response()
+            ->json(Clinic::orderBy('name', 'desc')->get());
     }
 
 }

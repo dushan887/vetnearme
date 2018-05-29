@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
     Route::get('clinics/show/{id}', 'ClinicsController@show');
     Route::get('clinics/edit/{id}', 'ClinicsController@edit');
     Route::get('clinics/create', 'ClinicsController@create');
+    Route::get('clinics/all', 'ClinicsController@all');
     Route::post('clinics/store', 'ClinicsController@store');
 
     // MEDIA

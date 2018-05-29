@@ -24,9 +24,18 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [];
+
+        if(\Auth::user()->hasRole('super_admin'))
+            $rules = [
+                'user_role' => [Rule::in(['super_admin', 'admin', 'user'])],
+                'clinic'    => 'integer',
+            ];
+
+        return array_merge($rules, [
             'first_name' => 'required|string|max:255',
             'last_name'  => 'required|string|max:255',
+            'title'      => 'integer',
             'gender'     => [Rule::in([0, 1])],
             'position'   => 'string|max:255|nullable',
             'phone'      => 'string|max:255|nullable',
@@ -34,7 +43,7 @@ class UserUpdateRequest extends FormRequest
             'about'      => 'string|nullable',
             'social.*'   => 'url|nullable',
             'avatar'     => 'nullable|image|mimes:jpeg,jpg,png,gif',
-        ];
+        ]);
     }
 
     public function attributes()

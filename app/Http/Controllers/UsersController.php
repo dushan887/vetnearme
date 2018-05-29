@@ -66,7 +66,13 @@ class UsersController extends Controller
 
         $model = new UserQuery;
 
-        $model->updateUser($validated, $request);
+        if(!$model->updateUser($validated, $request))
+             Session::flash('alert', [
+                'message' => 'Something went wrong. Please try again',
+                'type'    => 'danger'
+            ]);
+
+        return \Redirect::back();
     }
 
 
