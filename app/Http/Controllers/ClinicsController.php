@@ -148,10 +148,25 @@ class ClinicsController extends Controller
         //
     }
 
-    public function all()
+    public function get(Request $request)
     {
-        return response()
-            ->json(Clinic::orderBy('name', 'desc')->get());
+        switch ($request->input('role')) {
+            case 'owner':
+                return response()
+                    ->json(Clinic::whereNull('owner_id')->orderBy('name', 'desc')->get());
+                break;
+
+             case 'user':
+                return response()
+                    ->json(Clinic::orderBy('name', 'desc')->with('users')->get());
+                break;
+
+            default:
+                return response()
+                    ->json(Clinic::orderBy('name', 'desc')->with('users')->get());
+                break;
+        }
+
     }
 
 }

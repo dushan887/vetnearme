@@ -10,9 +10,9 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class UserUpdate
+class ClinicUpdate
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $_user;
     public $_clinicID;
@@ -35,6 +35,6 @@ class UserUpdate
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return [];
     }
 }

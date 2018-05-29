@@ -16,6 +16,19 @@ class Clinic extends Model
         'social_media', 'opening_hours', 'logo', 'owner_id'
     ];
 
+    public function isOwner($userID)
+    {
+        if($this->owner_id === $userID)
+            return true;
+
+        return false;
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
     /**
      * Get the country associated with the clinic.
      */

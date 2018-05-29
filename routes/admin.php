@@ -23,7 +23,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
     // USERS
     Route::get('users', 'UsersController@index')->name('users');
     Route::get('profile', 'UsersController@profile')->name('profile');
-    Route::get('users/edit', 'UsersController@edit');
+    Route::get('users/edit/{id}', 'UsersController@edit');
     Route::get('users/create', 'UsersController@create');
     Route::post('users/update', 'UsersController@update');
 
@@ -32,7 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
     Route::get('clinics/show/{id}', 'ClinicsController@show');
     Route::get('clinics/edit/{id}', 'ClinicsController@edit');
     Route::get('clinics/create', 'ClinicsController@create');
-    Route::get('clinics/all', 'ClinicsController@all');
+    Route::get('clinics/get/', 'ClinicsController@get');
     Route::post('clinics/store', 'ClinicsController@store');
 
     // MEDIA

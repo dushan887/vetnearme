@@ -41,23 +41,31 @@ class UsersController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('users.create', [
+            'titles' => Titles::TITLES,
+        ]);
+    }
+
+    /**
      * Show the dashboard Edit User.
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id, Request $request)
     {
-        return view('users/edit_user');
-    }
+        $user = User::find($id);
 
-    /**
-     * Show the dashboard New User.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
-        return view('users/new_user');
+        return view('users/edit', [
+            'user'   => $user,
+            'social' => json_decode($user->social),
+            'titles' => Titles::TITLES,
+        ]);
     }
 
     public function update(UserUpdateRequest $request)

@@ -3,6 +3,7 @@
 namespace App\ModelQueries;
 
 use App\User;
+use App\Events\ClinicUpdate;
 use App\Events\UserUpdate;
 use App\Helpers\Strings;
 
@@ -44,8 +45,14 @@ class UserQuery extends User
 
         if($user->hasRole('super_admin')){
 
-            if(isset($data['clinic']))
-                event(new UserUpdate($user, $data['clinic']));
+            if(isset($data['clinic_owner']))
+                event(new ClinicUpdate($user, $data['clinic_owner']));
+
+            if(isset($data['clinic_user']))
+                $user->clinic_id = (int) $data['clinic_user']);
+
+            if(\Auth::user()->id !== $user->id)
+                $user->giveRole($data['user_role']);
 
         }
 

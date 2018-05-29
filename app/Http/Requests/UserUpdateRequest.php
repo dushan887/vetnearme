@@ -28,8 +28,9 @@ class UserUpdateRequest extends FormRequest
 
         if(\Auth::user()->hasRole('super_admin'))
             $rules = [
-                'user_role' => [Rule::in(['super_admin', 'admin', 'user'])],
-                'clinic'    => 'integer',
+                'user_role'    => [Rule::in(['super_admin', 'admin', 'user'])],
+                'clinic_owner' => 'integer',
+                'clinic_user'  => 'integer',
             ];
 
         return array_merge($rules, [

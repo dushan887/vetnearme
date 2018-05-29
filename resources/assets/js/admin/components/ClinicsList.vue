@@ -17,9 +17,12 @@
             <label for=clinic class="col-sm-2 control-label">Clinics</label>
             <div class="col-sm-10">
 
-                <select name="clinic" id="clinic" class="form-control" size="10">
+                <select :name="selectName()"
+                    id="clinic"
+                    class="form-control"
+                    size="10">
                     <option :value="clinic.id"
-                        :selected="clinic.owner_id === userid"
+                        :selected="isAssigned(clinic.users)"
                         v-for="clinic in filteredList"
                         :key="clinic.id" >
                         {{clinic.name}}
@@ -33,7 +36,7 @@
 
 <script>
 export default {
-    props: ['userid'],
+    props: ['clinicrole', 'userid'],
     data(){
         return {
             searchValue: '',
@@ -41,19 +44,47 @@ export default {
         }
     },
     methods: {
+        selectName(){
+            switch (this.clinicrole) {
+                case 'owner':
+                    return 'clinic_owner'
+                    break;
+
+                case 'user':
+                    return 'clinic_user'
+                    break;
+
+                default:
+                    return 'clinic_user'
+                    break;
+            }
+        },
         search(value){
             this.searchValue = value
         },
         getClinics(){
-            axios.get('/admin/clinics/all', {})
+
+            axios.get('/admin/clinics/get', {
+                params: {role: this.clinicrole}
+            })
             .then((response) => {
                 this.clinics = response.data
             })
+        },
+        isAssigned(users){
+
+            let isMember = false
+            users.filter(user => {
+                if(user.id === this.userid){
+                    isMember = true
+                }
+            })
+
+            return isMember
         }
     },
     computed: {
         filteredList() {
-
             return this.clinics.filter(clinic => {
                 return clinic.name.toLowerCase().includes(this.searchValue.toLowerCase())
             })

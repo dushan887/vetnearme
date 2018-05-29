@@ -17874,9 +17874,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['userid'],
+    props: ['clinicrole', 'userid'],
     data: function data() {
         return {
             searchValue: '',
@@ -17885,23 +17888,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        selectName: function selectName() {
+            switch (this.clinicrole) {
+                case 'owner':
+                    return 'clinic_owner';
+                    break;
+
+                case 'user':
+                    return 'clinic_user';
+                    break;
+
+                default:
+                    return 'clinic_user';
+                    break;
+            }
+        },
         search: function search(value) {
             this.searchValue = value;
         },
         getClinics: function getClinics() {
             var _this = this;
 
-            axios.get('/admin/clinics/all', {}).then(function (response) {
+            axios.get('/admin/clinics/get', {
+                params: { role: this.clinicrole }
+            }).then(function (response) {
                 _this.clinics = response.data;
             });
+        },
+        isAssigned: function isAssigned(users) {
+            var _this2 = this;
+
+            var isMember = false;
+            users.filter(function (user) {
+                if (user.id === _this2.userid) {
+                    isMember = true;
+                }
+            });
+
+            return isMember;
         }
     },
     computed: {
         filteredList: function filteredList() {
-            var _this2 = this;
+            var _this3 = this;
 
             return this.clinics.filter(function (clinic) {
-                return clinic.name.toLowerCase().includes(_this2.searchValue.toLowerCase());
+                return clinic.name.toLowerCase().includes(_this3.searchValue.toLowerCase());
             });
         }
     },
@@ -17958,7 +17990,7 @@ var render = function() {
           "select",
           {
             staticClass: "form-control",
-            attrs: { name: "clinic", id: "clinic", size: "10" }
+            attrs: { name: _vm.selectName(), id: "clinic", size: "10" }
           },
           _vm._l(_vm.filteredList, function(clinic) {
             return _c(
@@ -17967,7 +17999,7 @@ var render = function() {
                 key: clinic.id,
                 domProps: {
                   value: clinic.id,
-                  selected: clinic.owner_id === _vm.userid
+                  selected: _vm.isAssigned(clinic.users)
                 }
               },
               [

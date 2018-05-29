@@ -328,10 +328,15 @@
                         </select>
                       </div>
                     </div>
-
-                    <admin-clinics-list :userid="<?php echo $user->id ?>"></admin-clinics-list>
-
                   @endif
+
+                    @if($user->hasRole('super_admin'))
+                      <p class="help-block col-md-offset-2"><strong>Assign user as the owner of the clinic</stri></p>
+                      <admin-clinics-list :clinicrole="'owner'"></admin-clinics-list>
+
+                      <p class="help-block col-md-offset-2"><strong>Assign user to the clinic</stri></p>
+                      <admin-clinics-list :clinicrole="'user'" :userid="{!! $user->id !!}"></admin-clinics-list>
+                    @endif
 
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">

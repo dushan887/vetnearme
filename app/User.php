@@ -19,7 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name', 'last_name', 'about', 'education', 'position', 'phone',
         'social', 'title', 'gender', 'avatar', 'location', 'email', 'password',
-        'verified'
+        'verified', 'clinic_id'
     ];
 
     /**
@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     public function clinic()
     {
-       return $this->hasOne(Clinic::class, 'owner_id');
+       return $this->belongsTo(Clinic::class);
     }
 
     public function files()
