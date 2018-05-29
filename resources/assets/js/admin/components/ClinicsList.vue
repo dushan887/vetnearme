@@ -18,7 +18,10 @@
             <div class="col-sm-10">
 
                 <select name="clinic" id="clinic" class="form-control" size="10">
-                    <option :value="clinic.id" v-for="clinic in filteredList" :key="clinic.id">
+                    <option :value="clinic.id"
+                        :selected="clinic.owner_id === userid"
+                        v-for="clinic in filteredList"
+                        :key="clinic.id" >
                         {{clinic.name}}
                     </option>
                 </select>
@@ -30,6 +33,7 @@
 
 <script>
 export default {
+    props: ['userid'],
     data(){
         return {
             searchValue: '',

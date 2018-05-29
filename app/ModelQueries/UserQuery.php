@@ -3,6 +3,7 @@
 namespace App\ModelQueries;
 
 use App\User;
+use App\Events\UserUpdate;
 use App\Helpers\Strings;
 
 class UserQuery extends User
@@ -40,6 +41,13 @@ class UserQuery extends User
         $user->location   = $data['location'];
         $user->about      = $data['about'] ?? '';
         $user->social     = Strings::arrayToJson($data['social']);
+
+        if($user->hasRole('super_admin')){
+
+            if(isset($data['clinic']))
+                event(new UserUpdate($user, $data['clinic']));
+
+        }
 
         if($user->update())
             return true;

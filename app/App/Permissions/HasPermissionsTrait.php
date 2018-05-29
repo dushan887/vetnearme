@@ -12,6 +12,8 @@ trait HasPermissionsTrait
 
     public function giveRole($role = 'user')
     {
+        $this->roles()->detach();
+
         $this->roles()->saveMany([Role::where('name', '=', $role)->first()]);
 
         return $this;

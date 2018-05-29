@@ -329,7 +329,7 @@
                       </div>
                     </div>
 
-                    <admin-clinics-list></admin-clinics-list>
+                    <admin-clinics-list :userid="<?php echo $user->id ?>"></admin-clinics-list>
 
                   @endif
 

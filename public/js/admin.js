@@ -17871,8 +17871,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['userid'],
     data: function data() {
         return {
             searchValue: '',
@@ -17959,7 +17963,13 @@ var render = function() {
           _vm._l(_vm.filteredList, function(clinic) {
             return _c(
               "option",
-              { key: clinic.id, domProps: { value: clinic.id } },
+              {
+                key: clinic.id,
+                domProps: {
+                  value: clinic.id,
+                  selected: clinic.owner_id === _vm.userid
+                }
+              },
               [
                 _vm._v(
                   "\n                    " +
