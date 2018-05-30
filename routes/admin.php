@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempPass']], function () {
 
     Route::get('services', 'ServicesController@index')->name('services');
     Route::get('services/all', 'ServicesController@all');
@@ -21,8 +21,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth']], func
     Route::get('notifications/notification', 'NotificationsController@notification');
 
     // USERS
-    Route::get('users', 'UsersController@index')->name('users');
     Route::get('profile', 'UsersController@profile')->name('profile');
+    Route::get('users', 'UsersController@index')->name('users');
     Route::get('users/edit/{id}', 'UsersController@edit');
     Route::get('users/create', 'UsersController@create');
     Route::post('users/store', 'UsersController@store');

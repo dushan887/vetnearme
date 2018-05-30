@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'role'          => \App\Http\Middleware\RoleMiddleware::class,
         'menu.admin'    => \App\Http\Middleware\AdminMenu::class,
         'checkRole'     => \App\Http\Middleware\CheckRole::class,
+        'tempPass'      => \App\Http\Middleware\TemporaryPassword::class,
     ];
 }

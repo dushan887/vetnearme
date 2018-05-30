@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-<php dd(333) ?>
+
 @section('content')
  <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -244,7 +244,4 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
-
-
-
 @stop
