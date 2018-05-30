@@ -45,6 +45,9 @@ let adminVue = new Vue({
             $('[data-hoursday=' + day + '] input[type=text]')
                 .prop('readOnly', (i, v) => { return !v } )
                 .val('00:00')
+        },
+        generateRandomString(){
+            $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
         }
     },
     mounted(){

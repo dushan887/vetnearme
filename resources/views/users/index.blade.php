@@ -16,7 +16,7 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
-          <a href="{{ url('/admin/users/new_user') }}" class="btn btn-primary btn-block margin-bottom">Add New User</a>
+          <a href="{{ url('/admin/users/create') }}" class="btn btn-primary btn-block margin-bottom">Add New User</a>
 
           <div class="box box-solid">
             <div class="box-header with-border">

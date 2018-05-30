@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ClinicUpdate' => [
             'App\Listeners\ClinicUpdateOwner',
         ],
+        'App\Events\NewUser' => [
+            'App\Listeners\SendWelcomeEmail',
+        ],
+
     ];
 
     /**

@@ -3,12 +3,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Edit User Account
+    Create New User Account
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
     <li><a href="#">Users</a></li>
-    <li class="active">Edit User Account</li>
+    <li class="active">Create New User Account</li>
   </ol>
 </section>
 
@@ -23,7 +23,7 @@
 
     <div class="col-md-12">
 
-      <form class="form-horizontal" action="/admin/users/create" method="post" enctype="multipart/form-data">
+      <form class="form-horizontal" action="/admin/users/store" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
           <label for="title" class="col-sm-2 control-label">Title</label>
@@ -59,6 +59,30 @@
           <div class="col-sm-10">
             <input type="text" class="form-control" name=last_name id="last_name" value="{{ old('last_name') }}"
               placeholder="Last Name"> {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
+          </div>
+
+        </div>
+
+        <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
+          <label for="email" class="col-sm-2 control-label">Email</label>
+
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name=email id="email" value="{{ old('email') }}" placeholder="Email">
+            {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
+          </div>
+
+        </div>
+
+        <div class="form-group {{ $errors->has('temp_password') ? 'has-error' : '' }}">
+          <label for="temp_password" class="col-sm-2 control-label">Temporary Password</label>
+
+          <div class="col-sm-1">
+            <button type="button" class="btn btn-xs btn-primary" @click="generateRandomString">Generate Password</button>
+          </div>
+
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name=temp_password id="temp_password" value="{{ old('temp_password') }}" placeholder="Temporary Password" role=random-string>
+            {!! $errors->first('temp_password', '<p class="help-block">:message</p>') !!}
           </div>
 
         </div>

@@ -16553,6 +16553,9 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             $('[data-hoursday=' + day + '] input[type=text]').prop('readOnly', function (i, v) {
                 return !v;
             }).val('00:00');
+        },
+        generateRandomString: function generateRandomString() {
+            $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10));
         }
     },
     mounted: function mounted() {

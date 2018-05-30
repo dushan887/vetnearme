@@ -15,6 +15,7 @@ class AddClinicIdToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('clinic_id')->after('verified')->default(null)->nullable();
+            $table->string('temporary_password')->after('password')->default(null)->nullable();
 
             $table->index('clinic_id');
         });
@@ -28,7 +29,7 @@ class AddClinicIdToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+            $table->dropColumn(['clinic_id']);
         });
     }
 }
