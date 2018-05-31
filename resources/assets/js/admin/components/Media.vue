@@ -85,7 +85,6 @@ export default {
                 case 'delete':
                     let fileID = event.target.dataset.id
                     url = '/admin/media/destroy/' + fileID
-                    console.log(url);
 
                     this.$dialog.confirm('Are you sure you want to delete this file?',{
                         loader: true

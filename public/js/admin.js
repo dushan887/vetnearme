@@ -16556,6 +16556,38 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         },
         generateRandomString: function generateRandomString() {
             $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10));
+        },
+        selectAll: function selectAll(element) {
+            $('input[role=selectAll').prop('checked', element.checked);
+        },
+        deleteEntry: function deleteEntry(element) {
+
+            var text = element.dataset.text;
+            var id = element.dataset.id;
+            var url = element.dataset.url + '/' + id;
+
+            this.$dialog.confirm('Are you sure you want to delete this ' + text + '?', {
+                loader: true
+            }).then(function (dialog) {
+
+                axios.post(url).then(function (response) {
+
+                    dialog.close();
+
+                    Event.$emit('message:show', {
+                        messageTitle: data.messageTitle,
+                        messageText: data.messageText
+                    }, data.class);
+                }).catch(function (error) {
+                    console.log(error);
+
+                    alert('Something went wrong. Please try again a bit later');
+                });
+            }).catch(function (error) {
+                console.log(error);
+
+                alert('Something went wrong. Please try again a bit later');
+            });
         }
     },
     mounted: function mounted() {
@@ -17338,7 +17370,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 case 'delete':
                     var fileID = event.target.dataset.id;
                     url = '/admin/media/destroy/' + fileID;
-                    console.log(url);
 
                     this.$dialog.confirm('Are you sure you want to delete this file?', {
                         loader: true

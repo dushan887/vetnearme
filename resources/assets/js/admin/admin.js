@@ -48,6 +48,42 @@ let adminVue = new Vue({
         },
         generateRandomString(){
             $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
+        },
+        selectAll(element){
+            $('input[role=selectAll').prop('checked', element.checked)
+        },
+        deleteEntry(element){
+
+            let text = element.dataset.text
+            let id   = element.dataset.id
+            let url  = element.dataset.url + '/' + id
+
+            this.$dialog.confirm('Are you sure you want to delete this ' + text +'?', {
+                loader: true
+            }).then((dialog) => {
+
+                axios.post(url)
+                .then((response) => {
+
+                    dialog.close()
+
+                    Event.$emit('message:show', {
+                        messageTitle: data.messageTitle,
+                        messageText: data.messageText
+                    }, data.class)
+                })
+                .catch((error) => {
+                    console.log(error);
+
+                    alert('Something went wrong. Please try again a bit later')
+                })
+
+            })
+            .catch((error) => {
+                console.log(error);
+
+                alert('Something went wrong. Please try again a bit later')
+            });
         }
     },
     mounted(){

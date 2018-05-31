@@ -111,5 +111,39 @@ class UsersController extends Controller
 
     }
 
+    public function destroy($id)
+    {
+        $user  = \Auth::user();
+        $error = true;
+        $id    = (int) $id;
+
+        // Super admin can delete all user accounts
+        if($user->hasRole('super_admin'))
+            $error = User::destroy($id) ? false : true;
+
+        // Normal admin can only delete users from his own clinic
+        if($user->hasRole('admin') && $deletingUser->clinic_id === $user->clinic_id)
+            $error = $deletingUser->destroy() ? false : true;
+
+        // Normal users (without any admin priviledges) can delete only themselves
+        if($user->hasRole('user') && $deletingUser->id === $user->id)
+            $error = $deletingUser->destroy() ? false : true;
+
+        $message = $error ?
+            [
+                'messageTitle' => 'Alert',
+                'messageText'  => 'Something went wrong. Please try again a bit later',
+                'class'        => 'error'
+            ] :
+            [
+                'messageTitle' => 'User Deleted',
+                'messageText'  => 'The user has been deleted',
+                'class'        => 'success'
+            ];
+
+        return response()->json($message)->setStatusCode($error ? 404 : 200);
+
+    }
+
 
 }

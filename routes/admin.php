@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::get('users', 'UsersController@index')->name('users');
     Route::get('users/edit/{id}', 'UsersController@edit');
     Route::get('users/create', 'UsersController@create');
+    Route::post('users/destroy/{id}', 'UsersController@destroy');
     Route::post('users/store', 'UsersController@store');
     Route::post('users/update', 'UsersController@update');
 
