@@ -56,8 +56,19 @@ class AdminPanelMenu {
             $event->menu->add('ADMIN NAVIGATION');
             $event->menu->add([
                 'text' => 'Users',
-                'url'  => 'admin/users',
-                'icon' => 'users'
+                'icon' => 'users',
+                'submenu' => [
+                    [
+                        'text' => 'All Users',
+                        'url'  => 'admin/users',
+                        'icon' => 'users',
+                    ],
+                    [
+                        'text' => 'Create User',
+                        'url'  => 'admin/users/create',
+                        'icon' => 'user'
+                    ]
+                ]
             ]);
             $event->menu->add([
                 'text' => 'Clinics',

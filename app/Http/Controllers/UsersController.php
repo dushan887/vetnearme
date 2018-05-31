@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Helpers\XSS;
 
-use App\Users;
+use App\User;
 use App\ModelQueries\UserQuery;
 use App\Statics\Titles;
 
@@ -22,8 +22,13 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
+        $users = \Auth::user()->hasRole('super_admin') ?
+            User::paginate(20) :
+            User::where('clinic_id', '=', \Auth::user()->clinic_id)->get()->paginate(20);
+
         return view('users/index', [
-            'users' => \Auth::user(),
+            'users'  => $users,
+            'titles' => Titles::TITLES,
         ]);
     }
 

@@ -52,7 +52,7 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
-         
+
         </div>
         <!-- /.col -->
         <div class="col-md-9">
@@ -81,10 +81,10 @@
 
 	              <p class="text-muted">Sydney, Australia</p>
 
-	              	              
+
               </div>
               <!-- /.tab-pane -->
-             
+
               <div class="tab-pane" id="settings">
                 <form class="form-horizontal">
                   <div class="form-group">

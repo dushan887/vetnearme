@@ -118,26 +118,36 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td><input type="checkbox"></td>
-                      <td width="47"><img src="http://via.placeholder.com/160x160" alt="User Image" width="30" height="30"></td>
-                      <td>Title</td>
-                      <td>First Name</td>
-                      <td>Last Name</td>
-                      <td>Clinic Name
-                      </td>
-                      <td>Super Admin</td>
-                      <td>Male</td>
-                      <td width="150">
-                        <div class="btn-group pull-right">
-                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/user') }}"'><i class="fa fa-eye"></i></button>
-                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/users/edit_user') }}"'><i class="fa fa-edit"></i></button>
-                          <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
-                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
+                    @foreach($users as $user)
+
+                      <tr>
+                        <td><input type="checkbox"></td>
+                        <td width="47">
+                          <img src="{{ $user->avatar ? '/avatars/thumbs/' . $user->avatar : 'http://via.placeholder.com/160x160' }}" alt="User Image" width="30" height="30">
+                        </td>
+                        <td><?php
+                              echo ucwords(array_search($user->title, $titles))
+                            ?>
+                        </td>
+                        <td>{{ $user->first_name }}</td>
+                        <td>{{ $user->last_name }}</td>
+                        <td>{{ $user->clinic->name ?? "Not associated with any clinic" }}</td>
+                        <td>{{ ucwords(str_replace('_', ' ', $user->roles[0]->name)) }}</td>
+                        <td>{{ !$user->gender ? "Male" : "Female" }}</td>
+                        <td width="150">
+                          <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/user ') }}"'><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/users/edit ') }}"'><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/mailbox/compose
+                              ') }}"'><i class="fa fa-envelope-o"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+
+                    @endforeach
+
                       <td><input type="checkbox"></td>
                       <td width="47"><img src="http://via.placeholder.com/160x160" alt="User Image" width="30" height="30"></td>
                       <td>Title</td>
