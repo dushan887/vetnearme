@@ -31,7 +31,7 @@
 
           <div class="col-sm-10">
             <select id="title" name="title" class="form-control">
-                  <option value=null></option>
+                  <option></option>
                   @foreach($titles as $key => $value)
                     <option
                       value="{{ $value }}"

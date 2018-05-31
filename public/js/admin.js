@@ -16572,6 +16572,7 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
                 axios.post(url).then(function (response) {
 
+                    var data = response.data;
                     dialog.close();
 
                     Event.$emit('message:show', {

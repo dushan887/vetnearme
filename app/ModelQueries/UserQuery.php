@@ -41,6 +41,8 @@ class UserQuery extends User
         $this->social             = Strings::arrayToJson($data['social']);
         $this->password           = $password;
         $this->temporary_password = $password;
+        // Users created via this method are verified by default
+        $this->verified           = 1;
 
         // Assign the clinic_id from the select menu (only super admin have the permission to do this)
         if(\Auth::user()->hasRole('super_admin') && isset($data['clinic_user']))

@@ -38,7 +38,7 @@ class UserCreateRequest extends FormRequest
             'last_name'     => 'required|string|max:255',
             'email'         => "required|string|email|unique:users",
             'temp_password' => 'required|string|min:8',
-            'title'         => 'integer',
+            'title'         => 'integer|nullable',
             'gender'        => [Rule::in([0, 1])],
             'position'      => 'string|max:255|nullable',
             'phone'         => 'string|max:255|nullable',

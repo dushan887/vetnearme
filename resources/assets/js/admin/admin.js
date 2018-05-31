@@ -65,6 +65,7 @@ let adminVue = new Vue({
                 axios.post(url)
                 .then((response) => {
 
+                    let data = response.data
                     dialog.close()
 
                     Event.$emit('message:show', {
