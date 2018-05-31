@@ -141,7 +141,7 @@ class UsersController extends Controller
                 'class'        => 'success'
             ];
 
-        return response()->json($message)->setStatusCode($error ? 404 : 200);
+        return response()->json($message, $error ? 404 : 200);
 
     }
 
