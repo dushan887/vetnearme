@@ -16561,6 +16561,7 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             $('input[role=selectAll').prop('checked', element.checked);
         },
         deleteEntry: function deleteEntry(element) {
+            var _this = this;
 
             var text = element.dataset.text;
             var id = element.dataset.id;
@@ -16573,6 +16574,10 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 axios.post(url).then(function (response) {
 
                     var data = response.data;
+
+                    $('#entryid-' + id).slideUp('fast', function () {
+                        $(_this).remove();
+                    });
                     dialog.close();
 
                     Event.$emit('message:show', {
@@ -16580,14 +16585,18 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                         messageText: data.messageText
                     }, data.class);
                 }).catch(function (error) {
-                    console.log(error);
-
                     alert('Something went wrong. Please try again a bit later');
                 });
             }).catch(function (error) {
-                console.log(error);
-
                 alert('Something went wrong. Please try again a bit later');
+            });
+        },
+        deleteMultiple: function deleteMultiple() {
+
+            var selected = $("input[role=selectAll]:checked").map(function () {
+                return $(this).val();
+            }).get().filter(function (element) {
+                return element !== 'null';
             });
         }
     },

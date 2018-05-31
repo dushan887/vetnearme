@@ -66,6 +66,10 @@ let adminVue = new Vue({
                 .then((response) => {
 
                     let data = response.data
+
+                    $('#entryid-' + id).slideUp('fast', () => {
+                        $(this).remove()
+                    })
                     dialog.close()
 
                     Event.$emit('message:show', {
@@ -74,17 +78,20 @@ let adminVue = new Vue({
                     }, data.class)
                 })
                 .catch((error) => {
-                    console.log(error);
-
                     alert('Something went wrong. Please try again a bit later')
                 })
 
             })
             .catch((error) => {
-                console.log(error);
-
                 alert('Something went wrong. Please try again a bit later')
             });
+        },
+        deleteMultiple(){
+
+            let selected = $("input[role=selectAll]:checked").map(function () {
+                return $(this).val();
+            }).get().filter(element => element !== 'null')
+
         }
     },
     mounted(){

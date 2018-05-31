@@ -107,7 +107,7 @@ class UsersController extends Controller
             return \Redirect::back();
         }
 
-        return redirect('/admin/users');
+        return redirect('/admin/users')->with('message', 'New user created');
 
     }
 

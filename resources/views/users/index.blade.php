@@ -14,7 +14,13 @@
 
     <!-- Main content -->
     <section class="content">
+
       <div class="row">
+
+        @if (Session::has('message'))
+          @include('partial._alert')
+        @endif
+
         <div class="col-md-3">
           <a href="{{ url('/admin/users/create') }}" class="btn btn-primary btn-block margin-bottom">Add New User</a>
 
@@ -89,12 +95,30 @@
             <div class="box-body no-padding">
               <div class="mailbox-controls">
                 <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
+                <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                  <i class="fa fa-square-o"></i>
                 </button>
+
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/user') }}"'><i class="fa fa-edit"></i></button>
-                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+
+                  <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick='window.location.href= "{{ url('/admin/user') }}"'>
+                    <i class="fa fa-edit"></i>
+                  </button>
+
+                  <button type="button"
+                    class="btn btn-default btn-sm"
+                    onclick='window.location.href= "{{ url('/admin/mailbox/compose') }}"'>
+                    <i class="fa fa-envelope-o"></i>
+                  </button>
+
+                  <button type="button" class="btn btn-default btn-sm">
+                    <i class="fa fa-trash-o"
+                      @click="deleteMultiple"
+                    ></i>
+                  </button>
+
                 </div>
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
@@ -108,6 +132,7 @@
                     <tr>
                       <td><input type="checkbox"
                           @click="selectAll($event.target)"
+                          value=null
                           role=selectAll>
                       </td>
                       <th>User</th>
@@ -123,7 +148,7 @@
                   <tbody>
                     @foreach($users as $user)
 
-                      <tr data-entry="entryid-{{$user->id}}">
+                      <tr id="entryid-{{$user->id}}">
                         <td><input type="checkbox" name="userSelected[]" value="{{ $user->id }}" role="selectAll"></td>
                         <td width="47">
                           <img src="{{ $user->avatar ? '/avatars/thumbs/' . $user->avatar : 'http://via.placeholder.com/160x160' }}" alt="User Image" width="30" height="30">
@@ -173,6 +198,7 @@
                     <tr>
                       <td><input type="checkbox"
                           @click="selectAll($event.target)"
+                          value=null
                           role=selectAll>
                       </td>
                       <th>User</th>
