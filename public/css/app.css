@@ -142,3 +142,20 @@
   left: 25%;
 }
 
+#clinic_opening_hours .color-palette {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+#clinic_opening_hours input[type=checkbox] {
+  margin: 0;
+  vertical-align: middle;
+}
+#clinic_opening_hours div[data-hoursday] .form-group  {
+  margin: 0;
+}
+#clinic_opening_hours div[data-hoursday]{
+  border: 1px solid #f4f4f4;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
