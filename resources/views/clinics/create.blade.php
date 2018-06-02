@@ -263,6 +263,7 @@
                                 <input
                                   type="text"
                                   id=hoursMonday name=hours[monday-from]
+                                  value="06:00"
                                   class="form-control timepicker">
                                   {!! $errors->first('hours.monday-from', '<p class="help-block">:message</p>') !!}
                               </div>
@@ -273,6 +274,7 @@
                                 <label for=hoursMondayTo>To</label>
                                 <input
                                   type="text" id=hoursMondayTo name=hours[monday-to]
+                                  value="06:00"
                                   class="form-control timepicker">
                                   {!! $errors->first('hours.monday-to', '<p class="help-block">:message</p>') !!}
                               </div>
@@ -284,8 +286,8 @@
                                 <input
                                   type="text"
                                   id=hoursMondayFrom2 name=hours[monday-from2]
-                                  class="form-control timepicker"
-                                  >
+                                  value="06:00"
+                                  class="form-control timepicker">
                                   {!! $errors->first('hours.monday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -297,8 +299,8 @@
                                   type="text"
                                   id=hoursMondayTo2
                                   name=hours[monday-to2]
-                                  class="form-control timepicker"
-                                  >
+                                  value="06:00"
+                                  class="form-control timepicker">
                                   {!! $errors->first('hours.monday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -325,6 +327,7 @@
                               <div class="form-group {{ $errors->has('hours.tuesday-from') ? 'has-error' : ''}}">
                                 <label for=hoursTuesdayFrom>From</label>
                                 <input type="text" id=hoursTuesdayFrom name=hours[tuesday-from]
+                                value="06:00"
                                 class="form-control timepicker">
                                 {!! $errors->first('hours.tuesday-from', '<p class="help-block">:message</p>') !!}
                               </div>
@@ -336,6 +339,7 @@
                                 <input type="text"
                                 id=hoursTuesdayTo
                                 name=hours[tuesday-to]
+                                value="06:00"
                                 class="form-control timepicker">
                                 {!! $errors->first('hours.tuesday-to', '<p class="help-block">:message</p>') !!}
                               </div>
@@ -347,6 +351,7 @@
                                 <input type="text"
                                 id=hoursTuesdayFrom2
                                 name=hours[tuesday-from2]
+                                value="06:00"
                                 class="form-control timepicker">
                                 {!! $errors->first('hours.tuesday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
@@ -356,6 +361,7 @@
                               <div class="form-group {{ $errors->has('hours.tuesday-to2') ? 'has-error' : ''}}">
                                 <label for=hoursTuesdayTo2>To</label>
                                 <input type="text" id=hoursTuesdayTo2 name=hours[tuesday-to2]
+                                value="06:00"
                                 class="form-control timepicker">
                                 {!! $errors->first('hours.tuesday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
@@ -382,7 +388,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.wednesday-from') ? 'has-error' : ''}}">
                                 <label for=hoursWednesdayFrom>From</label>
-                                <input type="text" id=hoursWednesdayFrom name=hours[wednesday-from] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursWednesdayFrom name=hours[wednesday-from]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.wednesday-from', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -390,7 +399,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.wednesday-to') ? 'has-error' : ''}}">
                                 <label for=hoursWednesdayTo>To</label>
-                                <input type="text" id=hoursWednesdayTo name=hours[wednesday-to] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursWednesdayTo name=hours[wednesday-to]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.wednesday-to', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -398,7 +410,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.wednesday-from2') ? 'has-error' : ''}}">
                                 <label for=hoursWednesdayFrom2>From</label>
-                                <input type="text" id=hoursWednesdayFrom2 name=hours[wednesday-from2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursWednesdayFrom2 name=hours[wednesday-from2]
+                                class="form-control timepicker">
                                 {!! $errors->first('hours.wednesday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -406,7 +421,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.wednesday-to2') ? 'has-error' : ''}}">
                                 <label for=hoursWednesdayTo2>To</label>
-                                <input type="text" id=hoursWednesdayTo2 name=hours[wednesday-to2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursWednesdayTo2 name=hours[wednesday-to2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.wednesday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -432,7 +450,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.thursday-from') ? 'has-error' : ''}}">
                                 <label for=hoursThursdayFrom>From</label>
-                                <input type="text" id=hoursThursdayFrom name=hours[thursday-from] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursThursdayFrom name=hours[thursday-from]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.thursday-from', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -440,7 +461,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
                                 <label for=hoursThursdayTo>To</label>
-                                <input type="text"  id=hoursThursdayTo name=hours[thursday-to] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursThursdayTo name=hours[thursday-to]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.thursday-to', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -448,7 +472,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.thursday-from2') ? 'has-error' : ''}}">
                                 <label for=hoursThursdayFrom2>From</label>
-                                <input type="text" id=hoursThursdayFrom2 name=hours[thursday-from2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursThursdayFrom2 name=hours[thursday-from2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.thursday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -456,7 +483,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
                                 <label for=hoursThursdayTo2>To</label>
-                                <input type="text" id=hoursThursdayTo2 name=hours[thursday-to2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursThursdayTo2 name=hours[thursday-to2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.thursday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -482,7 +512,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.friday-from') ? 'has-error' : ''}}">
                                 <label for=hoursFridayFrom>From</label>
-                                <input type="text" id=hoursFridayFrom name=hours[friday-from] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursFridayFrom name=hours[friday-from]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.friday-from', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -490,7 +523,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.friday-to') ? 'has-error' : ''}}">
                                 <label for=hoursFridayTo>To</label>
-                                <input type="text" id=hoursFridayTo name=hours[friday-to] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursFridayTo name=hours[friday-to]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.friday-to', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -498,7 +534,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.friday-from2') ? 'has-error' : ''}}">
                                 <label for=hoursFridayFrom2>From</label>
-                                <input type="text" d=hoursFridayFrom2 name=hours[friday-from2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                d=hoursFridayFrom2 name=hours[friday-from2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.friday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -506,7 +545,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.friday-to2') ? 'has-error' : ''}}">
                                 <label for=hoursFridayTo2>To</label>
-                                <input type="text" id=hoursFridayTo2 name=hours[friday-to2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursFridayTo2 name=hours[friday-to2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.friday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -533,7 +575,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayFrom>From</label>
-                                <input type="text" id=hoursSaturdayFrom name=hours[saturday-from] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSaturdayFrom name=hours[saturday-from]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.saturday-from', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -541,7 +586,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayTo>To</label>
-                                <input type="text" id=hoursSaturdayTo name=hours[saturday-to] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSaturdayTo name=hours[saturday-to]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.saturday-to', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -549,7 +597,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayFrom2>From</label>
-                                <input type="text" id=hoursSaturdayFrom2 name=hours[saturday-from2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSaturdayFrom2 name=hours[saturday-from2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.saturday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -557,7 +608,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayTo2>To</label>
-                                <input type="text" id=hoursSaturdayTo2 name=hours[saturday-to2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSaturdayTo2 name=hours[saturday-to2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.saturday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -584,7 +638,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSundayFrom>From</label>
-                                <input type="text" id=hoursSundayFrom name=hours[sunday-from] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSundayFrom name=hours[sunday-from]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.sunday-from', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -592,7 +649,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSundayTo>To</label>
-                                <input type="text" id=hoursSundayTo name=hours[sunday-to] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSundayTo name=hours[sunday-to]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.sunday-to', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -600,7 +660,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSundayFrom2>From</label>
-                                <input type="text" id=hoursSundayFrom2 name=hours[sunday-from2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSundayFrom2 name=hours[sunday-from2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.sunday-from2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>
@@ -608,7 +671,10 @@
                             <div class="col-sm-3 col-xs-6">
                               <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                                 <label for=hoursSundayTo2>To</label>
-                                <input type="text" id=hoursSundayTo2 name=hours[sunday-to2] class="form-control timepicker">
+                                <input type="text"
+                                value="06:00"
+                                id=hoursSundayTo2 name=hours[sunday-to2]
+                                 class="form-control timepicker">
                                 {!! $errors->first('hours.sunday-to2', '<p class="help-block">:message</p>') !!}
                               </div>
                             </div>

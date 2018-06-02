@@ -45,7 +45,7 @@ class ClinicQuery extends Clinic
 
     public function updateClinic($data, $request, $clinicID)
     {
-        $clinic = self::find($clinicID);
+        $clinic = Clinic::find($clinicID);
 
         if($request->hasFile('logo')){
 
@@ -59,7 +59,14 @@ class ClinicQuery extends Clinic
         $data = $this->formatData($data, $request);
 
         if($clinic->update($data)){
-            $clinic->services->attach($request->input('services'));
+
+            $clinic->services->detach();
+
+            $services = $this->getServices($request['services']);
+
+            if($services !== null)
+                $model->services()->saveMany($services);
+
             return $clinic->id;
         }
 

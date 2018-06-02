@@ -16610,9 +16610,7 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 //Timepicker
 $('.timepicker').timepicker({
     timeFormat: 'HH:mm',
-    interval: 5,
-    defaultTime: '00'
-
+    interval: 5
 });
 
 /***/ }),
@@ -16893,9 +16891,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    // _c("div", { staticClass: "content-header" }, [
-        _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
-    // ]),
+    _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
     _vm._v(" "),
     _c("div", { staticClass: "services-actions" }, [
       _c(
@@ -16913,96 +16909,57 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "services clearfix row" }, [
-        _c("div", { staticClass: "col-xs-12" }, [
-            _c("div", { staticClass: "box" }, [
-                _c("div", { staticClass: "box-body" }, [
-                    _c("table", { staticClass: "table table-bordered table-hover" }, [
-                        _c("thead", { staticClass: "" }, [
-                            _c("tr", { staticClass: "" }, [
-                                _c("th", { staticClass: "" }, [
-                                    _vm._v("Services")
-                                 ]),
-                                _c("th", { staticClass: "" }, [
-                                    _vm._v("Usage")
-                                 ]),
-                                _c("th", { staticClass: "" }, [
-                                    _vm._v("Actions")
-                                 ]),
-                            ]),
-                        ]),
-                        _c(
-                          "tbody",
-                          { staticClass: "" },
-                          _vm._l(_vm.services, function(service, index) {
-                            return _c(
-                              "tr",
-                              { key: service.id, staticClass: "" },
-                                [
-                                  _c("td", { staticClass: "" }, [
-                                    _c("h4", { staticClass: "no-margin" }, [
-                                      _vm._v(
-                                        _vm._s(service.name)
-                                      )
-                                    ]),
-                                  ]),
-                                  _c("td", { staticClass: "" }, [
-                                      _vm._v(
-                                        _vm._s(service.count)
-                                      )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "service-last" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        attrs: { type: "button", "data-id": service.id },
-                                        on: {
-                                          click: function($event) {
-                                          }
-                                        }
-                                      },
-                                      [_vm._c("i", { staticClass: "fa fa-check" }, )]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        attrs: { type: "button", "data-id": service.id },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.openModal("edit")
-                                          }
-                                        }
-                                      },
-                                      [_vm._c("i", { staticClass: "fa fa-edit" }, )]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-danger",
-                                        attrs: { type: "button", "data-id": service.id },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.openModal("delete")
-                                          }
-                                        }
-                                      },
-                                      [_vm._c("i", { staticClass: "fa fa-trash" }, )]
-                                    )
-                                  ])
-                                ]
-                            )
-                          })
-                        )
-                    ])
+    _c(
+      "div",
+      { staticClass: "services clearfix row" },
+      _vm._l(_vm.services, function(service, index) {
+        return _c(
+          "div",
+          { key: service.id, staticClass: "col-md-2 col-sm-3 col-xs-4" },
+          [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-body" }, [
+                _c("h4", [
+                  _vm._v(
+                    _vm._s(service.name) + " (" + _vm._s(service.count) + ")"
+                  )
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-id": service.id },
+                    on: {
+                      click: function($event) {
+                        _vm.openModal("edit")
+                      }
+                    }
+                  },
+                  [_vm._v("Edit")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-id": service.id },
+                    on: {
+                      click: function($event) {
+                        _vm.openModal("delete")
+                      }
+                    }
+                  },
+                  [_vm._v("Delete")]
+                )
+              ])
             ])
-        ])
-    ])
+          ]
+        )
+      })
+    )
   ])
 }
 var staticRenderFns = []
@@ -17393,24 +17350,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getHumanDate: function getHumanDate(date) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY');
         },
-        imageLoad: function imageLoad(file, event) {
-
-            var imageContainer = $('.image-thumb');
-            var folder = file.clinic_id ? '/media/' + file.clinic.name.trim().toLowerCase().replace('/ /g', "_") : '/media/general/';
-
-            if (this.imageExtensions.includes(file.extension)) imageContainer.attr('src', folder + file.name);
-        },
         imagePreview: function imagePreview(file, event) {
 
             var imageContainer = $('.image-preview-container');
             var folder = file.clinic_id ? '/media/' + file.clinic.name.trim().toLowerCase().replace('/ /g', "_") : '/media/general/';
 
             if (this.imageExtensions.includes(file.extension)) imageContainer.attr('src', folder + file.name).show();
-            $('body').addClass('preview_on')
         },
         removePreview: function removePreview() {
             $('.image-preview-container').hide();
-            $('body').removeClass('preview_on')
         },
         getAll: function getAll() {
             var _this = this;
@@ -17788,7 +17736,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "col-md-12 clearfix" }, [
-      _c("div", { staticClass: "box box-primary" }, [
+      _c("div", { staticClass: "box" }, [
         _c(
           "div",
           { staticClass: "box-body table-responsive no-padding media" },
@@ -17801,45 +17749,28 @@ var render = function() {
                   _vm._v(" "),
                   _vm._l(_vm.files, function(file, index) {
                     return _c("tr", { key: file.id }, [
-
-                      _c("td",
-                      {
-                          on: {
-                            mouseenter: function($event) {
-                              _vm.imageLoad(file, $event)
-                            }
-                          }
-                        },
-                      [
-                      _c("img", {
-                          staticClass: "img-responsive image-thumb",
-                          staticStyle: { width: "50px" },
-                          staticStyle: { height: "50px" },
-                          attrs: { src: "http://via.placeholder.com/50x50"}
-                        })
-                      ]),
-                      _vm._v(" "),
                       _c(
-                        "td",
+                        "th",
                         {
                           on: {
-                            click: function($event) {
+                            mouseenter: function($event) {
                               _vm.imagePreview(file, $event)
                             },
+                            mouseout: _vm.removePreview
                           }
                         },
                         [_vm._v(_vm._s(file.name))]
                       ),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(file.extension))]),
+                      _c("th", [_vm._v(_vm._s(file.extension))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(file.user.name))]),
+                      _c("th", [_vm._v(_vm._s(file.user.name))]),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("th", [
                         _vm._v(_vm._s(_vm.getHumanDate(file.created_at)))
                       ]),
                       _vm._v(" "),
-                      _c("td", { staticClass: "media-last" }, [
+                      _c("th", [
                         _c(
                           "button",
                           {
@@ -17851,7 +17782,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._c("i", { staticClass: "fa fa-trash" }, )]
+                          [_vm._v("Delete")]
                         )
                       ])
                     ])
@@ -17861,17 +17792,10 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("img",         
-            {
+            _c("img", {
               staticClass: "image-preview-container",
               staticStyle: { display: "none" },
-              attrs: { src: "" },  
-              on: {
-                click: function($event) {
-                  _vm.removePreview()
-                }
-              }
-
+              attrs: { src: "" }
             })
           ]
         )
@@ -17885,8 +17809,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("Thumb")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Extension")]),
