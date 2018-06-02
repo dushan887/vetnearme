@@ -13,11 +13,6 @@ use App\ModelQueries\ClinicQuery;
 
 class ClinicsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('checkRole:super_admin');
-    }
-
     /**
      * Show the dashboard Clinics.
      *
@@ -25,7 +20,9 @@ class ClinicsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('clinics/index');
+        return view('clinics/index', [
+            'clinics' => Clinic::paginate(20),
+        ]);
     }
 
     /**
@@ -63,14 +60,17 @@ class ClinicsController extends Controller
         $clinicID = $model->store( XSS::clean($validated, ['logo']), $request);
 
         if(!$clinicID){
-            Session::flash('alert', [
+            \Session::flash('alert', [
                 'message' => 'Something went wrong. Please try again',
                 'type'    => 'danger'
             ]);
             return Redirect::back();
         }
 
-        return redirect('admin/clinics/' . $clinicID);
+        if(\Auth::user()->hasRole('super_admin'))
+            return redirect('admin/clinics/show/' . $clinicID);
+
+        return redirect()->route('my-clinic');
     }
 
     /**
@@ -92,12 +92,16 @@ class ClinicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(int $id)
+    public function edit(?int $id = null)
     {
-        if(!\Auth::user()->hasRole('super_admin') && \Auth::user()->clinic->owner_id !== $id)
+        if(!\Auth::user()->hasRole('super_admin') ||
+            (\Auth::user()->hasRole('admin') && \Auth::user()->clinic_id !== $id)
+        )
             return redirect('admin/clinics/' . $id);
 
-        $clinic = Clinic::find($id);
+        // Super admin can edit all clinics
+        // Admin and owner
+        $clinic = Clinic::find($id ?? \Auth::user()->clinic_id);
 
         return view('clinics/edit', [
             'clinic'    => $clinic,
@@ -124,10 +128,10 @@ class ClinicsController extends Controller
 
         $model     = new ClinicQuery;
 
-        $clinicID = $model->update( XSS::clean($validated, ['logo']), $request, $id);
+        $clinicID = $model->updateClinic( XSS::clean($validated, ['logo']), $request, $id);
 
         if(!$clinicID){
-            Session::flash('alert', [
+            \Session::flash('alert', [
                 'message' => 'Something went wrong. Please try again',
                 'type'    => 'danger'
             ]);
