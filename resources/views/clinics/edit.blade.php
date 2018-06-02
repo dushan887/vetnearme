@@ -679,6 +679,28 @@
                       <input type="text" id=special_notes name=special_notes class="form-control" placeholder="Special Notes" value="{{ $clinic->special_notes }}">
                     </div>
 
+                    <div class="tab-pane" id="clinic_services">
+                    <div class="box box-primary padding">
+                      <div class="box-header">
+                        <h3 class="box-title">Services</h3>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="services">Services</label>
+                        <select name="services[]" id="services" multiple class="form-control">
+                          @foreach($services as $key => $value)
+                            <option value="{{ $value }}"
+                              @if(in_array($value, $clinicServices))
+                                selected="selected"
+                              @endif
+                            >{{ $key }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+
+                    </div>
+                </div>
+
                     <div class="form-group {{ $errors->has('logo') ? 'has-error' : ''}}">
                       <label for="logo">Logo input</label>
                       <input type="file" id="logo" name=logo>

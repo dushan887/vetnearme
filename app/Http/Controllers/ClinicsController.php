@@ -104,10 +104,12 @@ class ClinicsController extends Controller
         $clinic = Clinic::find($id ?? \Auth::user()->clinic_id);
 
         return view('clinics/edit', [
-            'clinic'    => $clinic,
-            'social'    => json_decode($clinic->social_media),
-            'hours'     => json_decode($clinic->opening_hours),
-            'countries' => Country::pluck('name', 'id'),
+            'clinic'         => $clinic,
+            'social'         => json_decode($clinic->social_media),
+            'hours'          => json_decode($clinic->opening_hours),
+            'services'       => Service::pluck('id', 'name'),
+            'clinicServices' => $clinic->services->pluck('id')->toArray(),
+            'countries'      => Country::pluck('name', 'id'),
         ]);
     }
 

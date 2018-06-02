@@ -76,7 +76,7 @@ class ClinicQuery extends Clinic
 
     public function uploadLogo($logo, $clinicName)
     {
-        $name = strtolower(str_replace(' ', '_', $clinicName)) . ' . ' . $logo->getClientOriginalExtension();
+        $name = strtolower(str_replace(' ', '_', $clinicName)) . '.' . $logo->getClientOriginalExtension();
 
         $logo->move($this->_logoDirectory, $name);
 

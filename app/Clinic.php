@@ -29,6 +29,11 @@ class Clinic extends Model
         return $this->hasMany(User::class);
     }
 
+    public function owner()
+    {
+        return $this->hasOne(User::class, 'id', 'owner_id');
+    }
+
     /**
      * Get the country associated with the clinic.
      */
