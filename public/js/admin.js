@@ -16893,7 +16893,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
+    // _c("div", { staticClass: "content-header" }, [
+        _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
+    // ]),
     _vm._v(" "),
     _c("div", { staticClass: "services-actions" }, [
       _c(
@@ -16911,57 +16913,96 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "services clearfix row" },
-      _vm._l(_vm.services, function(service, index) {
-        return _c(
-          "div",
-          { key: service.id, staticClass: "col-md-2 col-sm-3 col-xs-4" },
-          [
-            _c("div", { staticClass: "panel panel-default" }, [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("h4", [
-                  _vm._v(
-                    _vm._s(service.name) + " (" + _vm._s(service.count) + ")"
-                  )
+    _c("div", { staticClass: "services clearfix row" }, [
+        _c("div", { staticClass: "col-xs-12" }, [
+            _c("div", { staticClass: "box" }, [
+                _c("div", { staticClass: "box-body" }, [
+                    _c("table", { staticClass: "table table-bordered table-hover" }, [
+                        _c("thead", { staticClass: "" }, [
+                            _c("tr", { staticClass: "" }, [
+                                _c("th", { staticClass: "" }, [
+                                    _vm._v("Services")
+                                 ]),
+                                _c("th", { staticClass: "" }, [
+                                    _vm._v("Usage")
+                                 ]),
+                                _c("th", { staticClass: "" }, [
+                                    _vm._v("Actions")
+                                 ]),
+                            ]),
+                        ]),
+                        _c(
+                          "tbody",
+                          { staticClass: "" },
+                          _vm._l(_vm.services, function(service, index) {
+                            return _c(
+                              "tr",
+                              { key: service.id, staticClass: "" },
+                                [
+                                  _c("td", { staticClass: "" }, [
+                                    _c("h4", { staticClass: "no-margin" }, [
+                                      _vm._v(
+                                        _vm._s(service.name)
+                                      )
+                                    ]),
+                                  ]),
+                                  _c("td", { staticClass: "" }, [
+                                      _vm._v(
+                                        _vm._s(service.count)
+                                      )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", { staticClass: "service-last" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "button", "data-id": service.id },
+                                        on: {
+                                          click: function($event) {
+                                          }
+                                        }
+                                      },
+                                      [_vm._c("i", { staticClass: "fa fa-check" }, )]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        attrs: { type: "button", "data-id": service.id },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.openModal("edit")
+                                          }
+                                        }
+                                      },
+                                      [_vm._c("i", { staticClass: "fa fa-edit" }, )]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        attrs: { type: "button", "data-id": service.id },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.openModal("delete")
+                                          }
+                                        }
+                                      },
+                                      [_vm._c("i", { staticClass: "fa fa-trash" }, )]
+                                    )
+                                  ])
+                                ]
+                            )
+                          })
+                        )
+                    ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "panel-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button", "data-id": service.id },
-                    on: {
-                      click: function($event) {
-                        _vm.openModal("edit")
-                      }
-                    }
-                  },
-                  [_vm._v("Edit")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button", "data-id": service.id },
-                    on: {
-                      click: function($event) {
-                        _vm.openModal("delete")
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ])
             ])
-          ]
-        )
-      })
-    )
+        ])
+    ])
   ])
 }
 var staticRenderFns = []
