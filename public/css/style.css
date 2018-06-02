@@ -635,7 +635,3 @@ section:not(.page-search) #search .location-search:before {
   border: 1px solid #468a97;
   border-radius: 5px;
 }
-#clinic_opening_hours .color-palette {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
