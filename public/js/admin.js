@@ -1476,9 +1476,9 @@ webpackJsonp([0],[
 
             mom = createUTC([2000, 1]).day(i);
             if (strict && !this._fullWeekdaysParse[i]) {
-                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
-                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
-                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\.?') + '$', 'i');
+                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$', 'i');
             }
             if (!this._weekdaysParse[i]) {
                 regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
@@ -2281,7 +2281,7 @@ webpackJsonp([0],[
 
     function preprocessRFC2822(s) {
         // Remove comments and folding whitespace and replace multiple-spaces with a single space
-        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').trim();
+        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
     }
 
     function checkWeekday(weekdayStr, parsedInput, config) {
@@ -4460,7 +4460,7 @@ webpackJsonp([0],[
     // Side effect imports
 
 
-    hooks.version = '2.22.1';
+    hooks.version = '2.22.2';
 
     setHookCallback(createLocal);
 
@@ -5394,7 +5394,7 @@ module.exports = function normalizeComponent (
         relativeTime : {
             future : '%s sonra',
             past : '%s əvvəl',
-            s : 'birneçə saniyyə',
+            s : 'birneçə saniyə',
             ss : '%d saniyə',
             m : 'bir dəqiqə',
             mm : '%d dəqiqə',
@@ -5489,7 +5489,7 @@ module.exports = function normalizeComponent (
         weekdays : {
             format: 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split('_'),
             standalone: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
-            isFormat: /\[ ?[Вв] ?(?:мінулую|наступную)? ?\] ?dddd/
+            isFormat: /\[ ?[Ууў] ?(?:мінулую|наступную)? ?\] ?dddd/
         },
         weekdaysShort : 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
         weekdaysMin : 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
@@ -12720,7 +12720,7 @@ module.exports = function normalizeComponent (
         calendar : {
             sameDay : '[ਅਜ] LT',
             nextDay : '[ਕਲ] LT',
-            nextWeek : 'dddd, LT',
+            nextWeek : '[ਅਗਲਾ] dddd, LT',
             lastDay : '[ਕਲ] LT',
             lastWeek : '[ਪਿਛਲੇ] dddd, LT',
             sameElse : 'L'
@@ -16700,7 +16700,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/admin/components/Service.vue"
+Component.options.__file = "resources\\assets\\js\\admin\\components\\Service.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -16709,9 +16709,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1cca1b8e", Component.options)
+    hotAPI.createRecord("data-v-0a6df8fb", Component.options)
   } else {
-    hotAPI.reload("data-v-1cca1b8e", Component.options)
+    hotAPI.reload("data-v-0a6df8fb", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -16893,9 +16893,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    // _c("div", { staticClass: "content-header" }, [
-        _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
-    // ]),
+    _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
     _vm._v(" "),
     _c("div", { staticClass: "services-actions" }, [
       _c(
@@ -16913,96 +16911,57 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "services clearfix row" }, [
-        _c("div", { staticClass: "col-xs-12" }, [
-            _c("div", { staticClass: "box" }, [
-                _c("div", { staticClass: "box-body" }, [
-                    _c("table", { staticClass: "table table-bordered table-hover" }, [
-                        _c("thead", { staticClass: "" }, [
-                            _c("tr", { staticClass: "" }, [
-                                _c("th", { staticClass: "" }, [
-                                    _vm._v("Services")
-                                 ]),
-                                _c("th", { staticClass: "" }, [
-                                    _vm._v("Usage")
-                                 ]),
-                                _c("th", { staticClass: "" }, [
-                                    _vm._v("Actions")
-                                 ]),
-                            ]),
-                        ]),
-                        _c(
-                          "tbody",
-                          { staticClass: "" },
-                          _vm._l(_vm.services, function(service, index) {
-                            return _c(
-                              "tr",
-                              { key: service.id, staticClass: "" },
-                                [
-                                  _c("td", { staticClass: "" }, [
-                                    _c("h4", { staticClass: "no-margin" }, [
-                                      _vm._v(
-                                        _vm._s(service.name)
-                                      )
-                                    ]),
-                                  ]),
-                                  _c("td", { staticClass: "" }, [
-                                      _vm._v(
-                                        _vm._s(service.count)
-                                      )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "service-last" }, [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        attrs: { type: "button", "data-id": service.id },
-                                        on: {
-                                          click: function($event) {
-                                          }
-                                        }
-                                      },
-                                      [_vm._c("i", { staticClass: "fa fa-check" }, )]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-primary",
-                                        attrs: { type: "button", "data-id": service.id },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.openModal("edit")
-                                          }
-                                        }
-                                      },
-                                      [_vm._c("i", { staticClass: "fa fa-edit" }, )]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-danger",
-                                        attrs: { type: "button", "data-id": service.id },
-                                        on: {
-                                          click: function($event) {
-                                            _vm.openModal("delete")
-                                          }
-                                        }
-                                      },
-                                      [_vm._c("i", { staticClass: "fa fa-trash" }, )]
-                                    )
-                                  ])
-                                ]
-                            )
-                          })
-                        )
-                    ])
+    _c(
+      "div",
+      { staticClass: "services clearfix row" },
+      _vm._l(_vm.services, function(service, index) {
+        return _c(
+          "div",
+          { key: service.id, staticClass: "col-md-2 col-sm-3 col-xs-4" },
+          [
+            _c("div", { staticClass: "panel panel-default" }, [
+              _c("div", { staticClass: "panel-body" }, [
+                _c("h4", [
+                  _vm._v(
+                    _vm._s(service.name) + " (" + _vm._s(service.count) + ")"
+                  )
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "panel-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-id": service.id },
+                    on: {
+                      click: function($event) {
+                        _vm.openModal("edit")
+                      }
+                    }
+                  },
+                  [_vm._v("Edit")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button", "data-id": service.id },
+                    on: {
+                      click: function($event) {
+                        _vm.openModal("delete")
+                      }
+                    }
+                  },
+                  [_vm._v("Delete")]
+                )
+              ])
             ])
-        ])
-    ])
+          ]
+        )
+      })
+    )
   ])
 }
 var staticRenderFns = []
@@ -17011,7 +16970,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1cca1b8e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0a6df8fb", module.exports)
   }
 }
 
@@ -17041,7 +17000,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/admin/components/Modal.vue"
+Component.options.__file = "resources\\assets\\js\\admin\\components\\Modal.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17050,9 +17009,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-33c86074", Component.options)
+    hotAPI.createRecord("data-v-97fbb71a", Component.options)
   } else {
-    hotAPI.reload("data-v-33c86074", Component.options)
+    hotAPI.reload("data-v-97fbb71a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17137,7 +17096,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-33c86074", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-97fbb71a", module.exports)
   }
 }
 
@@ -17167,7 +17126,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/admin/components/EventMessages.vue"
+Component.options.__file = "resources\\assets\\js\\admin\\components\\EventMessages.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17176,9 +17135,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1fe68d9f", Component.options)
+    hotAPI.createRecord("data-v-4e77e54c", Component.options)
   } else {
-    hotAPI.reload("data-v-1fe68d9f", Component.options)
+    hotAPI.reload("data-v-4e77e54c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17276,7 +17235,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1fe68d9f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-4e77e54c", module.exports)
   }
 }
 
@@ -17306,7 +17265,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/admin/components/Media.vue"
+Component.options.__file = "resources\\assets\\js\\admin\\components\\Media.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17315,9 +17274,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-37485d06", Component.options)
+    hotAPI.createRecord("data-v-9b7bb3ac", Component.options)
   } else {
-    hotAPI.reload("data-v-37485d06", Component.options)
+    hotAPI.reload("data-v-9b7bb3ac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17393,24 +17352,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getHumanDate: function getHumanDate(date) {
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY');
         },
-        imageLoad: function imageLoad(file, event) {
-
-            var imageContainer = $('.image-thumb');
-            var folder = file.clinic_id ? '/media/' + file.clinic.name.trim().toLowerCase().replace('/ /g', "_") : '/media/general/';
-
-            if (this.imageExtensions.includes(file.extension)) imageContainer.attr('src', folder + file.name);
-        },
         imagePreview: function imagePreview(file, event) {
 
             var imageContainer = $('.image-preview-container');
             var folder = file.clinic_id ? '/media/' + file.clinic.name.trim().toLowerCase().replace('/ /g', "_") : '/media/general/';
 
             if (this.imageExtensions.includes(file.extension)) imageContainer.attr('src', folder + file.name).show();
-            $('body').addClass('preview_on')
         },
         removePreview: function removePreview() {
             $('.image-preview-container').hide();
-            $('body').removeClass('preview_on')
         },
         getAll: function getAll() {
             var _this = this;
@@ -17788,7 +17738,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "col-md-12 clearfix" }, [
-      _c("div", { staticClass: "box box-primary" }, [
+      _c("div", { staticClass: "box" }, [
         _c(
           "div",
           { staticClass: "box-body table-responsive no-padding media" },
@@ -17801,45 +17751,28 @@ var render = function() {
                   _vm._v(" "),
                   _vm._l(_vm.files, function(file, index) {
                     return _c("tr", { key: file.id }, [
-
-                      _c("td",
-                      {
-                          on: {
-                            mouseenter: function($event) {
-                              _vm.imageLoad(file, $event)
-                            }
-                          }
-                        },
-                      [
-                      _c("img", {
-                          staticClass: "img-responsive image-thumb",
-                          staticStyle: { width: "50px" },
-                          staticStyle: { height: "50px" },
-                          attrs: { src: "http://via.placeholder.com/50x50"}
-                        })
-                      ]),
-                      _vm._v(" "),
                       _c(
-                        "td",
+                        "th",
                         {
                           on: {
-                            click: function($event) {
+                            mouseenter: function($event) {
                               _vm.imagePreview(file, $event)
                             },
+                            mouseout: _vm.removePreview
                           }
                         },
                         [_vm._v(_vm._s(file.name))]
                       ),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(file.extension))]),
+                      _c("th", [_vm._v(_vm._s(file.extension))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(file.user.name))]),
+                      _c("th", [_vm._v(_vm._s(file.user.name))]),
                       _vm._v(" "),
-                      _c("td", [
+                      _c("th", [
                         _vm._v(_vm._s(_vm.getHumanDate(file.created_at)))
                       ]),
                       _vm._v(" "),
-                      _c("td", { staticClass: "media-last" }, [
+                      _c("th", [
                         _c(
                           "button",
                           {
@@ -17851,7 +17784,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._c("i", { staticClass: "fa fa-trash" }, )]
+                          [_vm._v("Delete")]
                         )
                       ])
                     ])
@@ -17861,17 +17794,10 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("img",         
-            {
+            _c("img", {
               staticClass: "image-preview-container",
               staticStyle: { display: "none" },
-              attrs: { src: "" },  
-              on: {
-                click: function($event) {
-                  _vm.removePreview()
-                }
-              }
-
+              attrs: { src: "" }
             })
           ]
         )
@@ -17885,8 +17811,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [_vm._v("Thumb")]),
-      _vm._v(" "),
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Extension")]),
@@ -17904,7 +17828,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-37485d06", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-9b7bb3ac", module.exports)
   }
 }
 
@@ -17934,7 +17858,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/admin/components/ClinicsList.vue"
+Component.options.__file = "resources\\assets\\js\\admin\\components\\ClinicsList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17943,9 +17867,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9d905bbc", Component.options)
+    hotAPI.createRecord("data-v-45a5310f", Component.options)
   } else {
-    hotAPI.reload("data-v-9d905bbc", Component.options)
+    hotAPI.reload("data-v-45a5310f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -18142,7 +18066,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-9d905bbc", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-45a5310f", module.exports)
   }
 }
 

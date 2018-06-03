@@ -13,7 +13,7 @@ class FrontPartController extends Controller {
      */
     public function index()
     {
-        dd(333);
+        
         return view('Front.home.index');
     }
 
