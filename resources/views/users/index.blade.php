@@ -149,7 +149,7 @@
                     @foreach($users as $user)
 
                       <tr id="entryid-{{$user->id}}">
-                        <td><input type="checkbox" name="userSelected[]" value="{{ $user->id }}" role="selectAll"></td>
+                        <td><input type="checkbox" name="selected[]" value="{{ $user->id }}" role="selectAll"></td>
                         <td width="47">
                           <img src="{{ $user->avatar ? '/avatars/thumbs/' . $user->avatar : 'http://via.placeholder.com/160x160' }}" alt="User Image" width="30" height="30">
                         </td>

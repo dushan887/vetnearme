@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::get('clinics/create', 'ClinicsController@create');
     Route::get('clinics/get/', 'ClinicsController@get');
     Route::post('clinics/store', 'ClinicsController@store');
+    Route::post('clinics/destroy/{id}', 'ClinicsController@destroy')->middleware('checkRole:super_admin');
 
     // MEDIA
     Route::get('media', 'MediaController@index')->name('media');

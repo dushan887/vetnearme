@@ -1476,9 +1476,9 @@ webpackJsonp([0],[
 
             mom = createUTC([2000, 1]).day(i);
             if (strict && !this._fullWeekdaysParse[i]) {
-                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\\.?') + '$', 'i');
-                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\\.?') + '$', 'i');
-                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\\.?') + '$', 'i');
+                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
+                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
+                this._minWeekdaysParse[i] = new RegExp('^' + this.weekdaysMin(mom, '').replace('.', '\.?') + '$', 'i');
             }
             if (!this._weekdaysParse[i]) {
                 regex = '^' + this.weekdays(mom, '') + '|^' + this.weekdaysShort(mom, '') + '|^' + this.weekdaysMin(mom, '');
@@ -2281,7 +2281,7 @@ webpackJsonp([0],[
 
     function preprocessRFC2822(s) {
         // Remove comments and folding whitespace and replace multiple-spaces with a single space
-        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+        return s.replace(/\([^)]*\)|[\n\t]/g, ' ').replace(/(\s\s+)/g, ' ').trim();
     }
 
     function checkWeekday(weekdayStr, parsedInput, config) {
@@ -4460,7 +4460,7 @@ webpackJsonp([0],[
     // Side effect imports
 
 
-    hooks.version = '2.22.2';
+    hooks.version = '2.22.1';
 
     setHookCallback(createLocal);
 
@@ -5394,7 +5394,7 @@ module.exports = function normalizeComponent (
         relativeTime : {
             future : '%s sonra',
             past : '%s əvvəl',
-            s : 'birneçə saniyə',
+            s : 'birneçə saniyyə',
             ss : '%d saniyə',
             m : 'bir dəqiqə',
             mm : '%d dəqiqə',
@@ -5489,7 +5489,7 @@ module.exports = function normalizeComponent (
         weekdays : {
             format: 'нядзелю_панядзелак_аўторак_сераду_чацвер_пятніцу_суботу'.split('_'),
             standalone: 'нядзеля_панядзелак_аўторак_серада_чацвер_пятніца_субота'.split('_'),
-            isFormat: /\[ ?[Ууў] ?(?:мінулую|наступную)? ?\] ?dddd/
+            isFormat: /\[ ?[Вв] ?(?:мінулую|наступную)? ?\] ?dddd/
         },
         weekdaysShort : 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
         weekdaysMin : 'нд_пн_ат_ср_чц_пт_сб'.split('_'),
@@ -12720,7 +12720,7 @@ module.exports = function normalizeComponent (
         calendar : {
             sameDay : '[ਅਜ] LT',
             nextDay : '[ਕਲ] LT',
-            nextWeek : '[ਅਗਲਾ] dddd, LT',
+            nextWeek : 'dddd, LT',
             lastDay : '[ਕਲ] LT',
             lastWeek : '[ਪਿਛਲੇ] dddd, LT',
             sameElse : 'L'
@@ -16698,7 +16698,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\admin\\components\\Service.vue"
+Component.options.__file = "resources/assets/js/admin/components/Service.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -16707,9 +16707,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0a6df8fb", Component.options)
+    hotAPI.createRecord("data-v-1cca1b8e", Component.options)
   } else {
-    hotAPI.reload("data-v-0a6df8fb", Component.options)
+    hotAPI.reload("data-v-1cca1b8e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -16968,7 +16968,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-0a6df8fb", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1cca1b8e", module.exports)
   }
 }
 
@@ -16998,7 +16998,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\admin\\components\\Modal.vue"
+Component.options.__file = "resources/assets/js/admin/components/Modal.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17007,9 +17007,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-97fbb71a", Component.options)
+    hotAPI.createRecord("data-v-33c86074", Component.options)
   } else {
-    hotAPI.reload("data-v-97fbb71a", Component.options)
+    hotAPI.reload("data-v-33c86074", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17094,7 +17094,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-97fbb71a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-33c86074", module.exports)
   }
 }
 
@@ -17124,7 +17124,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\admin\\components\\EventMessages.vue"
+Component.options.__file = "resources/assets/js/admin/components/EventMessages.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17133,9 +17133,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4e77e54c", Component.options)
+    hotAPI.createRecord("data-v-1fe68d9f", Component.options)
   } else {
-    hotAPI.reload("data-v-4e77e54c", Component.options)
+    hotAPI.reload("data-v-1fe68d9f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17233,7 +17233,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4e77e54c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1fe68d9f", module.exports)
   }
 }
 
@@ -17263,7 +17263,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\admin\\components\\Media.vue"
+Component.options.__file = "resources/assets/js/admin/components/Media.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17272,9 +17272,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9b7bb3ac", Component.options)
+    hotAPI.createRecord("data-v-37485d06", Component.options)
   } else {
-    hotAPI.reload("data-v-9b7bb3ac", Component.options)
+    hotAPI.reload("data-v-37485d06", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -17826,7 +17826,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-9b7bb3ac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-37485d06", module.exports)
   }
 }
 
@@ -17856,7 +17856,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\admin\\components\\ClinicsList.vue"
+Component.options.__file = "resources/assets/js/admin/components/ClinicsList.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -17865,9 +17865,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-45a5310f", Component.options)
+    hotAPI.createRecord("data-v-9d905bbc", Component.options)
   } else {
-    hotAPI.reload("data-v-45a5310f", Component.options)
+    hotAPI.reload("data-v-9d905bbc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -18064,7 +18064,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-45a5310f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-9d905bbc", module.exports)
   }
 }
 

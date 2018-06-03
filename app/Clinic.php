@@ -39,7 +39,7 @@ class Clinic extends Model
      */
     public function country()
     {
-        return $this->hasOne('Country');
+        return $this->hasOne(Country::class, 'id', 'country_id');
     }
 
     public function services()
