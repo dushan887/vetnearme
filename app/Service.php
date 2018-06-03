@@ -17,6 +17,6 @@ class Service extends Model
 
     public function clinics()
     {
-       return $this->belongsToMany(Clinic::class, 'clinics_services');
+       return $this->hasMany(Clinic::class, 'clinics_services');
     }
 }

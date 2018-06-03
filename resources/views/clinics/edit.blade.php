@@ -24,7 +24,7 @@
               <h3 class="box-title">Edit Clinic</h3>
             </div>
 
-            @if (Session::has('type'))
+            @if (\Session::has('type'))
               @include('partials._alert')
             @endif
 
@@ -101,7 +101,7 @@
                         @foreach($countries as $key => $value)
                           <option value="{{ $key }}"
                             <?php
-                                if($key === $country_id) echo "selected=selected"
+                                if($key === $clinic->country_id) echo "selected=selected"
                             ?>
                           >{{$value}}</option>
                         @endforeach
@@ -124,7 +124,7 @@
 
                     <div class="form-group {{ $errors->has('social.twitter') ? 'has-error' : ''}}">
                       <label for=socialTwitter>Twitter</label>
-                      <input type="text" id=socialTwitter name=social[twitter] class="form-control" placeholder="Twitter" value="{{ $social['twitter'] ?? :: }}">
+                      <input type="text" id=socialTwitter name=social[twitter] class="form-control" placeholder="Twitter" value="{{ $social['twitter'] ?? '' }}">
                       {!! $errors->first('social.twitter', '<p class="help-block">:message</p>') !!}
                     </div>
 
@@ -160,7 +160,7 @@
                              value=monday id=not-working-monday
                              @change="notWorking('monday')"
                              <?php
-                                if($hours['monday-from'] === null && $hours['monday-to'] === null)
+                                if($hours->{'monday-from'} === null && $hours->{'monday-to'} === null)
                                     echo "checked"
                              ?>
                              >
@@ -174,9 +174,9 @@
                           <input
                             type="text"
                             id=hoursMonday name=hours[monday-from]
-                            value="{{ $hours['monday-from'] }}"
+                            value="{{ $hours->{'monday-from'} }}"
                             <?php
-                                if($hours['monday-from'] === null)
+                                if($hours->{'monday-from'} === null)
                                     echo "readonly"
                             ?>
                             class="form-control timepicker">
@@ -189,9 +189,9 @@
                           <label for=hoursMondayTo>To</label>
                           <input
                             type="text" id=hoursMondayTo name=hours[monday-to]
-                            value="{{ $hours['monday-to'] }}"
+                            value="{{ $hours->{'monday-to'} }}"
                             <?php
-                                if($hours['monday-to'] === null)
+                                if($hours->{'monday-to'} === null)
                                     echo "readonly"
                             ?>
                             class="form-control timepicker">
@@ -205,9 +205,9 @@
                           <input
                             type="text"
                             id=hoursMondayFrom2 name=hours[monday-from2]
-                            value="{{ $hours['monday-from2'] }}"
+                            value="{{ $hours->{'monday-from2'} }}"
                             <?php
-                                if($hours['monday-from2'] === null)
+                                if($hours->{'monday-from2'} === null)
                                     echo "readonly"
                             ?>
                             class="form-control timepicker"
@@ -224,9 +224,9 @@
                             id=hoursMondayTo2
                             name=hours[monday-to2]
                             class="form-control timepicker"
-                            value="{{ $hours['monday-to2'] }}"
+                            value="{{ $hours->{'monday-to2'} }}"
                             <?php
-                                if($hours['monday-to2'] === null)
+                                if($hours->{'monday-to2'} === null)
                                     echo "readonly"
                             ?>
                             >
@@ -245,7 +245,7 @@
                             value=tuesday id=not-working-tuesday
                             @change="notWorking('tuesday')"
                             <?php
-                                if($hours['tuesday-from'] === null && $hours['tuesday-to'] === null)
+                                if($hours->{'tuesday-from'} === null && $hours->{'tuesday-to'} === null)
                                     echo "checked"
                              ?>>
                             We are not working on Tuesday
@@ -257,9 +257,9 @@
                           <label for=hoursTuesdayFrom>From</label>
                           <input type="text" id=hoursTuesdayFrom name=hours[tuesday-from]
                           class="form-control timepicker"
-                          value="{{ $hours['tuesday-from'] }}"
+                          value="{{ $hours->{'tuesday-from'} }}"
                           <?php
-                                if($hours['tuesday-from'] === null)
+                                if($hours->{'tuesday-from'} === null)
                                     echo "readonly"
                             ?>>
                           {!! $errors->first('hours.tuesday-from', '<p class="help-block">:message</p>') !!}
@@ -272,9 +272,9 @@
                           <input type="text"
                           id=hoursTuesdayTo
                           name=hours[tuesday-to]
-                          value="{{ $hours['tuesday-to'] }}"
+                          value="{{ $hours->{'tuesday-to'} }}"
                           <?php
-                                if($hours['tuesday-to'] === null)
+                                if($hours->{'tuesday-to'} === null)
                                     echo "readonly"
                             ?>
                           class="form-control timepicker">
@@ -288,9 +288,9 @@
                           <input type="text"
                           id=hoursTuesdayFrom2
                           name=hours[tuesday-from2]
-                          value="{{ $hours['tuesday-from2'] }}"
+                          value="{{ $hours->{'tuesday-from2'} }}"
                           <?php
-                                if($hours['tuesday-from2'] === null)
+                                if($hours->{'tuesday-from2'} === null)
                                     echo "readonly"
                             ?>
                           class="form-control timepicker">
@@ -302,9 +302,9 @@
                         <div class="form-group {{ $errors->has('hours.tuesday-to2') ? 'has-error' : ''}}">
                           <label for=hoursTuesdayTo2>To</label>
                           <input type="text" id=hoursTuesdayTo2 name=hours[tuesday-to2]
-                          value="{{ $hours['tuesday-to2'] }}"
+                          value="{{ $hours->{'tuesday-to2'} }}"
                           <?php
-                                if($hours['tuesday-to2'] === null)
+                                if($hours->{'tuesday-to2'} === null)
                                     echo "readonly"
                             ?>
                           class="form-control timepicker">
@@ -323,7 +323,7 @@
                             value=wednesday id=not-working-wednesday
                             @change="notWorking('wednesday')"
                             <?php
-                                if($hours['wednesday-from'] === null && $hours['wednesday-to'] === null)
+                                if($hours->{'wednesday-from'} === null && $hours->{'wednesday-to'} === null)
                                     echo "checked"
                              ?>>
                             We are not working on Wednesday
@@ -334,9 +334,9 @@
                         <div class="form-group {{ $errors->has('hours.wednesday-from') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayFrom>From</label>
                           <input type="text" id=hoursWednesdayFrom name=hours[wednesday-from] class="form-control timepicker"
-                          value="{{ $hours['wednesday-from'] }}"
+                          value="{{ $hours->{'wednesday-from'} }}"
                           <?php
-                                if($hours['wednesday-from'] === null)
+                                if($hours->{'wednesday-from'} === null)
                                     echo "readonly"
                             ?>
                           >
@@ -348,9 +348,9 @@
                         <div class="form-group {{ $errors->has('hours.wednesday-to') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayTo>To</label>
                           <input type="text" id=hoursWednesdayTo name=hours[wednesday-to] class="form-control timepicker"
-                          value="{{ $hours['wednesday-to'] }}"
+                          value="{{ $hours->{'wednesday-to'} }}"
                             <?php
-                                if($hours['wednesday-to'] === null)
+                                if($hours->{'wednesday-to'} === null)
                                 echo "readonly"
                             ?>
                           >
@@ -362,9 +362,9 @@
                         <div class="form-group {{ $errors->has('hours.wednesday-from2') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayFrom2>From</label>
                           <input type="text" id=hoursWednesdayFrom2 name=hours[wednesday-from2] class="form-control timepicker"
-                          value="{{ $hours['wednesday-from2'] }}"
+                          value="{{ $hours->{'wednesday-from2'} }}"
                           <?php
-                                if($hours['wednesday-from2'] === null)
+                                if($hours->{'wednesday-from2'} === null)
                                     echo "readonly"
                             ?>>
                           {!! $errors->first('hours.wednesday-from2', '<p class="help-block">:message</p>') !!}
@@ -375,9 +375,9 @@
                         <div class="form-group {{ $errors->has('hours.wednesday-to2') ? 'has-error' : ''}}">
                           <label for=hoursWednesdayTo2>To</label>
                           <input type="text" id=hoursWednesdayTo2 name=hours[wednesday-to2] class="form-control timepicker"
-                          value="{{ $hours['wednesday-to2'] }}"
+                          value="{{ $hours->{'wednesday-to2'} }}"
                           <?php
-                                if($hours['wednesday-to2'] === null)
+                                if($hours->{'wednesday-to2'} === null)
                                     echo "readonly"
                             ?>>
                           {!! $errors->first('hours.wednesday-to2', '<p class="help-block">:message</p>') !!}
@@ -396,7 +396,7 @@
                             id=not-working-thursday
                             @change="notWorking('thursday')"
                             <?php
-                                if($hours['thursday-from'] === null && $hours['thursday-to'] === null)
+                                if($hours->{'thursday-from'} === null && $hours->{'thursday-to'} === null)
                                     echo "checked"
                              ?>>
                             We are not working on Thursday
@@ -407,9 +407,9 @@
                         <div class="form-group {{ $errors->has('hours.thursday-from') ? 'has-error' : ''}}">
                           <label for=hoursThursdayFrom>From</label>
                           <input type="text" id=hoursThursdayFrom name=hours[thursday-from] class="form-control timepicker"
-                          value="{{ $hours['thursday-from'] }}"
+                          value="{{ $hours->{'thursday-from'} }}"
                           <?php
-                            if($hours['thursday-from'] === null)
+                            if($hours->{'thursday-from'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.thursday-from', '<p class="help-block">:message</p>') !!}
@@ -420,9 +420,9 @@
                         <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
                           <label for=hoursThursdayTo>To</label>
                           <input type="text"  id=hoursThursdayTo name=hours[thursday-to] class="form-control timepicker"
-                          value="{{ $hours['thursday-to'] }}"
+                          value="{{ $hours->{'thursday-to'} }}"
                           <?php
-                            if($hours['thursday-to'] === null)
+                            if($hours->{'thursday-to'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.thursday-to', '<p class="help-block">:message</p>') !!}
@@ -433,9 +433,9 @@
                         <div class="form-group {{ $errors->has('hours.thursday-from2') ? 'has-error' : ''}}">
                           <label for=hoursThursdayFrom2>From</label>
                           <input type="text" id=hoursThursdayFrom2 name=hours[thursday-from2] class="form-control timepicker"
-                          value="{{ $hours['thursday-from2'] }}"
+                          value="{{ $hours->{'thursday-from2'} }}"
                           <?php
-                            if($hours['thursday-from2'] === null)
+                            if($hours->{'thursday-from2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.thursday-from2', '<p class="help-block">:message</p>') !!}
@@ -446,9 +446,9 @@
                         <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
                           <label for=hoursThursdayTo2>To</label>
                           <input type="text" id=hoursThursdayTo2 name=hours[thursday-to2] class="form-control timepicker"
-                          value="{{ $hours['thursday-to2'] }}"
+                          value="{{ $hours->{'thursday-to2'} }}"
                           <?php
-                            if($hours['thursday-to2'] === null)
+                            if($hours->{'thursday-to2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.thursday-to2', '<p class="help-block">:message</p>') !!}
@@ -467,7 +467,7 @@
                             id=not-working-friday
                             @change="notWorking('friday')"
                             <?php
-                                if($hours['friday-from'] === null && $hours['friday-to'] === null)
+                                if($hours->{'friday-from'} === null && $hours->{'friday-to'} === null)
                                     echo "checked"
                              ?>
                           >
@@ -479,9 +479,9 @@
                         <div class="form-group {{ $errors->has('hours.friday-from') ? 'has-error' : ''}}">
                           <label for=hoursFridayFrom>From</label>
                           <input type="text" id=hoursFridayFrom name=hours[friday-from] class="form-control timepicker"
-                          value="{{ $hours['friday-from'] }}"
+                          value="{{ $hours->{'friday-from'} }}"
                           <?php
-                            if($hours['friday-from'] === null)
+                            if($hours->{'friday-from'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.friday-from', '<p class="help-block">:message</p>') !!}
@@ -492,9 +492,9 @@
                         <div class="form-group {{ $errors->has('hours.friday-to') ? 'has-error' : ''}}">
                           <label for=hoursFridayTo>To</label>
                           <input type="text" id=hoursFridayTo name=hours[friday-to] class="form-control timepicker"
-                          value="{{ $hours['friday-to'] }}"
+                          value="{{ $hours->{'friday-to'} }}"
                           <?php
-                            if($hours['friday-to'] === null)
+                            if($hours->{'friday-to'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.friday-to', '<p class="help-block">:message</p>') !!}
@@ -505,9 +505,9 @@
                         <div class="form-group {{ $errors->has('hours.friday-from2') ? 'has-error' : ''}}">
                           <label for=hoursFridayFrom2>From</label>
                           <input type="text" d=hoursFridayFrom2 name=hours[friday-from2] class="form-control timepicker"
-                          value="{{ $hours['friday-from2'] }}"
+                          value="{{ $hours->{'friday-from2'} }}"
                           <?php
-                            if($hours['friday-from2'] === null)
+                            if($hours->{'friday-from2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.friday-from2', '<p class="help-block">:message</p>') !!}
@@ -518,9 +518,9 @@
                         <div class="form-group {{ $errors->has('hours.friday-to2') ? 'has-error' : ''}}">
                           <label for=hoursFridayTo2>To</label>
                           <input type="text" id=hoursFridayTo2 name=hours[friday-to2] class="form-control timepicker"
-                          value="{{ $hours['friday-to2'] }}"
+                          value="{{ $hours->{'friday-to2'} }}"
                           <?php
-                            if($hours['friday-to2'] === null)
+                            if($hours->{'friday-to2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.friday-to2', '<p class="help-block">:message</p>') !!}
@@ -540,7 +540,7 @@
                             id=not-working-saturday
                             @change="notWorking('saturday')"
                             <?php
-                                if($hours['saturday-from'] === null && $hours['saturday-to'] === null)
+                                if($hours->{'saturday-from'} === null && $hours->{'saturday-to'} === null)
                                     echo "checked"
                              ?>>
                             We are not working on Saturday
@@ -551,9 +551,9 @@
                         <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayFrom>From</label>
                           <input type="text" id=hoursSaturdayFrom name=hours[saturday-from] class="form-control timepicker"
-                          value="{{ $hours['saturday-from'] }}"
+                          value="{{ $hours->{'saturday-from'} }}"
                           <?php
-                            if($hours['saturday-from'] === null)
+                            if($hours->{'saturday-from'} === null)
                                 echo "readonly"
                           ?>
                           >
@@ -565,9 +565,9 @@
                         <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayTo>To</label>
                           <input type="text" id=hoursSaturdayTo name=hours[saturday-to] class="form-control timepicker"
-                          value="{{ $hours['saturday-to'] }}"
+                          value="{{ $hours->{'saturday-to'} }}"
                           <?php
-                            if($hours['saturday-to'] === null)
+                            if($hours->{'saturday-to'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.saturday-to', '<p class="help-block">:message</p>') !!}
@@ -578,9 +578,9 @@
                         <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayFrom2>From</label>
                           <input type="text" id=hoursSaturdayFrom2 name=hours[saturday-from2] class="form-control timepicker"
-                          value="{{ $hours['saturday-from2'] }}"
+                          value="{{ $hours->{'saturday-from2'} }}"
                           <?php
-                            if($hours['saturday-from2'] === null)
+                            if($hours->{'saturday-from2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.saturday-from2', '<p class="help-block">:message</p>') !!}
@@ -591,9 +591,9 @@
                         <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
                           <label for=hoursSaturdayTo2>To</label>
                           <input type="text" id=hoursSaturdayTo2 name=hours[saturday-to2] class="form-control timepicker"
-                          value="{{ $hours['saturday-to2'] }}"
+                          value="{{ $hours->{'saturday-to2'} }}"
                           <?php
-                            if($hours['saturday-to2'] === null)
+                            if($hours->{'saturday-to2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.saturday-to2', '<p class="help-block">:message</p>') !!}
@@ -613,7 +613,7 @@
                             id=not-working-sunday
                             @change="notWorking('sunday')"
                             <?php
-                                if($hours['sunday-from'] === null && $hours['sunday-to'] === null)
+                                if($hours->{'sunday-from'} === null && $hours->{'sunday-to'} === null)
                                     echo "checked"
                              ?>>
                             We are not working on Sunday
@@ -624,9 +624,9 @@
                         <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayFrom>From</label>
                           <input type="text" id=hoursSundayFrom name=hours[sunday-from] class="form-control timepicker"
-                          value="{{ $hours['sunday-from'] }}"
+                          value="{{ $hours->{'sunday-from'} }}"
                           <?php
-                            if($hours['sunday-from'] === null)
+                            if($hours->{'sunday-from'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.sunday-from', '<p class="help-block">:message</p>') !!}
@@ -637,9 +637,9 @@
                         <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayTo>To</label>
                           <input type="text" id=hoursSundayTo name=hours[sunday-to] class="form-control timepicker"
-                          value="{{ $hours['sunday-to'] }}"
+                          value="{{ $hours->{'sunday-to'} }}"
                           <?php
-                            if($hours['sunday-to'] === null)
+                            if($hours->{'sunday-to'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.sunday-to', '<p class="help-block">:message</p>') !!}
@@ -650,9 +650,9 @@
                         <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayFrom2>From</label>
                           <input type="text" id=hoursSundayFrom2 name=hours[sunday-from2] class="form-control timepicker"
-                          value="{{ $hours['sunday-from2'] }}"
+                          value="{{ $hours->{'sunday-from2'} }}"
                           <?php
-                            if($hours['sunday-from2'] === null)
+                            if($hours->{'sunday-from2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.sunday-from2', '<p class="help-block">:message</p>') !!}
@@ -663,9 +663,9 @@
                         <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
                           <label for=hoursSundayTo2>To</label>
                           <input type="text" id=hoursSundayTo2 name=hours[sunday-to2] class="form-control timepicker"
-                          value="{{ $hours['sunday-to2'] }}"
+                          value="{{ $hours->{'sunday-to2'} }}"
                           <?php
-                            if($hours['sunday-to2'] === null)
+                            if($hours->{'sunday-to2'} === null)
                                 echo "readonly"
                           ?>>
                           {!! $errors->first('hours.sunday-to2', '<p class="help-block">:message</p>') !!}
@@ -674,10 +674,32 @@
 
                     </div>
 
-                    <div class="form-group {{ $errors->has('special-notes') ? 'has-error' : ''}}">
-                      <label for=special-notes>Special Notes</label>
-                      <input type="text" id=special-notes name=special-notes class="form-control" placeholder="Special Notes" value="{{ $clinic->special-notes }}">
+                    <div class="form-group {{ $errors->has('special_notes') ? 'has-error' : ''}}">
+                      <label for=special_notes>Special Notes</label>
+                      <input type="text" id=special_notes name=special_notes class="form-control" placeholder="Special Notes" value="{{ $clinic->special_notes }}">
                     </div>
+
+                    <div class="tab-pane" id="clinic_services">
+                    <div class="box box-primary padding">
+                      <div class="box-header">
+                        <h3 class="box-title">Services</h3>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="services">Services</label>
+                        <select name="services[]" id="services" multiple class="form-control">
+                          @foreach($services as $key => $value)
+                            <option value="{{ $value }}"
+                              @if(in_array($value, $clinicServices))
+                                selected="selected"
+                              @endif
+                            >{{ $key }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+
+                    </div>
+                </div>
 
                     <div class="form-group {{ $errors->has('logo') ? 'has-error' : ''}}">
                       <label for="logo">Logo input</label>

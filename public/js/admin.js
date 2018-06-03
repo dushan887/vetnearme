@@ -16610,9 +16610,7 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 //Timepicker
 $('.timepicker').timepicker({
     timeFormat: 'HH:mm',
-    interval: 5,
-    defaultTime: '00'
-
+    interval: 5
 });
 
 /***/ }),

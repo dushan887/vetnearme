@@ -106,7 +106,5 @@ let adminVue = new Vue({
 //Timepicker
 $('.timepicker').timepicker({
     timeFormat: 'HH:mm',
-    interval: 5,
-    defaultTime: '00',
-
+    interval: 5
 })

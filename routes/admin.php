@@ -30,9 +30,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::post('users/update', 'UsersController@update');
 
     // CLINICS
-    Route::get('clinics', 'ClinicsController@index')->name('clinics');
-    Route::get('clinics/show/{id}', 'ClinicsController@show');
-    Route::get('clinics/edit/{id}', 'ClinicsController@edit');
+    Route::get('clinics', 'ClinicsController@index')->name('clinics')->middleware('checkRole:super_admin');
+    Route::get('my-clinic', 'ClinicsController@myClinic')->name('my-clinic');
+    Route::get('clinics/show/{id}', 'ClinicsController@show')->middleware('checkRole:super_admin');
+    Route::get('clinics/edit/{id?}', 'ClinicsController@edit');
     Route::get('clinics/create', 'ClinicsController@create');
     Route::get('clinics/get/', 'ClinicsController@get');
     Route::post('clinics/store', 'ClinicsController@store');

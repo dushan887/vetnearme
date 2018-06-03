@@ -25,21 +25,24 @@ class StoreClinic extends FormRequest
     public function rules()
     {
         return [
-            'name'             => 'required|min:3|max:255|string',
-            'description'      => 'string',
-            'email'            => 'required|email|unique:clinics,email',
-            'phone_number'     => 'required|string|min:3|max:255',
-            'emergency_number' => 'nullable|string|min:3|max:255',
-            'url'              => 'nullable|url',
-            'gmaps_link'       => 'nullable|url',
-            'social.*'         => 'nullable|url',
-            'city'             => 'required|string|min:2|max:255',
-            'address'          => 'required|string|min:2|max:255',
-            'zip'              => 'required|string|min:2|max:255',
-            'country_id'       => 'integer',
-            'hours.*'          => ['required', new Hours],
-            'special-notes'    => 'nullable|string|min:3|max:1024',
-            'logo'             => 'nullable|image',
+            'name'                     => 'required|min:3|max:255|string',
+            'description'              => 'string',
+            'email'                    => 'required|email|unique:clinics,email',
+            'phone_number'             => 'required|string|min:3|max:255',
+            'emergency_number'         => 'nullable|string|min:3|max:255',
+            'url'                      => 'nullable|url',
+            'gmaps_link'               => 'nullable|url',
+            'social.*'                 => 'nullable|url',
+            'city'                     => 'required|string|min:2|max:255',
+            'address'                  => 'required|string|min:2|max:255',
+            'zip'                      => 'required|string|min:2|max:255',
+            'country_id'               => 'integer',
+            'hours.*'                  => ['required', new Hours],
+            'special_notes'            => 'nullable|string|min:3|max:1024',
+            'logo'                     => 'nullable|image',
+            'general_practice'         => 'required_without_all:specialist_and_emergency',
+            'specialist_and_emergency' => 'required_without_all:general_practice',
+
         ];
     }
 
@@ -89,4 +92,11 @@ class StoreClinic extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'general_practice.required_without_all'         => 'Please check General practice or Specialist and Emergency checkbox, or both',
+            'specialist_and_emergency.required_without_all' => 'Please check General practice or Specialist and Emergency checkbox, or both',
+        ];
+    }
 }

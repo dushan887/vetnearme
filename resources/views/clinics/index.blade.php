@@ -140,6 +140,31 @@
                       </td>
                     </tr>
 
+                    @foreach($clinics as $clinic)
+
+                      <tr>
+                        <td width="35"><input type="checkbox"></td>
+                        <td width="47">
+                            <img src="{{ $clinic->logo ? '/img/logo/' . $clinic->logo : "http://via.placeholder.com/160x160" }}"
+                            alt="Practice Logo" width="30" height="30"></td>
+                        <td>{{ $clinic->name }}</td>
+                        <td>{{ $clinic->owner->last_name ?? "Doesn't have owner" }}</td>
+                        <td>April, 2018</td>
+                        <td>{{ $clinic->country->name }}</td>
+                        <td width="150">
+                          <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/clinics/create
+                              ') }}"'><i class="fa fa-edit"></i></button>
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/mailbox/compose
+                              ') }}"'><i class="fa fa-envelope-o"></i></button>
+                            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                    @endforeach
+
                     <tr>
                       <td width="35"><input type="checkbox"></td>
                       <td width="47"><img src="http://via.placeholder.com/160x160" alt="Practice Image" width="30" height="30"></td>

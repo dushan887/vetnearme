@@ -5,6 +5,7 @@ namespace App\ModelQueries;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Clinic;
+use App\Service;
 use App\Helpers\Geolocation;
 use App\Helpers\Strings;
 
@@ -25,17 +26,26 @@ class ClinicQuery extends Clinic
         if($request->hasFile('logo'))
             $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
 
-        $data = $this->formatData($data);
+        $data = $this->formatData($data, $request);
 
-        if($this->create($data))
-            return $this->id;
+        $model = (new Clinic())->create($data);
+
+        if($model->id){
+
+            $services = $this->getServices($request['services']);
+
+            if($services !== null)
+                $model->services()->saveMany($services);
+
+            return $model->id;
+        }
 
         return false;
     }
 
-    public function update($data, $request, $clinicID)
+    public function updateClinic($data, $request, $clinicID)
     {
-        $clinic = self::find($clinicID);
+        $clinic = Clinic::find($clinicID);
 
         if($request->hasFile('logo')){
 
@@ -46,10 +56,17 @@ class ClinicQuery extends Clinic
 
         }
 
-        $data = $this->formatData($data);
+        $data = $this->formatData($data, $request);
 
         if($clinic->update($data)){
-            $clinic->services->attach($request->input('services'));
+
+            $clinic->services->detach();
+
+            $services = $this->getServices($request['services']);
+
+            if($services !== null)
+                $model->services()->saveMany($services);
+
             return $clinic->id;
         }
 
@@ -59,14 +76,20 @@ class ClinicQuery extends Clinic
 
     public function uploadLogo($logo, $clinicName)
     {
-        $name = strtolower(str_replace(' ', '_', $clinicName)) . ' . ' . $logo->getClientOriginalExtension();
+        $name = strtolower(str_replace(' ', '_', $clinicName)) . '.' . $logo->getClientOriginalExtension();
 
         $logo->move($this->_logoDirectory, $name);
 
         return $name;
     }
 
-    private function formatData($data)
+    private function getServices($services)
+    {
+        return Service::whereIn('id', $services)->get();
+
+    }
+
+    private function formatData($data, $request)
     {
         $coordinates = Geolocation::getCoordinates($data);
 
@@ -78,6 +101,15 @@ class ClinicQuery extends Clinic
             $data['lat'] = $coordinates->latitude();
             $data['lng'] = $coordinates->longitude();
         }
+
+        if($request->input('general_practice') && $request->input('general_practice') === 'true')
+            $data['general_practice'] = 1;
+
+        if($request->input('specialist_and_emergency') && $request->input('specialist_and_emergency') === 'true')
+            $data['specialist_and_emergency'] = 1;
+
+        if($request->input('subscribe') && $request->input('subscribe') === 'true')
+            $data['subscribe'] = 1;
 
         return $data;
     }
