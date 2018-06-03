@@ -12,7 +12,7 @@ class Service extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'count',
+        'name', 'count', 'priority'
     ];
 
     public function clinics()

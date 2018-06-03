@@ -163,12 +163,13 @@
                               onclick='window.location.href="{{ url('/admin/clinics/show/' . $clinic->id) }}"'>
                                 <i class="fa fa-eye"></i>
                             </button>
+
                             <button type="button" class="btn btn-default btn-sm"
                               onclick='window.location.href="{{ url('/admin/clinics/edit/' . $clinic->id) }}"'>
                               <i class="fa fa-edit"></i>
                             </button>
-                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/mailbox/compose
-                              ') }}"'><i class="fa fa-envelope-o"></i></button>
+
+                            <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url(' /admin/mailbox/compose') }}"'><i class="fa fa-envelope-o"></i></button>
                             <button type="button" class="btn btn-default btn-sm">
                               <i class="fa fa-trash-o"
                                   data-id="{{$clinic->id}}"

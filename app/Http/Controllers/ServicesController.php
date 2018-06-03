@@ -107,6 +107,33 @@ class ServicesController extends Controller
         ]);
     }
 
+    public function changePriorityStatus(Request $request)
+    {
+        $service = Service::find((int) $request->input('id'));
+
+        // At any time only 12 services can have priority status
+        $services = Service::where('priority', '=', 1)->get();
+
+        if($services && count($services) >= 12)
+            return response()->json([
+                'messageTitle' => 'Service Priority Limit',
+                'messageText'  => 'You can set priority status to 12 services.',
+                'class'        => 'danger'
+            ], 400);
+
+        $service->priority = !$request->input('priority');
+
+        $service->update();
+
+        return response()->json([
+            'service'      => $service,
+            'messageTitle' => 'Service Priority Changed',
+            'messageText'  => 'The service priority status has been updated',
+            'class'        => 'success'
+        ]);
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *

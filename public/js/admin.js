@@ -16781,6 +16781,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -16805,24 +16878,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             switch (action) {
                 case 'store':
-                    url = '/admin/services/create';
-                    this.getData(url);
+                    _url = '/admin/services/create';
+                    this.getData(_url);
                     break;
 
                 case 'edit':
-                    url = '/admin/services/edit/' + event.target.dataset.id;
-                    this.getData(url);
+                    _url = '/admin/services/edit/' + event.target.dataset.id;
+                    this.getData(_url);
                     break;
 
                 case 'delete':
-                    var serviceID = event.target.dataset.id;
-                    url = '/admin/services/destroy/' + serviceID;
+
+                    _url = '/admin/services/destroy/' + event.target.dataset.id;
 
                     this.$dialog.confirm('Are you sure you want to delete this service?', {
                         loader: true
                     }).then(function (dialog) {
 
-                        axios.post(url, {
+                        axios.post(_url, {
                             id: serviceID
                         }).then(function (response) {
 
@@ -16845,8 +16918,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             dialog.close();
                         });
                     }).catch(function () {
-                        alert('Something went wrong. Please try again a bit later');
+                        console.log('Delete canceled');
                     });
+                    break;
+
+                case 'priority':
+
+                    var element = event.target;
+                    var _url = '/admin/services/changePriorityStatus/' + element.dataset.id;
+
+                    this.$dialog.confirm('Are you sure you want to change priority status of this service?', {
+                        loader: true
+                    }).then(function (dialog) {
+
+                        axios.post(_url, {
+                            id: element.dataset.id,
+                            priority: element.dataset.priority
+                        }).then(function (response) {
+
+                            var data = response.data;
+                            dialog.close();
+
+                            var serviceIndex = _this2.services.findIndex(function (service) {
+                                return serviceID;
+                            });
+
+                            Vue.delete(_this2.services, serviceIndex);
+
+                            Event.$emit('message:show', {
+                                messageTitle: data.messageTitle,
+                                messageText: data.messageText
+                            }, data.class);
+                        }).catch(function (error) {
+
+                            alert('Something went wrong. Please try again a bit later');
+                            dialog.close();
+                        });
+                    }).catch(function () {
+                        console.log('Changing status canceled');
+                    });
+
                     break;
             }
         },
@@ -16913,79 +17024,198 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("h1", [_vm._v("Services (" + _vm._s(_vm.services.length) + ")")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "services-actions" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              _vm.openModal("store")
+  return _c("div", { staticClass: "col-md-6" }, [
+    _c("div", { staticClass: "box box-primary" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body no-padding" }, [
+        _c("div", { staticClass: "mailbox-controls" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "btn-group" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-default btn-sm",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.openModal("store")
+                  }
+                }
+              },
+              [_c("i", { staticClass: "fa fa-edit" })]
+            ),
+            _vm._v(" "),
+            _vm._m(2)
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "pull-right" })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          {
+            staticClass: "table table-bordered table-striped table-content",
+            attrs: {
+              id: "practice_table",
+              "data-url": "/admin/services/destroy",
+              "data-text": "clinic"
             }
-          }
-        },
-        [_vm._v("Add Service")]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "services clearfix row" },
-      _vm._l(_vm.services, function(service, index) {
-        return _c(
-          "div",
-          { key: service.id, staticClass: "col-md-2 col-sm-3 col-xs-4" },
+          },
           [
-            _c("div", { staticClass: "panel panel-default" }, [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("h4", [
-                  _vm._v(
-                    _vm._s(service.name) + " (" + _vm._s(service.count) + ")"
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "panel-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button", "data-id": service.id },
-                    on: {
-                      click: function($event) {
-                        _vm.openModal("edit")
-                      }
-                    }
-                  },
-                  [_vm._v("Edit")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button", "data-id": service.id },
-                    on: {
-                      click: function($event) {
-                        _vm.openModal("delete")
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
+            _vm._m(4),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.services, function(service, index) {
+                return _c(
+                  "tr",
+                  { key: service.id, attrs: { id: "entryid-" + service.id } },
+                  [
+                    _c("td", [
+                      _c("input", {
+                        attrs: {
+                          type: "checkbox",
+                          name: "selected[]",
+                          role: "selectAll"
+                        },
+                        domProps: { value: service.id }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(service.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(service.count))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default btn-sm",
+                          attrs: {
+                            type: "button",
+                            "data-id": service.id,
+                            "data-priority": service.priority,
+                            title: "Priority Status"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.openModal("priority")
+                            }
+                          }
+                        },
+                        [
+                          service.priority
+                            ? _c("i", { staticClass: "fa fa-check-circle" })
+                            : _c("i", { staticClass: "fa fa-circle-o" })
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default btn-sm",
+                          attrs: { type: "button", "data-id": service.id },
+                          on: {
+                            click: function($event) {
+                              _vm.openModal("edit")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-edit" })]
+                      )
+                    ])
+                  ]
                 )
-              ])
-            ])
+              })
+            )
           ]
         )
-      })
-    )
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Service List")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools pull-right" }, [
+        _c("div", { staticClass: "has-feedback" }, [
+          _c("input", {
+            staticClass: "form-control input-sm",
+            attrs: { type: "text", placeholder: "Search Services" }
+          }),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "glyphicon glyphicon-search form-control-feedback"
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default btn-sm checkbox-toggle",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "fa fa-square-o" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa fa-trash-o" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa fa-refresh" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("td", { attrs: { width: "35" } }, [
+          _c("input", {
+            attrs: { type: "checkbox", role: "selectAll", value: "null" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Count")]),
+        _vm._v(" "),
+        _c("th", { attrs: { width: "150" } }, [_vm._v("Action")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

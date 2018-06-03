@@ -154,13 +154,16 @@ class ClinicsController extends Controller
     {
         $deleted = Clinic::destroy($id) ?
             $message = [
-                'error'   => false,
-                'message' => 'Clinic has been deleted',
+                'messageTitle' => 'Clinic(s) Deleted',
+                'messageText'  => 'The clinic(s) has been deleted',
+                'class'        => 'success'
             ] :
             $message = [
-                'error'   => true,
-                'message' => 'Something went wrong. Please try again a bit later',
+                'messageTitle' => 'Alert',
+                'messageText'  => '',
+                'class'        => 'error'
             ];
+
         return response()->json($message, $deleted ? 200 : 500);
     }
 
