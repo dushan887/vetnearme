@@ -145,13 +145,23 @@ class ClinicsController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * Only super admin can delete clinic
      *
-     * @param  int  $id
+     * @param  int|array  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $deleted = Clinic::destroy($id) ?
+            $message = [
+                'error'   => false,
+                'message' => 'Clinic has been deleted',
+            ] :
+            $message = [
+                'error'   => true,
+                'message' => 'Something went wrong. Please try again a bit later',
+            ];
+        return response()->json($message, $deleted ? 200 : 500);
     }
 
     public function get(Request $request)

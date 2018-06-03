@@ -16563,9 +16563,10 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         deleteEntry: function deleteEntry(element) {
             var _this = this;
 
-            var text = element.dataset.text;
-            var id = element.dataset.id;
-            var url = element.dataset.url + '/' + id;
+            var table = $('.table-content');
+            var text = table.data('text');
+            var id = !Array.isArray(element) ? element.dataset.id : element;
+            var url = table.data("url") + '/' + id;
 
             this.$dialog.confirm('Are you sure you want to delete this ' + text + '?', {
                 loader: true
@@ -16575,9 +16576,8 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
                     var data = response.data;
 
-                    $('#entryid-' + id).slideUp('fast', function () {
-                        $(_this).remove();
-                    });
+                    _this.removeElement(id);
+
                     dialog.close();
 
                     Event.$emit('message:show', {
@@ -16585,10 +16585,12 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                         messageText: data.messageText
                     }, data.class);
                 }).catch(function (error) {
+                    console.log(error);
+
                     alert('Something went wrong. Please try again a bit later');
                 });
             }).catch(function (error) {
-                alert('Something went wrong. Please try again a bit later');
+                console.log('Delete aborted');
             });
         },
         deleteMultiple: function deleteMultiple() {
@@ -16598,6 +16600,27 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             }).get().filter(function (element) {
                 return element !== 'null';
             });
+
+            if (selected.length) {
+                this.deleteEntry(selected);
+
+                $('input[role=selectAll]').prop('checked', false);
+            }
+        },
+        removeElement: function removeElement(elemenID) {
+            var _this2 = this;
+
+            if (Array.isArray(elemenID)) {
+                elemenID.forEach(function (id) {
+                    $('#entryid-' + id).slideUp('fast', function () {
+                        $(_this2).remove();
+                    });
+                });
+            } else {
+                $('#entryid-' + elemenID).slideUp('fast', function () {
+                    $(_this2).remove();
+                });
+            }
         }
     },
     mounted: function mounted() {

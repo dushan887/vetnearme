@@ -127,7 +127,10 @@
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive">
-                <table id="user_table" class="table table-bordered table-striped">
+                <table id="user_table"
+                  class="table table-bordered table-striped table-content"
+                  data-url="/admin/users/destroy"
+                  data-text="user">
                   <thead>
                     <tr>
                       <td><input type="checkbox"
@@ -182,8 +185,6 @@
                               >
                                 <i class="fa fa-trash-o"
                                 data-id="{{$user->id}}"
-                                data-url="/admin/users/destroy"
-                                data-text="user"
                                 @click="deleteEntry($event.target)"></i>
                               </button>
                           </div>

@@ -99,18 +99,28 @@
                 <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
                 </button>
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "#"'><i class="fa fa-edit"></i></button>
+
                   <button type="button" class="btn btn-default btn-sm" onclick='window.location.href= "{{ url('/admin/clinics/create') }}"'><i class="fa fa-envelope-o"></i></button>
-                  <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+
+                  <button type="button"
+                    class="btn btn-default btn-sm"
+                    @click="deleteMultiple">
+                      <i class="fa fa-trash-o"></i>
+                  </button>
+
                 </div>
                 <!-- /.btn-group -->
                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                <div class="pull-right">
-                </div>
+
+                <div class="pull-right"></div>
                 <!-- /.pull-right -->
               </div>
               <div class="table-responsive">
-                <table id="practice_table" class="table table-bordered table-striped">
+                <table id="practice_table"
+                  class="table table-bordered table-striped table-content"
+                  data-url="/admin/clinics/destroy"
+                  data-text="clinic"
+                >
                   <thead>
                     <tr>
                       <td width="35">
@@ -131,7 +141,7 @@
 
                     @foreach($clinics as $clinic)
 
-                      <tr>
+                      <tr id="entryid-{{$clinic->id}}">
                         <td width="35">
                           <input
                           type="checkbox"
@@ -162,7 +172,6 @@
                             <button type="button" class="btn btn-default btn-sm">
                               <i class="fa fa-trash-o"
                                   data-id="{{$clinic->id}}"
-                                  data-url="/admin/clinics/destroy"
                                   data-text="user"
                                   @click="deleteEntry($event.target)"></i>
                             </button>

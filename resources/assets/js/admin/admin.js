@@ -54,9 +54,10 @@ let adminVue = new Vue({
         },
         deleteEntry(element){
 
-            let text = element.dataset.text
-            let id   = element.dataset.id
-            let url  = element.dataset.url + '/' + id
+            let table = $('.table-content')
+            let text  = table.data('text')
+            let id    = !Array.isArray(element) ? element.dataset.id : element
+            let url   = table.data("url") + '/' + id
 
             this.$dialog.confirm('Are you sure you want to delete this ' + text +'?', {
                 loader: true
@@ -67,9 +68,8 @@ let adminVue = new Vue({
 
                     let data = response.data
 
-                    $('#entryid-' + id).slideUp('fast', () => {
-                        $(this).remove()
-                    })
+                    this.removeElement(id)
+
                     dialog.close()
 
                     Event.$emit('message:show', {
@@ -78,12 +78,14 @@ let adminVue = new Vue({
                     }, data.class)
                 })
                 .catch((error) => {
+                    console.log(error);
+
                     alert('Something went wrong. Please try again a bit later')
                 })
 
             })
             .catch((error) => {
-                alert('Something went wrong. Please try again a bit later')
+                console.log('Delete aborted')
             });
         },
         deleteMultiple(){
@@ -91,6 +93,27 @@ let adminVue = new Vue({
             let selected = $("input[role=selectAll]:checked").map(function () {
                 return $(this).val();
             }).get().filter(element => element !== 'null')
+
+            if(selected.length){
+                this.deleteEntry(selected)
+
+                $('input[role=selectAll]').prop('checked', false)
+            }
+
+        },
+        removeElement(elemenID){
+
+            if(Array.isArray(elemenID)){
+                elemenID.forEach((id) => {
+                    $('#entryid-' + id).slideUp('fast', () => {
+                        $(this).remove()
+                    })
+                })
+            } else {
+                $('#entryid-' + elemenID).slideUp('fast', () => {
+                    $(this).remove()
+                })
+            }
 
         }
     },
@@ -100,8 +123,6 @@ let adminVue = new Vue({
         })
     }
 })
-
-
 
 //Timepicker
 $('.timepicker').timepicker({
