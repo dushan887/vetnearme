@@ -681,9 +681,9 @@
 
                           </div>
 
-                          <div class="form-group {{ $errors->has('special-notes') ? 'has-error' : ''}}">
-                            <label for=special-notes>Special Notes</label>
-                            <input type="text" id=special-notes name=special-notes class="form-control" placeholder="Special Notes" value="{{ old('special-notes') }}">
+                          <div class="form-group {{ $errors->has('special_notes') ? 'has-error' : ''}}">
+                            <label for=special_notes>Special Notes</label>
+                            <input type="text" id=special_notes name=special_notes class="form-control" placeholder="Special Notes" value="{{ old('special_notes') }}">
                           </div>
 
 
