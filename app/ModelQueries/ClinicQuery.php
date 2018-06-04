@@ -93,7 +93,7 @@ class ClinicQuery extends Clinic
     {
         $coordinates = Geolocation::getCoordinates($data);
 
-        $data['owner_id']      = \Auth::id();
+        $data['owner_id']      = \Auth::user()->hasRole('super_admin') ? null : \Auth::id();
         $data['opening_hours'] = $this->formatHours($data['hours'], $request);
         $data['social_media']  = Strings::arrayToJson($data['social']);
 
