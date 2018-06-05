@@ -116,12 +116,13 @@ class ClinicQuery extends Clinic
 
     private function formatHours($data, $request)
     {
-        foreach ($request->post('not-working') as $day) {
-            $data[$day . '-from']  = null;
-            $data[$day . '-to']    = null;
-            $data[$day . '-from2'] = null;
-            $data[$day . '-to2']   = null;
-        }
+        if ($request->has('not-working'))
+            foreach ($request->post('not-working') as $day) {
+                $data[$day . '-from']  = null;
+                $data[$day . '-to']    = null;
+                $data[$day . '-from2'] = null;
+                $data[$day . '-to2']   = null;
+            }
 
         return json_encode($data);
     }
