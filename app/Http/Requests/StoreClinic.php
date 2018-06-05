@@ -26,7 +26,7 @@ class StoreClinic extends FormRequest
     {
         return [
             'name'                     => 'required|min:3|max:255|string',
-            'description'              => 'string',
+            'description'              => 'string|nullable',
             'email'                    => 'required|email|unique:clinics,email',
             'phone_number'             => 'required|string|min:3|max:255',
             'emergency_number'         => 'nullable|string|min:3|max:255',
@@ -38,7 +38,7 @@ class StoreClinic extends FormRequest
             'zip'                      => 'required|string|min:2|max:255',
             'country_id'               => 'integer',
             'hours.*'                  => ['required', new Hours],
-            'special_notes'            => 'string|max:1024',
+            'special_notes'            => 'nullable|string|max:1024',
             'logo'                     => 'nullable|image',
             'general_practice'         => 'required_without_all:specialist_and_emergency',
             'specialist_and_emergency' => 'required_without_all:general_practice',

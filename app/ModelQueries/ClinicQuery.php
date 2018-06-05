@@ -111,6 +111,11 @@ class ClinicQuery extends Clinic
         if($request->input('subscribe') && $request->input('subscribe') === 'true')
             $data['subscribe'] = 1;
 
+        // Laravel validation will return null if empty
+        // Text in mysql can't be null so we need to set it as the empty string
+        $data['description']   = $data['description']  ?? '';
+        $data['special_notes'] = $data['special_notes']  ?? '';
+
         return $data;
     }
 
