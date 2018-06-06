@@ -2,6 +2,8 @@
 
 Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempPass']], function () {
 
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
     Route::get('services', 'ServicesController@index')->name('services');
     Route::get('services/all', 'ServicesController@all');
     Route::get('services/create', 'ServicesController@create');
