@@ -1,7 +1,5 @@
 <?php
 
-Route::get('/', 'DashboardController@index')->middleware(['menu.admin', 'tempPass', 'auth'])->name('home');
-
 Route::get('changePassword', 'PasswordController@index')->name('changePassword');
 Route::post('/password/update', 'PasswordController@update');
 

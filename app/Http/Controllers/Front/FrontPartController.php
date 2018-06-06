@@ -13,7 +13,6 @@ class FrontPartController extends Controller {
      */
     public function index()
     {
-        
         return view('Front.home.index');
     }
 
