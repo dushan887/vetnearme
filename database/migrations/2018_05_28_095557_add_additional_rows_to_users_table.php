@@ -15,7 +15,7 @@ class AddAdditionalRowsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
 
-            $table->renameColumn('name', 'first_name');
+            // $table->renameColumn('name', 'first_name');
 
             $table->string('last_name')->after('first_name')->default(null)->nullable();
             $table->text('about')->after('last_name');

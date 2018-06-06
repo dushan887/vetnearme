@@ -16,7 +16,7 @@ class AddNewRowsToClinicsTable extends Migration
         Schema::table('clinics', function (Blueprint $table) {
             $table->text('special_notes')->after('description');
             $table->boolean('general_practice')->after('opening_hours')->default(0);
-            $table->boolean('specialist_and_emergency')->after('general_pratice')->default(0);
+            $table->boolean('specialist_and_emergency')->after('general_practice')->default(0);
             $table->boolean('subscribe')->after('specialist_and_emergency')->default(0);
         });
     }
