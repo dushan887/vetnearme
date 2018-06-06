@@ -162,6 +162,7 @@ return [
         App\Providers\PermissionsServiceProvider::class,
         Jcf\Geocode\GeocodeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        browner12\helpers\HelperServiceProvider::class,
 
     ],
 

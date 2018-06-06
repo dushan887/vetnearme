@@ -4,7 +4,20 @@
 			<div class="col-9">
 				<div><span class="resaults-found main-color">546 found</span> <span>nearby for search for</span> <span class="search-input">Vet Clinic in Greater Sydney, NSW</span></div>
 			</div>
-			<div class="col-3" style="text-align: right;"><span>Showing 1-4 of 146</span></div>
+			<div class="col-3" style="text-align: right;"><span>
+				<?php
+					$showing = 33;
+
+					if($clinics->currentPage() === 1):
+						$showing = "1 - " . $clinics->perPage();
+					else:
+						$from    = ($clinics->currentPage() * $clinics->perPage()) - 1;
+						$to      = ($from + $clinics->perPage()) - 1;
+						$to      = $clinics->total() <= $to ? $clinics->total() : $to;
+						$showing = "{$from} - {$to}";
+					endif
+				?>
+				Showing {{ $showing }} of {{ $clinics->total() }}</span></div>
 		</div>
 
 		<div class="border-separator"></div>
@@ -41,197 +54,95 @@
 			<div class="col-12 col-md-7">
 				<div class="inner">
 					<ul class="list-unstyled">
-						<li class="item">
-							<div class="resault">
-								<div class="resault-logo"><a href="#"><img src="http://via.placeholder.com/120x80" alt=""></a></div>
-								<div class="reasault-info">
-									<div class="resault-title"><h4>Cremorne Veterinary Hospital</h4></div>
-									<div class="resault-description">
-										<p>The Cremorne Veterinary Hospital is the original Vet in Mosman with...</p>
-										<a href="#">View more...</a>
+
+						@foreach($clinics as $clinic)
+
+							<?php $hours = json_decode($clinic->opening_hours) ?>
+
+							<li class="item">
+								<div class="resault">
+									<div class="resault-logo">
+										<a href="#">
+											<img src="{{ $clinic->logo ?
+												'img/logo/' . $clinic->logo :
+												'http://via.placeholder.com/120x80'}}"
+											alt="{{ $clinic->name }} Logo">
+										</a>
+									</div>
+									<div class="reasault-info">
+										<div class="resault-title">
+											<h4>{{ $clinic->name }}</h4>
+										</div>
+										<div class="resault-description">
+											<p>{{ $clinic->description	}}</p>
+											<a href="#">View more...</a>
+										</div>
+									</div>
+									<div class="resault-address">
+										<span>{{ $clinic->address }}</span><br />
+										<span>{{ $clinic->city }}</span><br />
+										<span>{{ $clinic->country->name . " " . $clinic->zip }}</span><br />
 									</div>
 								</div>
-								<div class="resault-address">
-									<span>73a Spofforth St,</span><br />
-									<span>Mosman,</span><br />
-									<span>NSW 2088</span><br />
-								</div>
-							</div>									
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="resault-phone">
-									<a href="#"><i class="fa fa-phone"></i> <span>(02) 9953 1090</span></a>
-								</div>
-								<div class="resault-email">
-									<a href="#"><i class="fa fa-envelope"></i> <span>info@cremornevet.com.au</span></a>
-								</div>
-								<div class="resault-web">
-									<a href="#"><i class="fa fa-globe"></i> <span>www.cremornevet.com.au</span></a>
-								</div>
-							</div>
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="rasault-rating">
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-								</div>
-								<div class="resault-directions">
-									<a href="#"><i class="fa fa-map-signs"></i> Get Directions</a>
-								</div>
-								<div class="resault-open align-right">
-									<span class="checked"></span>
-								</div>
-							</div>
-
-						</li>
-
-						<li class="item">
-							<div class="resault">
-								<div class="resault-logo"><a href="#"><img src="http://via.placeholder.com/120x80" alt=""></a></div>
-								<div class="reasault-info">
-									<div class="resault-title"><h4>Chatswood Vetfriends</h4></div>
-									<div class="resault-description">
-										<p>Vetfriends Chatswood is a purpose built clinic – built in 2005...</p>
-										<a href="#">View more...</a>
+								<div class="border-separator space-12"></div>
+								<div class="resault">
+									<div class="resault-phone">
+										<a href="tel:{{ preg_replace('/\D/', '', $clinic->phone_number) }}">
+											<i class="fa fa-phone"></i>
+											<span>{{ $clinic->phone_number }}</span>
+										</a>
+									</div>
+									<div class="resault-email">
+										<a href="mailto:{{ $clinic->email }}">
+											<i class="fa fa-envelope"></i>
+											<span>{{ $clinic->email }}</span>
+										</a>
+									</div>
+									<div class="resault-web">
+										<a href="{{ $clinic->name }}" target="_blank"
+											rel="nofollow noopener noreferrer">
+											<i class="fa fa-globe"></i>
+											<span>{{ $clinic->name }}</span></a>
 									</div>
 								</div>
-								<div class="resault-address">
-									<span>Cnr Smith & High Street,</span><br />
-									<span>Chatswood</span><br />
-									<span>NSW 2067</span><br />
-								</div>
-							</div>									
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="resault-phone">
-									<a href="#"><i class="fa fa-phone"></i> <span>(02) 9882 3433</span></a>
-								</div>
-								<div class="resault-email">
-									<a href="#"><i class="fa fa-envelope"></i> <span>info@chatswood.com.au</span></a>
-								</div>
-								<div class="resault-web">
-									<a href="#"><i class="fa fa-globe"></i> <span>www.chatswood.com.au</span></a>
-								</div>
-							</div>
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="rasault-rating">
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-								</div>
-								<div class="resault-directions">
-									<a href="#"><i class="fa fa-map-signs"></i> Get Directions</a>
-								</div>
-								<div class="resault-open align-right">
-									<span class=""></span>
-								</div>
-							</div>
-
-						</li>
-
-						<li class="item">
-							<div class="resault">
-								<div class="resault-logo"><a href="#"><img src="http://via.placeholder.com/120x80" alt=""></a></div>
-								<div class="reasault-info">
-									<div class="resault-title"><h4>Riverview Animal Hospital</h4></div>
-									<div class="resault-description">
-										<p>From check-ups to preventative care and treatment, our veterinary...</p>
-										<a href="#">View more...</a>
+								<div class="border-separator space-12"></div>
+								<div class="resault">
+									<div class="rasault-rating">
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
+										<span class="fa fa-star checked"></span>
 									</div>
-								</div>
-								<div class="resault-address">
-									<span>18 Northwood Rd,</span><br />
-									<span>Lane Cove,</span><br />
-									<span>NSW 2066</span><br />
-								</div>
-							</div>									
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="resault-phone">
-									<a href="#"><i class="fa fa-phone"></i> <span>(02) 9428 3375</span></a>
-								</div>
-								<div class="resault-email">
-									<a href="#"><i class="fa fa-envelope"></i> <span>info@riverviewvet.com.au</span></a>
-								</div>
-								<div class="resault-web">
-									<a href="#"><i class="fa fa-globe"></i> <span>www.riverviewvet.com.au</span></a>
-								</div>
-							</div>
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="rasault-rating">
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-								</div>
-								<div class="resault-directions">
-									<a href="#"><i class="fa fa-map-signs"></i> Get Directions</a>
-								</div>
-								<div class="resault-open align-right">
-									<span class="checked"></span>
-								</div>
-							</div>
-
-						</li>
-
-						<li class="item">
-							<div class="resault">
-								<div class="resault-logo"><a href="#"><img src="http://via.placeholder.com/120x80" alt=""></a></div>
-								<div class="reasault-info">
-									<div class="resault-title"><h4>Figtree Veterinary Clinic</h4></div>
-									<div class="resault-description">
-										<p>The Figtree Veterinary Clinic in Lane Cove provides modern...</p>
-										<a href="#">View more...</a>
+									<div class="resault-directions">
+										<a href="{{ $clinic->gmaps_link }}" target="_blank"
+											rel="nofollow noopener noreferrer">
+											<i class="fa fa-map-signs"></i>
+											Get Directions
+										</a>
 									</div>
-								</div>
-								<div class="resault-address">
-									<span>Shop 10/225 Burns Bay Road,</span><br />
-									<span>Lane Cove West</span><br />
-									<span>NSW 2066 </span><br />
-								</div>
-							</div>									
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="resault-phone">
-									<a href="#"><i class="fa fa-phone"></i> <span>(02) 9428 4700</span></a>
-								</div>
-								<div class="resault-email">
-									<a href="#"><i class="fa fa-envelope"></i> <span>info@figtreevet.com</span></a>
-								</div>
-								<div class="resault-web">
-									<a href="#"><i class="fa fa-globe"></i> <span>www.figtreevet.com.au</span></a>
-								</div>
-							</div>
-							<div class="border-separator space-12"></div>
-							<div class="resault">
-								<div class="rasault-rating">
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-									<span class="fa fa-star checked"></span>
-								</div>
-								<div class="resault-directions">
-									<a href="#"><i class="fa fa-map-signs"></i> Get Directions</a>
-								</div>
-								<div class="resault-open align-right">
-									<span class="checked"></span>
-								</div>
-							</div>
 
-						</li>
+									@if(isClinicOpen($hours, $currentDay, $currentHour))
+										<div class="resault-open align-right">
+											<span class="checked"></span>
+										</div>
+									@else
+										<div class="resault-open align-right">
+											<span></span>
+										</div>
+									@endif
+								</div>
+
+							</li>
+
+						@endforeach
+
 					</ul>
-					
+
+					{{ $clinics->links() }}
+
 				</div>
-					
+
 			</div>
 			<div class="col-12 col-md-5">
 				<div class="inner">
