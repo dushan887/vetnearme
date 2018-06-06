@@ -155,6 +155,10 @@ header {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
+.page header {
+  position: relative;
+  background-color: #468a97;
+}
 /*MAIN MENU */
 
 /*Sign In Btn*/
@@ -608,7 +612,7 @@ section:not(.page-search) #search .location-search:before {
   border-color: #468a97;
   background: #fff;
 }
-.button-container  .checked::before {
+.button-container .checked::before {
   display: block;
   position: absolute;
   content: '';
@@ -635,3 +639,5 @@ section:not(.page-search) #search .location-search:before {
   border: 1px solid #468a97;
   border-radius: 5px;
 }
+
+/*RESULTS*/
