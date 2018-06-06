@@ -32,10 +32,13 @@ class ClinicQuery extends Clinic
 
         if($model->id){
 
-            $services = $this->getServices($request['services']);
+            if($request->has('services')){
+                $services = $this->getServices($request['services']);
 
-            if($services !== null)
-                $model->services()->saveMany($services);
+                if($services !== null)
+                    $model->services()->saveMany($services);
+            }
+                
 
             return $model->id;
         }
@@ -62,10 +65,12 @@ class ClinicQuery extends Clinic
 
             $clinic->services->detach();
 
-            $services = $this->getServices($request['services']);
+            if($request->has('services')){
+                $services = $this->getServices($request['services']);
 
-            if($services !== null)
-                $model->services()->saveMany($services);
+                if($services !== null)
+                    $model->services()->saveMany($services);
+            }
 
             return $clinic->id;
         }
