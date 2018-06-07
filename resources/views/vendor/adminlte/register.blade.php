@@ -20,7 +20,7 @@
 
                 <div class="form-group has-feedback {{ $errors->has('first_name') ? 'has-error' : '' }}">
                     <input type="text" name="first_name" class="form-control" value="{{ old('first_name') }}"
-                           placeholder="{{ trans('adminlte::adminlte.full_name') }}">
+                           placeholder="First Name">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('first_name'))
                         <span class="help-block">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="form-group has-feedback {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                    <input type="text" name="last_name" class="form-control" value="{{ old('last_name') }}"     placeholder="{{ trans('adminlte::adminlte.full_name') }}">
+                    <input type="text" name="last_name" class="form-control" value="{{ old('last_name') }}"     placeholder="Last Name">
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     @if ($errors->has('last_name'))
                         <span class="help-block">

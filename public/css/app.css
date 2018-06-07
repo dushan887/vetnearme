@@ -118,12 +118,6 @@
     width: 200px;
     margin-left: -100px;
   }
-  .no-margin-right-md {
-    margin-right: 0 !important;
-  }
-  .no-padding-right-md {
-    padding-right: 0 !important;
-  }
 }
 
 @media (max-width: 767px) {
@@ -135,64 +129,16 @@
     width: 100%;
   }
 }
-/*GOLOBAL*/
-.no-margin-bottom {
-  margin-bottom: 0 !important;
-}
-.no-margin-top {
-  margin-top: 0 !important;
-}
-/*END GLOBAL*/
+
 .services {
   margin-top: 20px;
 }
 
 .image-preview-container {
-  width: auto;
-  height: auto;
+  width: 720px;
   position: fixed;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  bottom: 10%;
-  margin: auto;
-  max-width: 80vw;
-  max-height: 80vh;
-  z-index: 99999;
+  /* or absolute */
+  top: 30%;
+  left: 25%;
 }
-.preview_on:before {
-  content: '';
-  display: block;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  background: rgba(0,0,0,.5);
-  z-index: 9999;
-}
-#clinic_opening_hours .color-palette {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-}
-#clinic_opening_hours input[type=checkbox] {
-  margin: 0;
-  vertical-align: middle;
-}
-#clinic_opening_hours div[data-hoursday] .form-group  {
-  margin: 0;
-}
-#clinic_opening_hours div[data-hoursday]{
-  border: 1px solid #f4f4f4;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-}
-/*SERVICES*/
-.service-last {
-  width: 140px
-}
-.media-last {
-  width: 50px;
-}
+
