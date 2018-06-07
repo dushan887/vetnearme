@@ -10,29 +10,31 @@
 
 @section('BodySetup')
 	<body class="page">
-	<header id="header" class="has-border">
-		@include('Front.main.header')
-	</header>
+		<header id="header" class="has-border">
+			@include('Front.main.header')
+		</header>
 
-	<div id="wrapper">
+		<div id="wrapper">
 
-		@include('Front.results.partials.search')
+			@include('Front.results.partials.search')
 
-		<div class="container page-content">
-			<div class="row">
-				<div class="col col-100">
+			<div class="container page-content">
+				<div class="row">
+					<div class="col col-100">
+					</div>
+				</div>
+				<div
+					id="content"
+					data-coordinates="{{ $coordinates }}">
+					@include('Front.results.partials.content')
+				</div>
+				<div id="sidebar" class="bg-main-color2">
 				</div>
 			</div>
-			<div id="content">
-				@include('Front.results.partials.content')
-			</div>
-			<div id="sidebar" class="bg-main-color2">
-			</div>
 		</div>
-	</div>
 
-	<footer id="footer" class="bg-main-color border-main-color2">
-	</footer>
+		<footer id="footer" class="bg-main-color border-main-color2"></footer>
+	</body>
 @stop
 
 @section('AditionalFoot')
@@ -40,14 +42,15 @@
 <script type="text/javascript">
 
 	function initMap() {
-		var input = document.getElementById('address-input');
-		var autocomplete = new google.maps.places.Autocomplete(input);
+		let input = document.getElementById('address-input');
+		let autocomplete = new google.maps.places.Autocomplete(input);
 	}
 
-     var myLatlng = new google.maps.LatLng(-33.829326,151.230331);
-	 var myLatlng2 = new google.maps.LatLng(-33.7871468,151.1945336);
-	 var myLatlng3 = new google.maps.LatLng(-33.823943,151.1706853);
-	 var myLatlng4 = new google.maps.LatLng(-33.8153578,151.1495098);
+	{{--  This will be changed once we have fully working geolocation  --}}
+	let myLatlng    = new google.maps.LatLng(-33.829326,151.230331)
+
+	let coordinates = $('#content').data('coordinates')
+
 
       function CustomMarker(latlng, map, args) {
 			this.latlng = latlng;
@@ -59,9 +62,9 @@
 
 		CustomMarker.prototype.draw = function() {
 
-			var self = this;
+			let self = this;
 
-			var div = this.div;
+			let div = this.div;
 
 			if (!div) {
 
@@ -78,11 +81,11 @@
 					google.maps.event.trigger(self, "click");
 				});
 
-				var panes = this.getPanes();
+				let panes = this.getPanes();
 				panes.overlayImage.appendChild(div);
 			}
 
-			var point = this.getProjection().fromLatLngToDivPixel(this.latlng);
+			let point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
 			if (point) {
 				div.style.left = (point.x - 15) + 'px';
@@ -104,7 +107,7 @@
       function initialize() {
 
 
-		var mapOptions = {
+		let mapOptions = {
 			zoom: 12,
 			center: myLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -125,36 +128,24 @@
 	        overviewMapControl: false,
 			}
 
-		var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		let map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-		overlay = new CustomMarker (
-			myLatlng,
-			map,
-			{
-				marker_id: '1',
-			},
-		);
-		overlay2 = new CustomMarker (
-			myLatlng2,
-			map,
-			{
-				marker_id: '2',
-			},
-		);
-		overlay3 = new CustomMarker (
-			myLatlng3,
-			map,
-			{
-				marker_id: '3',
-			},
-		);
-		overlay4 = new CustomMarker (
-			myLatlng4,
-			map,
-			{
-				marker_id: '4',
-			},
-		);
+		let count = 1;
+
+		for(coordinate in coordinates){
+
+			overlay = new CustomMarker (
+				new google.maps.LatLng(coordinates[coordinate].lat ,coordinates[coordinate].lng),
+				map,
+				{
+					marker_id: count,
+				},
+			);
+			count ++
+		}
+
+
+
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);

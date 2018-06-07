@@ -28,7 +28,7 @@ class ResultsController extends Controller {
 
         return view('Front.results.index',[
             'clinics'     => $clinics,
-            'coordinates' => $coordinates,
+            'coordinates' => json_encode($coordinates),
             'currentDay'  => strtolower(date('l')),
             'currentHour' => date('H:i:s'),
         ]);
