@@ -22,14 +22,13 @@
                         <i class="fa fa-edit"></i>
                     </button>
 
-                    <button type="button"
-                    class="btn btn-default btn-sm">
-                    <i class="fa fa-trash-o"></i>
-                    </button>
-
                 </div>
                 <!-- /.btn-group -->
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                <button type="button"
+                    class="btn btn-default btn-sm"
+                    @click="getAll()">
+                    <i class="fa fa-refresh"></i>
+                </button>
 
                 <div class="pull-right"></div>
                 <!-- /.pull-right -->
@@ -90,6 +89,13 @@
                                     @click="openModal('edit')"
                                     :data-id=service.id
                                 ><i class="fa fa-edit"></i></button>
+
+                                <button type="button"
+                                    class="btn btn-default btn-sm"
+                                     @click="openModal('delete')"
+                                    :data-id=service.id>
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
                             </td>
 
                         </tr>
@@ -131,13 +137,20 @@ export default {
                     break;
 
                 case 'edit':
-                    url = '/admin/services/edit/' + event.target.dataset.id
+
+                    element = event.target.tagName === "I" ? event.target.parentNode : event.target
+
+                    url = '/admin/services/edit/' + element.dataset.id
                     this.getData(url)
                     break;
 
                 case 'delete':
 
-                    url = '/admin/services/destroy/' + event.target.dataset.id
+                    element = event.target.tagName === "I" ? event.target.parentNode : event.target
+
+                    let serviceID = element.dataset.id
+
+                    url = '/admin/services/destroy/' + serviceID
 
                     this.$dialog.confirm('Are you sure you want to delete this service?',{
                         loader: true
@@ -168,7 +181,7 @@ export default {
                         })
 
                     })
-                    .catch(() => {
+                    .catch((error) => {
                         console.log('Delete canceled')
                     });
                     break;

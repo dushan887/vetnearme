@@ -16860,6 +16860,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -16892,13 +16898,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     break;
 
                 case 'edit':
-                    _url = '/admin/services/edit/' + event.target.dataset.id;
+
+                    element = event.target.tagName === "I" ? event.target.parentNode : event.target;
+
+                    _url = '/admin/services/edit/' + element.dataset.id;
                     this.getData(_url);
                     break;
 
                 case 'delete':
 
-                    _url = '/admin/services/destroy/' + event.target.dataset.id;
+                    element = event.target.tagName === "I" ? event.target.parentNode : event.target;
+
+                    var serviceID = element.dataset.id;
+
+                    _url = '/admin/services/destroy/' + serviceID;
 
                     this.$dialog.confirm('Are you sure you want to delete this service?', {
                         loader: true
@@ -16926,7 +16939,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             alert('Something went wrong. Please try again a bit later');
                             dialog.close();
                         });
-                    }).catch(function () {
+                    }).catch(function (error) {
                         console.log('Delete canceled');
                     });
                     break;
@@ -17062,12 +17075,22 @@ var render = function() {
                 }
               },
               [_c("i", { staticClass: "fa fa-edit" })]
-            ),
-            _vm._v(" "),
-            _vm._m(1)
+            )
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-default btn-sm",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.getAll()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fa fa-refresh" })]
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "pull-right" })
         ])
@@ -17168,6 +17191,20 @@ var render = function() {
                           }
                         },
                         [_c("i", { staticClass: "fa fa-edit" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-default btn-sm",
+                          attrs: { type: "button", "data-id": service.id },
+                          on: {
+                            click: function($event) {
+                              _vm.openModal("delete")
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-trash-o" })]
                       )
                     ])
                   ]
@@ -17201,26 +17238,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fa fa-trash-o" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fa fa-refresh" })]
-    )
   }
 ]
 render._withStripped = true
