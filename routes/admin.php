@@ -9,7 +9,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::get('services/create', 'ServicesController@create');
     Route::get('services/edit/{id}', 'ServicesController@edit');
     Route::post('services/store', 'ServicesController@store');
-    Route::post('services/changePriorityStatus', 'ServicesController@changePriorityStatus');
+    Route::post('services/changePriorityStatus/{id}', 'ServicesController@changePriorityStatus');
     Route::post('services/update/{id}', 'ServicesController@update');
     Route::post('services/destroy/{id}', 'ServicesController@destroy');
 

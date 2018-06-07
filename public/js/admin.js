@@ -16558,7 +16558,9 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10));
         },
         selectAll: function selectAll(element) {
-            $('input[role=selectAll').prop('checked', element.checked);
+            console.log(element);
+
+            $('input[role=selectAll]').prop('checked', element.checked);
         },
         deleteEntry: function deleteEntry(element) {
             var _this = this;
@@ -16624,8 +16626,14 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         }
     },
     mounted: function mounted() {
+        var _this3 = this;
+
         Event.$on('form:errors:show', function (form, errors) {
             Form.showErrors(form, errors);
+        });
+
+        Event.$on('select:all', function (element) {
+            _this3.selectAll(element);
         });
     }
 });
@@ -16852,8 +16860,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -16863,6 +16869,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        selectAll: function selectAll(element) {
+            Event.$emit('select:all', element);
+        },
         getAll: function getAll() {
             var _this = this;
 
@@ -16924,12 +16933,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 case 'priority':
 
-                    var element = event.target;
+                    var element = event.target.tagName === "I" ? event.target.parentNode : event.target;
                     var _url = '/admin/services/changePriorityStatus/' + element.dataset.id;
 
                     this.$dialog.confirm('Are you sure you want to change priority status of this service?', {
                         loader: true
                     }).then(function (dialog) {
+
+                        // Only 12 priority services can be present at one time
+                        var priorityCount = _this2.services.filter(function (service) {
+                            return service.priority === 1;
+                        });
+
+                        if (priorityCount.length >= 12) {
+                            alert("You can only have 12 priority services");
+                            dialog.close();
+                            return;
+                        }
 
                         axios.post(_url, {
                             id: element.dataset.id,
@@ -16940,10 +16960,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             dialog.close();
 
                             var serviceIndex = _this2.services.findIndex(function (service) {
-                                return serviceID;
+                                return service.id === data.service.id;
                             });
 
-                            Vue.delete(_this2.services, serviceIndex);
+                            _this2.services[serviceIndex].priority = data.service.priority;
 
                             Event.$emit('message:show', {
                                 messageTitle: data.messageTitle,
@@ -16951,7 +16971,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             }, data.class);
                         }).catch(function (error) {
 
-                            alert('Something went wrong. Please try again a bit later');
                             dialog.close();
                         });
                     }).catch(function () {
@@ -17030,8 +17049,6 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "box-body no-padding" }, [
         _c("div", { staticClass: "mailbox-controls" }, [
-          _vm._m(1),
-          _vm._v(" "),
           _c("div", { staticClass: "btn-group" }, [
             _c(
               "button",
@@ -17047,10 +17064,10 @@ var render = function() {
               [_c("i", { staticClass: "fa fa-edit" })]
             ),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(1)
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "pull-right" })
         ])
@@ -17068,7 +17085,30 @@ var render = function() {
             }
           },
           [
-            _vm._m(4),
+            _c("thead", [
+              _c("tr", [
+                _c("td", { attrs: { width: "35" } }, [
+                  _c("input", {
+                    attrs: {
+                      type: "checkbox",
+                      role: "selectAll",
+                      value: "null"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.selectAll($event.target)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Name")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Count")]),
+                _vm._v(" "),
+                _c("th", { attrs: { width: "150" } }, [_vm._v("Action")])
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "tbody",
@@ -17168,19 +17208,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      {
-        staticClass: "btn btn-default btn-sm checkbox-toggle",
-        attrs: { type: "button" }
-      },
-      [_c("i", { staticClass: "fa fa-square-o" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
       { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
       [_c("i", { staticClass: "fa fa-trash-o" })]
     )
@@ -17194,26 +17221,6 @@ var staticRenderFns = [
       { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
       [_c("i", { staticClass: "fa fa-refresh" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("td", { attrs: { width: "35" } }, [
-          _c("input", {
-            attrs: { type: "checkbox", role: "selectAll", value: "null" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Count")]),
-        _vm._v(" "),
-        _c("th", { attrs: { width: "150" } }, [_vm._v("Action")])
-      ])
-    ])
   }
 ]
 render._withStripped = true

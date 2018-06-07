@@ -15,18 +15,15 @@
             <div class="box-body no-padding">
 
                 <div class="mailbox-controls">
-                <!-- Check all button -->
-                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                </button>
+
                 <div class="btn-group">
 
                     <button type="button" class="btn btn-default btn-sm" @click="openModal('store')">
-                    <i class="fa fa-edit"></i>
+                        <i class="fa fa-edit"></i>
                     </button>
 
                     <button type="button"
-                    class="btn btn-default btn-sm"
-                    >
+                    class="btn btn-default btn-sm">
                     <i class="fa fa-trash-o"></i>
                     </button>
 
@@ -54,6 +51,7 @@
                             <input type="checkbox"
                             role="selectAll"
                             value=null
+                            @click="selectAll($event.target)"
                             >
                             </td>
                             <th>Name</th>
@@ -112,6 +110,9 @@ export default {
         }
     },
     methods: {
+        selectAll(element) {
+            Event.$emit('select:all', element)
+        },
         getAll(){
             axios.get('/admin/services/all', {})
             .then((response) => {
@@ -174,12 +175,21 @@ export default {
 
                 case 'priority':
 
-                    let element = event.target
+                    let element = event.target.tagName === "I" ? event.target.parentNode : event.target
                     let url     = '/admin/services/changePriorityStatus/' + element.dataset.id
 
                     this.$dialog.confirm('Are you sure you want to change priority status of this service?',{
                         loader: true
                     }).then((dialog) => {
+
+                        // Only 12 priority services can be present at one time
+                        let priorityCount = this.services.filter(service => service.priority === 1)
+
+                        if(priorityCount.length >= 12){
+                            alert("You can only have 12 priority services")
+                            dialog.close()
+                            return
+                        }
 
                         axios.post(url, {
                             id:       element.dataset.id,
@@ -190,9 +200,9 @@ export default {
                             let data = response.data
                             dialog.close()
 
-                            let serviceIndex = this.services.findIndex(service => serviceID)
+                            let serviceIndex = this.services.findIndex(service => service.id === data.service.id)
 
-                            Vue.delete(this.services, serviceIndex);
+                            this.services[serviceIndex].priority = data.service.priority
 
                             Event.$emit('message:show', {
                                 messageTitle: data.messageTitle,
@@ -201,7 +211,6 @@ export default {
                         })
                         .catch((error) => {
 
-                            alert('Something went wrong. Please try again a bit later')
                             dialog.close()
                         })
 
@@ -216,7 +225,7 @@ export default {
         },
         save(){
 
-            let form  = $('#service-store')
+            let form   = $('#service-store')
             let action = form.data('action')
 
             axios.post(form.attr('action'), {

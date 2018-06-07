@@ -121,7 +121,7 @@ class ServicesController extends Controller
                 'class'        => 'danger'
             ], 400);
 
-        $service->priority = !$request->input('priority');
+        $service->priority = (int) !$request->input('priority');
 
         $service->update();
 

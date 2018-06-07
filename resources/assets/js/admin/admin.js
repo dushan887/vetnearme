@@ -50,7 +50,9 @@ let adminVue = new Vue({
             $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
         },
         selectAll(element){
-            $('input[role=selectAll').prop('checked', element.checked)
+            console.log(element);
+
+            $('input[role=selectAll]').prop('checked', element.checked)
         },
         deleteEntry(element){
 
@@ -120,6 +122,10 @@ let adminVue = new Vue({
     mounted(){
         Event.$on('form:errors:show', (form, errors) => {
             Form.showErrors(form, errors)
+        })
+
+        Event.$on('select:all', (element) => {
+            this.selectAll(element)
         })
     }
 })
