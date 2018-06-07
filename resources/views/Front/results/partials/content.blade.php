@@ -99,10 +99,10 @@
 										</a>
 									</div>
 									<div class="resault-web">
-										<a href="{{ $clinic->name }}" target="_blank"
+										<a href="{{ $clinic->url }}" target="_blank"
 											rel="nofollow noopener noreferrer">
 											<i class="fa fa-globe"></i>
-											<span>{{ $clinic->name }}</span></a>
+											<span>{{ $clinic->url }}</span></a>
 									</div>
 								</div>
 								<div class="border-separator space-12"></div>
