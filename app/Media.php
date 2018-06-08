@@ -12,7 +12,7 @@ class Media extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'extension', 'user_id', 'clinic_id',
+        'name', 'extension', 'user_id', 'clinic_id', 'gallery'
     ];
 
     public function user()

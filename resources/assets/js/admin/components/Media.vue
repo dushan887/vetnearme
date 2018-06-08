@@ -22,7 +22,11 @@
                                 <th>{{ file.user.name }}</th>
                                 <th>{{ getHumanDate(file.created_at)  }}</th>
                                 <th>
-                                    <button type="button" class="btn btn-block btn-danger"
+                                    <button type="button" class="btn btn-sm btn-primary"
+                                    @click="openModal('galery')"
+                                    :data-id=file.id>Put in gallery</button>
+
+                                    <button type="button" class="btn btn-sm btn-danger"
                                     @click="openModal('delete')"
                                     :data-id=file.id>Delete</button>
                                 </th>
@@ -79,7 +83,6 @@ export default {
             let url;
             let data = {}
 
-
             switch (action) {
 
                 case 'delete':
@@ -120,6 +123,8 @@ export default {
 
                         alert('Something went wrong. Please try again a bit later')
                     });
+                    break;
+                case 'galery':
                     break;
             }
         },

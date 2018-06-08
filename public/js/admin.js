@@ -17612,6 +17612,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -17687,6 +17691,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                         alert('Something went wrong. Please try again a bit later');
                     });
+                    break;
+                case 'galery':
                     break;
             }
         },
@@ -18051,7 +18057,21 @@ var render = function() {
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-block btn-danger",
+                            staticClass: "btn btn-sm btn-primary",
+                            attrs: { type: "button", "data-id": file.id },
+                            on: {
+                              click: function($event) {
+                                _vm.openModal("galery")
+                              }
+                            }
+                          },
+                          [_vm._v("Put in gallery")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-danger",
                             attrs: { type: "button", "data-id": file.id },
                             on: {
                               click: function($event) {
