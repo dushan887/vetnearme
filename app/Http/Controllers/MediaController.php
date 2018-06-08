@@ -49,13 +49,31 @@ class MediaController extends Controller
 
     public function galleryUpdate(Request $request)
     {
-        $media = Media::find((int) $request->input('id'));
+        $media = \Auth::user()->hasRole('super_admin') ?
+            Media::find((int) $request->input('id')) :
+            Media::where(
+                ['id', '=', (int) $request->input('id')],
+                ['clinic_id', '=', \Auth::user()->clinic->id]
+            )->get();
 
-        if(
-            !\Auth::user()->hasRole('super_admin') &&
-            $media->clinic_id !== \Auth::user()->clinic->id
-        ){
-             return redirect()->route('media');
+        if(!$media)
+            return redirect()->route('media');
+
+        if(!\Auth::user()->hasRole('super_admin')){
+
+            $mediaGallery = Media::where(
+                ['gallery', '=', 1],
+                ['clinic_id', '=', Auth::user()->clinic->id]
+            )->get();
+
+            if($mediaGallery && count($mediaGallery) >= 5)
+                        return response()->json([
+                        'media'        => $media,
+                        'messageTitle' => 'Alert',
+                        'messageText'  => 'You can only have 5 images in the gallery at one time',
+                        'class'        => 'error'
+                ], 200);
+
         }
 
         $media->gallery = !$media->gallery;
