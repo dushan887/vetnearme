@@ -29,6 +29,7 @@ import Modal from './components/Modal.vue'
 import EventMessages from './components/EventMessages.vue'
 import Media from './components/Media.vue'
 import ClinicsList from './components/ClinicsList.vue'
+import PostCategories from './components/PostCategories.vue'
 
 let adminVue = new Vue({
     el: '#admin-app',
@@ -38,7 +39,8 @@ let adminVue = new Vue({
         adminMedia: Media,
         adminModal: Modal,
         adminAlerts: EventMessages,
-        adminClinicsList: ClinicsList
+        adminClinicsList: ClinicsList,
+        adminPostCategories: PostCategories
     },
     methods: {
         notWorking(day){

@@ -50,9 +50,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::post('media/destroy/{id}', 'MediaController@destroy');
 
 
-    // Blog
+    // Post
     Route::get('post', 'PostController@index')->name('post');
     Route::get('post/create', 'PostController@create');
+
+    // Post Categories
+    Route::get('post-categories', 'PostCategoryController@index')->name('post-categories');
+    Route::get('post-categories/all', 'PostCategoryController@all');
+    Route::get('post-categories/edit/{id}', 'PostCategoryController@edit');
+    Route::get('post-categories/create', 'PostCategoryController@create');
 
 
 });

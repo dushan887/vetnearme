@@ -17,13 +17,14 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-
+        <form>
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">New Post</h3>
             </div>
             <!-- /.box-header -->
+
             <div class="box-body">
               <div class="form-group">
                 <input class="form-control" placeholder="Title">
@@ -131,6 +132,7 @@
 
         </div>
         <!-- /.col -->
+        </form>
       </div>
       <!-- /.row -->
     </section>

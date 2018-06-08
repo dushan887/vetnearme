@@ -175,12 +175,6 @@ export default {
                         })
                     break;
             }
-        },
-        getData(url){
-            axios.get(url, {})
-            .then((response) => {
-               Event.$emit('modal:show', response.data)
-            })
         }
     },
     mounted(){

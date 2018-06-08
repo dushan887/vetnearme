@@ -86,9 +86,14 @@ class AdminPanelMenu {
                 'icon' => 'picture-o'
             ]);
             $event->menu->add([
-                'text' => 'Blog',
-                'url'  => 'admin/blog',
+                'text' => 'Post',
+                'url'  => 'admin/post',
                 'icon' => 'newspaper-o'
+            ]);
+            $event->menu->add([
+                'text' => 'Post Categories',
+                'url'  => 'admin/post-categories',
+                'icon' => 'list-ol'
             ]);
             $event->menu->add([
                 'text' => 'Settings',

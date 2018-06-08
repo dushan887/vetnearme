@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class PostCategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('checkRole:super_admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class PostCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view('postCategories/index');
     }
 
     /**
@@ -24,7 +30,8 @@ class PostCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return response()
+            ->json(view('services/partials/_createForm')->render());
     }
 
     /**
@@ -35,18 +42,24 @@ class PostCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|unique:postCategories|min:3|max:255',
+        ]);
+
+        $category = PostCategory::create($data);
+
+        return response()->json([
+            'service'      => $service,
+            'messageTitle' => 'Post Category Created',
+            'messageText'  => 'The post category has been created',
+            'class'        => 'success'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\PostCategory  $postCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PostCategory $postCategory)
+    public function all()
     {
-        //
+        return response()
+            ->json(PostCategory::orderBy('name', 'desc')->get());
     }
 
     /**
@@ -55,21 +68,37 @@ class PostCategoryController extends Controller
      * @param  \App\PostCategory  $postCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(PostCategory $postCategory)
+    public function edit(int $id)
     {
-        //
+        return response()
+            ->json(view('post-categories/partials/_editForm', [
+                'service' => Service::find($id),
+            ])->render());
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PostCategory  $postCategory
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PostCategory $postCategory)
+    public function update(Request $request, $id)
     {
-        //
+        $category = PostCategory::find($id);
+
+        $data = $request->validate([
+            'name' => 'required|min:3|max:255|unique:services,name,' . $category->id,
+        ]);
+
+        $category->update($data);
+
+        return response()->json([
+            'service'      => $category,
+            'messageTitle' => 'Service Updated',
+            'messageText'  => 'The service has been updated',
+            'class'        => 'success'
+        ]);
     }
 
     /**
