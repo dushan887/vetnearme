@@ -46,6 +46,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::get('media', 'MediaController@index')->name('media');
     Route::get('media/all', 'MediaController@all');
     Route::post('media/store', 'MediaController@store');
+    Route::post('media/galleryUpdate', 'MediaController@galleryUpdate');
     Route::post('media/destroy/{id}', 'MediaController@destroy');
 
 

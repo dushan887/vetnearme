@@ -22,9 +22,24 @@
                                 <th>{{ file.user.name }}</th>
                                 <th>{{ getHumanDate(file.created_at)  }}</th>
                                 <th>
-                                    <button type="button" class="btn btn-sm btn-primary"
-                                    @click="openModal('galery')"
-                                    :data-id=file.id>Put in gallery</button>
+
+                                    <span v-if="imageExtensions.includes(file.extension)">
+                                        <button
+                                        type="button"
+                                        class="btn btn-sm btn-primary"
+                                        @click="openModal('galery')"
+                                        v-if="!file.gallery"
+                                        data-action=put
+                                        :data-id=file.id>Put in gallery</button>
+
+                                        <button
+                                        type="button"
+                                        class="btn btn-sm btn-primary"
+                                        @click="openModal('galery')"
+                                        data-action=remove
+                                        v-else
+                                        :data-id=file.id>Remove from gallery</button>
+                                    </span>
 
                                     <button type="button" class="btn btn-sm btn-danger"
                                     @click="openModal('delete')"
@@ -125,6 +140,39 @@ export default {
                     });
                     break;
                 case 'galery':
+
+                    if(event.target.dataset.action === 'put'){
+                        let countGallery = this.files.filter(file => file.gallery)
+
+                        if(countGallery.length >= 5){
+                            alert('You can only have 5 images in the gallery')
+                            return
+                        }
+
+                    }
+
+
+                    axios.post('/admin/media/galleryUpdate', {
+                            id: event.target.dataset.id
+                        })
+                        .then((response) => {
+
+                            let data = response.data
+
+                            let fileIndex = this.files.findIndex(file => data.media.id)
+
+                            this.files[fileIndex].gallery = data.media.gallery
+
+                            Event.$emit('message:show', {
+                                messageTitle: data.messageTitle,
+                                messageText:  data.messageText
+                            }, data.class)
+                        })
+                        .catch((error) => {
+                            console.log(error);
+
+                            alert('Something went wrong. Please try again a bit later')
+                        })
                     break;
             }
         },

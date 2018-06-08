@@ -17616,6 +17616,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17693,6 +17708,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     });
                     break;
                 case 'galery':
+
+                    if (event.target.dataset.action === 'put') {
+                        var countGallery = this.files.filter(function (file) {
+                            return file.gallery;
+                        });
+
+                        if (countGallery.length >= 5) {
+                            alert('You can only have 5 images in the gallery');
+                            return;
+                        }
+                    }
+
+                    axios.post('/admin/media/galleryUpdate', {
+                        id: event.target.dataset.id
+                    }).then(function (response) {
+
+                        var data = response.data;
+
+                        var fileIndex = _this2.files.findIndex(function (file) {
+                            return data.media.id;
+                        });
+
+                        _this2.files[fileIndex].gallery = data.media.gallery;
+
+                        Event.$emit('message:show', {
+                            messageTitle: data.messageTitle,
+                            messageText: data.messageText
+                        }, data.class);
+                    }).catch(function (error) {
+                        console.log(error);
+
+                        alert('Something went wrong. Please try again a bit later');
+                    });
                     break;
             }
         },
@@ -18054,19 +18102,45 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("th", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-primary",
-                            attrs: { type: "button", "data-id": file.id },
-                            on: {
-                              click: function($event) {
-                                _vm.openModal("galery")
-                              }
-                            }
-                          },
-                          [_vm._v("Put in gallery")]
-                        ),
+                        _vm.imageExtensions.includes(file.extension)
+                          ? _c("span", [
+                              !file.gallery
+                                ? _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-sm btn-primary",
+                                      attrs: {
+                                        type: "button",
+                                        "data-action": "put",
+                                        "data-id": file.id
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.openModal("galery")
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Put in gallery")]
+                                  )
+                                : _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-sm btn-primary",
+                                      attrs: {
+                                        type: "button",
+                                        "data-action": "remove",
+                                        "data-id": file.id
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.openModal("galery")
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Remove from gallery")]
+                                  )
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c(
                           "button",

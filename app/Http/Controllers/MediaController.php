@@ -47,27 +47,33 @@ class MediaController extends Controller
             ->json(Media::orderBy('created_at', 'desc')->with(['user', 'clinic'])->get());
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Media  $media
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Media $media)
+    public function galleryUpdate(Request $request)
     {
-        //
-    }
+        $media = Media::find((int) $request->input('id'));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Media  $media
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Media $media)
-    {
-        //
+        if(
+            !\Auth::user()->hasRole('super_admin') &&
+            $media->clinic_id !== \Auth::user()->clinic->id
+        ){
+             return redirect()->route('media');
+        }
+
+        $media->gallery = !$media->gallery;
+
+        if($media->save())
+            return response()->json([
+                    'media'        => $media,
+                    'messageTitle' => 'Gallery Update',
+                    'messageText'  => $media->gallery ? 'Image added to gallery' : 'Image removed from gallery',
+                    'class'        => 'success'
+            ], 200);
+
+        return response()->json([
+                'media'        => $media,
+                'messageTitle' => 'Alert',
+                'messageText'  => 'Something went wrong. Please try again a bit later',
+                'class'        => 'error'
+        ], 500);
     }
 
     /**
