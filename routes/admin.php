@@ -51,8 +51,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
 
 
     // Blog
-    Route::get('blog', 'BlogController@index')->name('blog');
-    Route::get('blog/create', 'BlogController@create');
+    Route::get('post', 'PostController@index')->name('post');
+    Route::get('post/create', 'PostController@create');
 
 
 });
