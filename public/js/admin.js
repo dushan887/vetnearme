@@ -16507,8 +16507,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Media_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Media_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue__);
 
 
 
@@ -16541,6 +16543,7 @@ var Form = __webpack_require__(162);
 
 
 
+
 var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#admin-app',
     mixins: [Form],
@@ -16550,7 +16553,8 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         adminModal: __WEBPACK_IMPORTED_MODULE_3__components_Modal_vue___default.a,
         adminAlerts: __WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue___default.a,
         adminClinicsList: __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default.a,
-        adminPostCategories: __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue___default.a
+        adminPostCategories: __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue___default.a,
+        adminPostForm: __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue___default.a
     },
     methods: {
         notWorking: function notWorking(day) {
@@ -18439,20 +18443,15 @@ if (false) {
 }
 
 /***/ }),
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(186)
+var __vue_script__ = __webpack_require__(181)
 /* template */
-var __vue_template__ = __webpack_require__(187)
+var __vue_template__ = __webpack_require__(182)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -18491,7 +18490,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 186 */
+/* 181 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18607,7 +18606,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get('/admin/post-categories/all', {}).then(function (response) {
-                _this.files = response.data;
+                _this.categories = response.data;
             });
         },
         save: function save() {
@@ -18663,13 +18662,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 case 'edit':
 
-                    element = event.target.tagName === "I" ? event.target.parentNode : event.target;
+                    var element = event.target.tagName === "I" ? event.target.parentNode : event.target;
 
                     url = '/admin/post-categories/edit/' + element.dataset.id;
                     this.getData(url);
                     break;
 
                 case 'delete':
+
                     var categoryID = event.target.dataset.id;
                     url = '/admin/post-categories/destroy/' + categoryID;
 
@@ -18725,7 +18725,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 187 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -18895,6 +18895,662 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-1fb3a793", module.exports)
+  }
+}
+
+/***/ }),
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(189)
+/* template */
+var __vue_template__ = __webpack_require__(190)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/admin/components/PostForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-629bad7b", Component.options)
+  } else {
+    hotAPI.reload("data-v-629bad7b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 189 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    postid: {
+      default: null
+    }
+  },
+  data: function data() {
+    return {
+      post: {
+        title: '',
+        permalink: '',
+        body: '',
+        expert: '',
+        status: '',
+        cover_image: '',
+        category_id: null
+      },
+      categories: [],
+      action: this.postid ? '/admin/posts/edit/' + this.postid : '/admin/posts/store'
+    };
+  },
+
+  methods: {
+    titleAction: function titleAction() {
+
+      if (!this.postid) {
+        var title = event.target.value;
+
+        this.post.permalink = title.toLowerCase().split(' ').join('-');
+
+        this.post.expert = title;
+      }
+    },
+    getCategories: function getCategories() {
+      var _this = this;
+
+      axios.get('/admin/post-categories/all', {}).then(function (response) {
+        _this.categories = response.data;
+      });
+    },
+    save: function save(status) {
+
+      var form = $('#post-form');
+      var postData = form.serialize();
+
+      postDat += status === 'publish' ? '&status=1' : '&status=0';
+    },
+    newCategory: function newCategory() {}
+  },
+  mounted: function mounted() {
+    this.getCategories();
+  }
+});
+
+/***/ }),
+/* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              role: "form",
+              action: _vm.action,
+              enctype: "multipart/form-data",
+              method: "post",
+              id: "post-form"
+            }
+          },
+          [
+            _c("div", { staticClass: "col-md-9" }, [
+              _c("div", { staticClass: "box box-primary" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { "data-group": "title" }
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.post.title,
+                            expression: "post.title"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "title",
+                          id: "title",
+                          placeholder: "Title"
+                        },
+                        domProps: { value: _vm.post.title },
+                        on: {
+                          keyup: _vm.titleAction,
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.post, "title", $event.target.value)
+                          }
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { "data-group": "permalink" }
+                    },
+                    [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "permalink",
+                          id: "permalink",
+                          placeholder: "permalink"
+                        },
+                        domProps: { value: _vm.post.permalink }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { "data-group": "body" }
+                    },
+                    [
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        staticStyle: { height: "300px" },
+                        attrs: { id: "body", name: "body" },
+                        domProps: { value: _vm.post.body }
+                      })
+                    ]
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "box box-solid" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-body" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-success btn-block",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.save("publish")
+                        }
+                      }
+                    },
+                    [_vm._v("Publish")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary btn-block",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          _vm.save("draft")
+                        }
+                      }
+                    },
+                    [_vm._v("Draft")]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "box box-solid" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "category_id", id: "category_id" }
+                      },
+                      _vm._l(_vm.categories, function(category) {
+                        return _c(
+                          "option",
+                          {
+                            key: category.id,
+                            domProps: { value: category.id }
+                          },
+                          [_vm._v(_vm._s(category.name))]
+                        )
+                      })
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-xs-3 no-padding" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-square btn-block btn-primary",
+                          staticStyle: {
+                            "border-top-left-radius": "0",
+                            "border-bottom-left-radius": "0"
+                          },
+                          attrs: { type: "button", "data-widget": "collapse" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-plus",
+                            on: { click: _vm.newCategory }
+                          })
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "box box-solid" }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-body" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { "data-group": "expert" }
+                    },
+                    [
+                      _c("textarea", {
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "expert",
+                          id: "expert",
+                          rows: "3",
+                          placeholder: "Enter ..."
+                        },
+                        domProps: { value: _vm.post.expert }
+                      })
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content-header" }, [
+      _c("h1", [_vm._v("New Post")]),
+      _vm._v(" "),
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-dashboard" }),
+            _vm._v(" Dashboard")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", [_c("a", { attrs: { href: "#" } }, [_vm._v("Post")])]),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("New Post")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("New Post")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Status")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-box-tool",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Category")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-box-tool",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-9 no-padding" }, [
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          name: "category_name",
+          placeholder: "Enter New Categorie"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box box-solid" }, [
+      _c("div", { staticClass: "box-header with-border" }, [
+        _c("h3", { staticClass: "box-title" }, [_vm._v("Cover Image")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-tools" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-box-tool",
+              attrs: { type: "button", "data-widget": "collapse" }
+            },
+            [_c("i", { staticClass: "fa fa-minus" })]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-body" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "cover_image" } }, [
+            _vm._v("File input")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "file", id: "cover_image", name: "cover_image" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Expert")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-box-tool",
+            attrs: { type: "button", "data-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fa fa-minus" })]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-629bad7b", module.exports)
   }
 }
 

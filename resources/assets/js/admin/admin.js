@@ -30,6 +30,7 @@ import EventMessages from './components/EventMessages.vue'
 import Media from './components/Media.vue'
 import ClinicsList from './components/ClinicsList.vue'
 import PostCategories from './components/PostCategories.vue'
+import PostForm from './components/PostForm.vue'
 
 let adminVue = new Vue({
     el: '#admin-app',
@@ -40,7 +41,8 @@ let adminVue = new Vue({
         adminModal: Modal,
         adminAlerts: EventMessages,
         adminClinicsList: ClinicsList,
-        adminPostCategories: PostCategories
+        adminPostCategories: PostCategories,
+        adminPostForm: PostForm
     },
     methods: {
         notWorking(day){

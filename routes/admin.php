@@ -53,6 +53,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     // Post
     Route::get('post', 'PostController@index')->name('post');
     Route::get('post/create', 'PostController@create');
+    Route::get('post/edit/{id}', 'PostController@edit');
+    Route::post('post/store', 'PostController@store');
+    Route::post('post/update/{id}', 'PostController@update');
 
     // Post Categories
     Route::get('post-categories', 'PostCategoryController@index')->name('post-categories');

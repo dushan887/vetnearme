@@ -31,7 +31,7 @@ class PostCategoryController extends Controller
     public function create()
     {
         return response()
-            ->json(view('services/partials/_createForm')->render());
+            ->json(view('postCategories/partials/_createForm')->render());
     }
 
     /**
@@ -43,13 +43,13 @@ class PostCategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|unique:postCategories|min:3|max:255',
+            'name' => 'required|unique:post_categories|min:3|max:255',
         ]);
 
         $category = PostCategory::create($data);
 
         return response()->json([
-            'service'      => $service,
+            'category'     => $category,
             'messageTitle' => 'Post Category Created',
             'messageText'  => 'The post category has been created',
             'class'        => 'success'
@@ -71,8 +71,8 @@ class PostCategoryController extends Controller
     public function edit(int $id)
     {
         return response()
-            ->json(view('post-categories/partials/_editForm', [
-                'service' => Service::find($id),
+            ->json(view('postCategories/partials/_editForm', [
+                'category' => PostCategory::find($id),
             ])->render());
     }
 
@@ -88,13 +88,13 @@ class PostCategoryController extends Controller
         $category = PostCategory::find($id);
 
         $data = $request->validate([
-            'name' => 'required|min:3|max:255|unique:services,name,' . $category->id,
+            'name' => 'required|min:3|max:255|unique:post_categories,name,' . $category->id,
         ]);
 
         $category->update($data);
 
         return response()->json([
-            'service'      => $category,
+            'category'      => $category,
             'messageTitle' => 'Service Updated',
             'messageText'  => 'The service has been updated',
             'class'        => 'success'
@@ -104,11 +104,22 @@ class PostCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PostCategory  $postCategory
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PostCategory $postCategory)
+    public function destroy(int $id)
     {
-        //
+        if(PostCategory::destroy($id))
+            return response()->json([
+                'messageTitle' => 'Service Deleted',
+                'messageText'  => 'The service has been deleted',
+                'class'        => 'success'
+            ]);
+
+         return response()->json([
+                'messageTitle' => 'Alert',
+                'messageText'  => '',
+                'class'        => 'error'
+            ]);
     }
 }

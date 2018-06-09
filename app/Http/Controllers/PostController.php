@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\PostCategory;
+use App\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('checkRole:super_admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,12 +37,12 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param App\Requests\PostStoreRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        //
+        $data = $request->validated();
     }
 
     /**
