@@ -37,11 +37,15 @@
                 </div>
 
                 <div class="form-group" data-group=permalink>
-                  <input class="form-control" name=permalink id="permalink" placeholder="permalink" :value=post.permalink>
+                  <input class="form-control" name=permalink id="permalink"
+                  placeholder="permalink"
+                  v-model=post.permalink>
                 </div>
 
                 <div class="form-group" data-group=body>
-                  <textarea id="body" name="body" class="form-control" style="height: 300px" :value=post.body></textarea>
+                  <textarea id="body" name="body" class="form-control"
+                  style="height: 300px"
+                   v-model=post.body></textarea>
                 </div>
 
               </div>
@@ -214,10 +218,30 @@ export default {
     },
     save(status){
 
-      let form     = $('#post-form')
-      let postData = form.serialize()
+      let postData = new FormData()
+      let cover = document.getElementById("cover_image")
 
-      postDat += status === 'publish' ? '&status=1' : '&status=0'
+      postData.set('title', this.post.title)
+      postData.set('permalink', this.post.permalink)
+      postData.set('body', this.post.body)
+      postData.set('expert', this.post.expert)
+      postData.set('status', status === 'publish' ? 1 : 0)
+      postData.set('category_id', $('#category_id').val())
+      postData.append("cover_image", cover_image.files[0])
+
+      axios(this.action, postData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+      })
+      .then(function (response) {
+          //handle success
+          console.log(response);
+      })
+      .catch(function (response) {
+          //handle error
+          console.log(response);
+      });
 
     },
     newCategory(){

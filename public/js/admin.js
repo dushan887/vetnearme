@@ -19131,6 +19131,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -19174,10 +19178,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     save: function save(status) {
 
-      var form = $('#post-form');
-      var postData = form.serialize();
+      var postData = new FormData();
+      var cover = document.getElementById("cover_image");
 
-      postDat += status === 'publish' ? '&status=1' : '&status=0';
+      postData.set('title', this.post.title);
+      postData.set('permalink', this.post.permalink);
+      postData.set('body', this.post.body);
+      postData.set('expert', this.post.expert);
+      postData.set('status', status === 'publish' ? 1 : 0);
+      postData.set('category_id', $('#category_id').val());
+      postData.append("cover_image", cover_image.files[0]);
+
+      axios(this.action, postData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        //handle success
+        console.log(response);
+      }).catch(function (response) {
+        //handle error
+        console.log(response);
+      });
     },
     newCategory: function newCategory() {}
   },
@@ -19260,13 +19282,29 @@ var render = function() {
                     },
                     [
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.post.permalink,
+                            expression: "post.permalink"
+                          }
+                        ],
                         staticClass: "form-control",
                         attrs: {
                           name: "permalink",
                           id: "permalink",
                           placeholder: "permalink"
                         },
-                        domProps: { value: _vm.post.permalink }
+                        domProps: { value: _vm.post.permalink },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.post, "permalink", $event.target.value)
+                          }
+                        }
                       })
                     ]
                   ),
@@ -19279,10 +19317,26 @@ var render = function() {
                     },
                     [
                       _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.post.body,
+                            expression: "post.body"
+                          }
+                        ],
                         staticClass: "form-control",
                         staticStyle: { height: "300px" },
                         attrs: { id: "body", name: "body" },
-                        domProps: { value: _vm.post.body }
+                        domProps: { value: _vm.post.body },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.post, "body", $event.target.value)
+                          }
+                        }
                       })
                     ]
                   )
