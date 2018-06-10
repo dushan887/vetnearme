@@ -25,7 +25,8 @@
 				</div>
 				<div
 					id="content"
-					data-coordinates="{{ $coordinates }}">
+					data-coordinates="{{ $coordinates }}"
+					data-usercoordinates="{{ $userCoordinates }}">
 					@include('Front.results.partials.content')
 				</div>
 				<div id="sidebar" class="bg-main-color2">
@@ -46,11 +47,11 @@
 		let autocomplete = new google.maps.places.Autocomplete(input);
 	}
 
-	{{--  This will be changed once we have fully working geolocation  --}}
-	let myLatlng    = new google.maps.LatLng(-33.829326,151.230331)
+	let content = $('#content')
+	let coordinates     = content.data('coordinates')
+	let userCoordinates = content.data('usercoordinates')
 
-	let coordinates = $('#content').data('coordinates')
-
+	let myLatlng = new google.maps.LatLng(userCoordinates.lat,userCoordinates.lng)
 
       function CustomMarker(latlng, map, args) {
 			this.latlng = latlng;

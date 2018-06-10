@@ -20,4 +20,20 @@ class Geolocation
 
         return $response;
     }
+
+    /**
+     * Try to guess the coordinates based on input provided by the user
+     *
+     * @param string $address
+     * @return coordinates
+     */
+    public static function guessCoordinates(string $address)
+    {
+        $response = \Geocode::make()->address($address);
+
+        if(!$response)
+            return null;
+
+        return $response;
+    }
 }

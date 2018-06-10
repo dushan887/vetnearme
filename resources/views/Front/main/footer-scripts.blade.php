@@ -20,11 +20,7 @@
 			$('body').removeClass('search-in');
 		}
 	})
-	$('#search .submit').on('click', function(e) {
-		e.preventDefault();
-		window.location.href='/'; 
 
-	})
 	$('#f-option1').on('change', function() {
 		if ($(this).prop('checked')) {
 			$('#address-input').attr('placeholder', 'Enter suburb, town, city or postcode');

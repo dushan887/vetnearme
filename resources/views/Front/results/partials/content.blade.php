@@ -2,14 +2,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-9">
-				<div><span class="resaults-found main-color">546 found</span> <span>nearby for search for</span> <span class="search-input">Vet Clinic in Greater Sydney, NSW</span></div>
+				<div><span class="resaults-found main-color">{{ $clinics->total() }}</span> <span>nearby for search for</span> <span class="search-input">{{ $address }}</span></div>
 			</div>
 			<div class="col-3" style="text-align: right;"><span>
 				<?php
 					$showing = 33;
 
 					if($clinics->currentPage() === 1):
-						$showing = "1 - " . $clinics->perPage();
+						$to = $clinics->perPage() >= $clinics->total() ? $clinics->total() :$clinics->perPage();
+
+						$showing = "1 - {$to}" ;
 					else:
 						$from    = ($clinics->currentPage() * $clinics->perPage()) - 1;
 						$to      = ($from + $clinics->perPage()) - 1;
@@ -29,20 +31,20 @@
 						<li><i class="fa fa-filter" style="font-size: 20px;"></i></li>
 						<li id="distance-filter" class="select">
 							<span>Distance</span>
-							<select>
-								<option value="">10km</option>
-								<option value="">20km</option>
-								<option value="">30km</option>
-								<option value="">50km</option>
-								<option value="">100km</option>
-								<option value="">Show All</option>
+							<select name="radius" id="radius">
+								<option value="10">10km</option>
+								<option value="20">20km</option>
+								<option value="30">30km</option>
+								<option value="40">50km</option>
+								<option value="50">100km</option>
+								<option value="60">Show All</option>
 							</select>
 						</li>
 						<li id="open-hours-filter" class="select">
 							<span>Open Clinics</span>
 							<select>
-								<option value="">Open Now</option>
-								<option value="">Closed</option>
+								<option value="open">Open Now</option>
+								<option value="closed">Closed</option>
 							</select>
 						</li>
 					</ul>
@@ -81,7 +83,7 @@
 									<div class="resault-address">
 										<span>{{ $clinic->address }}</span><br />
 										<span>{{ $clinic->city }}</span><br />
-										<span>{{ $clinic->country->name . " " . $clinic->zip }}</span><br />
+										<span>{{ $clinic->country . " " . $clinic->zip }}</span><br />
 									</div>
 								</div>
 								<div class="border-separator space-12"></div>

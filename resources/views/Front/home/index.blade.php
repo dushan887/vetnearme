@@ -14,10 +14,10 @@
 		@include('Front.main.header')
 	</header>
 
-	<div id="wrapper">		
-		
+	<div id="wrapper">
+
 		@include('Front.home.partials.banner')
- 
+
 		<div class="container page-content">
 			<div class="row">
 				<div class="col col-100">
@@ -25,7 +25,7 @@
 			</div>
 			<div id="content">
 			</div>
-			<div id="sidebar" class="bg-main-color2">
+				<div id="sidebar" class="bg-main-color2">
 			</div>
 		</div>
 	</div>
@@ -34,11 +34,6 @@
 	</footer>
 @stop
 
-
-
-
-
-	
 @section('AditionalFoot')
 
 @stop
