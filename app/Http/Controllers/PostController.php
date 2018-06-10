@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\ModelQueries\PostQuery;
 use App\PostCategory;
-use App\Requests\PostStoreRequest;
+use App\Http\Requests\PostStoreRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -42,7 +43,13 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
+        // dd($request->all());
         $data = $request->validated();
+
+        $model = new PostQuery;
+
+        if($model->store($data, $request))
+            return redirect()->route('posts');
     }
 
     /**

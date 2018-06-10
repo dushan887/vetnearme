@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostStoreRequest extends FormRequest
 {
@@ -24,7 +25,12 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:posts|min:3|max:255',
+            'title'       => 'required|unique:posts|min:3|max:255',
+            'permalink'   => 'required|unique:posts|min:3|max:255',
+            'body'        => 'required|string',
+            'expert'      => 'required|string',
+            'status'      => [Rule::in([0, 1])],
+            'category_id' => 'required|integer'
         ];
     }
 }

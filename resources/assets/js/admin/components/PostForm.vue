@@ -104,15 +104,20 @@
                 </select>
               </div>
 
-              <div class="form-group">
+              <div class="form-group" data-group=name>
 
                 <div class="col-xs-9 no-padding">
-                  <input type="text" name="category_name" class="form-control" placeholder="Enter New Categorie">
+                  <input type="text"
+                    name="category_name"
+                    id=category_name
+                    class="form-control"
+                    placeholder="Enter New Categorie">
                 </div>
 
                 <div class="col-xs-3 no-padding">
-                  <button type="button" class="btn btn-square btn-block btn-primary"
-                  data-widget="collapse"
+                  <button type="button"
+                  class="btn btn-square btn-block btn-primary"
+                  @click="newCategory"
                   style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
                     <i class="fa fa-plus"
                     @click="newCategory"></i>
@@ -196,7 +201,8 @@ export default {
             category_id: null,
           },
           categories:[],
-          action: this.postid ? '/admin/posts/edit/' + this.postid : '/admin/posts/store'
+          action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store',
+          form: $('#post-form')
       }
   },
   methods: {
@@ -219,7 +225,7 @@ export default {
     save(status){
 
       let postData = new FormData()
-      let cover = document.getElementById("cover_image")
+      let cover    = document.getElementById("cover_image")
 
       postData.set('title', this.post.title)
       postData.set('permalink', this.post.permalink)
@@ -229,22 +235,43 @@ export default {
       postData.set('category_id', $('#category_id').val())
       postData.append("cover_image", cover_image.files[0])
 
-      axios(this.action, postData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-      })
+      axios.post(this.action, postData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+     })
       .then(function (response) {
           //handle success
           console.log(response);
       })
-      .catch(function (response) {
-          //handle error
-          console.log(response);
+      .catch(function (error) {
+          Event.$emit('form:errors:show', this.form, error.response.data.errors)
       });
 
     },
     newCategory(){
+
+      let categoryName = $('#category_name').val()
+
+      axios.post('/admin/post-categories/store', {
+          name: categoryName
+      })
+      .then((response) => {
+
+        let data = response.data
+
+        this.categories.unshift({id : data.category.id, name : data.category.name})
+
+        $('#category_name').val('')
+
+        Event.$emit('message:show', {
+                        messageTitle: data.messageTitle,
+                        messageText:  data.messageText
+                }, data.class)
+      })
+      .catch((error) => {
+          Event.$emit('form:errors:show', this.form, error.response.data.errors)
+      })
 
     }
   },

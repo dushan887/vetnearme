@@ -16509,7 +16509,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue__);
 
 
@@ -18899,20 +18899,15 @@ if (false) {
 }
 
 /***/ }),
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(189)
+var __vue_script__ = __webpack_require__(184)
 /* template */
-var __vue_template__ = __webpack_require__(190)
+var __vue_template__ = __webpack_require__(185)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -18951,11 +18946,16 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 189 */
+/* 184 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -19154,7 +19154,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         category_id: null
       },
       categories: [],
-      action: this.postid ? '/admin/posts/edit/' + this.postid : '/admin/posts/store'
+      action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store',
+      form: $('#post-form')
     };
   },
 
@@ -19189,19 +19190,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       postData.set('category_id', $('#category_id').val());
       postData.append("cover_image", cover_image.files[0]);
 
-      axios(this.action, postData, {
+      axios.post(this.action, postData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
         //handle success
         console.log(response);
-      }).catch(function (response) {
-        //handle error
-        console.log(response);
+      }).catch(function (error) {
+        Event.$emit('form:errors:show', this.form, error.response.data.errors);
       });
     },
-    newCategory: function newCategory() {}
+    newCategory: function newCategory() {
+      var _this2 = this;
+
+      var categoryName = $('#category_name').val();
+
+      axios.post('/admin/post-categories/store', {
+        name: categoryName
+      }).then(function (response) {
+
+        var data = response.data;
+
+        _this2.categories.unshift({ id: data.category.id, name: data.category.name });
+
+        $('#category_name').val('');
+
+        Event.$emit('message:show', {
+          messageTitle: data.messageTitle,
+          messageText: data.messageText
+        }, data.class);
+      }).catch(function (error) {
+        Event.$emit('form:errors:show', _this2.form, error.response.data.errors);
+      });
+    }
   },
   mounted: function mounted() {
     this.getCategories();
@@ -19209,7 +19231,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 190 */
+/* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -19403,29 +19425,37 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-xs-3 no-padding" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-square btn-block btn-primary",
-                          staticStyle: {
-                            "border-top-left-radius": "0",
-                            "border-bottom-left-radius": "0"
-                          },
-                          attrs: { type: "button", "data-widget": "collapse" }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-plus",
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { "data-group": "name" }
+                    },
+                    [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-xs-3 no-padding" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-square btn-block btn-primary",
+                            staticStyle: {
+                              "border-top-left-radius": "0",
+                              "border-bottom-left-radius": "0"
+                            },
+                            attrs: { type: "button" },
                             on: { click: _vm.newCategory }
-                          })
-                        ]
-                      )
-                    ])
-                  ])
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fa fa-plus",
+                              on: { click: _vm.newCategory }
+                            })
+                          ]
+                        )
+                      ])
+                    ]
+                  )
                 ])
               ]),
               _vm._v(" "),
@@ -19541,6 +19571,7 @@ var staticRenderFns = [
         attrs: {
           type: "text",
           name: "category_name",
+          id: "category_name",
           placeholder: "Enter New Categorie"
         }
       })
