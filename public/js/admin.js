@@ -19154,8 +19154,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         category_id: null
       },
       categories: [],
-      action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store',
-      form: $('#post-form')
+      action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store'
     };
   },
 
@@ -19181,6 +19180,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var postData = new FormData();
       var cover = document.getElementById("cover_image");
+      var form = $('#post-form');
 
       postData.set('title', this.post.title);
       postData.set('permalink', this.post.permalink);
@@ -19195,16 +19195,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        //handle success
-        console.log(response);
+        window.location.href = "/admin/posts";
       }).catch(function (error) {
-        Event.$emit('form:errors:show', this.form, error.response.data.errors);
+        console.log(error);
+
+        Event.$emit('form:errors:show', form, error.response.data.errors);
       });
     },
     newCategory: function newCategory() {
       var _this2 = this;
 
       var categoryName = $('#category_name').val();
+      var form = $('#post-form');
 
       axios.post('/admin/post-categories/store', {
         name: categoryName
@@ -19221,7 +19223,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           messageText: data.messageText
         }, data.class);
       }).catch(function (error) {
-        Event.$emit('form:errors:show', _this2.form, error.response.data.errors);
+        Event.$emit('form:errors:show', form, error.response.data.errors);
       });
     }
   },

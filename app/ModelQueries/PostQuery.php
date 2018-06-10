@@ -24,7 +24,7 @@ class PostQuery extends Post
         if($request->hasFile('cover_image'))
             $data['cover_image'] = $this->uploadCover($request->file('cover_image'), $data['title']);
 
-        dd($data);
+        $data['user_id'] = \Auth::id();
 
         $model = (new Post())->create($data);
 

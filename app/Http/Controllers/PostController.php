@@ -49,7 +49,10 @@ class PostController extends Controller
         $model = new PostQuery;
 
         if($model->store($data, $request))
-            return redirect()->route('posts');
+            return redirect()->route('posts')->with('alert', [
+                'message' => 'Post successfully created',
+                'type'    => 'success'
+            ]);
     }
 
     /**
@@ -66,12 +69,14 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param  integer $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(int $id)
     {
-        //
+        return view('post/edit', [
+            'id' => $id
+        ]);
     }
 
     /**

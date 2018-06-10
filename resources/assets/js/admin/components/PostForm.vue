@@ -202,7 +202,6 @@ export default {
           },
           categories:[],
           action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store',
-          form: $('#post-form')
       }
   },
   methods: {
@@ -226,6 +225,7 @@ export default {
 
       let postData = new FormData()
       let cover    = document.getElementById("cover_image")
+      let form     = $('#post-form')
 
       postData.set('title', this.post.title)
       postData.set('permalink', this.post.permalink)
@@ -241,17 +241,19 @@ export default {
         }
      })
       .then(function (response) {
-          //handle success
-          console.log(response);
+          window.location.href = "/admin/posts"
       })
       .catch(function (error) {
-          Event.$emit('form:errors:show', this.form, error.response.data.errors)
+        console.log(error);
+
+          Event.$emit('form:errors:show', form, error.response.data.errors)
       });
 
     },
     newCategory(){
 
       let categoryName = $('#category_name').val()
+      let form         = $('#post-form')
 
       axios.post('/admin/post-categories/store', {
           name: categoryName
@@ -270,7 +272,7 @@ export default {
                 }, data.class)
       })
       .catch((error) => {
-          Event.$emit('form:errors:show', this.form, error.response.data.errors)
+          Event.$emit('form:errors:show', form, error.response.data.errors)
       })
 
     }

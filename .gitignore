@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/avatars
+/public/postsCover
 /public/img/logo
 /storage/*.key
 /vendor
