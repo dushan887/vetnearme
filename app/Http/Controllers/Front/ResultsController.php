@@ -65,10 +65,10 @@ class ResultsController extends Controller {
         $category = XSS::clean($request->input('selector-category'));
 
         if($category === 'general')
-            $whereCategory = " WHERE clinics.general_practice = 1 ";
+            $whereCategory = " AND clinics.general_practice = 1 ";
 
         if($category === 'specialist')
-            $whereCategory = " WHERE clinics.specialist_and_emergency = 1 ";
+            $whereCategory = " AND clinics.specialist_and_emergency = 1 ";
 
         $lat = $coordinates->latitude();
         $lng = $coordinates->longitude();
@@ -77,52 +77,67 @@ class ResultsController extends Controller {
 
         if(!$services):
 
-            $clinics =  \DB::select('SELECT * FROM
-                (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
-                clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
-                clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
-                countries.full_name AS country,
-                (' . $radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *
-                cos(radians(lng) - radians(' . $lng . ')) +
-                sin(radians(' . $lat . ')) * sin(radians(lat))))
-                AS distance
-                FROM clinics
-                JOIN countries ON countries.id = clinics.country_id
-                ' . $whereCategory . '
-                ) AS distances
-            WHERE distance < ' . $radius . '
-            ORDER BY distance');
+            // $clinics =  \DB::select('SELECT * FROM
+            //     (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
+            //     clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
+            //     clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
+            //     countries.full_name AS country,
+            //     (' .  $radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *
+            //     cos(radians(lng) - radians(' . $lng . ')) +
+            //     sin(radians(' . $lat . ')) * sin(radians(lat))))
+            //     AS distance
+            //     FROM clinics
+            //     JOIN countries ON countries.id = clinics.country_id
+            //     ' . $whereCategory . '
+            //     ) AS distances
+            // WHERE distance < ' . $radius. '
+            // ORDER BY distance DESC');
+
+            $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
+                    FROM clinics
+                    JOIN countries ON countries.id = clinics.country_id
+                    WHERE
+                    lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
+                    lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010))
+                    {$whereCategory}");
 
         else:
 
             $whereServices = [];
 
             foreach ($services as $service) {
-                $whereServices[] = " clinics_services.service_id = {$service} ";
+                $whereServices[] = " AND clinics_services.service_id = {$service} ";
             }
 
-            $whereServices = implode(' AND ', $whereServices);
+            $whereServices = implode(' ', $whereServices);
 
-            if($whereCategory != "")
-                $whereCategory = str_replace("AND", '', $whereCategory);
+             $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
+                    FROM clinics
+                    JOIN countries ON countries.id = clinics.country_id
+                    JOIN clinics_services ON clinics.id = clinics_services.clinic_id
+                    WHERE
+                    lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
+                    lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010))
+                    {$whereCategory}
+                    {$whereServices}");
 
-            $clinics =  \DB::select('SELECT * FROM
-                (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
-                clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
-                clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
-                countries.full_name AS country,
-                (' . $radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *
-                cos(radians(lng) - radians(' . $lng . ')) +
-                sin(radians(' . $lat . ')) * sin(radians(lat))))
-                AS distance
-                FROM clinics
-                JOIN countries ON countries.id = clinics.country_id
-                JOIN clinics_services ON clinic.id = clinics_services.clinic_id
-                WHERE ' . $whereServices . '
-                ' . $whereCategory . '
-                ) AS distances
-            WHERE distance < ' . $radius . '
-            ORDER BY distance');
+            // $clinics =  \DB::select('SELECT * FROM
+            //     (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
+            //     clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
+            //     clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
+            //     countries.full_name AS country,
+            //     (' . $radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *
+            //     cos(radians(lng) - radians(' . $lng . ')) +
+            //     sin(radians(' . $lat . ')) * sin(radians(lat))))
+            //     AS distance
+            //     FROM clinics
+            //     JOIN countries ON countries.id = clinics.country_id
+            //     JOIN clinics_services ON clinic.id = clinics_services.clinic_id
+            //     WHERE ' . $whereServices . '
+            //     ' . $whereCategory . '
+            //     ) AS distances
+            // WHERE distance < ' . $radius . '
+            // ORDER BY distance');
 
         endif;
 
