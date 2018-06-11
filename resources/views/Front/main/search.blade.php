@@ -10,25 +10,39 @@
 				name="address-input"
 				class="border-main-color"
 				type="text"
+				value="{{ $address ?? '' }}"
 				placeholder="Enter suburb, town, city or postcode" />
 			<div class="search-category raido-checkbox radio">
 				<ul class="list-unstyled">
 				  <li>
-				    <input type="radio" id="f-option" name="selector-category" checked value="all">
+					<input
+						type="radio"
+						id="f-option"
+						name="selector-category"
+						value="all"
+						@if($category === 'all')
+							checked="checked"
+						@endif>
 				    <label for="f-option">All</label>
 
 				    <div class="check"></div>
 				  </li>
 
 				  <li>
-				    <input type="radio" id="s-option" name="selector-category" value="general">
+					<input type="radio" id="s-option" name="selector-category" value="general"
+						@if($category === 'general')
+							checked="checked"
+						@endif>
 				    <label for="s-option">General practice</label>
 
 				    <div class="check"><div class="inside"></div></div>
 				  </li>
 
 				  <li>
-				    <input type="radio" id="t-option" name="selector-category" value="specialist">
+					<input type="radio" id="t-option" name="selector-category" value="specialist"
+						@if($category === 'specialist')
+							checked="checked"
+						@endif>
 				    <label for="t-option">Specialist and Emergency </label>
 
 				    <div class="check"><div class="inside"></div></div>
@@ -44,7 +58,10 @@
 			<div class="raido-checkbox advanced-search">
 				<ul class="list-unstyled">
 				  <li>
-				    <input type="checkbox" id="advanced-search">
+					<input type="checkbox" id="advanced-search" name=advanced-search value="search"
+					@if($advancedSearch)
+						checked="checked"
+					@endif>
 				    <label for="advanced-search">Advanced Search</label>
 
 				    <div class="check"></div>
@@ -66,7 +83,14 @@
 
 					@foreach($services as $service)
 						<div class="button-container">
-							<input type="checkbox" id="s-{{ $service->name }}" name="services[]" value="{{ $service->id }}">
+							<input
+								type="checkbox"
+								id="s-{{ $service->name }}"
+								name="services[]"
+								value="{{ $service->id }}"
+								@if(in_array($service->id, $selectedServices))
+									checked=checked
+								@endif>
 							<label for="s-{{ $service->name }}">{{ $service->name }}</label>
 							<div class="checked">
 								<div class="inside"></div>

@@ -24,6 +24,7 @@ class ResultsController extends Controller {
         $coordinates = Geolocation::guessCoordinates($address);
 
         $clinics = $this->getClinics($request, $address, $coordinates);
+        $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
 
         $clinicsCoordinates = [];
 
@@ -34,14 +35,33 @@ class ResultsController extends Controller {
             ];
         }
 
+        if($request->ajax()){
+            return response()
+                    ->json([
+                        'page' => view('Front.results.partials.content', [
+                            'clinics'            => $clinics,
+                            'clinicsCoordinates' => $clinicsCoordinates,
+                            'userCoordinates'    => $userCoordinates,
+                            'address'            => $address,
+                            'currentDay'         => strtolower(date('l')),
+                            'currentHour'        => date('H:i:s'),
+                        ])->render()
+                    ]);
+
+        }
+
         return view('Front.results.index',[
-            'clinics'         => $clinics,
-            'coordinates'     => json_encode($clinicsCoordinates),
-            'currentDay'      => strtolower(date('l')),
-            'currentHour'     => date('H:i:s'),
-            'address'         => $address,
-            'userCoordinates' => json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]),
-            'services'        => Service::where('priority', '=', 1)->orderBy('count', 'desc')->get(),
+            'clinics'          => $clinics,
+            'coordinates'      => json_encode($clinicsCoordinates),
+            'currentDay'       => strtolower(date('l')),
+            'currentHour'      => date('H:i:s'),
+            'address'          => $address,
+            'userCoordinates'  => json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]),
+            'services'         => Service::where('priority', '=', 1)->orderBy('count', 'desc')->get(),
+            'advancedSearch'   => $request->input('advanced-search') && $request->input('advanced-search') === 'search'
+                ? true : false,
+            'selectedServices' => $request->input('services') ?? [],
+            'category'         => XSS::clean($request->input('selector-category'))
         ]);
     }
 
@@ -58,11 +78,28 @@ class ResultsController extends Controller {
     private function getClinics($request, $address, $coordinates)
     {
 
-        $radius = $request->input('radius') ? (int)  $request->input('radius') : 10;
+        $radius = $request->input('radius') ? $request->input('radius') : 10;
 
         $whereCategory = '';
 
         $category = XSS::clean($request->input('selector-category'));
+
+        $lat      = $coordinates->latitude();
+        $lng      = $coordinates->longitude();
+        $services = false;
+
+        if($request->input('advanced-search') && $request->input('advanced-search') === 'search')
+            $services = $request->input('services');
+
+        if($radius === 'all'){
+            $whereRadius = "";
+        } else {
+
+            $radius = (int) $radius;
+
+            $whereRadius =  " WHERE lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
+                lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010)) ";
+        }
 
         if($category === 'general')
             $whereCategory = " AND clinics.general_practice = 1 ";
@@ -70,10 +107,8 @@ class ResultsController extends Controller {
         if($category === 'specialist')
             $whereCategory = " AND clinics.specialist_and_emergency = 1 ";
 
-        $lat = $coordinates->latitude();
-        $lng = $coordinates->longitude();
-
-        $services = $request->input('services');
+        if($whereRadius === "")
+            $whereCategory = str_replace('AND', 'WHERE', $whereCategory);
 
         if(!$services):
 
@@ -96,9 +131,7 @@ class ResultsController extends Controller {
             $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
                     FROM clinics
                     JOIN countries ON countries.id = clinics.country_id
-                    WHERE
-                    lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
-                    lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010))
+                    {$whereRadius}
                     {$whereCategory}");
 
         else:
@@ -106,8 +139,12 @@ class ResultsController extends Controller {
             $whereServices = [];
 
             foreach ($services as $service) {
+                $service = (int) $service;
                 $whereServices[] = " AND clinics_services.service_id = {$service} ";
             }
+
+            if($whereRadius === "" && $whereCategory === "")
+                $whereServices[0] = str_replace('AND', 'WHERE', $whereServices[0]);
 
             $whereServices = implode(' ', $whereServices);
 
@@ -115,9 +152,7 @@ class ResultsController extends Controller {
                     FROM clinics
                     JOIN countries ON countries.id = clinics.country_id
                     JOIN clinics_services ON clinics.id = clinics_services.clinic_id
-                    WHERE
-                    lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
-                    lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010))
+                    {$whereRadius}
                     {$whereCategory}
                     {$whereServices}");
 

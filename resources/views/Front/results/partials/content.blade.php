@@ -37,7 +37,7 @@
 								<option value="30">30km</option>
 								<option value="40">50km</option>
 								<option value="50">100km</option>
-								<option value="60">Show All</option>
+								<option value="all">Show All</option>
 							</select>
 						</li>
 						<li id="open-hours-filter" class="select">
