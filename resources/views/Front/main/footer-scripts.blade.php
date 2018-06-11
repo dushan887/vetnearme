@@ -11,43 +11,11 @@
 	$('#menu-btn').click(function() {
 		$('body').toggleClass('nav-in');
 	});
-</script>
-
-<script type="text/javascript">
-
-	let advancedSearch = $('#advanced-search')
-
-	if(advancedSearch.prop('checked')){
-		$('body').addClass('search-in');
-	}
-
 	$('#advanced-search').on('change', function() {
 		if ($(this).prop('checked')) {
 			$('body').addClass('search-in');
 		} else {
 			$('body').removeClass('search-in');
-		}
-	})
-
-	$('#f-option1').on('change', function() {
-		if ($(this).prop('checked')) {
-			$('#address-input').attr('placeholder', 'Enter suburb, town, city or postcode');
-			$('#address-input').parent().removeClass('by-address').removeClass('by-name').removeClass('by-doctor');
-			$('#address-input').parent().addClass('by-address')
-		}
-	})
-	$('#s-option2').on('change', function() {
-		if ($(this).prop('checked')) {
-			$('#address-input').attr('placeholder', 'Enter clinics name');
-			$('#address-input').parent().removeClass('by-address').removeClass('by-name').removeClass('by-doctor');
-			$('#address-input').parent().addClass('by-name')
-		}
-	})
-	$('#t-option3').on('change', function() {
-		if ($(this).prop('checked')) {
-			$('#address-input').attr('placeholder', 'Enter doctors first or last name');
-			$('#address-input').parent().removeClass('by-address').removeClass('by-name').removeClass('by-doctor');
-			$('#address-input').parent().addClass('by-doctor')
 		}
 	})
 	function initMap() {
