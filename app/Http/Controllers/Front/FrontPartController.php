@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Front;
 
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,9 @@ class FrontPartController extends Controller {
      */
     public function index()
     {
-        return view('Front.home.index');
+        return view('Front.home.index',[
+            'services' => Service::where('priority', '=', 1)->orderBy('count', 'desc')->get(),
+        ]);
     }
 
 

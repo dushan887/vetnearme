@@ -13,7 +13,7 @@ class DropClinicImagesTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('clinics_services');
+        Schema::dropIfExists('clinics_images');
     }
 
     /**

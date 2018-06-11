@@ -64,77 +64,15 @@
 
 				<div class="form-field">
 
-					<div class="button-container">
-						<input type="checkbox" id="s-24-Hour-Service" name="template-type">
-						<label for="s-24-Hour-Service">24 Hour Service</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Puppy-Preschool" name="template-type">
-						<label for="s-Puppy-Preschool">Puppy Preschool</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Vaccination" name="template-type">
-						<label for="s-Vaccination">Vaccination</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Animal-Dentistry" name="template-type">
-						<label for="s-Animal-Dentistry">Animal Dentistry</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Dietary-advice" name="template-type">
-						<label for="s-Dietary-advice">Dietary advice</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Animal-Dentistry" name="template-type">
-						<label for="s-Animal-Dentistry">Animal Dentistry</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Surgical-Specialists" name="template-type">
-						<label for="s-Surgical-Specialists">Surgical Specialists</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-International-Travel" name="template-type">
-						<label for="s-International-Travel">International Travel</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Equine-Services" name="template-type">
-						<label for="s-Equine-Services">Equine Services</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Boarding" name="template-type">
-						<label for="s-Boarding">Boarding</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-House-Calls" name="template-type">
-						<label for="s-House-Calls">House Calls</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
-
-					<div class="button-container">
-						<input type="checkbox" id="s-Oncology" name="template-type">
-						<label for="s-Oncology">Oncology</label>
-						<div class="checked"><div class="inside"></div></div>
-					</div>
+					@foreach($services as $service)
+						<div class="button-container">
+							<input type="checkbox" id="s-{{ $service->name }}" name="services[]" value="{{ $service->id }}">
+							<label for="s-{{ $service->name }}">{{ $service->name }}</label>
+							<div class="checked">
+								<div class="inside"></div>
+							</div>
+						</div>
+					@endforeach
 
 				</div>
 
