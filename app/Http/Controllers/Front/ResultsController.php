@@ -38,14 +38,16 @@ class ResultsController extends Controller {
         if($request->ajax()){
             return response()
                     ->json([
-                        'page' => view('Front.results.partials.content', [
+                        'page' => view('Front.results.partials._clinics', [
                             'clinics'            => $clinics,
                             'clinicsCoordinates' => $clinicsCoordinates,
                             'userCoordinates'    => $userCoordinates,
                             'address'            => $address,
                             'currentDay'         => strtolower(date('l')),
-                            'currentHour'        => date('H:i:s'),
-                        ])->render()
+                            'currentHour'        => date('H:i:s')
+
+                        ])->render(),
+                        'total' => $clinics->total(),
                     ]);
 
         }

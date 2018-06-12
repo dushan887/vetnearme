@@ -42,7 +42,10 @@
 			data: data,
 			dataType: 'json',
 			success: (response) => {
-				$('#content').html(response.page)
+				$('.clinics-container').html(response.page)
+				$('.resaults-found').html(response.total)
+
+				window.history.pushState(null, null, data);
 			}
 		});
 
