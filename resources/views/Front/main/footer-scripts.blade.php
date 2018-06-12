@@ -36,17 +36,28 @@
 
 		let data  = $('#search').serialize() + '&radius=' + $('#radius').val() + '&working=' + $('#working').val()
 
-		$.ajax({
+		window.location.replace('/results?' + data)
+
+		{{-- $.ajax({
 			url: '/results',
 			data: data,
 			dataType: 'json',
 			success: (response) => {
+
 				$('.clinics-container').html(response.page)
 				$('.resaults-found').html(response.total)
+				$('.search-input').html(response.address)
 
-				window.history.pushState(null, null, '/results?' + data);
+				window.history.pushState(null, null, '/results?' + data)
+
+				let content         = $('#gmap-data')
+				let coordinates     = content.data('coordinates')
+				let userCoordinates = content.data('usercoordinates')
+
+				let count  = 1
+
 			}
-		});
+		}); --}}
 
 	})
 </script>

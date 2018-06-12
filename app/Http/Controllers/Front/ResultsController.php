@@ -42,14 +42,14 @@ class ResultsController extends Controller {
                     ->json([
                         'page' => view('Front.results.partials._clinics', [
                             'clinics'            => $clinics,
-                            'clinicsCoordinates' => $clinicsCoordinates,
+                            'clinicsCoordinates' => json_encode($clinicsCoordinates),
                             'userCoordinates'    => $userCoordinates,
-                            'address'            => $address,
                             'currentHour'        => $currentHour,
                             'currentDay'         => $currentDay,
 
                         ])->render(),
-                        'total' => $clinics->total(),
+                        'total'   => $clinics->total(),
+                        'address' => $address,
                     ]);
 
         }
@@ -60,7 +60,7 @@ class ResultsController extends Controller {
             'currentHour'      => $currentHour,
             'currentDay'       => $currentDay,
             'address'          => $address,
-            'userCoordinates'  => json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]),
+            'userCoordinates'  => $userCoordinates,
             'services'         => Service::where('priority', '=', 1)->orderBy('count', 'desc')->get(),
             'advancedSearch'   => $request->input('advanced-search') && $request->input('advanced-search') === 'search'
                 ? true : false,
@@ -153,8 +153,8 @@ class ResultsController extends Controller {
                 $whereServices[] = " AND clinics_services.service_id = {$service} ";
             }
 
-            if($whereRadius === "" && $whereCategory === "")
-                $whereServices[0] = str_replace('AND', 'WHERE', $whereServices[0]);
+            if($whereRadius === "")
+                $whereOpen = str_replace('AND', 'WHERE', $whereOpen);
 
             $whereServices = implode(' ', $whereServices);
 
@@ -163,6 +163,7 @@ class ResultsController extends Controller {
                     JOIN countries ON countries.id = clinics.country_id
                     JOIN clinics_services ON clinics.id = clinics_services.clinic_id
                     {$whereRadius}
+                    {$$whereOpen}
                     {$whereCategory}
                     {$whereServices}");
 

@@ -43,99 +43,99 @@
 <script type="text/javascript">
 
 	function initMap() {
-		let input = document.getElementById('address-input');
+		let input        = document.getElementById('address-input');
 		let autocomplete = new google.maps.places.Autocomplete(input);
 	}
 
-	let content = $('#content')
-	let coordinates     = content.data('coordinates')
+	let markers     	= []
+	let content     	= $('#content')
+	let coordinates 	= content.data('coordinates')
 	let userCoordinates = content.data('usercoordinates')
 
 	let myLatlng = new google.maps.LatLng(userCoordinates.lat,userCoordinates.lng)
 
-      function CustomMarker(latlng, map, args) {
-			this.latlng = latlng;
-			this.args = args;
-			this.setMap(map);
+	function CustomMarker(latlng, map, args) {
+		this.latlng = latlng;
+		this.args   = args;
+		this.setMap(map);
+	}
+
+	CustomMarker.prototype = new google.maps.OverlayView();
+
+	CustomMarker.prototype.draw = function() {
+
+		let self = this;
+
+		let div = this.div;
+
+		if (!div) {
+
+			div = this.div = document.createElement('div');
+
+			div.className = 'marker';
+
+			if (typeof(self.args.marker_id) !== 'undefined') {
+				div.dataset.marker_id = self.args.marker_id;
+			}
+
+			google.maps.event.addDomListener(div, "click", function(event) {
+				// alert('You clicked on a custom marker!');
+				google.maps.event.trigger(self, "click");
+			});
+
+			let panes = this.getPanes();
+			panes.overlayImage.appendChild(div);
 		}
 
-		CustomMarker.prototype = new google.maps.OverlayView();
+		let point = this.getProjection().fromLatLngToDivPixel(this.latlng);
 
-		CustomMarker.prototype.draw = function() {
+		if (point) {
+			div.style.left = (point.x - 15) + 'px';
+			div.style.top = (point.y - 15) + 'px';
+		}
+	};
 
-			let self = this;
+	CustomMarker.prototype.remove = function() {
+		if (this.div) {
+			this.div.parentNode.removeChild(this.div);
+			this.div = null;
+		}
+	};
 
-			let div = this.div;
+	CustomMarker.prototype.getPosition = function() {
+		return this.latlng;
+	};
 
-			if (!div) {
-
-				div = this.div = document.createElement('div');
-
-				div.className = 'marker';
-
-				if (typeof(self.args.marker_id) !== 'undefined') {
-					div.dataset.marker_id = self.args.marker_id;
-				}
-
-				google.maps.event.addDomListener(div, "click", function(event) {
-					// alert('You clicked on a custom marker!');
-					google.maps.event.trigger(self, "click");
-				});
-
-				let panes = this.getPanes();
-				panes.overlayImage.appendChild(div);
-			}
-
-			let point = this.getProjection().fromLatLngToDivPixel(this.latlng);
-
-			if (point) {
-				div.style.left = (point.x - 15) + 'px';
-				div.style.top = (point.y - 15) + 'px';
-			}
-		};
-
-		CustomMarker.prototype.remove = function() {
-			if (this.div) {
-				this.div.parentNode.removeChild(this.div);
-				this.div = null;
-			}
-		};
-
-		CustomMarker.prototype.getPosition = function() {
-			return this.latlng;
-		};
-
-      function initialize() {
-
+	function initialize() {
 
 		let mapOptions = {
-			zoom: 12,
+			zoom: 11,
 			center: myLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-	        zoomControl: true,
-	        disableDefaultUI: true,
-	        zoomControlOptions: {
-	            style: google.maps.ZoomControlStyle.DEFAULT,
-	        },
-	        disableDoubleClickZoom: true,
-	        mapTypeControl: false,
-	        mapTypeControlOptions: {
-	            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-	        },
-	        scaleControl: true,
-	        scrollwheel: false,
-	        streetViewControl: false,
-	        draggable : true,
-	        overviewMapControl: false,
+			zoomControl: true,
+			disableDefaultUI: true,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.DEFAULT,
+			},
+			disableDoubleClickZoom: true,
+			mapTypeControl: false,
+			mapTypeControlOptions: {
+				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+			},
+			scaleControl: true,
+			scrollwheel: false,
+			streetViewControl: false,
+			draggable : true,
+			overviewMapControl: false,
 			}
 
-		let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		let map = new google.maps.Map(document.getElementById('map'), mapOptions)
 
 		let count = 1;
 
 		for(coordinate in coordinates){
 
-			overlay = new CustomMarker (
+			let marker = new CustomMarker (
 				new google.maps.LatLng(coordinates[coordinate].lat ,coordinates[coordinate].lng),
 				map,
 				{
@@ -143,6 +143,8 @@
 				},
 			);
 			count ++
+
+			markers.push(marker)
 		}
 
 	}
