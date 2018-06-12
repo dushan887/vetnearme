@@ -32,10 +32,9 @@
 
 	// Get the clinics based on radius
 
-	$('body').on('change', '#radius', function(){
+	$('body').on('change', '#radius, #working', function(){
 
-		let $this = $(this)
-		let data  = $('#search').serialize() + '&radius=' + $this.val()
+		let data  = $('#search').serialize() + '&radius=' + $('#radius').val() + '&working=' + $('#working').val()
 
 		$.ajax({
 			url: '/results',
@@ -45,7 +44,7 @@
 				$('.clinics-container').html(response.page)
 				$('.resaults-found').html(response.total)
 
-				window.history.pushState(null, null, data);
+				window.history.pushState(null, null, '/results?' + data);
 			}
 		});
 

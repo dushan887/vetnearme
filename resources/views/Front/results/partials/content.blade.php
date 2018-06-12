@@ -41,7 +41,7 @@
 						</li>
 						<li id="open-hours-filter" class="select">
 							<span>Open Clinics</span>
-							<select>
+							<select name="working" id="working">
 								<option value="open">Open Now</option>
 								<option value="closed">Closed</option>
 							</select>

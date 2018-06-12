@@ -22,8 +22,10 @@ class ResultsController extends Controller {
     {
         $address     = XSS::clean($request->input('address-input'));
         $coordinates = Geolocation::guessCoordinates($address);
+        $currentHour = date('H:i:s');
+        $currentDay  = strtolower(date('l'));
 
-        $clinics = $this->getClinics($request, $address, $coordinates);
+        $clinics = $this->getClinics($request, $address, $coordinates, $currentDay);
         $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
 
         $clinicsCoordinates = [];
@@ -43,8 +45,8 @@ class ResultsController extends Controller {
                             'clinicsCoordinates' => $clinicsCoordinates,
                             'userCoordinates'    => $userCoordinates,
                             'address'            => $address,
-                            'currentDay'         => strtolower(date('l')),
-                            'currentHour'        => date('H:i:s')
+                            'currentHour'        => $currentHour,
+                            'currentDay'         => $currentDay,
 
                         ])->render(),
                         'total' => $clinics->total(),
@@ -55,8 +57,8 @@ class ResultsController extends Controller {
         return view('Front.results.index',[
             'clinics'          => $clinics,
             'coordinates'      => json_encode($clinicsCoordinates),
-            'currentDay'       => strtolower(date('l')),
-            'currentHour'      => date('H:i:s'),
+            'currentHour'      => $currentHour,
+            'currentDay'       => $currentDay,
             'address'          => $address,
             'userCoordinates'  => json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]),
             'services'         => Service::where('priority', '=', 1)->orderBy('count', 'desc')->get(),
@@ -77,7 +79,7 @@ class ResultsController extends Controller {
             ['path' => $request->url(), 'query' => $request->query()]);
     }
 
-    private function getClinics($request, $address, $coordinates)
+    private function getClinics($request, $address, $coordinates, $currentDay)
     {
 
         $radius = $request->input('radius') ? $request->input('radius') : 10;
@@ -102,6 +104,11 @@ class ResultsController extends Controller {
             $whereRadius =  " WHERE lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
                 lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010)) ";
         }
+
+        $isOpen = $request->input('working') !== null && $request->input('working') === 'closed' ?
+            '<' : '>';
+
+        $whereOpen = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
 
         if($category === 'general')
             $whereCategory = " AND clinics.general_practice = 1 ";
@@ -134,6 +141,7 @@ class ResultsController extends Controller {
                     FROM clinics
                     JOIN countries ON countries.id = clinics.country_id
                     {$whereRadius}
+                    {$whereOpen}
                     {$whereCategory}");
 
         else:
