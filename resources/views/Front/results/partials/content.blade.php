@@ -31,19 +31,28 @@
 						<li id="distance-filter" class="select">
 							<span>Distance</span>
 							<select name="radius" id="radius">
-								<option value="10">10km</option>
-								<option value="20">20km</option>
-								<option value="30">30km</option>
-								<option value="50">50km</option>
-								<option value="100">100km</option>
-								<option value="all">Show All</option>
+								@foreach($radius as $key => $value)
+									<option
+										value="{{ $key }}"
+										@if(isset($radiusSelected) && $radiusSelected == $key)
+											selected="selected"
+										@endif
+									>{{ $value }}</option>
+								@endforeach
 							</select>
 						</li>
 						<li id="open-hours-filter" class="select">
 							<span>Open Clinics</span>
 							<select name="working" id="working">
-								<option value="open">Open Now</option>
-								<option value="closed">Closed</option>
+								<option value="open"
+								@if($working === 'open')
+									selected="selected"
+								@endif
+								>Open Now</option>
+								<option value="closed"
+								@if($working === 'closed')
+									selected="selected"
+								@endif>Closed</option>
 							</select>
 						</li>
 					</ul>

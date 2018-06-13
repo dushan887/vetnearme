@@ -10,6 +10,7 @@ use App\Clinic;
 use App\Service;
 use App\Helpers\Geolocation;
 use App\Helpers\XSS;
+use App\Statics\Radius;
 
 class ResultsController extends Controller {
 
@@ -50,6 +51,8 @@ class ResultsController extends Controller {
                         ])->render(),
                         'total'   => $clinics->total(),
                         'address' => $address,
+                        'radius'  => $request->input('radius') ?? 10,
+                        'working' => $request->input('working') ?? 'open'
                     ]);
 
         }
@@ -65,7 +68,10 @@ class ResultsController extends Controller {
             'advancedSearch'   => $request->input('advanced-search') && $request->input('advanced-search') === 'search'
                 ? true : false,
             'selectedServices' => $request->input('services') ?? [],
-            'category'         => XSS::clean($request->input('selector-category'))
+            'category'         => XSS::clean($request->input('selector-category')),
+            'radius'           => Radius::get(),
+            'radiusSelected'   => $request->input('radius') ?? 10,
+            'working' => $request->input('working') ?? 'open'
         ]);
     }
 
