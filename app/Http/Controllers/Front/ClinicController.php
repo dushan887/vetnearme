@@ -18,7 +18,7 @@ class ClinicController extends Controller {
         // $clinic = \DB::table('clinics')
         //     ->whereRaw("LOWER(`name`) = '" . str_replace('_', ' ', $clinicName) . "'")->first();
 
-        $clinic = Clinic::where('name', '=', str_replace('_', ' ', $clinicName))->first();
+        $clinic = Clinic::whereRaw("LOWER(name) = ?", str_replace('_', ' ', $clinicName))->first();
 
         return view('Front.clinic.index', [
             'clinic' => $clinic,
