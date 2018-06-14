@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+<?php //dd($errors) ?>
 @section('content')
  <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -114,7 +114,7 @@
 
               <div class="active tab-pane" id="settings">
                 <form class="form-horizontal"
-                  action="/admin/users/update"
+                  action="/admin/users/update/@if(\Auth::user()->hasRole('super_admin')){{$id}}@endif"
                   method="post"
                   enctype="multipart/form-data"
                 >
@@ -124,7 +124,6 @@
 
                     <div class="col-sm-10">
                       <select id="title" name="title" class="form-control">
-                        <option value=null></option>
                         @foreach($titles as $key => $value)
                           <option
                             value="{{ $value }}"

@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::get('users/create', 'UsersController@create');
     Route::post('users/destroy/{id}', 'UsersController@destroy');
     Route::post('users/store', 'UsersController@store');
-    Route::post('users/update', 'UsersController@update');
+    Route::post('users/update/{id?}', 'UsersController@update');
 
     // CLINICS
     Route::get('clinics', 'ClinicsController@index')->name('clinics')->middleware('checkRole:super_admin');

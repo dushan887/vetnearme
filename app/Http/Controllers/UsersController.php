@@ -73,16 +73,17 @@ class UsersController extends Controller
             'user'   => $user,
             'social' => json_decode($user->social),
             'titles' => Titles::TITLES,
+            'id'     => $id,
         ]);
     }
 
-    public function update(UserUpdateRequest $request)
+    public function update(UserUpdateRequest $request, $id = null)
     {
         $validated = $request->validated();
 
         $model = new UserQuery;
 
-        if(!$model->updateUser(XSS::clean($validated, ['avatar']), $request))
+        if(!$model->updateUser(XSS::clean($validated, ['avatar']), $request, $id))
              Session::flash('alert', [
                 'message' => 'Something went wrong. Please try again',
                 'type'    => 'danger'

@@ -91,7 +91,7 @@ class UserQuery extends User
         $user->about              = $data['about'] ?? '';
         $user->social             = Strings::arrayToJson($data['social']);
 
-        if($user->hasRole('super_admin')){
+        if(\Auth::user()->hasRole('super_admin')){
 
             if(isset($data['clinic_owner']))
                 event(new ClinicUpdate($user, $data['clinic_owner']));
