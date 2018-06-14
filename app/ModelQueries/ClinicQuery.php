@@ -38,7 +38,6 @@ class ClinicQuery extends Clinic
                 if($services !== null)
                     $model->services()->saveMany($services);
             }
-                
 
             return $model->id;
         }

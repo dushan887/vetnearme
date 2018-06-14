@@ -2,5 +2,4 @@
 
     Route::get('/', 'Front\FrontPartController@index')->name('home');
     Route::get('/results', 'Front\ResultsController@index')->name('results');
-    Route::get('/clinic', 'Front\ClinicController@index')->name('clinic');
-    Route::get('/clinic/{clinic}', 'Front\ClinicController@show');
+    Route::get('/clinic/{clinic}', 'Front\ClinicController@index')->name('clinic');
