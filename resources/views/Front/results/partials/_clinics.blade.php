@@ -22,7 +22,9 @@
                         </div>
                         <div class="reasault-info">
                             <div class="resault-title">
-                                <h4>{{ $clinic->name }}</h4>
+                                <h4>
+                                    <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">{{ $clinic->name }}</a>
+                                </h4>
                             </div>
                             <div class="resault-description">
                                 <p>{{ $clinic->description }}</p>
