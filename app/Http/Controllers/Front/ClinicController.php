@@ -13,8 +13,13 @@ class ClinicController extends Controller {
      */
     public function index()
     {
-        
+
         return view('Front.clinic.index');
+    }
+
+    public function show($clinicName)
+    {
+        # code...
     }
 
 

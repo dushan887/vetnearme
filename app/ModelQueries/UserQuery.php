@@ -127,8 +127,8 @@ class UserQuery extends User
 
     private function deleteOldAvatar($avatar)
     {
-        File::delete($this->_avatarDirectory . $avatar);
-        File::delete($this->_avatarThumbsDirectory . $avatar);
+        \File::delete($this->_avatarDirectory . $avatar);
+        \File::delete($this->_avatarThumbsDirectory . $avatar);
     }
 
 
