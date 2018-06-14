@@ -330,7 +330,7 @@
                     </div>
                   @endif
 
-                    @if(\Auth::user()-->hasRole('super_admin'))
+                    @if(\Auth::user()->hasRole('super_admin'))
                       <p class="help-block col-md-offset-2"><strong>Assign user as the owner of the clinic</stri></p>
                       <admin-clinics-list :clinicrole="'owner'"></admin-clinics-list>
 
