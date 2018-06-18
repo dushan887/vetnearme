@@ -17,14 +17,23 @@
 
 		@include('Front.home.partials.banner')
 
-		<div class="container page-content">
+		<div class="container page-content container-1400">
 			<div class="row">
-				<div class="col col-100">
+				<div class="col-12">
+					<h2 class="main-color"><i class="fa fa-paper-plane"></i> Pet News &amp; Advice</h2>
 				</div>
 			</div>
-			<div id="content">
-			</div>
-				<div id="sidebar" class="bg-main-color2">
+			<div class="row">
+				<div class="col-12 col-md-8">
+					<div id="content">
+						@include('Front.home.partials.content')
+					</div>
+				</div>
+				<div class="col-12 col-md-4">
+					<div id="sidebar" class="bg-main-color2">
+						@include('Front.home.partials.sidebar')
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

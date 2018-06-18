@@ -84,7 +84,7 @@ class ResultsController extends Controller {
     private function arrayPaginator($array, $request)
     {
         $page    = Input::get('page', 1);
-        $perPage = 4;
+        $perPage = 150;
         $offset  = ($page * $perPage) - $perPage;
 
         return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
