@@ -1,6 +1,6 @@
 <section class="blog-grid grid-2x2">
 	<div class="row">
-	<div class="col-12 col-md-4">
+	<div class="col-12 col-md-6">
 			<article>
 				<header>
 					<a href="#">
@@ -24,7 +24,7 @@
 			</article>
 		</div>
 		
-		<div class="col-12 col-md-4">
+		<div class="col-12 col-md-6">
 			<article>
 				<header>
 					<a href="#">
@@ -48,7 +48,7 @@
 			</article>
 		</div>
 
-		<div class="col-12 col-md-4">
+		<div class="col-12 col-md-6">
 			<article>
 				<header>
 					<a href="#">
@@ -72,7 +72,7 @@
 			</article>
 		</div>
 
-		<div class="col-12 col-md-4">
+		<div class="col-12 col-md-6">
 			<article>
 				<header>
 					<a href="#">
