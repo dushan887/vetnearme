@@ -122,7 +122,7 @@ class ResultsController extends Controller {
                 lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010)) ";
         }
 
-        $isOpen = $request->input('working') !== null && $request->input('working') === 'all' ?
+        $isOpen = $request->input('working') !== null && $request->input('working') === 'closed' ?
             '<' : '>';
 
         // $whereOpen = "";
