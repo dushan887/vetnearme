@@ -27,7 +27,13 @@ class ResultsController extends Controller {
         $currentDay  = strtolower(date('l'));
 
         $clinics = $this->getClinics($request, $address, $coordinates, $currentDay);
-        $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
+        if(!$coordinates) {            
+            $userCoordinates = json_encode(['lat' => '-33.8688197', 'lng' => '151.2092955']);
+            return redirect()->route('home')->with(['message' => 'Address not valid!']);
+        } else {
+            $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
+        }
+        
 
         $clinicsCoordinates = [];
 
@@ -94,8 +100,13 @@ class ResultsController extends Controller {
 
         $category = XSS::clean($request->input('selector-category'));
 
-        $lat      = $coordinates->latitude();
-        $lng      = $coordinates->longitude();
+        if(!$coordinates) {
+            $lat      = -33.8688197;
+            $lng      = 151.2092955;
+        } else {
+            $lat      = $coordinates->latitude();
+            $lng      = $coordinates->longitude();
+        }
         $services = false;
 
         if($request->input('advanced-search') && $request->input('advanced-search') === 'search')
@@ -111,9 +122,10 @@ class ResultsController extends Controller {
                 lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010)) ";
         }
 
-        $isOpen = $request->input('working') !== null && $request->input('working') === 'closed' ?
+        $isOpen = $request->input('working') !== null && $request->input('working') === 'all' ?
             '<' : '>';
 
+        // $whereOpen = "";
         $whereOpen = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
 
         if($category === 'general')

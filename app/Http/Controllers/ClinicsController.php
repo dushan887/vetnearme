@@ -21,7 +21,7 @@ class ClinicsController extends Controller
     public function index(Request $request)
     {
         return view('clinics/index', [
-            'clinics' => Clinic::paginate(20),
+            'clinics' => Clinic::paginate(200),
         ]);
     }
 

@@ -44,15 +44,15 @@
 						<li id="open-hours-filter" class="select">
 							<span>Open Clinics</span>
 							<select name="working" id="working">
+								<option value="all"
+								@if($working === 'all')
+									selected="selected"
+								@endif
+								>Show All</option>
 								<option value="open"
 								@if($working === 'open')
 									selected="selected"
-								@endif
-								>Open Now</option>
-								<option value="closed"
-								@if($working === 'closed')
-									selected="selected"
-								@endif>Closed</option>
+								@endif>Open Now</option>
 							</select>
 						</li>
 					</ul>

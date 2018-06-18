@@ -2,6 +2,11 @@
 	id="search" action="/results" method="get">
 	<div class="search-title">
 		<h1 class="white-color">Find Your Nearest Vet</h1>
+		@if (session('message'))
+		    <div class="alert alert-danger">
+		        {{ session('message') }}
+		    </div>
+		@endif
 	</div>
 	<!-- SEARCH -->
 	<div class="search-wrapper">
