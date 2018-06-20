@@ -19,14 +19,11 @@
 			@include('Front.results.partials.search')
 
 			<div class="container page-content">
-				<div class="row">
-					<div class="col col-100">
-					</div>
-				</div>
 				<div
 					id="content"
 					data-coordinates="{{ $coordinates }}"
-					data-usercoordinates="{{ $userCoordinates }}">
+					data-usercoordinates="{{ $userCoordinates }}"
+					data-urls="">
 					@include('Front.results.partials.content')
 				</div>
 				<div id="sidebar" class="bg-main-color2">
@@ -39,20 +36,75 @@
 @stop
 
 @section('AditionalFoot')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&v=3.exp"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU&callback=initMap"></script>
 <script type="text/javascript">
+	function changeView() {		
+		if ($('.item').length < 1) {
+			$('#radius').val($('#radius option:selected').next().val()).trigger("change");
+		}
+	}
+	changeView();
+	$('.resault-web-address').each(function() {
+		var x = $(this).text().split('//')[1].split('/')[0]
+		if (x.includes('www')) {
+			$(this).text(x)
+		} else {
+			$(this).text('www.'+x)
+		}
+
+	})
+	var dataUrl = []
+	$('.item').each(function() {		
+		dataUrl = dataUrl + $(this).attr('data-item-url') + ' ';
+	})
+	dataUrl = dataUrl.split(' ');
+	$('#content').attr('data-urls', dataUrl)
 
 	function initMap() {
+		var options = {
+		  types: ['(cities)'],
+		  componentRestrictions: {country: "AU", country: "NZ"}
+		 };
 		let input        = document.getElementById('address-input');
-		let autocomplete = new google.maps.places.Autocomplete(input);
+		let autocomplete = new google.maps.places.Autocomplete(input,options);
+	}
+	let zoomNew = 5;
+	function setZoom() {
+		let radiusV = $('#radius').val();
+		if (radiusV == 2) {
+			zoomNew = 14
+		}
+		if (radiusV == 5) {
+			zoomNew = 13
+		} 
+		if (radiusV == 10) {
+			zoomNew = 12
+		} 
+		if (radiusV == 25) {
+			zoomNew = 11
+		} 
+		if (radiusV == 50) {
+			zoomNew = 10
+		}
+		if (radiusV == 100) {
+			zoomNew = 9
+		}
+		if (radiusV == 200) {
+			zoomNew = 8
+		}
+		if (radiusV == 500) {
+			zoomNew = 7
+		}
 	}
 
 	let markers     	= []
 	let content     	= $('#content')
 	let coordinates 	= content.data('coordinates')
 	let userCoordinates = content.data('usercoordinates')
+	let urls            = content.data('urls').split(',')
 
 	let myLatlng = new google.maps.LatLng(userCoordinates.lat,userCoordinates.lng)
+
 
 	function CustomMarker(latlng, map, args) {
 		this.latlng = latlng;
@@ -70,12 +122,13 @@
 
 		if (!div) {
 
-			div = this.div = document.createElement('div');
+			div = this.div = document.createElement('a');
 
 			div.className = 'marker';
 
 			if (typeof(self.args.marker_id) !== 'undefined') {
 				div.dataset.marker_id = self.args.marker_id;
+				div.href = self.args.href;
 			}
 
 			google.maps.event.addDomListener(div, "click", function(event) {
@@ -108,8 +161,10 @@
 
 	function initialize() {
 
+		setZoom();
+
 		let mapOptions = {
-			zoom: 11,
+			zoom: zoomNew,
 			center: myLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			zoomControl: true,
@@ -131,15 +186,24 @@
 
 		let map = new google.maps.Map(document.getElementById('map'), mapOptions)
 
-		let count = 1;
+		let count = 0;
+		let marker = new CustomMarker (
+				new google.maps.LatLng(userCoordinates.lat ,userCoordinates.lng),
+				map,
+				{
+					marker_id: 'start',
+					href: '#',
+				},
+			);
 
 		for(coordinate in coordinates){
-
+		
 			let marker = new CustomMarker (
 				new google.maps.LatLng(coordinates[coordinate].lat ,coordinates[coordinate].lng),
 				map,
 				{
 					marker_id: count,
+					href: urls[count],
 				},
 			);
 			count ++
@@ -150,6 +214,11 @@
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+
+
+	
+
+
 
 </script>
 @stop

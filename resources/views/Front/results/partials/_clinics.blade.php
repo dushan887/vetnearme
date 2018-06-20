@@ -3,17 +3,17 @@
         id="gmap-data"
         data-coordinates="{{ $clinicsCoordinates ?? '' }}"
         data-usercoordinates="{{ $userCoordinates }}"
-    >
+        >
         <ul class="list-unstyled">
 
             @foreach($clinics as $clinic)
 
             <?php $hours = json_decode($clinic->opening_hours) ?>
 
-                <li class="item">
+                <li class="item" data-item-no="" data-item-url="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
                     <div class="resault">
                         <div class="resault-logo">
-                            <a href="#">
+                            <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
                                 <img src="{{ $clinic->logo ?
                                     'img/logo/' . $clinic->logo :
                                     'http://via.placeholder.com/120x80'}}"
@@ -27,8 +27,8 @@
                                 </h4>
                             </div>
                             <div class="resault-description">
-                                <p>{{ $clinic->description }}</p>
-                                <a href="#">View more...</a>
+                                <p>{{ str_limit($clinic->description, $limit = 60, $end = '...') }} </p>
+                                <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">View more...</a>
                             </div>
                         </div>
                         <div class="resault-address">
@@ -54,7 +54,7 @@
                         <div class="resault-web">
                             <a href="{{ $clinic->url }}" target="_blank" rel="nofollow noopener noreferrer">
                                                 <i class="fa fa-globe"></i>
-                                                <span>{{ $clinic->url }}</span></a>
+                                                <span class="resault-web-address">{{ substr( $clinic->url , strpos($clinic->url, "//")) }}</span></a>
                         </div>
                     </div>
                     <div class="border-separator space-12"></div>
@@ -67,10 +67,14 @@
                             <span class="fa fa-star checked"></span>
                         </div>
                         <div class="resault-directions">
-                            <a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer">
+                            {{-- <a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer">
                                                 <i class="fa fa-map-signs"></i>
                                                 Get Directions
-                                            </a>
+                                            </a> --}}
+                            <a href="https://www.google.com/maps/dir/{{ strtolower(str_replace([':', '"', '{', '}', 'lat', 'lng', ']', '['], '', $userCoordinates)) }}/{{ $clinic->lat }},{{ $clinic->lng }}" target="_blank" rel="nofollow noopener noreferrer">
+                                <i class="fa fa-map-signs"></i>
+                                Get Directions
+                            </a>
                         </div>
 
                         @if(isClinicOpen($hours, $currentDay, $currentHour))
@@ -91,3 +95,5 @@
         </ul>
 
         {{ $clinics->links() }}
+
+    </div>

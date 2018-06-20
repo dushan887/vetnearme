@@ -20,9 +20,7 @@
 				</a>
 			</div>
 			<ul>
-				<li>
-					<a href="{{ URL::to('/results?address-input=Australia&selector-category=alll&radius=all') }}">View Clinics</a>
-				</li>
+				
 			</ul>
 		</div>
 	</nav>

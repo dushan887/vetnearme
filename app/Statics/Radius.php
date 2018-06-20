@@ -5,13 +5,15 @@ namespace App\Statics;
 class Radius {
 
     const RADIUS = [
-
+        '2'  => '2km',
+        '5'  => '5km',
         '10'  => '10km',
-        '20'  => '20km',
-        '30'  => '30km',
+        '25'  => '25km',
         '50'  => '50km',
         '100' => '100km',
-        'all' => 'Show All',
+        '200' => '200km',
+        '500' => '500km',
+        //'all' => 'Show All',
 
     ];
 

@@ -57,7 +57,7 @@ class ResultsController extends Controller {
                         ])->render(),
                         'total'   => $clinics->total(),
                         'address' => $address,
-                        'radius'  => $request->input('radius') ?? 10,
+                        'radius'  => $request->input('radius') ?? 2,
                         'working' => $request->input('working') ?? 'open'
                     ]);
 
@@ -76,7 +76,7 @@ class ResultsController extends Controller {
             'selectedServices' => $request->input('services') ?? [],
             'category'         => XSS::clean($request->input('selector-category')),
             'radius'           => Radius::get(),
-            'radiusSelected'   => $request->input('radius') ?? 10,
+            'radiusSelected'   => $request->input('radius') ?? 2,
             'working' => $request->input('working') ?? 'open'
         ]);
     }
@@ -94,7 +94,7 @@ class ResultsController extends Controller {
     private function getClinics($request, $address, $coordinates, $currentDay)
     {
 
-        $radius = $request->input('radius') ? $request->input('radius') : 10;
+        $radius = $request->input('radius') ? $request->input('radius') : 2;
 
         $whereCategory = '';
 
@@ -125,8 +125,8 @@ class ResultsController extends Controller {
         $isOpen = $request->input('working') !== null && $request->input('working') === 'closed' ?
             '<' : '>';
 
-        // $whereOpen = "";
-        $whereOpen = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
+        $whereOpen = "";
+        // $whereOpen = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
 
         if($category === 'general')
             $whereCategory = " AND clinics.general_practice = 1 ";
@@ -155,7 +155,7 @@ class ResultsController extends Controller {
             // WHERE distance < ' . $radius. '
             // ORDER BY distance DESC');
 
-            $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
+             $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
                     FROM clinics
                     JOIN countries ON countries.id = clinics.country_id
                     {$whereRadius}
@@ -175,13 +175,13 @@ class ResultsController extends Controller {
                 $whereOpen = str_replace('AND', 'WHERE', $whereOpen);
 
             $whereServices = implode(' ', $whereServices);
-
-             $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
+           
+              $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
                     FROM clinics
                     JOIN countries ON countries.id = clinics.country_id
                     JOIN clinics_services ON clinics.id = clinics_services.clinic_id
                     {$whereRadius}
-                    {$$whereOpen}
+                    {$whereOpen}
                     {$whereCategory}
                     {$whereServices}");
 

@@ -48,11 +48,11 @@
 								@if($working === 'open')
 									selected="selected"
 								@endif
-								>Open Now</option>
-								<option value="closed"
+								>Show All</option>
+								{{-- <option value="closed"
 								@if($working === 'closed')
 									selected="selected"
-								@endif>Closed</option>
+								@endif>Closed</option> --}}
 							</select>
 						</li>
 					</ul>
@@ -61,11 +61,10 @@
 		</div>
 
 		<div id="visual-resaults" class="row">
-			<div class="clinics-container col-12 col-md-7">
+			<div class="clinics-container col-12 col-md-6 ds-col-45">
 				@include('Front.results.partials._clinics')
 			</div>
-		</div>
-		<div class="col-12 col-md-5">
+			<div class="col-12 col-md-6 ds-col-55">
 				<div class="inner">
 					<div id="map" style="width: 100%; height: 100%; display: block;"></div>
 				</div>
