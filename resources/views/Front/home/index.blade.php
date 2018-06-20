@@ -49,8 +49,12 @@
 <script>
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {});
+	var options = {
+	  types: ['(cities)'],
+	  componentRestrictions: {country: ["AU", "NZ"]}
+	 };
 	var input = document.getElementById('address-input');
-	var autocomplete = new google.maps.places.Autocomplete(input); 
+	var autocomplete = new google.maps.places.Autocomplete(input,options); 
 }
 </script>
 @stop

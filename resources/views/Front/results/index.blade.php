@@ -41,29 +41,31 @@
 	function changeView() {		
 		if ($('.item').length < 1) {
 			$('#radius').val($('#radius option:selected').next().val()).trigger("change");
+			$('.resault-web-address').each(function() {
+				var x = $(this).text().split('//')[1].split('/')[0]
+				if (x.includes('www')) {
+					$(this).text(x)
+				} else {
+					$(this).text('www.'+x)
+				}
+
+			})
+			var dataUrl = []
+			$('.item').each(function() {		
+				dataUrl = dataUrl + $(this).attr('data-item-url') + ' ';
+			})
+			dataUrl = dataUrl.split(' ');
+			$('#content').attr('data-urls', dataUrl)
 		}
 	}
 	changeView();
-	$('.resault-web-address').each(function() {
-		var x = $(this).text().split('//')[1].split('/')[0]
-		if (x.includes('www')) {
-			$(this).text(x)
-		} else {
-			$(this).text('www.'+x)
-		}
-
-	})
-	var dataUrl = []
-	$('.item').each(function() {		
-		dataUrl = dataUrl + $(this).attr('data-item-url') + ' ';
-	})
-	dataUrl = dataUrl.split(' ');
-	$('#content').attr('data-urls', dataUrl)
+	
+	
 
 	function initMap() {
 		var options = {
 		  types: ['(cities)'],
-		  componentRestrictions: {country: "AU", country: "NZ"}
+		  componentRestrictions: {country: ["AU", "NZ"]}
 		 };
 		let input        = document.getElementById('address-input');
 		let autocomplete = new google.maps.places.Autocomplete(input,options);
