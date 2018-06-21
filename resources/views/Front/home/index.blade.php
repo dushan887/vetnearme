@@ -44,13 +44,13 @@
 
 @section('AditionalFoot')
 <div id="map" style="visibility: hidden; width: 0; height: 0; opacity: 0;position: absolute;"></div> 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&callback=initMap&region=AU"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&callback=initMap"
         async defer></script>
 <script>
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {});
 	var options = {
-	  types: ['(cities)'],
+	  types: ['(regions)'],
 	  componentRestrictions: {country: ["AU", "NZ"]}
 	 };
 	var input = document.getElementById('address-input');

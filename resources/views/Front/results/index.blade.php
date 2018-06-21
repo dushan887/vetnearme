@@ -36,7 +36,7 @@
 @stop
 
 @section('AditionalFoot')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU&callback=initMap"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&callback=initMap"></script>
 <script type="text/javascript">
 	function changeView() {		
 		if ($('.item').length < 1) {
