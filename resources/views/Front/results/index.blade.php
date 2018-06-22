@@ -176,7 +176,7 @@
 			zoom: zoomNew,
 			center: myLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			zoomControl: false,
+			zoomControl: true,
 			disableDefaultUI: true,
 			zoomControlOptions: {
 				style: google.maps.ZoomControlStyle.DEFAULT,
@@ -187,7 +187,7 @@
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 			},
-			scaleControl: true,
+			scaleControl: false,
 			scrollwheel: false,
 			streetViewControl: false,
 			draggable : true,
