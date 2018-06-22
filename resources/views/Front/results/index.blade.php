@@ -36,7 +36,7 @@
 @stop
 
 @section('AditionalFoot')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&callback=initMap"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places"></script>
 <script type="text/javascript">
 	function changeView() {		
 		if ($('.item').length < 1) {
@@ -44,25 +44,11 @@
 		}
 	}
 	changeView();
-	$('.resault-web-address').each(function() {
-		var x = $(this).text().split('//')[1].split('/')[0]
-		if (x.includes('www')) {
-			$(this).text(x)
-		} else {
-			$(this).text('www.'+x)
-		}
-
-	})
-	var dataUrl = []
-	$('.item').each(function() {		
-		dataUrl = dataUrl + $(this).attr('data-item-url') + ' ';
-	})
-	dataUrl = dataUrl.split(' ');
-	$('#content').attr('data-urls', dataUrl)
+	
 
 	function initMap() {
-		var options = {
-		  types: ['(cities)'],
+		let options = {
+		  types: [],
 		  componentRestrictions: {country: ["AU", "NZ"]}
 		 };
 		let input        = document.getElementById('address-input');
@@ -122,18 +108,41 @@
 
 		if (!div) {
 
-			div = this.div = document.createElement('a');
+			div = this.div = document.createElement('div');
 
 			div.className = 'marker';
 
 			if (typeof(self.args.marker_id) !== 'undefined') {
 				div.dataset.marker_id = self.args.marker_id;
-				div.href = self.args.href;
+				div.dataset.content = self.args.content;
 			}
 
 			google.maps.event.addDomListener(div, "click", function(event) {
 				// alert('You clicked on a custom marker!');
-				google.maps.event.trigger(self, "click");
+				google.maps.event.trigger(self, "click");				
+					var infoIndex = $(this).attr('data-marker_id')
+					if (infoIndex != 'start') {
+						if (!$(this).hasClass('open')) {
+							var infoTitle = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-title').html();
+							var infoAddress = '<i class="fas fa-map-marker-alt"></i>' + $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-address').html();
+							var infoEmail = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-email').html();
+							var infoPhone = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-phone').html();
+							var infoWeb = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-web').html();
+							$('.marker').removeClass('open')
+							$(this).addClass('open').append('<div class="info-window">'+
+								'<div class="info-title"><strong> '+ infoTitle + '</div>' +
+								'<div class="info-address"> '+ infoAddress + '</div>' +
+								'<div class="info-email"> '+ infoEmail + '</div>' +
+								'<div class="info-phone"> '+ infoPhone + '</div>' +
+								'<div class="info-web"> '+ infoWeb + '</div>' +
+								'</div>')
+						} else {
+							if ($(event.target).hasClass('marker')) {
+								$('.marker').removeClass('open')
+							} 
+						};
+
+					}
 			});
 
 			let panes = this.getPanes();
@@ -167,13 +176,14 @@
 			zoom: zoomNew,
 			center: myLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			zoomControl: true,
+			zoomControl: false,
 			disableDefaultUI: true,
 			zoomControlOptions: {
 				style: google.maps.ZoomControlStyle.DEFAULT,
 			},
 			disableDoubleClickZoom: true,
 			mapTypeControl: false,
+			clickableIcons: false,
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
 			},
@@ -192,7 +202,6 @@
 				map,
 				{
 					marker_id: 'start',
-					href: '#',
 				},
 			);
 
@@ -203,7 +212,6 @@
 				map,
 				{
 					marker_id: count,
-					href: urls[count],
 				},
 			);
 			count ++
@@ -214,6 +222,21 @@
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
+	$(document).ready(function() {
+		initMap();
+		setTimeout(function(){
+			$('.item .resault-web-address').each(function() {
+				var x = $(this).text().split('//')[1].split('/')[0]
+				if (x.includes('www')) {
+					$(this).text(x)
+				} else {
+					$(this).text('www.'+x)
+				}
+
+			})
+		 }, 500);
+	})
+	
 
 
 	

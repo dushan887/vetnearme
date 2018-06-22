@@ -786,6 +786,9 @@ section:not(.page-search) #search .location-search:before,
     background-color: #fff;
     color: #468a97;
 }
+.marker.open .info-window {
+  display: block;
+}
 .marker {
   width: 30px;
   height: 30px;
@@ -813,6 +816,44 @@ section:not(.page-search) #search .location-search:before,
 
   border-radius: 100%;
   z-index: 20;
+}
+.marker.open {
+  z-index: 999;
+}
+.marker.open:before {
+  color: #C8DCE0;
+}
+.info-window {
+  display: none;
+  width: 300px;
+  /*height: 200px;*/
+  background: #fff;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #C8DCE0;
+}
+.info-window > div:not(.info-title){
+  padding-left: 30px;
+  position: relative;
+  line-height: 20px;
+}
+.info-title h4 {
+  line-height: 22px !important;
+  font-size: 18px !important;
+  padding-left: 40px;
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+  min-height: 40px;
+}
+.info-window i {
+  position: absolute;
+  left:5px;
+  font-size: 14px;
+  line-height: 20px;
 }
 .marker[data-marker_id="start"] {
   background-color: red;
