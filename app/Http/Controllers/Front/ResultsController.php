@@ -27,13 +27,13 @@ class ResultsController extends Controller {
         $currentDay  = strtolower(date('l'));
 
         $clinics = $this->getClinics($request, $address, $coordinates, $currentDay);
-        if(!$coordinates) {            
+        if(!$coordinates) {
             $userCoordinates = json_encode(['lat' => '-33.8688197', 'lng' => '151.2092955']);
             return redirect()->route('home')->with(['message' => 'Address not valid!']);
         } else {
             $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
         }
-        
+
 
         $clinicsCoordinates = [];
 
@@ -96,7 +96,9 @@ class ResultsController extends Controller {
 
         $radius = $request->input('radius') ? $request->input('radius') : 2;
 
-        $whereCategory = '';
+        $whereQuery = [];
+
+        $whereCategory = [];
 
         $category = XSS::clean($request->input('selector-category'));
 
@@ -112,98 +114,43 @@ class ResultsController extends Controller {
         if($request->input('advanced-search') && $request->input('advanced-search') === 'search')
             $services = $request->input('services');
 
-        if($radius === 'all'){
-            $whereRadius = "";
-        } else {
-
-            $radius = (int) $radius;
-
-            $whereRadius =  " WHERE lat BETWEEN ({$lat} - ({$radius}*0.010)) AND ({$lat} + ({$radius}*0.010)) AND
-                lng BETWEEN ({$lng} - ({$radius}*0.010)) AND ({$lng} + ({$radius}*0.010)) ";
-        }
-
         $isOpen = $request->input('working') !== null && $request->input('working') === 'closed' ?
             '<' : '>';
 
         $whereOpen = "";
-        // $whereOpen = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
+
+        $whereQuery[] = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
 
         if($category === 'general')
-            $whereCategory = " AND clinics.general_practice = 1 ";
+            $whereQuery[] = "clinics.general_practice = 1";
 
         if($category === 'specialist')
-            $whereCategory = " AND clinics.specialist_and_emergency = 1 ";
+            $whereQuery[] = "clinics.specialist_and_emergency = 1";
 
-        if($whereRadius === "")
-            $whereCategory = str_replace('AND', 'WHERE', $whereCategory);
-
-        if(!$services):
-
-            // $clinics =  \DB::select('SELECT * FROM
-            //     (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
-            //     clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
-            //     clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
-            //     countries.full_name AS country,
-            //     (' .  $radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *
-            //     cos(radians(lng) - radians(' . $lng . ')) +
-            //     sin(radians(' . $lat . ')) * sin(radians(lat))))
-            //     AS distance
-            //     FROM clinics
-            //     JOIN countries ON countries.id = clinics.country_id
-            //     ' . $whereCategory . '
-            //     ) AS distances
-            // WHERE distance < ' . $radius. '
-            // ORDER BY distance DESC');
-
-             $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
-                    FROM clinics
-                    JOIN countries ON countries.id = clinics.country_id
-                    {$whereRadius}
-                    {$whereOpen}
-                    {$whereCategory}");
-
-        else:
-
-            $whereServices = [];
-
+        if($services)
             foreach ($services as $service) {
                 $service = (int) $service;
-                $whereServices[] = " AND clinics_services.service_id = {$service} ";
+                $whereQuery[] = "clinics_services.service_id = {$service}";
             }
 
-            if($whereRadius === "")
-                $whereOpen = str_replace('AND', 'WHERE', $whereOpen);
+        $whereQuery = implode(' AND ', $whereQuery);
 
-            $whereServices = implode(' ', $whereServices);
-           
-              $clinics = \DB::select("SELECT clinics.*,  countries.full_name AS country
-                    FROM clinics
-                    JOIN countries ON countries.id = clinics.country_id
-                    JOIN clinics_services ON clinics.id = clinics_services.clinic_id
-                    {$whereRadius}
-                    {$whereOpen}
-                    {$whereCategory}
-                    {$whereServices}");
-
-            // $clinics =  \DB::select('SELECT * FROM
-            //     (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
-            //     clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
-            //     clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
-            //     countries.full_name AS country,
-            //     (' . $radius . ' * acos(cos(radians(' . $lat . ')) * cos(radians(lat)) *
-            //     cos(radians(lng) - radians(' . $lng . ')) +
-            //     sin(radians(' . $lat . ')) * sin(radians(lat))))
-            //     AS distance
-            //     FROM clinics
-            //     JOIN countries ON countries.id = clinics.country_id
-            //     JOIN clinics_services ON clinic.id = clinics_services.clinic_id
-            //     WHERE ' . $whereServices . '
-            //     ' . $whereCategory . '
-            //     ) AS distances
-            // WHERE distance < ' . $radius . '
-            // ORDER BY distance');
-
-        endif;
+        $clinics =  \DB::select('SELECT * FROM
+                (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
+                clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
+                clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
+                countries.full_name AS country,
+                (6371 * acos(
+                    cos(radians(' . $lat . ')) * cos(radians(lat)) *
+                    cos(radians(lng) - radians(' . $lng . ')) +
+                    sin(radians(' . $lat . ')) * sin(radians(lat))))
+                AS distance
+                FROM clinics
+                JOIN countries ON countries.id = clinics.country_id
+                ' . $whereQuery . '
+                ) AS distances
+            WHERE distance < ' . $radius. '
+            ORDER BY distance ASC');
 
         return $this->arrayPaginator($clinics, $request);
     }
