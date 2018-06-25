@@ -38,49 +38,59 @@
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places"></script>
 <script type="text/javascript">
-	function changeView() {		
-		if ($('.item').length < 1) {
-			$('#radius').val($('#radius option:selected').next().val()).trigger("change");
-		}
-	}
-	changeView();
-	
+
 
 	function initMap() {
 		let options = {
-		  types: [],
+		  types: ["(regions)"],
 		  componentRestrictions: {country: ["AU", "NZ"]}
 		 };
 		let input        = document.getElementById('address-input');
 		let autocomplete = new google.maps.places.Autocomplete(input,options);
 	}
-	let zoomNew = 5;
+
 	function setZoom() {
-		let radiusV = $('#radius').val();
-		if (radiusV == 2) {
-			zoomNew = 14
+
+		let zoom = 14;
+
+		switch(parseInt($('#radius').val()), 10){
+			case 2:
+				zoom = 14;
+			break;
+
+			case 5:
+				zoom = 13;
+			break;
+
+			case 10:
+				zoom = 12;
+			break;
+
+			case 25:
+				zoom = 11;
+			break;
+
+			case 50:
+				zoom = 10;
+			break;
+
+			case 100:
+				zoom = 9;
+			break;
+
+			case 200:
+				zoom = 8;
+			break;
+
+			case 500:
+				zoom = 7;
+			break;
+
+			default:
+				zoom = 14;
 		}
-		if (radiusV == 5) {
-			zoomNew = 13
-		} 
-		if (radiusV == 10) {
-			zoomNew = 12
-		} 
-		if (radiusV == 25) {
-			zoomNew = 11
-		} 
-		if (radiusV == 50) {
-			zoomNew = 10
-		}
-		if (radiusV == 100) {
-			zoomNew = 9
-		}
-		if (radiusV == 200) {
-			zoomNew = 8
-		}
-		if (radiusV == 500) {
-			zoomNew = 7
-		}
+
+		return zoom;
 	}
 
 	let markers     	= []
@@ -90,7 +100,6 @@
 	let urls            = content.data('urls').split(',')
 
 	let myLatlng = new google.maps.LatLng(userCoordinates.lat,userCoordinates.lng)
-
 
 	function CustomMarker(latlng, map, args) {
 		this.latlng = latlng;
@@ -119,7 +128,7 @@
 
 			google.maps.event.addDomListener(div, "click", function(event) {
 				// alert('You clicked on a custom marker!');
-				google.maps.event.trigger(self, "click");				
+				google.maps.event.trigger(self, "click");
 					var infoIndex = $(this).attr('data-marker_id')
 					if (infoIndex != 'start') {
 						if (!$(this).hasClass('open')) {
@@ -139,7 +148,7 @@
 						} else {
 							if ($(event.target).hasClass('marker')) {
 								$('.marker').removeClass('open')
-							} 
+							}
 						};
 
 					}
@@ -170,10 +179,8 @@
 
 	function initialize() {
 
-		setZoom();
-
 		let mapOptions = {
-			zoom: zoomNew,
+			zoom: setZoom(),
 			center: myLatlng,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			zoomControl: true,
@@ -206,7 +213,7 @@
 			);
 
 		for(coordinate in coordinates){
-		
+
 			let marker = new CustomMarker (
 				new google.maps.LatLng(coordinates[coordinate].lat ,coordinates[coordinate].lng),
 				map,
@@ -224,24 +231,7 @@
 	google.maps.event.addDomListener(window, 'load', initialize);
 	$(document).ready(function() {
 		initMap();
-		setTimeout(function(){
-			$('.item .resault-web-address').each(function() {
-				var x = $(this).text().split('//')[1].split('/')[0]
-				if (x.includes('www')) {
-					$(this).text(x)
-				} else {
-					$(this).text('www.'+x)
-				}
-
-			})
-		 }, 500);
 	})
-	
-
-
-	
-
-
 
 </script>
 @stop

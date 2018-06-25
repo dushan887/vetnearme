@@ -26,14 +26,15 @@ class ResultsController extends Controller {
         $currentHour = date('H:i:s');
         $currentDay  = strtolower(date('l'));
 
-        $clinics = $this->getClinics($request, $address, $coordinates, $currentDay);
+        $result  = $this->getClinics($request, $address, $coordinates, $currentDay);
+        $clinics = $result['clinics'];
+
         if(!$coordinates) {
             $userCoordinates = json_encode(['lat' => '-33.8688197', 'lng' => '151.2092955']);
             return redirect()->route('home')->with(['message' => 'Address not valid!']);
         } else {
             $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
         }
-
 
         $clinicsCoordinates = [];
 
@@ -57,7 +58,7 @@ class ResultsController extends Controller {
                         ])->render(),
                         'total'   => $clinics->total(),
                         'address' => $address,
-                        'radius'  => $request->input('radius') ?? 2,
+                        'radius'  => $result['radius'],
                         'working' => $request->input('working') ?? 'open'
                     ]);
 
@@ -76,8 +77,8 @@ class ResultsController extends Controller {
             'selectedServices' => $request->input('services') ?? [],
             'category'         => XSS::clean($request->input('selector-category')),
             'radius'           => Radius::get(),
-            'radiusSelected'   => $request->input('radius') ?? 2,
-            'working' => $request->input('working') ?? 'open'
+            'radiusSelected'   => $result['radius'],
+            'working'          => $request->input('working') ?? 'open'
         ]);
     }
 
@@ -94,11 +95,11 @@ class ResultsController extends Controller {
     private function getClinics($request, $address, $coordinates, $currentDay)
     {
 
-        $radius = $request->input('radius') ? $request->input('radius') : 2;
+        $radius     = $request->input('radius') ? $request->input('radius'): 2;
+        $services   = false;
+        $radiusList = Radius::get();
 
-        $whereQuery = [];
-
-        $whereCategory = [];
+        $conditionsQuery = [];
 
         $category = XSS::clean($request->input('selector-category'));
 
@@ -109,7 +110,6 @@ class ResultsController extends Controller {
             $lat      = $coordinates->latitude();
             $lng      = $coordinates->longitude();
         }
-        $services = false;
 
         if($request->input('advanced-search') && $request->input('advanced-search') === 'search')
             $services = $request->input('services');
@@ -119,40 +119,61 @@ class ResultsController extends Controller {
 
         $whereOpen = "";
 
-        $whereQuery[] = " AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW()) ";
+        $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW())";
 
         if($category === 'general')
-            $whereQuery[] = "clinics.general_practice = 1";
+            $conditionsQuery[] = "clinics.general_practice = 1";
 
         if($category === 'specialist')
-            $whereQuery[] = "clinics.specialist_and_emergency = 1";
+            $conditionsQuery[] = "clinics.specialist_and_emergency = 1";
 
-        if($services)
+        if($services):
             foreach ($services as $service) {
                 $service = (int) $service;
-                $whereQuery[] = "clinics_services.service_id = {$service}";
+                $conditionsQuery[] = "clinics_services.service_id = {$service}";
             }
+        endif;
 
-        $whereQuery = implode(' AND ', $whereQuery);
+        $clinics     = [];
+        $radiusCount = count($radiusList);
+        $i           = array_search($radius, $radiusList);
 
-        $clinics =  \DB::select('SELECT * FROM
+        do {
+
+            $clinics = $this->clinicQuery($conditionsQuery, $lat, $lng, $radiusList[$i]);
+
+            $i++;
+
+        } while  (empty($clinics) && $i < $radiusCount);
+
+        // $i - 1 is used to get the right position in the array
+        return [
+            'clinics' => $this->arrayPaginator($clinics, $request),
+            'radius'  => $radiusList[$i - 1],
+        ];
+    }
+
+    private function clinicQuery($conditionsQuery, $lat, $lng, $radius)
+    {
+        $conditionsQuery = $conditionsQuery ? " WHERE " . implode(' AND ', $conditionsQuery) : "";
+
+        // 6378 is the circumvent of the Earth in km
+        return \DB::select('SELECT * FROM
                 (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
                 clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
                 clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
                 countries.full_name AS country,
-                (6371 * acos(
+                (6378 * acos(
                     cos(radians(' . $lat . ')) * cos(radians(lat)) *
                     cos(radians(lng) - radians(' . $lng . ')) +
                     sin(radians(' . $lat . ')) * sin(radians(lat))))
                 AS distance
                 FROM clinics
                 JOIN countries ON countries.id = clinics.country_id
-                ' . $whereQuery . '
+                ' . $conditionsQuery . '
                 ) AS distances
             WHERE distance < ' . $radius. '
             ORDER BY distance ASC');
-
-        return $this->arrayPaginator($clinics, $request);
     }
 
 

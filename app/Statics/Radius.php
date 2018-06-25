@@ -5,16 +5,14 @@ namespace App\Statics;
 class Radius {
 
     const RADIUS = [
-        '2'  => '2km',
-        '5'  => '5km',
-        '10'  => '10km',
-        '25'  => '25km',
-        '50'  => '50km',
-        '100' => '100km',
-        '200' => '200km',
-        '500' => '500km',
-        //'all' => 'Show All',
-
+        '2',
+        '5',
+        '10',
+        '25',
+        '50',
+        '100',
+        '200',
+        '500',
     ];
 
     static public function get()

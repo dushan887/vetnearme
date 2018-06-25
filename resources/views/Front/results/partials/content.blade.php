@@ -31,13 +31,13 @@
 						<li id="distance-filter" class="select">
 							<span>Distance</span>
 							<select name="radius" id="radius">
-								@foreach($radius as $key => $value)
+								@foreach($radius as $rad)
 									<option
-										value="{{ $key }}"
-										@if(isset($radiusSelected) && $radiusSelected == $key)
+										value="{{ $rad }}"
+										@if(isset($radiusSelected) && $radiusSelected == $rad)
 											selected="selected"
 										@endif
-									>{{ $value }}</option>
+									>{{ $rad }}km</option>
 								@endforeach
 							</select>
 						</li>

@@ -53,8 +53,14 @@
                         </div>
                         <div class="resault-web">
                             <a href="{{ $clinic->url }}" target="_blank" rel="nofollow noopener noreferrer">
-                                                <i class="fa fa-globe"></i>
-                                                <span class="resault-web-address">{{ substr( $clinic->url , strpos($clinic->url, "//")) }}</span></a>
+                                <i class="fa fa-globe"></i>
+                                <span class="resault-web-address">
+                                    <?php
+                                        $domain = parse_url($clinic->url);
+                                        echo $domain['host'] ?? $domain['path'];
+                                    ?>
+                                </span
+                            </a>
                         </div>
                     </div>
                     <div class="border-separator space-12"></div>
