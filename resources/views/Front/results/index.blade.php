@@ -53,7 +53,7 @@
 
 		let zoom = 14;
 
-		switch(parseInt($('#radius').val()), 10){
+		switch(parseInt($('#radius').val(), 10)){
 			case 2:
 				zoom = 14;
 			break;
