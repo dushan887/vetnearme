@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreClinic;
+use App\Http\Requests\UpdateClinicRequest;
 use App\Clinic;
 use App\Country;
 use App\Service;
@@ -120,7 +121,7 @@ class ClinicsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreClinic $request, int $id)
+    public function update(UpdateClinicRequest $request, int $id)
     {
         // User can update only his clinic
         if(!\Auth::user()->hasRole('super_admin') && \Auth::user()->clinic->owner_id !== $id)

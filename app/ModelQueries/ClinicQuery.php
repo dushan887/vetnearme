@@ -62,13 +62,13 @@ class ClinicQuery extends Clinic
 
         if($clinic->update($data)){
 
-            $clinic->services->detach();
+            $clinic->services()->detach();
 
             if($request->has('services')){
                 $services = $this->getServices($request['services']);
 
                 if($services !== null)
-                    $model->services()->saveMany($services);
+                    $clinic->services()->saveMany($services);
             }
 
             return $clinic->id;

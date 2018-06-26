@@ -60,7 +60,7 @@
 
                   <div class="form-group {{ $errors->has('subscribe') ? 'has-error' : ''}}">
                     <label style="display: block">
-                      Specialist and Emergency
+                      Subscribe
                       <input type="checkbox" value="true" name="subscribe" checked class="minimal pull-right">
                     </label>
                     {!! $errors->first('subscribe', '<p class="help-block">:message</p>') !!}
@@ -481,7 +481,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.thursday-to') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.thursday-to2') ? 'has-error' : ''}}">
                                 <label for=hoursThursdayTo2>To</label>
                                 <input type="text"
                                 value="06:00"
@@ -584,7 +584,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.saturday-to') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayTo>To</label>
                                 <input type="text"
                                 value="06:00"
@@ -595,7 +595,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.saturday-from2') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayFrom2>From</label>
                                 <input type="text"
                                 value="06:00"
@@ -606,7 +606,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.saturday-from') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.saturday-to2') ? 'has-error' : ''}}">
                                 <label for=hoursSaturdayTo2>To</label>
                                 <input type="text"
                                 value="06:00"
@@ -647,7 +647,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.sunday-to') ? 'has-error' : ''}}">
                                 <label for=hoursSundayTo>To</label>
                                 <input type="text"
                                 value="06:00"
@@ -658,7 +658,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.sunday-from2') ? 'has-error' : ''}}">
                                 <label for=hoursSundayFrom2>From</label>
                                 <input type="text"
                                 value="06:00"
@@ -669,7 +669,7 @@
                             </div>
 
                             <div class="col-sm-3 col-xs-6">
-                              <div class="form-group {{ $errors->has('hours.sunday-from') ? 'has-error' : ''}}">
+                              <div class="form-group {{ $errors->has('hours.sunday-to2') ? 'has-error' : ''}}">
                                 <label for=hoursSundayTo2>To</label>
                                 <input type="text"
                                 value="06:00"
