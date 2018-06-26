@@ -32,6 +32,7 @@
 	</div>
 
 	<footer id="footer" class="bg-main-color border-main-color2">
+		@include('Front.main.footer')
 	</footer>
 @stop
 
