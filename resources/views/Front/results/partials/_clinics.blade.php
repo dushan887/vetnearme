@@ -59,7 +59,7 @@
                                         $domain = parse_url($clinic->url);
                                         echo $domain['host'] ?? $domain['path'];
                                     ?>
-                                </span
+                                </span>
                             </a>
                         </div>
                     </div>
@@ -73,10 +73,6 @@
                             <span class="fa fa-star checked"></span>
                         </div>
                         <div class="resault-directions">
-                            {{-- <a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer">
-                                                <i class="fa fa-map-signs"></i>
-                                                Get Directions
-                                            </a> --}}
                             <a href="https://www.google.com/maps/dir/{{ strtolower(str_replace([':', '"', '{', '}', 'lat', 'lng', ']', '['], '', $userCoordinates)) }}/{{ $clinic->lat }},{{ $clinic->lng }}" target="_blank" rel="nofollow noopener noreferrer">
                                 <i class="fa fa-map-signs"></i>
                                 Get Directions
