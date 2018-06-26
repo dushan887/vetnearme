@@ -123,7 +123,7 @@
 
 			if (typeof(self.args.marker_id) !== 'undefined') {
 				div.dataset.marker_id = self.args.marker_id;
-				div.dataset.content = self.args.content;
+				div.dataset.marker_pin = self.args.marker_pin;
 			}
 
 			google.maps.event.addDomListener(div, "click", function(event) {
@@ -219,6 +219,7 @@
 				map,
 				{
 					marker_id: count,
+					marker_pin: count + 1,
 				},
 			);
 			count ++

@@ -50,7 +50,7 @@
 function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), {});
 	var options = {
-	  types: [],
+	  types: ["(regions)"],
 	  componentRestrictions: {country: ["AU", "NZ"]}
 	 };
 	var input = document.getElementById('address-input');

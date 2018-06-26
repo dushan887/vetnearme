@@ -800,7 +800,7 @@ section:not(.page-search) #search .location-search:before,
   border-radius: 100%;
 }
 .marker:before {
-  content: '1';
+  content: attr(data-marker_pin);
   color: #fff;
   font-weight: 600;
   text-align: center;
@@ -826,7 +826,6 @@ section:not(.page-search) #search .location-search:before,
 .info-window {
   display: none;
   width: 300px;
-  /*height: 200px;*/
   background: #fff;
   position: absolute;
   left: -10px;
@@ -857,119 +856,21 @@ section:not(.page-search) #search .location-search:before,
 }
 .marker[data-marker_id="start"] {
   background-color: red;
-  z-index: 99999;
+  z-index: 99;
+
+  background: transparent;
 }
 .marker[data-marker_id="start"]:before {  
-  border: 3px solid red;
+  border: 3px solid transparent;
   content: "\f1ae";
   font-family: "Font Awesome 5 Free";
   font-style: normal;
   font-weight: 700;
-}
-.marker[data-marker_id="0"]:before {
-  content:'1';
-}
-.marker[data-marker_id="1"]:before {
-  content:'2';
-}
-.marker[data-marker_id="2"]:before {
-  content:'3';
-}
-.marker[data-marker_id="3"]:before {
-  content:'4';
-}
-.marker[data-marker_id="4"]:before {
-  content:'5';
-}
-.marker[data-marker_id="5"]:before {
-  content:'6';
-}
-.marker[data-marker_id="6"]:before {
-  content:'7';
-}
-.marker[data-marker_id="7"]:before {
-  content:'8';
-}
-.marker[data-marker_id="8"]:before {
-  content:'9';
-}
-.marker[data-marker_id="9"]:before {
-  content:'10';
-}
-.marker[data-marker_id="10"]:before {
-  content:'11';
-}
-.marker[data-marker_id="11"]:before {
-  content:'12';
-}
-.marker[data-marker_id="12"]:before {
-  content:'13';
-}
-.marker[data-marker_id="13"]:before {
-  content:'14';
-}
-.marker[data-marker_id="14"]:before {
-  content:'15';
-}
-.marker[data-marker_id="15"]:before {
-  content:'16';
-}
-.marker[data-marker_id="16"]:before {
-  content:'17';
-}
-.marker[data-marker_id="17"]:before {
-  content:'18';
-}
-.marker[data-marker_id="18"]:before {
-  content:'19';
-}
-.marker[data-marker_id="19"]:before {
-  content:'20';
-}
-.marker[data-marker_id="20"]:before {
-  content:'21';
-}
-.marker[data-marker_id="21"]:before {
-  content:'22';
-}
-.marker[data-marker_id="22"]:before {
-  content:'23';
-}
-.marker[data-marker_id="23"]:before {
-  content:'24';
-}
-.marker[data-marker_id="24"]:before {
-  content:'25';
-}
-.marker[data-marker_id="25"]:before {
-  content:'26';
-}
-.marker[data-marker_id="26"]:before {
-  content:'27';
-}
-.marker[data-marker_id="27"]:before {
-  content:'28';
-}
-.marker[data-marker_id="28"]:before {
-  content:'29';
-}
-.marker[data-marker_id="29"]:before {
-  content:'30';
-}
-.marker[data-marker_id="30"]:before {
-  content:'31';
-}
-.marker[data-marker_id="31"]:before {
-  content:'32';
-}
-.marker[data-marker_id="32"]:before {
-  content:'33';
-}
-.marker[data-marker_id="33"]:before {
-  content:'34';
-}
-.marker[data-marker_id="34"]:before {
-  content:'35';
+  width: 15px;
+  height: 15px;
+  font-size: 0;
+  line-height: 0;
+  background: blue;
 }
 .marker:after {
   content: '';
@@ -991,8 +892,11 @@ section:not(.page-search) #search .location-search:before,
   animation-iteration-count: infinite;
 }
 .marker[data-marker_id="start"]:after {
-  background-color: red;
-  border: 10px solid red;
+  background-color: blue;
+  border: 15px solid blue;
+  width: 35px;
+  height: 35px;
+  background: transparent;
 }
 @-moz-keyframes pulse {
  0% {-moz-transform: scale(0);opacity: 0.0;}
@@ -1500,6 +1404,7 @@ article footer {
   display: inline-block;
   padding: 15px;
   border-radius: 5px;
+  width: 100%;
 }
 #article-search input {
     width: 100%;
@@ -1550,4 +1455,32 @@ article footer {
     background-color: #468a97;
     color: #fff;
     text-decoration: none;
+}
+/*FOOTER*/
+#footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    position: relative;
+    color: #fff;
+    line-height: 1.5;
+    font-size: 14px;
+    border-top: 15px solid;
+}
+#footer .col-12:first-child {
+    text-align: left;
+}
+#footer .col-12:last-child {
+    text-align: right;
+}
+#footer ul li {
+    margin-right: 0;
+}
+#footer ul li:not(:last-child):after {
+    content: '|';
+    position: relative;
+    padding: 0 10px;
+    display: inline-block;
+}
+#footer ul li a {
+    color: #fff;
 }
