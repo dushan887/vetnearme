@@ -138,6 +138,6 @@ class ClinicQuery extends Clinic
 
     private function deleteOldLogo($logo)
     {
-        File::delete($this->_logoDirectory . $logo);
+        \File::delete($this->_logoDirectory . $logo);
     }
 }
