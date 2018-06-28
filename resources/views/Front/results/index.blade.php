@@ -203,7 +203,8 @@
 			overviewMapControl: false,
 			}
 
-		let map = new google.maps.Map(document.getElementById('map'), mapOptions)
+		let map    = new google.maps.Map(document.getElementById('map'), mapOptions)
+		let bounds = new google.maps.LatLngBounds()
 
 		let count = 0;
 		let marker = new CustomMarker (
@@ -212,8 +213,11 @@
 				{
 					marker_id: 'start',
 				},
+
+
 			);
 
+		bounds.extend(marker.latlng)
 		for(coordinate in coordinates){
 
 			let marker = new CustomMarker (
@@ -227,7 +231,11 @@
 			count ++
 
 			markers.push(marker)
+
+			bounds.extend(marker.latlng)
 		}
+
+		map.fitBounds(bounds)
 
 	}
 
