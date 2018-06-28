@@ -5,6 +5,7 @@
     Route::get('/clinic/{clinic}', 'Front\ClinicController@index')->name('clinic');
 
     Route::get('/blog', 'Front\BlogController@index')->name('blog');
+    Route::get('/blogsingle', 'Front\BlogController@blogsingle')->name('blog-single');
 
     Route::get('/blog/pet-health', 'Front\BlogController@category')->name('Pet Health');
     Route::get('/blog/medical-bulletin', 'Front\BlogController@category2')->name('Medical Bulletin');

@@ -1400,7 +1400,8 @@ article .article-body p {
 article footer {
     padding: 15px;
 }
-.home #sidebar {
+.home #sidebar,
+.post #sidebar {
   display: inline-block;
   padding: 15px;
   border-radius: 5px;

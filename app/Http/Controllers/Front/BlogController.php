@@ -17,6 +17,16 @@ class BlogController extends Controller
         return view('Front.blog.index');
     }
 
+     /**
+     * Show the application Blog Single.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function blogsingle()
+    {
+        return view('Front.blog.blogsingle');
+    }
+
     /**
      * Show the Blog Category.
      *
