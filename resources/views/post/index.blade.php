@@ -18,7 +18,7 @@
       <div class="row">
 
         @if (Session::has('alert'))
-          @include('partials._alert')
+          @include('partial._alert')
         @endif
 
         <div class="col-md-3">

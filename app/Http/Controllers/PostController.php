@@ -48,11 +48,21 @@ class PostController extends Controller
 
         $model = new PostQuery;
 
-        if($model->store($data, $request))
-            return redirect()->route('posts')->with('alert', [
-                'message' => 'Post successfully created',
-                'type'    => 'success'
-            ]);
+        if($model->store($data, $request)){
+            if($request->ajax()){
+                $request->session()->flash('alert', [
+                    'message' => 'Post successfully created',
+                    'type'    => 'success'
+                ]);
+            } else {
+                return response()->json([
+                    'messageTitle' => 'Creating post failed!',
+                    'messageText'  => 'Something went wrong. Please try again.',
+                    'class'        => 'danger'
+                ], 400);
+            }
+        }
+
     }
 
     /**
@@ -99,17 +109,28 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(PostUpdateRequest $request)
+    public function update(PostUpdateRequest $request, int $id)
     {
         $data = $request->validated();
 
         $model = new PostQuery;
 
-        if($model->updatePost($data, $request))
-            return redirect()->route('posts')->with('alert', [
-                'message' => 'Post updated successfuly',
-                'type'    => 'success'
-            ]);
+        if($model->updatePost($data, $request, $id)){
+
+            if($request->ajax()){
+                $request->session()->flash('alert', [
+                    'message' => 'Post updated successfuly',
+                    'type'    => 'success'
+                ]);
+            } else {
+                return response()->json([
+                    'messageTitle' => 'Updating post failed!',
+                    'messageText'  => 'Something went wrong. Please try again.',
+                    'class'        => 'danger'
+                ], 400);
+            }
+        }
+
     }
 
     /**

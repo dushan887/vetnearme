@@ -250,7 +250,7 @@ export default {
         }
      })
       .then(function (response) {
-          // window.location.href = "/admin/posts"
+          window.location.href = "/admin/posts"
       })
       .catch(function (error) {
         console.log(error);
