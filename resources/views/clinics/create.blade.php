@@ -66,6 +66,14 @@
                     {!! $errors->first('subscribe', '<p class="help-block">:message</p>') !!}
                   </div>
 
+                  <div class="form-group {{ $errors->has('accessibility') ? 'has-error' : ''}}">
+                    <label style="display: block">
+                      Wheelchair Accessible
+                      <input type="checkbox" value="true" name="accessibility" checked class="minimal pull-right">
+                    </label>
+                    {!! $errors->first('accessibility', '<p class="help-block">:message</p>') !!}
+                  </div>
+
                 </div>
 
                <button type="submit" class="btn btn-primary">Create Clinic</button>
@@ -163,6 +171,13 @@
                                   ?>>{{$value}}</option>
                               @endforeach
                             </select>
+                          </div>
+
+                          <div class="form-group {{ $errors->has('state') ? 'has-error' : ''}}">
+                            <label for=state>Postal Code</label>
+                            <input type="text" id=state name=state class="form-control" placeholder="State"
+                              value="{{ old('state')}}">
+                              {!! $errors->first('state','<p class="help-block">:message</p>') !!}
                           </div>
 
                           <div class="form-group {{ $errors->has('gmaps_link') ? 'has-error' : ''}}">

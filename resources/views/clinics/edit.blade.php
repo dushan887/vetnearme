@@ -77,6 +77,18 @@
                 <p class="help-block">:message</p>') !!}
               </div>
 
+              <div class="form-group {{ $errors->has('accessibility') ? 'has-error' : ''}}">
+                <label style="display: block">
+                      Specialist and Emergency
+                      <input type="checkbox"
+                      value="true" name="accessibility"
+                      class="minimal pull-right"
+                      @if($clinic->accessibility)
+                        checked
+                      @endif>
+                    </label> {!! $errors->first('accessibility', '<p class="help-block">:message</p>') !!}
+              </div>
+
             </div>
 
             <button type="submit" class="btn btn-primary">Update Clinic</button>
@@ -189,6 +201,13 @@
                           </option>
                         @endforeach
                       </select>
+                  </div>
+
+                  <div class="form-group {{ $errors->has('state') ? 'has-error' : ''}}">
+                    <label for=state>Postal Code</label>
+                    <input type="text" id=state name=state class="form-control" placeholder="State"
+                      value="{{ old('state') ?? $clinic->state }}">
+                      {!! $errors->first('state','<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group {{ $errors->has('gmaps_link') ? 'has-error' : ''}}">

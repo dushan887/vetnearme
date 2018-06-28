@@ -36,6 +36,7 @@ class StoreClinic extends FormRequest
             'city'                     => 'required|string|min:2|max:255',
             'address'                  => 'required|string|min:2|max:255',
             'zip'                      => 'required|string|min:2|max:255',
+            'state'                    => 'nullable|string|min:2|max:255',
             'country_id'               => 'integer',
             'hours.*'                  => ['required', new Hours],
             'special_notes'            => 'nullable|string|max:1024',
