@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
 
-<admin-post-form id="{{ $id }}"></admin-post-form>
+<admin-post-form :postid="{{ $id }}"></admin-post-form>
 
 @stop

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PostStoreRequest extends FormRequest
+class PostUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class PostStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'       => 'required|min:3|max:255|unique:posts,title',
-            'permalink'   => 'required|min:3|max:255|unique:posts,permalink',
+            'title'       => 'required|min:3|max:255|unique:posts,title,' . $this->route('id'),
+            'permalink'   => 'required|min:3|max:255|unique:posts,permalink,' . $this->route('id'),
             'body'        => 'required|string',
             'expert'      => 'required|string',
             'status'      => [Rule::in([0, 1])],

@@ -2,12 +2,12 @@
     <div>
         <section class="content-header">
 
-            <h1>New Post</h1>
+            <h1>{{ title }}</h1>
 
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                 <li><a href="#">Post</a></li>
-                <li class="active">New Post</li>
+                <li class="active">{{ title }}</li>
             </ol>
 
         </section>
@@ -24,7 +24,7 @@
           <div class="col-md-9">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">New Post</h3>
+                <h3 class="box-title">{{ title }}</h3>
               </div>
               <!-- /.box-header -->
 
@@ -83,6 +83,7 @@
 
             <div class="box-header with-border">
               <h3 class="box-title">Category</h3>
+            console.log(data);
 
               <div class="box-tools">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -96,7 +97,8 @@
                 <select
                   name="category_id"
                   id="category_id"
-                  class="form-control">
+                  class="form-control"
+                  v-model=post.category_id>
                     <option
                       v-for="category in categories"
                       :key=category.id
@@ -142,10 +144,16 @@
             </div>
 
             <div class="box-body">
-              <div class="form-group">
-                  <label for="cover_image">File input</label>
-                  <input type="file" id="cover_image" name="cover_image">
+
+                <div class="form-group">
+                    <label for="cover_image">File input</label>
+                    <input type="file" id="cover_image" name="cover_image">
                 </div>
+
+                <img
+                    class="post-cover-image"
+                    :src="'/postsCover/' + post.cover_image" alt="" v-if="post.cover_image !== ''">
+
             </div>
             <!-- /.box-body -->
           </div>
@@ -202,6 +210,7 @@ export default {
           },
           categories:[],
           action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store',
+          title: this.postid ? `Update Post` : "New Post"
       }
   },
   methods: {
@@ -241,7 +250,7 @@ export default {
         }
      })
       .then(function (response) {
-          window.location.href = "/admin/posts"
+          // window.location.href = "/admin/posts"
       })
       .catch(function (error) {
         console.log(error);
@@ -275,9 +284,31 @@ export default {
           Event.$emit('form:errors:show', form, error.response.data.errors)
       })
 
+    },
+    getPost(id){
+      axios.get('/admin/posts/get/' + id, {})
+        .then((response) => {
+
+            let data = response.data.post
+
+            this.post = {
+              title: data.title,
+              permalink: data.permalink,
+              body: data.body,
+              expert: data.expert,
+              status: data.status,
+              cover_image: data.cover_image,
+              category_id: data.category_id,
+            }
+        })
     }
   },
   mounted(){
+
+    if(this.postid){
+      this.getPost(this.postid)
+    }
+
     this.getCategories()
   }
 }

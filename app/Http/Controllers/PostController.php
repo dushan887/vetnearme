@@ -6,6 +6,7 @@ use App\Post;
 use App\ModelQueries\PostQuery;
 use App\PostCategory;
 use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -43,7 +44,6 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        // dd($request->all());
         $data = $request->validated();
 
         $model = new PostQuery;
@@ -80,15 +80,36 @@ class PostController extends Controller
     }
 
     /**
+     * Get the post data via ajax request.
+     *
+     * @param  integer $id
+     * @return \Illuminate\Http\Response
+     */
+    public function get(int $id)
+    {
+        return response()->json([
+            'post' => Post::find($id)
+        ], 200);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Requests\App\Requests\PostStoreRequest  $request
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostUpdateRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $model = new PostQuery;
+
+        if($model->updatePost($data, $request))
+            return redirect()->route('posts')->with('alert', [
+                'message' => 'Post updated successfuly',
+                'type'    => 'success'
+            ]);
     }
 
     /**
@@ -99,6 +120,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $data = $request->validated();
     }
 }

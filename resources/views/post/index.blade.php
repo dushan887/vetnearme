@@ -22,7 +22,7 @@
         @endif
 
         <div class="col-md-3">
-          <a href="{{ url('/admin/post/create') }}" class="btn btn-primary btn-block margin-bottom">New Post</a>
+          <a href="{{ url('/admin/posts/create') }}" class="btn btn-primary btn-block margin-bottom">New Post</a>
 
           <div class="box box-solid">
             <div class="box-header with-border">

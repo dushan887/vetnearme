@@ -87,7 +87,7 @@ class AdminPanelMenu {
             ]);
             $event->menu->add([
                 'text' => 'Post',
-                'url'  => 'admin/post',
+                'url'  => 'admin/posts',
                 'icon' => 'newspaper-o'
             ]);
             $event->menu->add([
