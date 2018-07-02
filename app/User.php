@@ -46,4 +46,8 @@ class User extends Authenticatable
         return $this->hasOne('App\VerifyUser');
     }
 
+    public function posts(){
+        return $this->hasMany("Post");
+    }
+
 }

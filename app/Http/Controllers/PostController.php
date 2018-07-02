@@ -23,7 +23,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post/index');
+        return view('post/index', [
+            'posts' => Post::paginate(10),
+        ]);
     }
 
     /**
@@ -139,8 +141,20 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(int $id)
     {
-        $data = $request->validated();
+        $deleted = Clinic::destroy($id) ?
+            $message = [
+                'messageTitle' => 'Clinic(s) Deleted',
+                'messageText'  => 'The clinic(s) has been deleted',
+                'class'        => 'success'
+            ] :
+            $message = [
+                'messageTitle' => 'Alert',
+                'messageText'  => '',
+                'class'        => 'error'
+            ];
+
+        return response()->json($message, $deleted ? 200 : 500);
     }
 }

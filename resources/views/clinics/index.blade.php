@@ -156,6 +156,7 @@
                         <td>{{ $clinic->owner->last_name ?? "Doesn't have owner" }}</td>
                         <td>{{ $clinic->subscribe ? 'Yes' : 'No' }}</td>
                         <td>{{ $clinic->country->name }}</td>
+
                         <td width="150">
                           <div class="btn-group pull-right">
                             <button type="button"
@@ -183,6 +184,7 @@
                     @endforeach
 
                   </tbody>
+
                   <tfoot>
                     <tr>
                       <td width="35">
@@ -199,6 +201,7 @@
                       <th width="150">Action</th>
                     </tr>
                   </tfoot>
+
                 </table>
                 <!-- /.table -->
               </div>
