@@ -145,8 +145,8 @@ class PostController extends Controller
     {
         $deleted = Post::destroy($id) ?
             $message = [
-                'messageTitle' => 'Clinic(s) Deleted',
-                'messageText'  => 'The clinic(s) has been deleted',
+                'messageTitle' => 'Post(s) Deleted',
+                'messageText'  => 'The post(s) has been deleted',
                 'class'        => 'success'
             ] :
             $message = [
