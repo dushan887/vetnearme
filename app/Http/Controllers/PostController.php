@@ -138,12 +138,12 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @integer $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
     {
-        $deleted = Clinic::destroy($id) ?
+        $deleted = Post::destroy($id) ?
             $message = [
                 'messageTitle' => 'Clinic(s) Deleted',
                 'messageText'  => 'The clinic(s) has been deleted',
