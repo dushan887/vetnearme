@@ -20,7 +20,8 @@ class FrontPartController extends Controller {
             // Since the search file is shared, we need the default values to avoid possible errors
             'category'         => 'all',
             'advancedSearch'   => false,
-            'selectedServices' => []
+            'selectedServices' => [],
+            'posts'            => Post::orderBy('created_at', 'desc')->limit(4)->get(),
         ]);
     }
 

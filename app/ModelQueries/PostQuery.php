@@ -12,10 +12,14 @@ class PostQuery extends Post
     protected $table = 'posts';
 
     private $_coverDirectory;
+    private $_coverDirectoryThumbs;
 
     public function __construct()
     {
-        $this->_coverDirectory = public_path('/postsCover/');
+        $this->_coverDirectory       = public_path('/postsCover/');
+        $this->_coverDirectoryThumbs = $this->_coverDirectory . "/thumbs";
+
+        \File::makeDirectory($this->_coverDirectoryThumbs, 0755, true, true);
     }
 
     public function store($data, $request)
@@ -61,11 +65,21 @@ class PostQuery extends Post
 
         $cover->move($this->_coverDirectory, $name);
 
+        $img = \Image::make($cover->getPathName());
+
+        // Make thumbs
+        $img->fit(256, 256);
+        $img->save($this->_coverDirectoryThumbs  . "/" . $name);
+
         return $name;
     }
 
     private function deleteOldCover($cover)
     {
-        File::delete($this->_coverDirectory . $cover);
+        \File::delete($this->_coverDirectory . $cover);
+
+        if(\File::exists(public_path($this->_coverDirectory . "/thumbs/" . $cover)))
+            \File::delete(public_path($this->_coverDirectory . "/thumbs/" . $cover));
+
     }
 }
