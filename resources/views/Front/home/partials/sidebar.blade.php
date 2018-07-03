@@ -4,7 +4,7 @@
 		<div class="search-wrapper">
 			<div class="field relative">
 				<input class="border-main-color" type="text" placeholder="Article Search">
-			</div>					
+			</div>
 		</div>
 	</form>
 	<div class="border-separator" style="margin-bottom: 18px;"></div>

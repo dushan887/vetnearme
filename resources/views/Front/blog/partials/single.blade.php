@@ -1,25 +1,23 @@
 <section>
 	<div class="container" style="max-width: 1170px;">
-		<div class="wrapper bg-main-color2">	
+		<div class="wrapper bg-main-color2">
 			<div class="row inner-sections">
 				<div class="col-md-12" style="margin-top: 20px">
 					<div class="inner empty">
-						<img src="{{ asset('/img/post2.jpg') }}" alt="">
+						<img src="{{ asset('/postsCover/' . $post->cover_image) }}"
+						alt="{{ $post->title }}">
 					</div>
-				</div>					
+				</div>
 			</div>
 
 			<div class="row inner-sections">
 				<div class="col-12 col-md-8">
 					<div class="inner">
-						<h4 class="main-color">What is lorem ipsum?</h4>
+						<h4 class="main-color">{{ $post->title }}?</h4>
 						<div class="border-separator space-10"></div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt obcaecati nesciunt ducimus ea exercitationem deleniti dolore, voluptas, quis nisi atque sint quia animi voluptatibus provident excepturi id illo rerum? Inventore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt obcaecati nesciunt ducimus ea exercitationem deleniti dolore, voluptas, quis nisi atque sint quia animi voluptatibus provident excepturi id illo rerum? Inventore!</p><br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt obcaecati nesciunt ducimus ea exercitationem deleniti dolore, voluptas, quis nisi atque sint quia animi voluptatibus provident excepturi id illo rerum? Inventore!</p><br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt obcaecati nesciunt ducimus ea exercitationem deleniti dolore, voluptas, quis nisi atque sint quia animi voluptatibus provident excepturi id illo rerum? Inventore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt obcaecati nesciunt ducimus ea exercitationem deleniti dolore, voluptas, quis nisi atque sint quia animi voluptatibus provident excepturi id illo rerum? Inventore!</p><br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt obcaecati nesciunt ducimus ea exercitationem deleniti dolore, voluptas, quis nisi atque sint quia animi voluptatibus provident excepturi id illo rerum? Inventore!</p><br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+
+						{{ $post->body  }}
+
 						<h4 class="main-color" style="margin-top: 20px;">Share this story on Social Media</h4>
 						<div class="border-separator space-10"></div>
 						<ul class="blog-social list-inline list-unstyled">
@@ -45,7 +43,7 @@
 				</div>
 			</div>
 
-			
+
 		</div>
 	</div>
 </section>

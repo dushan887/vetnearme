@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Post;
+use App\PostCategory;
+
+use App\Helpers\XSS;
+
 class BlogController extends Controller
 {
     /**
@@ -14,17 +19,24 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('Front.blog.index');
+        return view('Front.blog.index', [
+            'posts' => Post::paginate(20),
+        ]);
     }
 
-     /**
-     * Show the application Blog Single.
+    /**
+     * Show the single blog
      *
+     * @param string $slug
      * @return \Illuminate\Http\Response
      */
-    public function blogsingle()
+    public function show(string $slug)
     {
-        return view('Front.blog.blogsingle');
+        return view('Front.blog.show',[
+            'post'        => Post::where('permalink', XSS::clean($slug))->first(),
+            'categories'  => PostCategory::all(),
+            'recentPosts' => Post::orderBy('created_at', 'desc')->limit(8)->get(),
+        ]);
     }
 
     /**
