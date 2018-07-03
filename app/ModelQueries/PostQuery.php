@@ -65,10 +65,13 @@ class PostQuery extends Post
 
         $cover->move($this->_coverDirectory, $name);
 
-        $img = \Image::make($cover->getPathName());
+        $img = \Image::make($this->_coverDirectory . $name);
 
         // Make thumbs
-        $img->fit(256, 256);
+        $img->resize(256, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
         $img->save($this->_coverDirectoryThumbs  . "/" . $name);
 
         return $name;

@@ -19142,7 +19142,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -19627,7 +19626,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-header with-border" }, [
       _c("h3", { staticClass: "box-title" }, [_vm._v("Category")]),
-      _vm._v("\n        console.log(data);\n\n          "),
+      _vm._v(" "),
       _c("div", { staticClass: "box-tools" }, [
         _c(
           "button",

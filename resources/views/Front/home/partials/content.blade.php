@@ -9,7 +9,7 @@
 					<header>
 						<a href="/blog/{{ $post->permalink }}">
 							<div class="cover-img"
-								style="background-image: url({{ asset('/postsCover/' . $post->cover_image) }});"></div>
+								style="background-image: url({{ asset('/postsCover/thumbs/' . $post->cover_image) }});"></div>
 						</a>
 					</header>
 
