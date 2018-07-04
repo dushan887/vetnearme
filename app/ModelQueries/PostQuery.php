@@ -82,7 +82,7 @@ class PostQuery extends Post
         \File::delete($this->_coverDirectory . $cover);
 
         if(\File::exists($this->_coverDirectory . "/thumbs/" . $cover))
-            \File::delete($this->_coverDirectory . "/thumbs/" . $cover);
+            \File::delete($this->_coverDirectory . "/thumbs/" . $cover  );
 
     }
 }

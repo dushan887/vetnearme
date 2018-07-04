@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Service;
+use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
