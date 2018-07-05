@@ -1391,8 +1391,22 @@ article header .cover-img {
 .grid-2x2 article header .cover-img {
     height: calc( ( 1400px / 10) * 2 );
 }
+.home-blog.grid-3x3 article header .cover-img {
+    height: calc( ( 1400px / 15) * 2 );
+}
+
+.home-blog.grid-3x3 article {
+    height: calc(100% - 30px);
+}
 article .article-body {
     padding: 25px 15px 0px 15px;
+}
+.home-blog.grid-3x3 article .article-body {
+    padding-top: 15px;
+}
+.home-blog.grid-3x3 article .article-body h3 {
+  font-size: 20px;
+  text-align: center;
 }
 article .article-body p {
     color: #222;
