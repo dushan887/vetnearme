@@ -31,7 +31,12 @@
 					data-coordinates="{{ $coordinates }}"
 					data-usercoordinates="{{ $userCoordinates }}"
 					data-urls="">
-					@include('Front.results.partials.content')
+					@if ($clinics)
+						@include('Front.results.partials.content')
+					@else
+						@include('Front.results.partials.no-result')
+					@endif
+
 				</div>
 				<div id="sidebar" class="bg-main-color2">
 				</div>

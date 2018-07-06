@@ -95,9 +95,9 @@ class ResultsController extends Controller {
     private function getClinics($request, $address, $coordinates, $currentDay)
     {
 
-        $radius     = $request->input('radius') ? $request->input('radius'): 2;
-        $services   = false;
         $radiusList = Radius::get();
+        $radius     = $request->input('radius') ? $request->input('radius'): $radiusList[0];
+        $services   = false;
 
         $conditionsQuery = [];
 
