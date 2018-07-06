@@ -688,7 +688,8 @@ article .article-body {
 .home-blog article .article-body {
   padding-top: 15px;
 }
-.home-blog article .article-body h3 {
+.home-blog article .article-body h3,
+.related article .article-body h3 {
   font-size: 20px;
   text-align: center;
 }

@@ -24,9 +24,6 @@
 						@include('Front.blog.partials.content')
 					</div>
 				</div>
-			{{-- 	<div class="col-12 col-md-4">
-					<div id="sidebar" class="bg-main-color2"></div>
-				</div> --}}
 			</div>
 		</div>
 	</div>

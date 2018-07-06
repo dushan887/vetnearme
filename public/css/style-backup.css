@@ -1,0 +1,241 @@
+
+
+
+
+
+
+/*SINGLE CLINIC*/
+.single .wrapper {
+    padding: 15px 15px 0 15px;
+    display: block;
+    border-radius: 5px;
+}
+.single .marker:before {
+  content: "\f3c5";
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 700;
+}
+.inner-sections .inner {
+    padding: 15px;
+    display: block;
+    font-size: 15px;
+    line-height: 1.5;
+    background-color: #fff;
+    height: 100%;
+    border-radius: 5px;
+}
+.row.inner-sections {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.inner-sections > div:not(.col-md-12):first-child {
+    padding-right: 0;
+}
+.inner-sections > div {
+    margin-bottom: 15px;
+}
+.wrapper .clinic-header {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    display: block;
+    background: #fff;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+.wrapper .clinic-header .col {
+    min-height: 120px;
+    align-items: center;
+}
+.clinic-header .rasault-rating {
+    position: absolute;
+    top:  15px;
+    right: 15px;
+    color: #C8DCE0;
+    padding: 0 10px;
+    line-height: 16px;
+    vertical-align: middle;
+}
+.rasault-rating .checked {
+    color: orange;
+}
+#clinic-nav {
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+}
+#clinic-nav ul {
+    display: flex;
+}
+#clinic-nav ul li {
+    display: inline-block;
+    margin-left: 5px;
+}
+#clinic-nav ul li a {
+    padding: 5px 10px;
+    border: 1px solid #C8DCE0;
+    border-radius: 5px;
+    width: 20%;
+    font-size: 12px;
+}
+#clinic-nav ul li a:hover {
+    background-color: #468a97;
+    color: #fff;
+    border: 1px solid #468a97;
+}
+.wrapper .clinic-logo {
+    text-align: center;
+    position: relative;
+    width: 150px;
+    display: block;
+    height: 150px;
+    z-index: 10;
+    top: -20px;
+    margin: auto;
+}
+.wrapper .clinic-logo img {    
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+    position: relative;
+    vertical-align: middle;
+}
+.wrapper .clinic-logo:before {
+    content: '';
+    border: 3px solid #468a97;
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    border-radius: 5px;
+    left: -10px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background-color: #C8DCE0;
+    z-index: 1;
+    margin: auto;
+}
+.wrapper .clinic-name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.wrapper .clinic-name h1 {
+    margin: auto 0;
+}
+.opening-hours li {
+    width: 100%;
+    display: block;
+    float: left;
+}
+.opening-hours strong {
+    float: left;
+    margin: 5px 0;
+    font-weight: 600;
+}
+.opening-hours strong {
+    float: left;
+    margin: 5px 0;
+}
+.opening-hours span {
+    float: right;
+    margin: 5px 0;
+}
+.opening-hours .note span {
+    float: left;
+    font-size: 12px;
+    width: 100%;
+}
+.opening-hours .note strong {
+    width: 100%;
+}
+.service-list li {
+  display: inline-block;
+  margin-right: 2px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  border: 1px solid #c8dce0;
+  padding: 5px 15px;
+  text-align: center;
+  border-radius: 5px;
+}
+.clinic-doctors .doctor-img {
+    float: left;
+    margin-right: 30px;
+    margin-left: 15px;
+    position: relative;
+}
+.clinic-doctors .doctor-img:before {
+    content: '';
+    border: 1px solid #468a97;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    left: -5px;
+    top: -5px;
+    overflow: hidden;
+    background-color: #C8DCE0;
+    z-index: 1;
+}
+.clinic-doctors .doctor-img img {
+    display: block;
+    position: relative;
+    z-index: 10;
+    border-radius: 100%;
+    max-width: 60px;
+}
+.clinic-doctors li {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.clinic-doctors {
+    max-height: 320px;
+    position: relative;
+    overflow-y: scroll;
+}
+.clinic-doctors span {
+  font-weight: 600;
+}
+.clinic-doctors span small {
+  display: block;
+  font-weight: normal;
+  font-size: 12px;
+}
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+    border: 1px solid #C8DCE0;
+    padding: 10px 15px;
+    color: #468a97;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+    display: inline-block;
+    font-family: inherit;
+}
+.booking-form textarea {
+    height: 100px;
+}
+.booking-form .half {
+    width: calc(50% - 2px)
+}
+.booking-form input[type="submit"] {
+    border-color: #468a97;
+    background-color: #468a97;
+    color: #fff;
+    text-align: center;    
+    cursor: pointer;
+    max-width: 200px;
+}
+.booking-form input[type="submit"]:hover {
+    border-color: #468a97;
+    background-color: #C8DCE0;
+    color: #468a97;
+    text-align: center;
+}
