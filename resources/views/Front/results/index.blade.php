@@ -129,9 +129,12 @@
 			div = this.div = document.createElement('div');
 
 			innerdiv = document.createElement('span');
+			innerimage = document.createElement('img');
 
 			div.className = 'marker';
 
+			// MARKER IKONICA IDE OVDE
+			div.appendChild(innerimage).src = 'http://vetnearme.local/img/l1.png';
 			div.appendChild(innerdiv);
 
 			if (typeof(self.args.marker_id) !== 'undefined') {

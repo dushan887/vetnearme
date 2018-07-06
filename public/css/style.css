@@ -913,6 +913,9 @@ article footer {
   cursor: pointer;
   border-radius: 100%;
 }
+.marker:not([data-marker_id="start"]) {
+ background-color: #fff;
+}
 .marker > span{
   width: 0;
   height: 0;
@@ -924,6 +927,16 @@ article footer {
   right: 0;
   margin: auto;
   bottom: -22px;
+}
+.marker > img {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  margin: auto;
 }
 .marker:before {
   content: attr(data-marker_pin);
@@ -942,6 +955,7 @@ article footer {
 
   border-radius: 100%;
   z-index: 20;
+  color: transparent;
 }
 .marker.open {
   z-index: 999;
