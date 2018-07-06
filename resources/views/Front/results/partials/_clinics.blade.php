@@ -4,13 +4,22 @@
         data-coordinates="{{ $clinicsCoordinates ?? '' }}"
         data-usercoordinates="{{ $userCoordinates }}"
         >
-        <ul class="list-unstyled">
+        <ul class="list-unstyled" id="clinics">
 
+            @php
+                $count = 0;
+            @endphp
             @foreach($clinics as $clinic)
 
             <?php $hours = json_decode($clinic->opening_hours) ?>
 
-                <li class="item" data-item-no="" data-item-url="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
+                <li
+                    id="clinic-{{ $count }}"
+                    data-marker={{ $clinic->marker ?? 'none' }}
+                    class="item"
+                    data-item-no=""
+                    data-item-url="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
+
                     <div class="resault">
                         <div class="resault-logo">
                             <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
@@ -91,7 +100,9 @@
                     </div>
 
                 </li>
-
+                @php
+                    $count++;
+                @endphp
             @endforeach
 
         </ul>

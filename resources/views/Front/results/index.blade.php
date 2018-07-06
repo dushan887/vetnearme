@@ -139,7 +139,10 @@
 			div.className = 'marker';
 
 			// MARKER IKONICA IDE OVDE
-			div.appendChild(innerimage).src = 'http://vetnearme.local/img/l1.png';
+			let popUpMarker = $('#clinic-' + self.args.marker_id).data('marker')
+
+			div.appendChild(innerimage).src =
+				popUpMarker !== "none" ? popUpMarker : '/img/l1.png';
 			div.appendChild(innerdiv);
 
 			if (typeof(self.args.marker_id) !== 'undefined') {
@@ -148,24 +151,33 @@
 			}
 
 			google.maps.event.addDomListener(div, "click", function(event) {
+
 				// alert('You clicked on a custom marker!');
 				google.maps.event.trigger(self, "click");
-					var infoIndex = $(this).attr('data-marker_id')
+
+					let infoIndex = $(this).attr('data-marker_id')
+
 					if (infoIndex != 'start') {
 						if (!$(this).hasClass('open')) {
-							var infoTitle = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-title').html();
-							var infoAddress = '<i class="fas fa-map-marker-alt"></i>' + $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-address').html();
-							var infoEmail = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-email').html();
-							var infoPhone = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-phone').html();
-							var infoWeb = $('#visual-resaults .inner > ul li:eq('+infoIndex+') .resault-web').html();
+
+							let clinic = $('#clinic-' + infoIndex)
+
+							let infoTitle   = clinic.find('.resault-title').html()
+							let infoAddress = clinic.find('.resault-address').html()
+							let infoEmail   = clinic.find('.resault-email').html()
+							let infoPhone   = clinic.find('.resault-phone').html()
+							let infoWeb     = clinic.find('.resault-web').html()
+
 							$('.marker').removeClass('open')
-							$(this).addClass('open').append('<div class="info-window">'+
-								'<div class="info-title"><strong> '+ infoTitle + '</div>' +
-								'<div class="info-address"> '+ infoAddress + '</div>' +
-								'<div class="info-email"> '+ infoEmail + '</div>' +
-								'<div class="info-phone"> '+ infoPhone + '</div>' +
-								'<div class="info-web"> '+ infoWeb + '</div>' +
-								'</div>')
+							$(this).addClass('open').append(`
+								<div class="info-window">
+									<div class="info-title"><strong>${infoTitle}</div>
+									<div class="info-address">${infoAddress}</div>
+									<div class="info-email">${infoEmail}</div>
+									<div class="info-phone">${infoPhone}</div>
+									<div class="info-web">${infoWeb}</div>
+								'</div>
+								`)
 						} else {
 							if ($(event.target).hasClass('marker')) {
 								$('.marker').removeClass('open')

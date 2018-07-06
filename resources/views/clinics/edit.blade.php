@@ -767,7 +767,6 @@
                 <h3 class="box-title">Media</h3>
               </div>
 
-
               <div class="box-body">
                 <div class="col-md-12">
                   <div class="form-group {{ $errors->has('logo') ? 'has-error' : ''}}">
@@ -777,6 +776,18 @@
 
                   <h3>Current Logo</h3>
                   <img src="/img/logo/{{ $clinic->logo }}" alt="Current Logo">
+                </div>
+              </div>
+
+              <div class="box-body">
+                <div class="col-md-12">
+                  <div class="form-group {{ $errors->has('marker') ? 'has-error' : ''}}">
+                    <label for="marker">Clinic Marker</label>
+                    <input type="file" id="marker" name=marker>
+                  </div>
+
+                  <h3>Current Marker</h3>
+                  <img src="/img/markers/{{ $clinic->marker }}" alt="Current Marker">
                 </div>
               </div>
 

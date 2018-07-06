@@ -739,12 +739,20 @@
                         <h3 class="box-title">Media</h3>
                       </div>
 
-
                       <div class="box-body">
                         <div class="col-md-12">
                           <div class="form-group {{ $errors->has('logo') ? 'has-error' : ''}}">
                             <label for="logo">Clinic Logo</label>
                             <input type="file" id="logo" name=logo>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="box-body">
+                        <div class="col-md-12">
+                          <div class="form-group {{ $errors->has('marker') ? 'has-error' : ''}}">
+                            <label for="marker">Clinic Marker</label>
+                            <input type="file" id="marker" name=marker>
                           </div>
                         </div>
                       </div>
