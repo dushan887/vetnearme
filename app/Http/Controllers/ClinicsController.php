@@ -189,4 +189,63 @@ class ClinicsController extends Controller
 
     }
 
+    public function export()
+    {
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=clinics.csv',
+            'Expires'             => '0',
+            'Pragma'              => 'public',
+        ];
+
+        $clinics = Clinic::all();
+
+        $columns = [
+            'name', 'description', 'special_notes', 'email', 'phone_number', 'emergency_number', 'city',
+            'address', 'zip', 'state', 'country', 'latitude', 'longitude', 'web_site',
+            'social_media', 'opening_hours', 'general_practice', 'specialist_and_emergency', 'subscribe',
+            'owner'
+        ];
+
+        $callback = function() use ($clinics, $columns)
+        {
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, $columns);
+
+            foreach($clinics as $clinic) {
+                fputcsv($file, [
+                    $clinic->name,
+                    $clinic->description,
+                    $clinic->special_notes,
+                    $clinic->email,
+                    $clinic->phone_number,
+                    $clinic->emergency_number,
+                    $clinic->city,
+                    $clinic->zip,
+                    $clinic->address,
+                    $clinic->state,
+                    $clinic->country->full_name,
+                    $clinic->lat,
+                    $clinic->lng,
+                    $clinic->url,
+                    $clinic->social_media,
+                    $clinic->opening_hours,
+                    $clinic->general_practice ? 'No' : 'Yes',
+                    $clinic->specialist_and_emergency ? 'No' : 'Yes',
+                    $clinic->general_practice ? 'No' : 'Yes',
+                    $clinic->subscribe ? 'No' : 'Yes',
+                    $clinic->owner ? $clinic->owner->first_name . " " . $clinic->owner->last_name : "Doesn't have an owner",
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return \Response::stream($callback, 200, $headers);
+
+
+    }
+
 }

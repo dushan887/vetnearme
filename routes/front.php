@@ -1,14 +1,14 @@
 <?php
 
-    Route::get('/', 'Front\FrontPartController@index')->name('home');
-    Route::get('/results', 'Front\ResultsController@index')->name('results');
-    Route::get('/clinic/{clinic}', 'Front\ClinicController@index')->name('clinic');
+    Route::get('/', 'Front\FrontPartController@index')->name('home')->middleware('checkRole:auth');
+    Route::get('/results', 'Front\ResultsController@index')->name('results')->middleware('checkRole:auth');
+    Route::get('/clinic/{clinic}', 'Front\ClinicController@index')->name('clinic')->middleware('checkRole:auth');
 
-    Route::get('/blog', 'Front\BlogController@index')->name('blog');
+    Route::get('/blog', 'Front\BlogController@index')->name('blog')->middleware('checkRole:auth');
 
-    Route::get('/blog/{slug}', 'Front\BlogController@show')->name('blog-single');
+    Route::get('/blog/{slug}', 'Front\BlogController@show')->name('blog-single')->middleware('checkRole:auth');
 
-    Route::get('/blog/category/{name}', 'Front\BlogController@category')->name('blog-categories');
+    Route::get('/blog/category/{name}', 'Front\BlogController@category')->name('blog-categories')->middleware('checkRole:auth');
 
     // Route::get('/blog/pet-health', 'Front\BlogController@category')->name('Pet Health');
     // Route::get('/blog/medical-bulletin', 'Front\BlogController@category2')->name('Medical Bulletin');
