@@ -1,4 +1,4 @@
-<section class="blog-grid grid-3x3 home-blog">
+<section class="blog-grid home-blog">
 	<div class="row">
 
 		@foreach($posts as $post)

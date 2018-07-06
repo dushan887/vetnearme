@@ -10,9 +10,6 @@
 			<div></div>
 			<div></div>
 		</div>
-		<div id="sign-in">
-			<a href="{{ URL::to('/login') }}">Sign In</a>
-		</div>
 		<div id="main-nav">
 			<div class="side-logo">
 				<a href="#">
