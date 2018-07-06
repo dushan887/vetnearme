@@ -16,7 +16,11 @@
     <section class="content">
       <div class="row">
         <div class="col-md-3">
+
           <a href="{{ url('/admin/clinics/create') }}" class="btn btn-primary btn-block margin-bottom">Add New Practice</a>
+
+          <a href="{{ url('/admin/clinics/export') }}" class="btn btn-info btn-block margin-bottom"
+          aria-label="Left Align">Export Practices</a>
 
           <div class="box box-solid">
             <div class="box-header with-border">
