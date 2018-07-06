@@ -59,7 +59,7 @@
                   <option>Super Admin</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group"  style="display: none !important">
                 <label for="filter-opt4">User gender:</label>
                 <select class="form-control" id="filter-opt4">
                   <option>Any</option>

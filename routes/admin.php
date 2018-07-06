@@ -14,14 +14,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::post('services/destroy/{id}', 'ServicesController@destroy');
 
     // MESSAGES
-    Route::get('mailbox', 'MailboxController@index')->name('mailbox');
-    Route::get('mailbox/compose', 'MailboxController@compose');
-    Route::get('mailbox/message', 'MailboxController@message');
+    // Route::get('mailbox', 'MailboxController@index')->name('mailbox');
+    // Route::get('mailbox/compose', 'MailboxController@compose');
+    // Route::get('mailbox/message', 'MailboxController@message');
 
     // NOTIFICATIONS
-    Route::get('notifications', 'NotificationsController@index')->name('notifications');
-    Route::get('notifications/compose', 'NotificationsController@compose');
-    Route::get('notifications/notification', 'NotificationsController@notification');
+    // Route::get('notifications', 'NotificationsController@index')->name('notifications');
+    // Route::get('notifications/compose', 'NotificationsController@compose');
+    // Route::get('notifications/notification', 'NotificationsController@notification');
 
     // USERS
     Route::get('profile', 'UsersController@profile')->name('profile');

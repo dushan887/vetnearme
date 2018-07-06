@@ -69,7 +69,7 @@
                   placeholder="Last Name"> {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
               </div>
 
-              <div class="form-group no-margin-bottom">
+              <div class="form-group no-margin-bottom"  style="display: none !important">
                 <label for="gender" class="control-label">Gender</label>
                   <select id="gender" name=gender class="form-control">
                     <option value="0">Male</option>

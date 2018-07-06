@@ -164,7 +164,7 @@
 
                   </div>
 
-                  <div class="form-group">
+                  <div class="form-group" style="display: none !important">
                     <label for="gender" class="col-sm-2 control-label">Gender</label>
 
                     <div class="col-sm-10">
