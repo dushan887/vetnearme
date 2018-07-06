@@ -13,8 +13,8 @@
 
 		@foreach($categories as $category)
 			<li>
-				<i class="fa fa-paper-plane"></i>
-				<a href="#">{{ $post->name  }}</a>
+				<i class="fs fa-paw"></i>
+				<a href="/blog/category/{{ strtolower($category->name) }}">{{ $category->name  }}</a>
 			</li>
 		@endforeach
 

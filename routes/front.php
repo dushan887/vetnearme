@@ -8,7 +8,7 @@
 
     Route::get('/blog/{slug}', 'Front\BlogController@show')->name('blog-single');
 
-    Route::get('/blog/categories/{name}', 'Front\BlogController@categories')->name('blog-categories');
+    Route::get('/blog/category/{name}', 'Front\BlogController@category')->name('blog-categories');
 
     // Route::get('/blog/pet-health', 'Front\BlogController@category')->name('Pet Health');
     // Route::get('/blog/medical-bulletin', 'Front\BlogController@category2')->name('Medical Bulletin');

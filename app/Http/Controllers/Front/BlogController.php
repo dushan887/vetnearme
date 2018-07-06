@@ -32,10 +32,15 @@ class BlogController extends Controller
      */
     public function show(string $slug)
     {
+        $post = Post::where('permalink', XSS::clean($slug))->first();
         return view('Front.blog.show',[
-            'post'        => Post::where('permalink', XSS::clean($slug))->first(),
-            'categories'  => PostCategory::all(),
-            'recentPosts' => Post::orderBy('created_at', 'desc')->limit(8)->get(),
+            'post'         => $post,
+            'categories'   => PostCategory::orderBy('name', 'desc')->get(),
+            'posts'        => Post::orderBy('created_at', 'desc')->limit(6)->get(),
+            'relatedPosts' => Post::where([
+                'category_id' => $post->category_id,
+                ['id', '!=', $post->id],
+            ])->orderBy('created_at', 'desc')->limit(3)->get()
         ]);
     }
 
@@ -44,110 +49,13 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function category()
+    public function category(string $name)
     {
-        return view('Front.blog.category');
+        return view('Front.blog.category', [
+            'posts' => Post::whereHas('category', function ($query) use ($name) {
+                $query->whereRaw("LOWER(name) = ?", strtolower(XSS::clean($name)));
+            })->get()
+        ]);
     }
 
-     /**
-     * Show the Blog Category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function category2()
-    {
-        return view('Front.blog.category2');
-    }
-
-     /**
-     * Show the Blog Category.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function category3()
-    {
-        return view('Front.blog.category3');
-    }
-
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post()
-    {
-        return view('Front.blog.post');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post2()
-    {
-        return view('Front.blog.post2');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post3()
-    {
-        return view('Front.blog.post3');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post4()
-    {
-        return view('Front.blog.post4');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post5()
-    {
-        return view('Front.blog.post5');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post6()
-    {
-        return view('Front.blog.post6');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post7()
-    {
-        return view('Front.blog.post7');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post8()
-    {
-        return view('Front.blog.post8');
-    }
-    /**
-     * Show the Blog Post.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function post9()
-    {
-        return view('Front.blog.post9');
-    }
 }

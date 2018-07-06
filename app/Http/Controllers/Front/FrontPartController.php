@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Service;
 use App\Post;
+use App\PostCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,6 +24,7 @@ class FrontPartController extends Controller {
             'advancedSearch'   => false,
             'selectedServices' => [],
             'posts'            => Post::orderBy('created_at', 'desc')->limit(6)->get(),
+            'categories'       => PostCategory::orderBy('name', 'desc')->get(),
         ]);
     }
 

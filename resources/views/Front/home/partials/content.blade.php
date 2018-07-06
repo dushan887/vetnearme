@@ -20,15 +20,6 @@
 						{{-- <p>{{ $post->expert }}</p> --}}
 					</div>
 
-					{{-- <footer>
-						<div class="row">
-							<div class="col-12 col-md-6 align-left">
-								<a href="#">PET HEALTH</a>
-							</div>
-							<div class="col-12 col-md-6 align-right">
-								<a href="/blog/{{ $post->permalink }}">read more...</a>
-							</div>
-						</div> --}}
 					</footer>
 				</article>
 			</div>
