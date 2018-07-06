@@ -234,7 +234,6 @@ class ClinicsController extends Controller
                     $clinic->opening_hours,
                     $clinic->general_practice ? 'No' : 'Yes',
                     $clinic->specialist_and_emergency ? 'No' : 'Yes',
-                    $clinic->general_practice ? 'No' : 'Yes',
                     $clinic->subscribe ? 'No' : 'Yes',
                     $clinic->owner ? $clinic->owner->first_name . " " . $clinic->owner->last_name : "Doesn't have an owner",
                 ]);
