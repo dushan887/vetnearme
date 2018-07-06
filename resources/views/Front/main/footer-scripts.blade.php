@@ -7,7 +7,11 @@
 
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&callback=initMap"
         async defer></script> -->
+
 <script type="text/javascript">
+	$('#search-toogle-btn').click(function() {
+		$('#toogle-search').toggle('fast')
+	})
 	$('#menu-btn').click(function() {
 		$('body').toggleClass('nav-in');
 	});

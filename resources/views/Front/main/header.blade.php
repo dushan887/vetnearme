@@ -4,7 +4,10 @@
 	  		<div class="logo">
 	  			<a href="{{ URL::to('/') }}"><img src="{{ URL::asset('/img/logo-w.png') }}" style="max-height: 40px"></a>
 	  		</div>
-	  	</div>
+	  	</div>	  	
+		<div id="search-toogle-btn">
+			<i class="fa fa-search"></i>
+		</div>
 	 	<div id="menu-btn">
 			<div></div>
 			<div></div>

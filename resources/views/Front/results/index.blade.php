@@ -5,7 +5,14 @@
 @stop
 
 @section('AditionalHead')
-
+<style type="text/css">
+	#search-toogle-btn {
+		display: block
+	}
+	#toogle-search {
+		display: none;
+	}
+</style>
 @stop
 
 @section('BodySetup')
@@ -121,7 +128,11 @@
 
 			div = this.div = document.createElement('div');
 
+			innerdiv = document.createElement('span');
+
 			div.className = 'marker';
+
+			div.appendChild(innerdiv);
 
 			if (typeof(self.args.marker_id) !== 'undefined') {
 				div.dataset.marker_id = self.args.marker_id;
@@ -164,7 +175,7 @@
 
 		if (point) {
 			div.style.left = (point.x - 15) + 'px';
-			div.style.top = (point.y - 15) + 'px';
+			div.style.top = (point.y - 50) + 'px';
 		}
 	};
 

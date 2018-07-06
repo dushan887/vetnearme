@@ -1,6 +1,6 @@
 <section>
 	<div class="container" style="max-width: 992px;">
-		<div class="wrapper bg-main-color2" id="clinic" data-lat="{{ $clinic->lat }}" data-lng="{{ $clinic->lng }}">
+		<div class="wrapper bg-main-color2 pl-0 pr-0" id="clinic" data-lat="{{ $clinic->lat }}" data-lng="{{ $clinic->lng }}">
 			<div class="clinic-header">
 				<div class="row">
 					<div class="col-12 col-md-4">
@@ -242,7 +242,7 @@
 				</div>
 			</div>
 
-			<div class="row inner-sections">
+			{{-- <div class="row inner-sections">
 				<div class="col-12 col-md-4">
 					<div class="inner">
 						<h4 class="main-color">Doctors</h4>
@@ -262,7 +262,7 @@
 
 					</div>
 				</div>
-			</div>
+			</div> --}}
 
 		</div>
 	</div>
