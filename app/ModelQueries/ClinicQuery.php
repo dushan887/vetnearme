@@ -14,17 +14,22 @@ class ClinicQuery extends Clinic
     protected $table = 'clinics';
 
     private $_logoDirectory;
+    private $_markerDirectory;
 
     public function __construct()
     {
-        $this->_logoDirectory = public_path('/img/logo/');
+        $this->_logoDirectory   = public_path('/img/logo/');
+        $this->_markerDirectory = public_path('/img/markers/');
     }
 
     public function store($data, $request)
     {
 
         if($request->hasFile('logo'))
-            $data['logo'] = $this->uploadLogo($request->file('logo'), $data['name']);
+            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name'], $this->_logoDirectory);
+
+        if($request->hasFile('marker'))
+            $data['marker'] = $this->uploadImage($request->file('marker'), $data['name'], $this->_markerDirectory);
 
         $data = $this->formatData($data, $request);
 
@@ -78,11 +83,11 @@ class ClinicQuery extends Clinic
 
     }
 
-    public function uploadLogo($logo, $clinicName)
+    public function uploadImage($image, $clinicName, $directory)
     {
         $name = strtolower(str_replace(' ', '_', $clinicName)) . '.' . $logo->getClientOriginalExtension();
 
-        $logo->move($this->_logoDirectory, $name);
+        $image->move($uploadImagedirectory, $name);
 
         return $name;
     }
