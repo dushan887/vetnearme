@@ -13,7 +13,7 @@
 			<div class="row inner-sections  ml-3 mr-0 pb-3">
 				<div class="col-12 col-md-8 bg-white pb-3 pt-3">
 					<div class="inner">
-						<h4 class="main-color">{{ $post->title }}?</h4>
+						<h4 class="main-color">{{ $post->title }}</h4>
 						<div class="border-separator space-10"></div>
 
 						{{ $post->body  }}

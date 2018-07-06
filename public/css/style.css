@@ -171,6 +171,10 @@ a,
   position: relative;
   background-color: #468a97;
 }
+.post #header {
+  position: absolute;
+  background-color: transparent;  
+}
 #header.has-border > div:before {
     content: '';
     width: calc(100% - 30px);
@@ -223,7 +227,8 @@ a,
     border-bottom: 15px solid;
 }
 .page .banner {    
-    max-height: 250px
+    max-height: 15vw;
+    min-height: 220px;
 }
 .banner:before {
     content: '';
@@ -243,6 +248,15 @@ a,
     align-items: center;
     align-content: center;
     position: relative;
+}
+.post .banner-inner {
+    padding-top: 86px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    position: absolute;
 }
 
 /*Menu Btn*/

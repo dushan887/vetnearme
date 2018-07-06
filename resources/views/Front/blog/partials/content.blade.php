@@ -5,12 +5,12 @@
 
 			<div class="col-12 col-md-4">
 
-				<article>
+				<article class="border-main-color">
 
 					<header>
-						<a href="#">
+						<a href="/blog/{{ $post->permalink }}">
 							<div class="cover-img"
-								style="background-image: url({{ asset('/img/post2.jpg') }});"></div>
+								style="background-image: url({{ asset('/postsCover/' . $post->cover_image) }});"></div>
 						</a>
 					</header>
 

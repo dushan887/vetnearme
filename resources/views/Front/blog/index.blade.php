@@ -8,7 +8,7 @@
 @stop
 
 @section('BodySetup')
-	<body class="page">
+	<body class="page post">
 	<header id="header">
 		@include('Front.main.header')
 	</header>
