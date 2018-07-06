@@ -52,7 +52,8 @@ class BlogController extends Controller
     public function category(string $name)
     {
         return view('Front.blog.category', [
-            'posts' => Post::whereHas('category', function ($query) use ($name) {
+            'categoryName' => $name,
+            'posts'        => Post::whereHas('category', function ($query) use ($name) {
                 $query->whereRaw("LOWER(name) = ?", strtolower(XSS::clean($name)));
             })->get()
         ]);
