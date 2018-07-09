@@ -16652,6 +16652,12 @@ $('.timepicker').timepicker({
     interval: 5
 });
 
+tinymce.init({
+    selector: '.editor',
+    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
+    plugins: 'code'
+});
+
 /***/ }),
 /* 142 */,
 /* 143 */
@@ -19394,7 +19400,7 @@ var render = function() {
                             expression: "post.body"
                           }
                         ],
-                        staticClass: "form-control",
+                        staticClass: "form-control editor",
                         staticStyle: { height: "300px" },
                         attrs: { id: "body", name: "body" },
                         domProps: { value: _vm.post.body },

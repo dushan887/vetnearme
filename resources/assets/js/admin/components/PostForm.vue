@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group" data-group=body>
-                  <textarea id="body" name="body" class="form-control"
+                  <textarea id="body" name="body" class="form-control editor"
                   style="height: 300px"
                    v-model=post.body></textarea>
                 </div>

@@ -21,6 +21,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "bootstrap3-wysihtml5-npm": "^0.3.3-npm.12",
         "moment": "^2.22.1",
         "vue-moment": "^4.0.0-0",
         "vuejs-dialog": "^0.9.0"
