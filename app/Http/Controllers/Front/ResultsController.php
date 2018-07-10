@@ -170,6 +170,7 @@ class ResultsController extends Controller {
                 AS distance
                 FROM clinics
                 JOIN countries ON countries.id = clinics.country_id
+                LEFT JOIN clinics_services ON clinics.id = clinics_services.clinic_id
                 ' . $conditionsQuery . '
                 ) AS distances
             WHERE distance < ' . $radius. '
