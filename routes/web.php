@@ -1,7 +1,7 @@
 <?php
 
 Route::fallback(function(){
-    return response()->view('errors/404', [], 404);
+    return response()->view('errors.404', [], 404);
 });
 
 Route::get('changePassword', 'PasswordController@index')->name('changePassword');
