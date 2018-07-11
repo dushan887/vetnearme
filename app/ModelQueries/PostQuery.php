@@ -30,6 +30,8 @@ class PostQuery extends Post
 
         $data['user_id'] = \Auth::id();
 
+        $data['body']    = clean($data['body']);
+
         $model = (new Post())->create($data);
 
         if($model->id)
@@ -50,6 +52,8 @@ class PostQuery extends Post
             $data['cover_image'] = $this->uploadCover($request->file('cover_image'), $data['title']);
 
         }
+
+        $data['body'] = clean($data['body']);
 
         if($post->update($data))
             return $post->id;

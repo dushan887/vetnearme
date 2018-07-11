@@ -55,8 +55,7 @@
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<script src="{{ asset('js/tinymce/js/tinymce/jquery.tinymce.min.js') }}"></script>
-<script src="{{ asset('js/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
@@ -73,7 +72,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
 
+@yield('extraJS')
 @yield('adminlte_js')
+
 
 </body>
 </html>

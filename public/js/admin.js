@@ -19198,7 +19198,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       postData.set('title', this.post.title);
       postData.set('permalink', this.post.permalink);
-      postData.set('body', this.post.body);
+      postData.set('body', tinyMCE.activeEditor.getContent());
       postData.set('expert', this.post.expert);
       postData.set('status', status === 'publish' ? 1 : 0);
       postData.set('category_id', $('#category_id').val());

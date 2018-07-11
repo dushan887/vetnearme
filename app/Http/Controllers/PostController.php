@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\XSS;
+
 use App\Post;
 use App\ModelQueries\PostQuery;
 use App\PostCategory;
@@ -50,7 +52,7 @@ class PostController extends Controller
 
         $model = new PostQuery;
 
-        if($model->store($data, $request)){
+        if($model->store(XSS::clean($data, ['cover_image', 'body']), $request)){
             if($request->ajax()){
                 $request->session()->flash('alert', [
                     'message' => 'Post successfully created',
@@ -117,7 +119,7 @@ class PostController extends Controller
 
         $model = new PostQuery;
 
-        if($model->updatePost($data, $request, $id)){
+        if($model->updatePost(XSS::clean($data, ['cover_image', 'body']), $request, $id)){
 
             if($request->ajax()){
                 $request->session()->flash('alert', [

@@ -11,7 +11,7 @@ class XSS
 
         array_walk_recursive($data, function(&$data, $key) use ($exclude) {
 
-            if(in_array($key, $exclude))
+            if(!in_array($key, $exclude))
                 $data = htmlspecialchars(strip_tags($data), ENT_QUOTES, 'UTF-8');
 
         });
