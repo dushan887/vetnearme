@@ -16552,7 +16552,7 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         adminMedia: __WEBPACK_IMPORTED_MODULE_5__components_Media_vue___default.a,
         adminModal: __WEBPACK_IMPORTED_MODULE_3__components_Modal_vue___default.a,
         adminAlerts: __WEBPACK_IMPORTED_MODULE_4__components_EventMessages_vue___default.a,
-        adminClinicsList: __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default.a,
+        adminClinics: __WEBPACK_IMPORTED_MODULE_6__components_ClinicsList_vue___default.a,
         adminPostCategories: __WEBPACK_IMPORTED_MODULE_7__components_PostCategories_vue___default.a,
         adminPostForm: __WEBPACK_IMPORTED_MODULE_8__components_PostForm_vue___default.a
     },
@@ -16566,8 +16566,6 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
             $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10));
         },
         selectAll: function selectAll(element) {
-            console.log(element);
-
             $('input[role=selectAll]').prop('checked', element.checked);
         },
         deleteEntry: function deleteEntry(element) {
@@ -16643,6 +16641,14 @@ var adminVue = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         Event.$on('select:all', function (element) {
             _this3.selectAll(element);
         });
+
+        Event.$on('delete:entry', function (element) {
+            _this3.deleteEntry(element);
+        });
+
+        Event.$on('delete:multiple', function () {
+            _this3.deleteMultiple();
+        });
     }
 });
 
@@ -16652,11 +16658,14 @@ $('.timepicker').timepicker({
     interval: 5
 });
 
-tinymce.init({
-    selector: '.editor',
-    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
-    plugins: 'code'
-});
+if (typeof tinymce !== 'undefined') {
+
+    tinymce.init({
+        selector: '.editor',
+        toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
+        plugins: 'code'
+    });
+}
 
 /***/ }),
 /* 142 */,
@@ -18299,6 +18308,216 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['clinicrole', 'userid'],
@@ -18310,6 +18529,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        selectAll: function selectAll(target) {
+            Event.$emit('select:all', target);
+        },
         selectName: function selectName() {
             switch (this.clinicrole) {
                 case 'owner':
@@ -18348,6 +18570,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
 
             return isMember;
+        },
+        openModal: function openModal(action) {
+
+            var url = void 0;
+            var data = {};
+
+            switch (action) {
+                case 'delete-single':
+
+                    var element = event.target.tagName === "I" ? event.target.parentNode : event.target;
+
+                    Event.$emit('delete:entry', element);
+
+                    break;
+
+                case 'delete-multiple':
+
+                    Event.$emit('delete:multiple');
+
+                    break;
+
+            }
+        },
+        clinicLogo: function clinicLogo(clinic) {
+            return clinic.logo ? '/img/logo/' + clinic.logo : 'http://via.placeholder.com/160x160';
+        },
+        redirect: function redirect(action, clinic) {
+            window.location.href = "/admin/clinics/" + action + "/" + clinic.id;
         }
     },
     computed: {
@@ -18373,72 +18623,460 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group has-warning" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-sm-2 control-label",
-          attrs: { for: "asignClinic" }
-        },
-        [_vm._v("Clinic")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-10" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            type: "text",
-            id: "asignClinic",
-            placeholder: "Clinic Name"
-          },
-          on: {
-            input: function($event) {
-              _vm.search($event.target.value)
-            }
-          }
-        })
-      ])
-    ]),
+    _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "col-sm-2 control-label", attrs: { for: "clinic" } },
-        [_vm._v("Clinics")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-10" }, [
-        _c(
-          "select",
-          {
-            staticClass: "form-control",
-            attrs: { name: _vm.selectName(), id: "clinic", size: "10" }
-          },
-          _vm._l(_vm.filteredList, function(clinic) {
-            return _c(
-              "option",
-              {
-                key: clinic.id,
-                domProps: {
-                  value: clinic.id,
-                  selected: _vm.isAssigned(clinic.users)
-                }
-              },
-              [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(clinic.name) +
-                    "\n                "
-                )
-              ]
-            )
-          })
-        )
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("div", { staticClass: "box box-primary" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "box-body no-padding" }, [
+              _c("div", { staticClass: "mailbox-controls" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "btn-group" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-default btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.openModal("delete-multiple")
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fa fa-trash-o" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(5),
+                _vm._v(" "),
+                _c("div", { staticClass: "pull-right" })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table table-bordered table-striped table-content",
+                  attrs: {
+                    id: "practice_table",
+                    "data-url": "/admin/clinics/destroy",
+                    "data-text": "clinic(s)"
+                  }
+                },
+                [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("td", { attrs: { width: "35" } }, [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            role: "selectAll",
+                            value: "null"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.selectAll($event.target)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Logo")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Clinic")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Administrator")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Subscription")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Country")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { width: "150" } }, [_vm._v("Action")])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.clinics, function(clinic) {
+                      return _c(
+                        "tr",
+                        {
+                          key: clinic.id,
+                          attrs: { id: "entryid-" + clinic.id }
+                        },
+                        [
+                          _c("td", { attrs: { width: "35" } }, [
+                            _c("input", {
+                              attrs: {
+                                type: "checkbox",
+                                name: "selected[]",
+                                role: "selectAll"
+                              },
+                              domProps: { value: clinic.id }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { width: "47" } }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.clinicLogo(clinic),
+                                alt: clinic.name + "Logo",
+                                width: "30",
+                                height: "30"
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(clinic.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                clinic.owner
+                                  ? clinic.owner.last_name
+                                  : "Doesn't have an owner"
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(clinic.subscribe ? "Yes" : "No"))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(clinic.country.name))]),
+                          _vm._v(" "),
+                          _c("td", { attrs: { width: "150" } }, [
+                            _c("div", { staticClass: "btn-group pull-right" }, [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-default btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.redirect("show", clinic)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-eye" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-default btn-sm",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.redirect("edit", clinic)
+                                    }
+                                  }
+                                },
+                                [_c("i", { staticClass: "fa fa-edit" })]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-default btn-sm",
+                                  attrs: {
+                                    type: "button",
+                                    "data-id": clinic.id
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fa fa-trash-o",
+                                    attrs: { "data-text": "clinic" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.openModal("delete-single")
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c("tfoot", [
+                    _c("tr", [
+                      _c("td", { attrs: { width: "35" } }, [
+                        _c("input", {
+                          attrs: {
+                            type: "checkbox",
+                            value: "null",
+                            role: "selectAll"
+                          },
+                          on: {
+                            click: function($event) {
+                              _vm.selectAll($event.target)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Logo")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Clinic")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Administrator")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Subscription")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("Country")]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { width: "150" } }, [_vm._v("Action")])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "content-header" }, [
+      _c("h1", [_vm._v("\n            Practices\n        ")]),
+      _vm._v(" "),
+      _c("ol", { staticClass: "breadcrumb" }, [
+        _c("li", [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-dashboard" }),
+            _vm._v(" Dashboard")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "active" }, [_vm._v("Practices")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-primary btn-block margin-bottom",
+          attrs: { href: "/admin/clinics/create" }
+        },
+        [_vm._v("Add New Practice")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-info btn-block margin-bottom",
+          attrs: { href: "/admin/clinics/export", "aria-label": "Left Align" }
+        },
+        [_vm._v("Export Practices")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "box box-solid" }, [
+        _c("div", { staticClass: "box-header with-border" }, [
+          _c("h3", { staticClass: "box-title" }, [_vm._v("Filters")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-tools" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-box-tool",
+                attrs: { type: "button", "data-widget": "collapse" }
+              },
+              [_c("i", { staticClass: "fa fa-minus" })]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-body" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "filter-opt3" } }, [
+              _vm._v("Show entries:")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              { staticClass: "form-control", attrs: { id: "filter-opt3" } },
+              [
+                _c("option", [_vm._v("10")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("25")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("50")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "filter-opt1" } }, [
+              _vm._v("Practice type:")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              { staticClass: "form-control", attrs: { id: "filter-opt1" } },
+              [
+                _c("option", [_vm._v("Any")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("General practice")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Specialist and Emergency ")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "filter-opt2" } }, [
+              _vm._v("Subscribed practice:")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              { staticClass: "form-control", attrs: { id: "filter-opt2" } },
+              [
+                _c("option", [_vm._v("Any")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Yes")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("No")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "filter-opt5" } }, [
+              _vm._v("Assigned admin:")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              { staticClass: "form-control", attrs: { id: "filter-opt5" } },
+              [
+                _c("option", [_vm._v("Any")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Yes")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("No")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "filter-opt4" } }, [
+              _vm._v("Country:")
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              { staticClass: "form-control", attrs: { id: "filter-opt4" } },
+              [
+                _c("option", [_vm._v("Any")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Australia")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("New Zealand")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "pull-right" }, [
+            _c(
+              "button",
+              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+              [
+                _c("i", { staticClass: "fa fa-filter" }),
+                _vm._v(" Apply Filter")
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-header with-border" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Practice List")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-tools pull-right" }, [
+        _c("div", { staticClass: "has-feedback" }, [
+          _c("input", {
+            staticClass: "form-control input-sm",
+            attrs: { type: "text", placeholder: "Search Practice" }
+          }),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "glyphicon glyphicon-search form-control-feedback"
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default btn-sm checkbox-toggle",
+        attrs: { type: "button" }
+      },
+      [_c("i", { staticClass: "fa fa-square-o" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-default btn-sm",
+        attrs: {
+          type: "button",
+          onclick: "window.location.href=/admin/clinics/create"
+        }
+      },
+      [_c("i", { staticClass: "fa fa-envelope-o" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-default btn-sm", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa fa-refresh" })]
+    )
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

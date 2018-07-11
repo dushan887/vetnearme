@@ -20,9 +20,7 @@ class ClinicsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('clinics/index', [
-            'clinics' => Clinic::paginate(200),
-        ]);
+        return view('clinics/index');
     }
 
     /**
@@ -182,7 +180,7 @@ class ClinicsController extends Controller
 
             default:
                 return response()
-                    ->json(Clinic::orderBy('name', 'desc')->with('users')->get());
+                    ->json(Clinic::orderBy('name', 'desc')->with(['users', 'country'])->get());
                 break;
         }
 

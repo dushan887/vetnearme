@@ -40,7 +40,7 @@ let adminVue = new Vue({
         adminMedia: Media,
         adminModal: Modal,
         adminAlerts: EventMessages,
-        adminClinicsList: ClinicsList,
+        adminClinics: ClinicsList,
         adminPostCategories: PostCategories,
         adminPostForm: PostForm
     },
@@ -54,8 +54,6 @@ let adminVue = new Vue({
             $('input[role=random-string]').val(Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10))
         },
         selectAll(element){
-            console.log(element);
-
             $('input[role=selectAll]').prop('checked', element.checked)
         },
         deleteEntry(element){
@@ -124,12 +122,21 @@ let adminVue = new Vue({
         }
     },
     mounted(){
+
         Event.$on('form:errors:show', (form, errors) => {
             Form.showErrors(form, errors)
         })
 
         Event.$on('select:all', (element) => {
             this.selectAll(element)
+        })
+
+        Event.$on('delete:entry', (element) => {
+            this.deleteEntry(element)
+        })
+
+        Event.$on('delete:multiple', () => {
+            this.deleteMultiple()
         })
     }
 })
@@ -140,8 +147,13 @@ $('.timepicker').timepicker({
     interval: 5
 })
 
-tinymce.init({
-    selector: '.editor',
-    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
-    plugins: 'code'
-  });
+if (typeof tinymce !== 'undefined') {
+
+    tinymce.init({
+        selector: '.editor',
+        toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
+        plugins: 'code'
+      });
+
+}
+
