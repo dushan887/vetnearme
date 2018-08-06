@@ -163,6 +163,7 @@ return [
         Jcf\Geocode\GeocodeServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         browner12\helpers\HelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -214,6 +215,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Geocode' => Jcf\Geocode\Facades\Geocode::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

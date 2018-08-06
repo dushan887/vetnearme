@@ -39,7 +39,7 @@
 
 							  <?php $counter = 0  ?>
 
-							  @foreach($clinic->media as $media)
+							  @foreach($clinic->gallery as $media)
 								<li data-target="#carouselExampleIndicators"
 								data-slide-to="{{ $counter }}"
 								@if($clinic === 0)
@@ -53,11 +53,18 @@
 						  </ol>
 
 						  <div class="carousel-inner">
-							@foreach($clinic->media as $media)
+							@foreach($clinic->gallery as $media)
 								<div class="carousel-item active">
 									<img
 										class="d-block w-100"
-										src="/media/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
+
+										@if ($media->media->super_admin)
+											src="/media/general/{{ $media->media->name }}"
+										@else
+											src="/media/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}/{{ $media->media->name }}"
+										@endif
+									>
+
 								</div>
 							@endforeach
 						  </div>

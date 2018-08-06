@@ -114,7 +114,7 @@
 
               <div class="active tab-pane" id="settings">
                 <form class="form-horizontal"
-                  action="/admin/users/update/@if(\Auth::user()->hasRole('super_admin')){{$id}}@endif"
+                  action="/admin/users/update/@if(\Auth::user()->hasRole('super_admin')){{$user->id}}@endif"
                   method="post"
                   enctype="multipart/form-data"
                 >

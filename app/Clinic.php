@@ -29,6 +29,11 @@ class Clinic extends Model
         return $this->hasMany(Media::class);
     }
 
+    public function gallery()
+    {
+        return $this->hasMany(ClinicGallery::class);
+    }
+
     public function users()
     {
         return $this->hasMany(User::class);

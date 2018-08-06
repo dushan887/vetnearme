@@ -20,6 +20,12 @@ class ClinicsController extends Controller
      */
     public function index(Request $request)
     {
+        // Owner of the clinic can see only his clinic
+        // Super admin will see all clinics in this place
+        if(!\Auth::user()->hasRole('super_admin')){
+            return redirect('admin/clinics/edit/' . \Auth::user()->clinic()->id);
+        }
+
         return view('clinics/index');
     }
 
@@ -175,7 +181,7 @@ class ClinicsController extends Controller
 
              case 'user':
                 return response()
-                    ->json(Clinic::orderBy('name', 'desc')->with('users')->get());
+                    ->json(Clinic::orderBy('name', 'desc')->with(['users', 'country'])->get());
                 break;
 
             default:

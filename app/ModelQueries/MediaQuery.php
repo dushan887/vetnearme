@@ -47,12 +47,13 @@ class MediaQuery extends Media
             }
 
             $data[] = [
-                'name'       => $result['name'],
-                'extension'  => $result['extension'],
-                'user_id'    => $userID,
-                'clinic_id'  => $clinicID,
-                'created_at' => $now,
-                'updated_at' => $now,
+                'name'        => $result['name'],
+                'extension'   => $result['extension'],
+                'user_id'     => $userID,
+                'clinic_id'   => $clinicID,
+                'super_admin' =>  \Auth::user()->hasRole('super_admin') ? 0 : 1,
+                'created_at'  => $now,
+                'updated_at'  => $now,
             ];
 
         }

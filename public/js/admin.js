@@ -17654,10 +17654,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['superadmin'],
     data: function data() {
         return {
             files: [],
@@ -17676,6 +17694,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.imageExtensions.includes(file.extension)) imageContainer.attr('src', folder + file.name).show();
         },
+        getThumbSource: function getThumbSource(file) {
+            return file.clinic_id ? '/media/' + file.clinic.name.trim().toLowerCase().replace('/ /g', "_") : '/media/general/thumbs/' + file.name;
+        },
         removePreview: function removePreview() {
             $('.image-preview-container').hide();
         },
@@ -17683,6 +17704,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get('/admin/media/all', {}).then(function (response) {
+                console.log(response.data);
+
                 _this.files = response.data;
             });
         },
@@ -17732,49 +17755,94 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     break;
                 case 'galery':
 
-                    if (event.target.dataset.action === 'put') {
-                        var countGallery = this.files.filter(function (file) {
-                            return file.gallery;
-                        });
-
-                        if (countGallery.length >= 5) {
-                            alert('You can only have 5 images in the gallery');
-                            return;
-                        }
+                    if (this.superadmin === 'yes') {
+                        this.asSuperAdmin();
+                    } else {
+                        this.asUser();
                     }
 
-                    axios.post('/admin/media/galleryUpdate', {
-                        id: event.target.dataset.id
-                    }).then(function (response) {
-
-                        var data = response.data;
-
-                        var fileIndex = _this2.files.findIndex(function (file) {
-                            return data.media.id;
-                        });
-
-                        _this2.files[fileIndex].gallery = data.media.gallery;
-
-                        Event.$emit('message:show', {
-                            messageTitle: data.messageTitle,
-                            messageText: data.messageText
-                        }, data.class);
-                    }).catch(function (error) {
-                        console.log(error);
-
-                        alert('Something went wrong. Please try again a bit later');
-                    });
                     break;
             }
+        },
+        asSuperAdmin: function asSuperAdmin() {
+            axios.get('/admin/clinic-gallery/get-clinics', {
+                params: {
+                    mediaID: event.target.dataset.id
+                }
+            }).then(function (response) {
+                Event.$emit('modal:show', response.data);
+            });
+        },
+        asUser: function asUser() {
+            var _this3 = this;
+
+            if (event.target.dataset.action === 'put') {
+                var countGallery = this.files.filter(function (file) {
+                    return file.gallery;
+                });
+
+                if (countGallery.length >= 5) {
+                    alert('You can only have 5 images in the gallery');
+                    return;
+                }
+            }
+
+            axios.post('/admin/media/galleryUpdate', {
+                id: event.target.dataset.id,
+                action: event.target.dataset.action
+            }).then(function (response) {
+
+                var data = response.data;
+
+                var fileIndex = _this3.files.findIndex(function (file) {
+                    return data.media.id;
+                });
+
+                _this3.files[fileIndex].gallery = data.media.gallery;
+
+                Event.$emit('message:show', {
+                    messageTitle: data.messageTitle,
+                    messageText: data.messageText
+                }, data.class);
+            }).catch(function (error) {
+                console.log(error);
+
+                alert('Something went wrong. Please try again a bit later');
+            });
+        },
+        storeToGallery: function storeToGallery() {
+
+            var form = $('#clinic-gallery');
+
+            axios.post(form.attr('action'), {
+                mediaID: form.find("#mediaID").val(),
+                clinics: form.find("#clinics").val()
+            }).then(function (response) {
+
+                // Event.$emit('message:show', {
+                //     messageTitle: data.messageTitle,
+                //     messageText:  data.messageText
+                // }, data.class)
+            }).catch(function (error) {
+                console.log(error);
+
+                alert('Something went wrong. Please try again a bit later');
+            });
         }
     },
     mounted: function mounted() {
-        var _this3 = this;
+        var _this4 = this;
 
         this.getAll();
 
-        Event.$on('service:save', function () {
-            _this3.save();
+        Event.$on('clinic-gallery:store', function () {
+            _this4.storeToGallery();
+        });
+
+        document.body.addEventListener('keyup', function (e) {
+            if (e.keyCode === 27) {
+                _this4.removePreview();
+            }
         });
     }
 });
@@ -18083,114 +18151,162 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "col-md-12 clearfix" }, [
-      _c("div", { staticClass: "box" }, [
-        _c(
-          "div",
-          { staticClass: "box-body table-responsive no-padding media" },
-          [
-            _c("table", { staticClass: "table table-hover" }, [
-              _c(
-                "tbody",
-                [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _vm._l(_vm.files, function(file, index) {
-                    return _c("tr", { key: file.id }, [
-                      _c(
-                        "th",
-                        {
-                          on: {
-                            mouseenter: function($event) {
-                              _vm.imagePreview(file, $event)
+  return _c(
+    "div",
+    {
+      on: {
+        keydown: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
+          ) {
+            return null
+          }
+          _vm.removePreview()
+        }
+      }
+    },
+    [
+      _c("div", { staticClass: "col-md-12 clearfix" }, [
+        _c("div", { staticClass: "box" }, [
+          _c(
+            "div",
+            { staticClass: "box-body table-responsive no-padding media" },
+            [
+              _c("table", { staticClass: "table table-hover" }, [
+                _c(
+                  "tbody",
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.files, function(file, index) {
+                      return _c("tr", { key: file.id }, [
+                        _c("th", { staticClass: "media-thumb" }, [
+                          _c("img", {
+                            attrs: {
+                              src: _vm.getThumbSource(file),
+                              alt: file.name + "thumb"
                             },
-                            mouseout: _vm.removePreview
-                          }
-                        },
-                        [_vm._v(_vm._s(file.name))]
-                      ),
-                      _vm._v(" "),
-                      _c("th", [_vm._v(_vm._s(file.extension))]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v(_vm._s(file.user.name))]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v(_vm._s(_vm.getHumanDate(file.created_at)))
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm.imageExtensions.includes(file.extension)
-                          ? _c("span", [
-                              !file.gallery
-                                ? _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-sm btn-primary",
-                                      attrs: {
-                                        type: "button",
-                                        "data-action": "put",
-                                        "data-id": file.id
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.openModal("galery")
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Put in gallery")]
-                                  )
-                                : _c(
-                                    "button",
-                                    {
-                                      staticClass: "btn btn-sm btn-primary",
-                                      attrs: {
-                                        type: "button",
-                                        "data-action": "remove",
-                                        "data-id": file.id
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.openModal("galery")
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Remove from gallery")]
-                                  )
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-danger",
-                            attrs: { type: "button", "data-id": file.id },
                             on: {
                               click: function($event) {
-                                _vm.openModal("delete")
+                                _vm.imagePreview(file, $event)
                               }
                             }
-                          },
-                          [_vm._v("Delete")]
-                        )
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(file.name))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(file.extension))]),
+                        _vm._v(" "),
+                        _c("th", [_vm._v(_vm._s(file.user.name))]),
+                        _vm._v(" "),
+                        _c("th", [
+                          _vm._v(_vm._s(_vm.getHumanDate(file.created_at)))
+                        ]),
+                        _vm._v(" "),
+                        _c("th", [
+                          _vm.imageExtensions.includes(file.extension)
+                            ? _c("span", [
+                                _vm.superadmin !== "no"
+                                  ? _c("span", [
+                                      !file.gallery &&
+                                      !file.gallery_images.length
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-primary",
+                                              attrs: {
+                                                type: "button",
+                                                "data-action": "put",
+                                                "data-id": file.id
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.openModal("galery")
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Put in gallery")]
+                                          )
+                                        : _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-sm btn-primary",
+                                              attrs: {
+                                                type: "button",
+                                                "data-action": "remove",
+                                                "data-id": file.id
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.openModal("galery")
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Remove from gallery")]
+                                          )
+                                    ])
+                                  : _c("span", [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-primary",
+                                          attrs: {
+                                            type: "button",
+                                            "data-id": file.id
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              _vm.openModal("galery")
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("Update Gallery")]
+                                      )
+                                    ])
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-danger",
+                              attrs: { type: "button", "data-id": file.id },
+                              on: {
+                                click: function($event) {
+                                  _vm.openModal("delete")
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ])
                       ])
-                    ])
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "image-preview-container",
-              staticStyle: { display: "none" },
-              attrs: { src: "" }
-            })
-          ]
-        )
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "image-preview-container",
+                staticStyle: { display: "none" },
+                attrs: { src: "" },
+                on: {
+                  click: function($event) {
+                    _vm.removePreview()
+                  }
+                }
+              })
+            ]
+          )
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -18198,6 +18314,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
+      _c("th", [_vm._v("Thumb")]),
+      _vm._v(" "),
       _c("th", [_vm._v("Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Extension")]),

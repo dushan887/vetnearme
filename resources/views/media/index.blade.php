@@ -54,7 +54,14 @@
         <!-- /.col -->
         <div class="col-md-9">
             <div class="row">
-                 <admin-media></admin-media>
+                <admin-media
+                    @if (\Auth::user()->hasRole('super_admin') )
+                        :superadmin="'yes'"
+                    @else
+                        :superadmin="'no'"
+                    @endif
+                >
+                </admin-media>
             </div>
         </div>
         <!-- /.col -->

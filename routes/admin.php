@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
 
     // CLINICS
     Route::get('clinics', 'ClinicsController@index')->name('clinics')->middleware('checkRole:super_admin');
-    Route::get('my-clinic', 'ClinicsController@myClinic')->name('my-clinic');
+    Route::get('my-clinic', 'ClinicsController@index')->name('my-clinic');
     Route::get('clinics/show/{id}', 'ClinicsController@show')->middleware('checkRole:super_admin');
     Route::get('clinics/edit/{id?}', 'ClinicsController@edit');
     Route::get('clinics/create', 'ClinicsController@create');
@@ -51,6 +51,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['menu.admin', 'auth', 'tempP
     Route::post('media/galleryUpdate', 'MediaController@galleryUpdate');
     Route::post('media/destroy/{id}', 'MediaController@destroy');
 
+    // Clinic Images
+    Route::get('clinic-gallery/get-clinics', 'ClinicGalleryController@getClinics')->middleware('checkRole:super_admin');
+    Route::post('clinic-gallery/store', 'ClinicGalleryController@store');
 
     // Post
     Route::get('posts', 'PostController@index')->name('posts');

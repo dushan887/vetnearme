@@ -23,5 +23,5 @@
 
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-    <button type="button" class="btn btn-primary" onclick="window.Event.$emit('service:save')">Update Service</button>
+    <button type="button" class="btn btn-primary" onclick="window.Event.$emit('service:save')">Add Imges To Gallery</button>
 </div>

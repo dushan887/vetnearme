@@ -12,7 +12,7 @@ class Media extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'extension', 'user_id', 'clinic_id', 'gallery'
+        'name', 'extension', 'user_id', 'clinic_id', 'super_admin'
     ];
 
     public function user()
@@ -23,5 +23,10 @@ class Media extends Model
     public function clinic()
     {
         return $this->belongsTo('App\Clinic');
+    }
+
+    public function galleryImages()
+    {
+        return $this->hasMany('App\ClinicGallery');
     }
 }

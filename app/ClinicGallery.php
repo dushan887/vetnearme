@@ -4,8 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClinicImages extends Model
+class ClinicGallery extends Model
 {
+    protected $table = 'clinic_gallery';
+
     protected $fillable = [
         'clinic_id', 'media_id'
     ];
@@ -18,4 +20,5 @@ class ClinicImages extends Model
     public function media(){
         return $this->belongsTo(Media::class);
     }
+
 }

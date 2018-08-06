@@ -27,7 +27,7 @@ class UpdateClinicRequest extends FormRequest
         return [
             'name'                     => 'required|min:3|max:255|string',
             'description'              => 'string|nullable',
-            'email'                    => 'required|email|unique:clinics,email,' . $this->route('id'),
+            'email'                    => 'required|email',
             'phone_number'             => 'required|string|min:3|max:255',
             'emergency_number'         => 'nullable|string|min:3|max:255',
             'url'                      => 'nullable|url',

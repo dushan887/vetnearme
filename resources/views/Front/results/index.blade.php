@@ -31,7 +31,8 @@
 					data-coordinates="{{ $coordinates }}"
 					data-usercoordinates="{{ $userCoordinates }}"
 					data-urls="">
-					@if ($clinics)
+
+					@if ($clinics->total() > 0)
 						@include('Front.results.partials.content')
 					@else
 						@include('Front.results.partials.no-result')
