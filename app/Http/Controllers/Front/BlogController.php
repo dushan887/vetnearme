@@ -20,7 +20,7 @@ class BlogController extends Controller
     public function index()
     {
         return view('Front.blog.index', [
-            'posts' => Post::paginate(20),
+            'posts' => Post::where('status', 1)->with(['category'])->paginate(20),
         ]);
     }
 
