@@ -32,7 +32,14 @@ class BlogController extends Controller
      */
     public function show(string $slug)
     {
-        $post = Post::where('permalink', XSS::clean($slug))->first();
+        $post = Post::where([
+            ['permalink', '=', XSS::clean($slug)],
+            ['status', '=', 1],
+        ])->first();
+
+        if(!$post)
+            return $this->redirect('/blog');
+
         return view('Front.blog.show',[
             'post'         => $post,
             'categories'   => PostCategory::orderBy('name', 'desc')->get(),
