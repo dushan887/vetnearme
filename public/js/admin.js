@@ -18208,7 +18208,7 @@ var render = function() {
                         _c("th", [
                           _vm.imageExtensions.includes(file.extension)
                             ? _c("span", [
-                                _vm.superadmin !== "no"
+                                _vm.superadmin === "no"
                                   ? _c("span", [
                                       !file.gallery &&
                                       !file.gallery_images.length

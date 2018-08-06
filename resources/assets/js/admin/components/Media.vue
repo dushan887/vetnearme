@@ -30,7 +30,7 @@
 
                                     <span v-if="imageExtensions.includes(file.extension)">
 
-                                        <span v-if="superadmin !== 'no'">
+                                        <span v-if="superadmin === 'no'">
                                             <button
                                             type="button"
                                             class="btn btn-sm btn-primary"
