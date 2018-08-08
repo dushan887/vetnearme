@@ -1085,6 +1085,37 @@ article footer {
     border-bottom: 1px solid;
     border-color: #C8DCE0;
 }
+.no-resaults-info {
+    border: 1px solid #fff;
+    margin-bottom: 15px;
+    padding: 15px 15px 5px 15px;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #468a97;
+}
+.no-results-list li {
+  color: #468a97;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background: #fff;
+  margin-bottom: 5px;
+}
+.no-results-list-more {
+    display: block;
+    text-align: center;
+    color: #fff !important;
+    background-color: #C8DCE0;
+    border: 1px solid #fff;
+    margin-bottom: 5px;
+    padding: 10px;
+    text-decoration: none !important;
+    font-size: 20px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+.no-results-list-more:hover {
+    background-color: #468a97;
+}
 .space-12 {
     margin: 12px auto;
 }

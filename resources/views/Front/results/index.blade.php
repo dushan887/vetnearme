@@ -314,7 +314,7 @@ function initMap() {
 
 function createMarkers(places) {
   var bounds = new google.maps.LatLngBounds();
-  var placesList = document.getElementById('places');
+  var placesList = document.getElementById('clinics');
 
   for (var i = 0, place; place = places[i]; i++) {
     var image = {
