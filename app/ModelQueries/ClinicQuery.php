@@ -57,18 +57,18 @@ class ClinicQuery extends Clinic
         if($request->hasFile('logo')){
 
             if($clinic->logo)
-                $this->deleteImage($clinic->logo);
+                $this->deleteImage($clinic->logo, $this->_logoDirectory );
 
-            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name'], $this->_markerDirectory);
+            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name'], $this->_logoDirectory);
 
         }
 
         if($request->hasFile('marker')){
 
             if($clinic->marker)
-                $this->deleteImage($clinic->marker, 'marker');
+                $this->deleteImage($clinic->marker, $this->_markerDirectory);
 
-            $data['marker'] = $this->uploadImage($request->file('marker'), $data['name'], $this->_logoDirectory);
+            $data['marker'] = $this->uploadImage($request->file('marker'), $data['name'], $this->_markerDirectory);
 
         }
 
