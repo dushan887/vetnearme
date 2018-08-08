@@ -929,14 +929,15 @@ article footer {
   bottom: -22px;
 }
 .marker > img {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   position: absolute;
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  bottom: 3px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   margin: auto;
+  border-radius: 100%;
 }
 .marker:before {
   content: attr(data-marker_pin);
@@ -989,10 +990,18 @@ article footer {
   min-height: 40px;
 }
 .info-window i {
-  position: absolute;
-  left:5px;
-  font-size: 14px;
+  position: relative;
+  font-size: 12px;
   line-height: 20px;
+  top: auto;
+  width: 15px;
+  text-decoration: none !important;
+}
+.info-window i:before {
+  text-decoration: none !important;
+}
+.info-address {
+  padding-bottom: 10px
 }
 .marker[data-marker_id="start"] {
   background-color: red;

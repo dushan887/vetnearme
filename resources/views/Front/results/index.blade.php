@@ -52,6 +52,8 @@
 
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places"></script>
+
+@if ($clinics->total() > 0)
 <script type="text/javascript">
 
 
@@ -87,22 +89,7 @@
 
 			case 50:
 				zoom = 10;
-			break;
-
-			case 100:
-				zoom = 9;
-			break;
-
-			case 200:
-				zoom = 8;
-			break;
-
-			case 500:
-				zoom = 7;
-			break;
-
-			default:
-				zoom = 14;
+			break;			
 		}
 
 		return zoom;
@@ -281,4 +268,78 @@
 	})
 
 </script>
+@else
+<script type="text/javascript">
+var map;
+let markers     	= []
+let content     	= $('#content')
+let userCoordinates = content.data('usercoordinates')
+
+function initMap() {
+  // Create the map.
+	var pyrmont = userCoordinates
+	let options = {
+	  types: ["(regions)"],
+	  componentRestrictions: {country: ["AU", "NZ"]}
+	 };
+	let input        = document.getElementById('address-input');
+	let autocomplete = new google.maps.places.Autocomplete(input,options);
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: pyrmont,
+    zoom: 15
+  });
+
+  // Create the places service.
+  var service = new google.maps.places.PlacesService(map);
+  var getNextPage = null;
+  var moreButton = document.getElementById('more');
+  moreButton.onclick = function() {
+    moreButton.disabled = true;
+    if (getNextPage) getNextPage();
+  };
+
+  // Perform a nearby search.
+  service.nearbySearch(
+      {location: pyrmont, radius: 5000, type: ['veterinary_care']},
+      function(results, status, pagination) {
+        if (status !== 'OK') return;
+
+        createMarkers(results);
+        moreButton.disabled = !pagination.hasNextPage;
+        getNextPage = pagination.hasNextPage && function() {
+          pagination.nextPage();
+        };
+      });
+}
+
+function createMarkers(places) {
+  var bounds = new google.maps.LatLngBounds();
+  var placesList = document.getElementById('places');
+
+  for (var i = 0, place; place = places[i]; i++) {
+    var image = {
+      url: '/img/l1.png',
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(40, 40)
+    };
+
+    var marker = new google.maps.Marker({
+      map: map,
+      icon: image,
+      title: place.name,
+      position: place.geometry.location
+    });
+
+    var li = document.createElement('li');
+    li.textContent = place.name;
+    placesList.appendChild(li);
+
+    bounds.extend(place.geometry.location);
+  }
+  map.fitBounds(bounds);
+}
+initMap();</script>
+@endif
 @stop
