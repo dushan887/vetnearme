@@ -171,6 +171,7 @@
               <div class="form-group" data-group=expert>
                 <textarea
                   :value=post.expert
+                  @keyup="post.expert = $event.target.value"
                   class="form-control" name=expert id=expert rows="3" placeholder="Enter ..." ></textarea>
               </div>
             </div>

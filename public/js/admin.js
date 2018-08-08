@@ -19911,6 +19911,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -20339,7 +20340,12 @@ var render = function() {
                           rows: "3",
                           placeholder: "Enter ..."
                         },
-                        domProps: { value: _vm.post.expert }
+                        domProps: { value: _vm.post.expert },
+                        on: {
+                          keyup: function($event) {
+                            _vm.post.expert = $event.target.value
+                          }
+                        }
                       })
                     ]
                   )
