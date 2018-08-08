@@ -47,7 +47,6 @@
 		var newUrl = 'www.' + url.slice(0, url.indexOf("/"))
 
 		$('#web-url-check span').text(newUrl)
-		console.log(newUrl)
 	})
 
 		let clinic = $('#clinic')
