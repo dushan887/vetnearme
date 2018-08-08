@@ -39,7 +39,7 @@
 
 		let clinic = $('#clinic')
 
-	  var myLatlng = new google.maps.LatLng(clinic.data('lat'), clinic.data('lng'));
+		let myLatlng = new google.maps.LatLng(clinic.data('lat'), clinic.data('lng'));
 
       function CustomMarker(latlng, map, args) {
 			this.latlng = latlng;
@@ -130,8 +130,6 @@
 	}
 
 	google.maps.event.addDomListener(window, 'load', initialize);
-
-
 
 </script>
 @stop

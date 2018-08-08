@@ -42,18 +42,24 @@
 							</select>
 						</li>
 						<li id="open-hours-filter" class="select">
-							<span>Open Clinics</span>
-							<select name="working" id="working">
-								<option value="open"
+
+							<label for="clinics-all">
+								All clinics
+								<input type="radio" name="working" value="all" id="clinics-all"
+								@if($working === 'all')
+									checked="checked"
+								@endif>
+							</label>
+
+							<label for="clinics-open">
+								Open Clinics
+								<input type="radio" name="working" value="open" id="clinics-open"
 								@if($working === 'open')
-									selected="selected"
+									checked="checked"
 								@endif
-								>Show All</option>
-								{{-- <option value="closed"
-								@if($working === 'closed')
-									selected="selected"
-								@endif>Closed</option> --}}
-							</select>
+								>
+							</label>
+
 						</li>
 					</ul>
 				</div>

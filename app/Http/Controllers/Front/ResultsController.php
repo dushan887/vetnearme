@@ -59,10 +59,11 @@ class ResultsController extends Controller {
                         'total'   => $clinics->total(),
                         'address' => $address,
                         'radius'  => $result['radius'],
-                        'working' => $request->input('working') ?? 'open'
+                        'working' => $request->input('working') ?? 'all'
                     ]);
 
         }
+
 
         return view('Front.results.index',[
             'clinics'          => $clinics,
@@ -78,7 +79,7 @@ class ResultsController extends Controller {
             'category'         => XSS::clean($request->input('selector-category')),
             'radius'           => Radius::get(),
             'radiusSelected'   => $result['radius'],
-            'working'          => $request->input('working') ?? 'open'
+            'working'          => $request->input('working') ?? 'all'
         ]);
     }
 

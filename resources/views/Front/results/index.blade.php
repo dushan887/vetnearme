@@ -144,9 +144,6 @@
 				// MARKER IKONICA IDE OVDE
 				let clinicMarker = $('#clinic-' + self.args.marker_id).data('marker')
 
-				console.log(clinicMarker);
-
-
 				div.appendChild(innerimage).src = clinicMarker !== 'none' ? '/img/markers/' + clinicMarker : '/img/l1.png'
 				div.appendChild(innerdiv);
 

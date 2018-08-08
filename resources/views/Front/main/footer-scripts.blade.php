@@ -36,9 +36,9 @@
 
 	// Get the clinics based on radius
 
-	$('body').on('change', '#radius, #working', function(){
+	$('body').on('change', '#radius, input[name=working]', function(){
 
-		let data  = $('#search').serialize() + '&radius=' + $('#radius').val() + '&working=' + $('#working').val()
+		let data  = $('#search').serialize() + '&radius=' + $('#radius').val() + '&working=' + $('input[name=working]:checked').val()
 
 		window.location.replace('/results?' + data)
 
