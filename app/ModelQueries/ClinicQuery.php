@@ -85,9 +85,9 @@ class ClinicQuery extends Clinic
 
     public function uploadImage($image, $clinicName, $directory)
     {
-        $name = strtolower(str_replace(' ', '_', $clinicName)) . '.' . $logo->getClientOriginalExtension();
+        $name = strtolower(str_replace(' ', '_', $clinicName)) . '.' . $image->getClientOriginalExtension();
 
-        $image->move($uploadImagedirectory, $name);
+        $image->move($directory, $name);
 
         return $name;
     }

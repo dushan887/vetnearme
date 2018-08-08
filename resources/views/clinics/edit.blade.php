@@ -777,7 +777,7 @@
                   </div>
 
                   <h3>Current Logo</h3>
-                  <img src="/img/logo/{{ $clinic->logo }}" alt="Current Logo">
+                  <img src="/img/logo/{{ $clinic->logo }}" alt="Current Logo" class="clinic-current-logo">
                 </div>
               </div>
 
