@@ -37,6 +37,19 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&v=3.exp"></script>
 <script type="text/javascript">
 
+	$(document).ready(function() {
+		$('.opening-hours li span').each(function() {
+			if($(this).is(':contains("Closed")')) {
+			      $(this).text('Closed')
+			}
+		})
+		var url = $('#web-url-check span').text().replace('http://', '').replace('https://', '').replace('www.', '')
+		var newUrl = 'www.' + url.slice(0, url.indexOf("/"))
+
+		$('#web-url-check span').text(newUrl)
+		console.log(newUrl)
+	})
+
 		let clinic = $('#clinic')
 
 		let myLatlng = new google.maps.LatLng(clinic.data('lat'), clinic.data('lng'));

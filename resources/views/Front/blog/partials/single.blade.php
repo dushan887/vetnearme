@@ -16,7 +16,7 @@
 						<h4 class="main-color">{{ $post->title }}</h4>
 						<div class="border-separator space-10"></div>
 
-						{{ $post->body  }}
+						{!! $post->body !!}
 					</div>
 				</div>
 				<div class="col-12 col-md-4">

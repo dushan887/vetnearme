@@ -21,9 +21,7 @@
 						</div>
 						<div id="clinic-nav">
 							<ul>
-								@foreach($clinic->services as $service)
-									<li><a href="#">{{ $service->name }}</a></li>
-								@endforeach
+								
 
 							</ul>
 						</div>
@@ -91,7 +89,7 @@
 								<span style="margin-top: 0">{{ $clinic->emergency_number }}</span></a></li>
 							<li><a href="#"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
-							<li><a href="#"><i class="fas fa-globe"></i> <strong>Website:</strong><br />
+							<li id="web-url-check"><a href="#"><i class="fas fa-globe"></i> <strong>Website:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->url }}</span></a></li>
 							<li>
 								<div class="border-separator space-10"></div>
@@ -123,7 +121,7 @@
 					<div class="inner">
 						<h4 class="main-color">About {{ $clinic->name }}</h4>
 						<div class="border-separator space-10"></div>
-						{{ $clinic->description }}
+						{!! $clinic->description !!}
 					</div>
 				</div>
 				<div class="col-12 col-md-4">
@@ -140,7 +138,7 @@
 									@endif
 
 									@if ($hours->{'monday-from2'} !== '00:00' && $hours->{'monday-to2'} !== '00:00')
-										| {{ $hours->{'monday-from2'}  }} - {{ $hours->{'monday-to2'} }}
+										<br /> {{ $hours->{'monday-from2'}  }} - {{ $hours->{'monday-to2'} }}
 									@endif
 
 								</span>
@@ -155,7 +153,7 @@
 									@endif
 
 									@if ($hours->{'tuesday-from2'} !== '00:00' && $hours->{'tuesday-to2'} !== '00:00')
-										| {{ $hours->{'tuesday-from2'}  }} - {{ $hours->{'tuesday-to2'} }}
+										<br /> {{ $hours->{'tuesday-from2'}  }} - {{ $hours->{'tuesday-to2'} }}
 									@endif
 
 								</span>
@@ -170,7 +168,7 @@
 									@endif
 
 									@if ($hours->{'wednesday-from2'} !== '00:00' && $hours->{'wednesday-to2'} !== '00:00')
-										| {{ $hours->{'wednesday-from2'}  }} - {{ $hours->{'wednesday-to2'} }}
+										<br /> {{ $hours->{'wednesday-from2'}  }} - {{ $hours->{'wednesday-to2'} }}
 									@endif
 
 								</span>
@@ -185,7 +183,7 @@
 									@endif
 
 									@if ($hours->{'thursday-from2'} !== '00:00' && $hours->{'thursday-to2'} !== '00:00')
-										| {{ $hours->{'thursday-from2'}  }} - {{ $hours->{'thursday-to2'} }}
+										<br /> {{ $hours->{'thursday-from2'}  }} - {{ $hours->{'thursday-to2'} }}
 									@endif
 
 								</span>
@@ -200,7 +198,7 @@
 									@endif
 
 									@if ($hours->{'friday-from2'} !== '00:00' && $hours->{'friday-to2'} !== '00:00')
-										| {{ $hours->{'friday-from2'}  }} - {{ $hours->{'friday-to2'} }}
+										<br /> {{ $hours->{'friday-from2'}  }} - {{ $hours->{'friday-to2'} }}
 									@endif
 
 								</span>
@@ -215,7 +213,7 @@
 									@endif
 
 									@if ($hours->{'saturday-from2'} !== '00:00' && $hours->{'saturday-to2'} !== '00:00')
-										| {{ $hours->{'saturday-from2'}  }} - {{ $hours->{'saturday-to2'} }}
+										<br /> {{ $hours->{'saturday-from2'}  }} - {{ $hours->{'saturday-to2'} }}
 									@endif
 
 								</span>
@@ -230,7 +228,7 @@
 									@endif
 
 									@if ($hours->{'sunday-from2'} !== '00:00' && $hours->{'sunday-to2'} !== '00:00')
-										| {{ $hours->{'sunday-from2'}  }} - {{ $hours->{'sunday-to2'} }}
+										<br /> {{ $hours->{'sunday-from2'}  }} - {{ $hours->{'sunday-to2'} }}
 									@endif
 
 								</span>
@@ -245,7 +243,7 @@
 			<div class="row inner-sections">
 				<div class="col-12 col-md-8">
 					<div class="inner empty">
-						<div id="map" style="width: 100%; height:300px; display: block;"></div>
+						<div id="map" class="clinic-map-pin" style="width: 100%; height:300px; display: block;"></div>
 					</div>
 				</div>
 				<div class="col-12 col-md-4">

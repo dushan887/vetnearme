@@ -947,7 +947,7 @@ article footer {
   width: 40px;
   height: 40px;
   line-height: 34px;
-  direction: block;
+  display: block;
   font-size: 15px;
   top: -5px;
   left: -5px;
@@ -1018,7 +1018,7 @@ article footer {
   background-color: #468a97;
   z-index: 10;
   position: absolute;
-  direction: block;
+  display: block;
   width: 60px;
   height: 60px;
   top: -15px;
@@ -1053,6 +1053,14 @@ article footer {
  50% {-webkit-transform: scale(0.1);opacity: 0.3;}
  75% {-webkit-transform: scale(0.5);opacity: 0.5;}
  100% {-webkit-transform: scale(1);opacity: 0.0;}
+}
+.clinic-map-pin .marker:before {
+    content: "\f3c5";
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 700;
+    display: block;
+    color: #468a97 !important;
 }
 .resaults-found {
     font-size: 22px;
@@ -1357,9 +1365,9 @@ article footer {
 .wrapper .clinic-logo {
     text-align: center;
     position: relative;
-    width: 150px;
+    width: 200px;
     display: block;
-    height: 150px;
+    height: 120px;
     z-index: 10;
     top: -20px;
     margin: auto;
@@ -1375,8 +1383,8 @@ article footer {
     content: '';
     border: 3px solid #468a97;
     position: absolute;
-    width: 170px;
-    height: 170px;
+    width: 220px;
+    height: 140px;
     border-radius: 5px;
     left: -10px;
     top: 0;
