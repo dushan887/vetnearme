@@ -57,9 +57,18 @@ class ClinicQuery extends Clinic
         if($request->hasFile('logo')){
 
             if($clinic->logo)
-                $this->deleteOldLogo($clinic->logo);
+                $this->deleteImage($clinic->logo);
 
-            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name'], $this->_logoDirectory);
+            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name'], $this->_markerDirectory);
+
+        }
+
+        if($request->hasFile('marker')){
+
+            if($clinic->marker)
+                $this->deleteImage($clinic->marker, 'marker');
+
+            $data['marker'] = $this->uploadImage($request->file('marker'), $data['name'], $this->_logoDirectory);
 
         }
 
@@ -144,8 +153,8 @@ class ClinicQuery extends Clinic
         return json_encode($data);
     }
 
-    private function deleteOldLogo($logo)
+    private function deleteImage($name, $directory)
     {
-        \File::delete($this->_logoDirectory . $logo);
+        return  \File::delete($directory . $name);
     }
 }
