@@ -38,7 +38,7 @@
 						@if($category === 'general')
 							checked="checked"
 						@endif>
-				    <label for="s-option">General practice</label>
+				    <label for="s-option"><span class="show-desktop">General practice</span><span class="show-mobile">GP</span></label>
 
 				    <div class="check"><div class="inside"></div></div>
 				  </li>
@@ -48,7 +48,7 @@
 						@if($category === 'specialist')
 							checked="checked"
 						@endif>
-				    <label for="t-option">Specialist and Emergency </label>
+				    <label for="t-option"><span class="show-desktop">Specialist and Emergency</span> <span class="show-mobile">S&E</span></label>
 
 				    <div class="check"><div class="inside"></div></div>
 				  </li>

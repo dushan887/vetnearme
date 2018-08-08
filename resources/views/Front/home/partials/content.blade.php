@@ -3,7 +3,7 @@
 
 		@foreach($posts as $post)
 
-			<div class="col-12 col-md-4">
+			<div class="col-12 col-md-6 col-lg-4">
 				<article>
 
 					<header>

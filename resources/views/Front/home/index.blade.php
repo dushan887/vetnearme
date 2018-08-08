@@ -24,12 +24,12 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 col-md-9">
+				<div class="col-12 col-md-8 col-lg-9">
 					<div id="content">
 						@include('Front.home.partials.content')
 					</div>
 				</div>
-				<div class="col-12 col-md-3">
+				<div class="col-12 col-md-4 col-lg-3">
 					<div id="sidebar" class="bg-main-color2">
 						@include('Front.home.partials.sidebar')
 					</div>

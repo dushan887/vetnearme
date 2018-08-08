@@ -1538,3 +1538,48 @@ article footer {
 #footer ul li a {
   color: #fff;
 }
+
+/*RESPONSIVE*/
+.show-desktop {
+  display: block;
+}
+.show-mobile {
+  display: none;
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 100% !important
+  }
+}
+@media screen and (max-width: 992px) {
+  .show-desktop {
+    display: none;
+  }
+  .show-mobile {
+    display: block;
+  }
+  .container {
+    max-width: 100% !important
+  }
+}
+@media screen and (max-width: 772px) {
+  .home #search .field.submit-search input[type=submit] {
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      display: inline-block;
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      background-color: transparent;
+      border: 1px solid #468a97;
+      color: #fff;
+      font-size: 0;
+      z-index: 3;
+  }
+  /*.home #search .field.submit-search {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+  }*/
+}
