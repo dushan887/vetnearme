@@ -139,9 +139,10 @@
 										{{ $hours->{'monday-from'} }} - {{ $hours->{'monday-to'} }}
 									@endif
 
-									@if ($hours->{'monday-from2'} !== '00:00' && )
-
+									@if ($hours->{'monday-from2'} !== '00:00' && $hours->{'monday-to2'} !== '00:00')
+										| {{ $hours->{'monday-from2'}  }} - {{ $hours->{'monday-to2'} }}
 									@endif
+
 								</span>
 							</li>
 
@@ -152,6 +153,11 @@
 									@else
 										{{ $hours->{'tuesday-from'} }} - {{ $hours->{'tuesday-to'} }}
 									@endif
+
+									@if ($hours->{'tuesday-from2'} !== '00:00' && $hours->{'tuesday-to2'} !== '00:00')
+										| {{ $hours->{'tuesday-from2'}  }} - {{ $hours->{'tuesday-to2'} }}
+									@endif
+
 								</span>
 							</li>
 
@@ -162,6 +168,11 @@
 									@else
 										{{ $hours->{'wednesday-from'} }} - {{ $hours->{'wednesday-to'} }}
 									@endif
+
+									@if ($hours->{'wednesday-from2'} !== '00:00' && $hours->{'wednesday-to2'} !== '00:00')
+										| {{ $hours->{'wednesday-from2'}  }} - {{ $hours->{'wednesday-to2'} }}
+									@endif
+
 								</span>
 							</li>
 
@@ -172,6 +183,11 @@
 									@else
 										{{ $hours->{'thursday-from'} }} - {{ $hours->{'thursday-to'} }}
 									@endif
+
+									@if ($hours->{'thursday-from2'} !== '00:00' && $hours->{'thursday-to2'} !== '00:00')
+										| {{ $hours->{'thursday-from2'}  }} - {{ $hours->{'thursday-to2'} }}
+									@endif
+
 								</span>
 							</li>
 
@@ -182,6 +198,11 @@
 									@else
 										{{ $hours->{'friday-from'} }} - {{ $hours->{'friday-to'} }}
 									@endif
+
+									@if ($hours->{'friday-from2'} !== '00:00' && $hours->{'friday-to2'} !== '00:00')
+										| {{ $hours->{'friday-from2'}  }} - {{ $hours->{'friday-to2'} }}
+									@endif
+
 								</span>
 							</li>
 
@@ -192,6 +213,11 @@
 									@else
 										{{ $hours->{'saturday-from'} }} - {{ $hours->{'saturday-to'} }}
 									@endif
+
+									@if ($hours->{'saturday-from2'} !== '00:00' && $hours->{'saturday-to2'} !== '00:00')
+										| {{ $hours->{'saturday-from2'}  }} - {{ $hours->{'saturday-to2'} }}
+									@endif
+
 								</span>
 							</li>
 
@@ -202,6 +228,11 @@
 									@else
 										{{ $hours->{'sunday-from'} }} - {{ $hours->{'sunday-to'} }}
 									@endif
+
+									@if ($hours->{'sunday-from2'} !== '00:00' && $hours->{'sunday-to2'} !== '00:00')
+										| {{ $hours->{'sunday-from2'}  }} - {{ $hours->{'sunday-to2'} }}
+									@endif
+
 								</span>
 							</li>
 
