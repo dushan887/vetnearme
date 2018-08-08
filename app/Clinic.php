@@ -13,7 +13,7 @@ class Clinic extends Model
      */
     protected $fillable = [
         'name', 'description', 'email', 'phone_number', 'emergency_number', 'city', 'address', 'zip', 'country_id', 'state', 'lat', 'lng', 'gmaps_link', 'special_notes', 'social_media', 'opening_hours',
-        'general_practice', 'specialist_and_emergency', 'accessibility', 'logo', 'owner_id', 'url'
+        'general_practice', 'specialist_and_emergency', 'accessibility', 'logo', 'marker', 'owner_id', 'url'
     ];
 
     public function isOwner($userID)

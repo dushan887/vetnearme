@@ -140,7 +140,7 @@
 			div.className = 'marker';
 
 			// MARKER IKONICA IDE OVDE
-			let popUpMarker = $('#clinic-' + self.args.marker_id).data('marker')
+			let popUpMarker = '/img/markers/' + $('#clinic-' + self.args.marker_id).data('marker')
 
 			div.appendChild(innerimage).src =
 				popUpMarker !== "none" ? popUpMarker : '/img/l1.png';
