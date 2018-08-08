@@ -139,12 +139,16 @@
 
 			div.className = 'marker';
 
-			// MARKER IKONICA IDE OVDE
-			let popUpMarker = '/img/markers/' + $('#clinic-' + self.args.marker_id).data('marker')
+			if(self.args.marker_id !== 'start'){
 
-			div.appendChild(innerimage).src =
-				popUpMarker !== "none" ? popUpMarker : '/img/l1.png';
-			div.appendChild(innerdiv);
+				// MARKER IKONICA IDE OVDE
+				let clinicMarker = $('#clinic-' + self.args.marker_id).data('marker')
+
+				div.appendChild(innerimage).src = clinicMarker !== 'none' ? '/img/markers/' + clinicMarker : '/img/l1.png'
+				div.appendChild(innerdiv);
+
+			}
+
 
 			if (typeof(self.args.marker_id) !== 'undefined') {
 				div.dataset.marker_id = self.args.marker_id;
