@@ -59,7 +59,7 @@ class ClinicQuery extends Clinic
             if($clinic->logo)
                 $this->deleteOldLogo($clinic->logo);
 
-            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name']);
+            $data['logo'] = $this->uploadImage($request->file('logo'), $data['name'], $this->_logoDirectory);
 
         }
 
