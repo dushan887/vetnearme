@@ -14,8 +14,11 @@
 
 <!-- Main content -->
 <section class="content">
-  @if (Session::has('type'))
-  @include('partials._alert') @endif
+
+  @if (Session::has('alert'))
+    @include('partial/_alert')
+  @endif
+
   <form class="form-horizontal"
       action="/admin/clinics/update/{{ $clinic->id }}" method=post role=form enctype="multipart/form-data">
     @csrf

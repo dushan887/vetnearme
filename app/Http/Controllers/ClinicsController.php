@@ -130,6 +130,7 @@ class ClinicsController extends Controller
         if(!\Auth::user()->hasRole('super_admin') && \Auth::user()->clinic->owner_id !== $id)
             return redirect('admin/clinics/' . $id);
 
+
         $validated = $request->validated();
 
         $model     = new ClinicQuery;
@@ -141,10 +142,17 @@ class ClinicsController extends Controller
                 'message' => 'Something went wrong. Please try again',
                 'type'    => 'danger'
             ]);
-            return Redirect::back();
+
+        } else {
+
+            \Session::flash('alert', [
+                'message' => 'Clinic Updated',
+                'type'    => 'success'
+            ]);
+
         }
 
-        return redirect('admin/clinics/' . $clinicID);
+        return redirect('admin/clinics/edit/' . $id);
     }
 
     /**
