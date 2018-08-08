@@ -115,12 +115,10 @@ class ResultsController extends Controller {
         if($request->input('advanced-search') && $request->input('advanced-search') === 'search')
             $services = $request->input('services');
 
-        $isOpen = $request->input('working') !== null && $request->input('working') === 'closed' ?
-            '<' : '>';
-
         $whereOpen = "";
 
-        $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') {$isOpen} HOUR(NOW())";
+        if($request->input('working') !== null && $request->input('working') === 'open')
+            $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') < HOUR(NOW())";
 
         if($category === 'general')
             $conditionsQuery[] = "clinics.general_practice = 1";
