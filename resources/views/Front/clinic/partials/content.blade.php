@@ -138,6 +138,10 @@
 									@else
 										{{ $hours->{'monday-from'} }} - {{ $hours->{'monday-to'} }}
 									@endif
+
+									@if ($hours->{'monday-from2'} !== '00:00' && )
+
+									@endif
 								</span>
 							</li>
 

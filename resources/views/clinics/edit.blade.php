@@ -126,7 +126,6 @@
                   <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                     <label for=email>Email Address</label>
                     <input type="email" id=email name=email class="form-control"
-                      readonly
                       placeholder="Email"
                       value="{{ $clinic->email }}">
                     {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
