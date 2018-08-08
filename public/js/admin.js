@@ -18636,6 +18636,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['clinicrole', 'userid'],
@@ -18876,14 +18879,18 @@ var render = function() {
                           _c("td", { attrs: { width: "150" } }, [
                             _c("div", { staticClass: "btn-group pull-right" }, [
                               _c(
-                                "button",
+                                "a",
                                 {
                                   staticClass: "btn btn-default btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.redirect("show", clinic)
-                                    }
+                                  attrs: {
+                                    type: "button",
+                                    rel: "noopener noreferrer",
+                                    target: "_blank",
+                                    href:
+                                      "/clinic/" +
+                                      clinic.name
+                                        .toLowerCase()
+                                        .replace(/\s/g, "_")
                                   }
                                 },
                                 [_c("i", { staticClass: "fa fa-eye" })]

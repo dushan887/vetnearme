@@ -186,11 +186,14 @@
                                             <td width="150">
                                                 <div class="btn-group pull-right">
 
-                                                    <button type="button"
-                                                    class="btn btn-default btn-sm"
-                                                        @click='redirect("show", clinic)'>
+                                                    <a type="button"
+                                                        class="btn btn-default btn-sm"
+                                                        rel="noopener noreferrer"
+                                                        target="_blank"
+                                                        :href="'/clinic/' + clinic.name.toLowerCase().replace(/\s/g, '_')"
+                                                    >
                                                         <i class="fa fa-eye"></i>
-                                                    </button>
+                                                    </a>
 
                                                     <button type="button" class="btn btn-default btn-sm"
                                                         @click='redirect("edit", clinic)'>
