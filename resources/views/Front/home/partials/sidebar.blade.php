@@ -1,5 +1,5 @@
 <section style="background: #fff; padding: 15px;">
-	<h4 class="main-color">SEARCH ARTICLES</h4>
+	{{-- <h4 class="main-color">SEARCH ARTICLES</h4>
 	<form id="article-search">
 		<div class="search-wrapper">
 			<div class="field relative">
@@ -7,7 +7,7 @@
 			</div>
 		</div>
 	</form>
-	<div class="border-separator" style="margin-bottom: 18px;"></div>
+	<div class="border-separator" style="margin-bottom: 18px;"></div> --}}
 	<h4 class="main-color">CATEGORIES</h4>
 	<ul class="list-unstyled main-color2">
 
