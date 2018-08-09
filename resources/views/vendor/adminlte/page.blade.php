@@ -64,11 +64,11 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
-                        
+
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                               <img src="http://via.placeholder.com/160x160" class="user-image" alt="User Image">
-                              <span class="hidden-xs">Name Surname</span>
+                            <span class="hidden-xs">{{ \Auth::user()->full_name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                               <!-- User image -->
@@ -76,8 +76,8 @@
                                 <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
 
                                 <p>
-                                  Name Surname - Position
-                                  <small>Member since April 2018</small>
+                                  {{\Auth::user()->full_name}} - {{ \Auth::user()->position }}
+                                    <small>Member since {{ date('F, Y', strtotime(\Auth::user()->created_at)) }}</small>
                                 </p>
                               </li>
                               <!-- Menu Body -->
@@ -147,7 +147,7 @@
                       <img src="http://via.placeholder.com/160x160" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                      <p>Name Surname</p>
+                      <p>{{ \Auth::user()->full_name }}</p>
                     </div>
                   </div>
 

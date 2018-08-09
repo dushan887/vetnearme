@@ -23,7 +23,7 @@ class FrontPartController extends Controller {
             'category'         => 'all',
             'advancedSearch'   => false,
             'selectedServices' => [],
-            'posts'            => Post::orderBy('created_at', 'desc')->limit(6)->get(),
+            'posts'            => Post::where('status', 1)->orderBy('created_at', 'desc')->limit(6)->get(),
             'categories'       => PostCategory::orderBy('name', 'desc')->get(),
         ]);
     }
