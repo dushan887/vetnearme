@@ -96,9 +96,10 @@ class ResultsController extends Controller {
     private function getClinics($request, $address, $coordinates, $currentDay)
     {
 
-        $radiusList = Radius::get();
-        $radius     = $request->input('radius') ? $request->input('radius'): $radiusList[0];
-        $services   = false;
+        $radiusList  = Radius::get();
+        $radius      = $request->input('radius') ? $request->input('radius'): $radiusList[0];
+        $services    = false;
+        $currentHour = date('H:i');
 
         $conditionsQuery = [];
 
@@ -117,8 +118,9 @@ class ResultsController extends Controller {
 
         $whereOpen = "";
 
+
         if($request->input('working') !== null && $request->input('working') === 'open')
-            $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') < HOUR(NOW())";
+            $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') > '{$currentHour}'";
 
         if($category === 'general')
             $conditionsQuery[] = "clinics.general_practice = 1";
@@ -172,6 +174,7 @@ class ResultsController extends Controller {
                 JOIN countries ON countries.id = clinics.country_id
                 LEFT JOIN clinics_services ON clinics.id = clinics_services.clinic_id
                 ' . $conditionsQuery . '
+                GROUP BY clinics.id
                 ) AS distances
             WHERE distance < ' . $radius. '
             ORDER BY distance ASC');
