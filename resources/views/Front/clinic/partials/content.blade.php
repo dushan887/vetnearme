@@ -52,7 +52,13 @@
 
 						  <div class="carousel-inner">
 							@foreach($clinic->gallery as $media)
-								<div class="carousel-item active">
+								<div class="carousel-item
+
+								@if($clinic === 0)
+									active
+								@endif
+
+								">
 									<img
 										class="d-block w-100"
 
