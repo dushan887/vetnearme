@@ -43,6 +43,7 @@
 			      $(this).text('Closed')
 			}
 		})
+		$('#clinicSliderCarousel .carousel-item:first-child').addClass('active');
 		var url = $('#web-url-check span').text().replace('http://', '').replace('https://', '').replace('www.', '')
 		var newUrl = 'www.' + url.slice(0, url.indexOf("/"))
 

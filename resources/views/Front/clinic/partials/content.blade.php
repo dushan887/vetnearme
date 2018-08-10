@@ -32,13 +32,13 @@
 			<div class="row inner-sections">
 				<div class="col-12 col-md-8">
 					<div class="inner empty">
-						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+						<div id="clinicSliderCarousel" class="carousel slide" data-ride="carousel">
 						  <ol class="carousel-indicators">
 
 							  <?php $counter = 0  ?>
 
 							  @foreach($clinic->gallery as $media)
-								<li data-target="#carouselExampleIndicators"
+								<li data-target="#clinicSliderCarousel"
 								data-slide-to="{{ $counter }}"
 								@if($clinic === 0)
 									class="active"
@@ -52,13 +52,7 @@
 
 						  <div class="carousel-inner">
 							@foreach($clinic->gallery as $media)
-								<div class="carousel-item
-
-								@if($clinic === 0)
-									active
-								@endif
-
-								">
+								<div class="carousel-item">
 									<img
 										class="d-block w-100"
 
@@ -73,11 +67,11 @@
 							@endforeach
 						  </div>
 
-						  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						  <a class="carousel-control-prev" href="#clinicSliderCarousel" role="button" data-slide="prev">
 						    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 						    <span class="sr-only">Previous</span>
 						  </a>
-						  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+						  <a class="carousel-control-next" href="#clinicSliderCarousel" role="button" data-slide="next">
 						    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 						    <span class="sr-only">Next</span>
 						  </a>
