@@ -51,7 +51,7 @@ class MediaQuery extends Media
                 'extension'   => $result['extension'],
                 'user_id'     => $userID,
                 'clinic_id'   => $clinicID,
-                'super_admin' =>  \Auth::user()->hasRole('super_admin') ? 0 : 1,
+                'super_admin' =>  \Auth::user()->hasRole('super_admin') ? 1 : 0,
                 'created_at'  => $now,
                 'updated_at'  => $now,
             ];
