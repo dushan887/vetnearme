@@ -7,11 +7,35 @@
 @section('AditionalHead')
 <style type="text/css">
 	#search-toogle-btn {
-		display: block
+		display: none
 	}
-	#toogle-search {
+	#toogle-search,
+	.page .search-title {
 		display: none;
 	}
+	#toogle-search {
+    /*margin-top: -160px;*/
+	    display: block !important;
+	    position: absolute;
+	    top: -10px;
+	    right: 0;
+	    left: 400px;
+	    z-index: 9999;
+	    background: transparent;
+	    border: 0 !important;
+	}
+	.page #header {
+	    padding-top: 30px;
+	    padding-bottom: 30px;
+	    overflow: visible;
+	}
+	.search-in.page .advanced-search-holder {
+		margin-left: 0
+	}
+	.page-search #search #address-input {
+		border-radius: 5px !important
+	}
+
 </style>
 @stop
 
@@ -19,12 +43,13 @@
 	<body class="page">
 		<header id="header" class="has-border">
 			@include('Front.main.header')
+			@include('Front.results.partials.search')
+
 		</header>
 
 		<div id="wrapper">
 
-			@include('Front.results.partials.search')
-
+			
 			<div class="container page-content">
 				<div
 					id="content"
@@ -299,17 +324,16 @@ function initMap() {
   };
 
   // Perform a nearby search.
-  service.nearbySearch(
-      {location: pyrmont, radius: 5000, type: ['veterinary_care']},
-      function(results, status, pagination) {
-        if (status !== 'OK') return;
-
-        createMarkers(results);
-        moreButton.disabled = !pagination.hasNextPage;
-        getNextPage = pagination.hasNextPage && function() {
-          pagination.nextPage();
-        };
-      });
+	service.nearbySearch(
+		{location: pyrmont, radius: 5000, type: ['veterinary_care']},
+		function(results, status, pagination) {
+		if (status !== 'OK') return;
+		createMarkers(results);
+		moreButton.disabled = !pagination.hasNextPage;
+		getNextPage = pagination.hasNextPage && function() {
+		  pagination.nextPage();
+		};
+	});
 }
 
 function createMarkers(places) {
@@ -332,6 +356,20 @@ function createMarkers(places) {
       position: place.geometry.location
     });
 
+    var infowindow = new google.maps.InfoWindow()
+
+    var content =  `<div class="info">
+						<h4 class="info-title main-color"><strong>${place.name}</h4>
+						<div class="info"><i class="fas fa-map-marker-alt"></i> ${place.vicinity}</div>			
+					</div>`
+
+    google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+	    return function() {
+	        infowindow.setContent(content);
+	        infowindow.open(map,marker);
+	    };
+	})(marker,content,infowindow));  
+
     var li = document.createElement('li');
     li.textContent = place.name;
     placesList.appendChild(li);
@@ -340,6 +378,9 @@ function createMarkers(places) {
   }
   map.fitBounds(bounds);
 }
-initMap();</script>
+
+
+initMap();
+</script>
 @endif
 @stop

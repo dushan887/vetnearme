@@ -8,11 +8,11 @@
 		<div id="search-toogle-btn">
 			<i class="fa fa-search"></i>
 		</div>
-	 	<div id="menu-btn">
+	 	{{-- <div id="menu-btn">
 			<div></div>
 			<div></div>
 			<div></div>
-		</div>
+		</div> --}}
 		<div id="main-nav">
 			<div class="side-logo">
 				<a href="#">
