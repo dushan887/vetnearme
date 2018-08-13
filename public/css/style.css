@@ -1040,6 +1040,7 @@ article footer {
   -webkit-animation-iteration-count: infinite;
   -moz-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+  display: none !important; 
 }
 .marker[data-marker_id="start"]:after {
   background-color: blue;
@@ -1048,7 +1049,7 @@ article footer {
   height: 35px;
   background: transparent;
 }
-@-moz-keyframes pulse {
+/*@-moz-keyframes pulse {
  0% {-moz-transform: scale(0);opacity: 0.0;}
  25% {-moz-transform: scale(0);opacity: 0.1;}
  50% {-moz-transform: scale(0.1);opacity: 0.3;}
@@ -1062,6 +1063,11 @@ article footer {
  50% {-webkit-transform: scale(0.1);opacity: 0.3;}
  75% {-webkit-transform: scale(0.5);opacity: 0.5;}
  100% {-webkit-transform: scale(1);opacity: 0.0;}
+}*/
+.info-det {
+  line-height: 1.5;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 .clinic-map-pin .marker:before {
     content: "\f3c5";

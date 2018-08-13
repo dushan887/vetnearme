@@ -300,7 +300,7 @@ let markers     	= []
 let content     	= $('#content')
 let userCoordinates = content.data('usercoordinates')
 
-function initMap() {
+
   // Create the map.
 	var pyrmont = userCoordinates
 	let options = {
@@ -317,28 +317,18 @@ function initMap() {
   // Create the places service.
   var service = new google.maps.places.PlacesService(map);
   var getNextPage = null;
-  var moreButton = document.getElementById('more');
-  moreButton.onclick = function() {
-    moreButton.disabled = true;
-    if (getNextPage) getNextPage();
-  };
 
   // Perform a nearby search.
 	service.nearbySearch(
 		{location: pyrmont, radius: 5000, type: ['veterinary_care']},
-		function(results, status, pagination) {
+		function(results, status) {
 		if (status !== 'OK') return;
 		createMarkers(results);
-		moreButton.disabled = !pagination.hasNextPage;
-		getNextPage = pagination.hasNextPage && function() {
-		  pagination.nextPage();
-		};
 	});
-}
+
 
 function createMarkers(places) {
   var bounds = new google.maps.LatLngBounds();
-  var placesList = document.getElementById('clinics');
 
   for (var i = 0, place; place = places[i]; i++) {
     var image = {
@@ -353,26 +343,59 @@ function createMarkers(places) {
       map: map,
       icon: image,
       title: place.name,
-      position: place.geometry.location
+      position: place.geometry.location,
+      reference: place.reference
     });
 
     var infowindow = new google.maps.InfoWindow()
 
-    var content =  `<div class="info">
-						<h4 class="info-title main-color"><strong>${place.name}</h4>
-						<div class="info"><i class="fas fa-map-marker-alt"></i> ${place.vicinity}</div>			
-					</div>`
+    var content =  ''
 
     google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
 	    return function() {
-	        infowindow.setContent(content);
-	        infowindow.open(map,marker);
+	    	var request = {
+		        reference: this.reference
+		    };
+
+		    service.getDetails(request, function(place, status){
+		    	console.log(place.opening_hours)
+			    	var content = '<div class="info"><h4 class="info-title main-color"><strong>' + place.name + '</strong></h4>'
+			        if(status == google.maps.places.PlacesServiceStatus.OK){			            
+			            if(typeof place.formatted_address !== 'undefined'){
+			                content += '<div class="info-det"><i class="fas fa-map-marker-alt"></i> ' + place.formatted_address + '</div>';
+			            }
+			            
+			            if(typeof place.formatted_phone_number !== 'undefined'){
+			                content += '<div class="info-det"><i class="fas fa-phone"></i> <a href="tel:' + place.formatted_phone_number + '">' + place.formatted_phone_number + '</a></div>';
+			            }
+			            
+			            if(typeof place.website !== 'undefined'){
+			                content += '<div class="info-det"><i class="fas fa-globe"></i> <a href="tel:' + place.website + '">' + place.website + '</a></div>';
+			            
+			            }
+
+			            if(typeof place.opening_hours !== 'undefined'){
+			            	 content += '<strong><i class="fas fa-clock"></i> Opening Hours</strong><br /><ul class="info-det list-unstyled"> ';
+			            	for (var i = 0; i < place.opening_hours.weekday_text.length; i++) {
+
+				               	var opening_hours_div = document.getElementById("opening-hours");
+				                // var hours = document.createElement('div');
+				                hours = '<li>'+place.opening_hours.weekday_text[i]+'</li>'
+				               	content += hours;
+				            }
+			                content += '</ul>';
+			            
+			            }
+			            content +='</div>'
+			        }     
+			        infowindow.setContent(content);
+	       			infowindow.open(map,marker);
+			});
+	        
 	    };
 	})(marker,content,infowindow));  
 
-    var li = document.createElement('li');
-    li.textContent = place.name;
-    placesList.appendChild(li);
+    
 
     bounds.extend(place.geometry.location);
   }

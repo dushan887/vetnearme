@@ -48,20 +48,9 @@
 		</div>
 
 		<div id="visual-resaults" class="row">
-			<div class="clinics-container col-12 col-md-6 ds-col-45">				
+			<div class="col-12 col-md-12">
 				<div class="inner">
-					<div class="no-resaults-info text-center">
-						<h4 class="text-white">There are no listed places matching your criteria</h4>
-						<p class="text-white">Please try again with different filter options </p>
-					</div>
-					<ul id="clinics" class="no-results-list list-unstyled"></ul>
-					<a href="" id="more" class="no-results-list-more">More</a>
-				</div>
-				
-			</div>
-			<div class="col-12 col-md-6 ds-col-55">
-				<div class="inner">
-					<div id="map" style="width: 100%; height: 100%; display: block;"></div>
+					<div id="map" style="width: 100%; height: 100%; display: block; min-height: 600px"></div>
 				</div>
 			</div>
 		</div>
