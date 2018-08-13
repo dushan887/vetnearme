@@ -370,7 +370,7 @@ function createMarkers(places) {
 			            }
 			            
 			            if(typeof place.website !== 'undefined'){
-			                content += '<div class="info-det"><i class="fas fa-globe"></i> <a href="tel:' + place.website + '">' + place.website + '</a></div>';
+			                content += '<div class="info-det"><i class="fas fa-globe"></i> <a href="' + place.website + '">' + place.website + '</a></div>';
 			            
 			            }
 
