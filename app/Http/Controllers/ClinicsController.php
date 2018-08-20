@@ -130,7 +130,6 @@ class ClinicsController extends Controller
         if(!\Auth::user()->hasRole('super_admin') && \Auth::user()->clinic->owner_id !== $id)
             return redirect('admin/clinics/' . $id);
 
-
         $validated = $request->validated();
 
         $model     = new ClinicQuery;
@@ -181,6 +180,11 @@ class ClinicsController extends Controller
 
     public function get(Request $request)
     {
+        $paginate = (int) $request->get('limit') ?? 10;
+
+        return response()
+                ->json(Clinic::orderBy('name', 'asc')->with(['users', 'country'])->paginate(10));
+
         switch ($request->input('role')) {
             case 'owner':
                 return response()

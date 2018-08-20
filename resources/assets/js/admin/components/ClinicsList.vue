@@ -236,6 +236,19 @@
                                 </table>
 
                             </div>
+
+                            <div class="box-footer clearfix">
+                                <ul class="pagination pagination-sm no-margin pull-right" v-if="pagination.pages">
+                                    <li><a href="#" @click.prevent="getClinics(pagination.prevPage)">«</a></li>
+
+                                    <li v-for="n in pagination.pages" :key="n">
+                                        <a href="#"
+                                            @click.prevent="getClinics(paginationLink(n))">{{ n }}</a>
+                                    </li>
+
+                                    <li><a href="#" @click.prevent="getClinics(pagination.nextPage)">»</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <!-- CLINICS LIST END -->
@@ -253,7 +266,13 @@ export default {
     data(){
         return {
             searchValue: '',
-            clinics: []
+            clinics: [],
+            pagination: {
+                pages: 0,
+                currentPage: 0,
+                prevPage: '',
+                nextPage: ''
+            }
         }
     },
     methods: {
@@ -278,14 +297,25 @@ export default {
         search(value){
             this.searchValue = value
         },
-        getClinics(){
+        getClinics(href){
 
-            axios.get('/admin/clinics/get', {
+            if(!href)
+                return
+
+            axios.get(href, {
                 params: {role: this.clinicrole}
             })
             .then((response) => {
-                this.clinics = response.data
+                this.populateClinics(response.data)
             })
+        },
+        populateClinics(data){
+            this.pagination.pages       = data.last_page
+            this.pagination.currentPage = data.current_page
+            this.pagination.prevPage    = data.prev_page_url
+            this.pagination.nextPage    = data.next_page_url
+
+            this.clinics = data.data
         },
         isAssigned(users){
 
@@ -325,6 +355,12 @@ export default {
         },
         redirect(action, clinic){
             window.location.href="/admin/clinics/" + action + "/" + clinic.id
+        },
+        paginationLink(n){
+            if(n === this.pagination.currentPage)
+                return null
+
+            return "/admin/clinics/get?page=" + n
         }
     },
     computed: {
@@ -335,7 +371,7 @@ export default {
         }
     },
     mounted(){
-        this.getClinics()
+        this.getClinics('/admin/clinics/get')
     }
 }
 </script>
