@@ -83,13 +83,13 @@
 						<h4 class="main-color">Contact Details</h4>
 						<div class="border-separator space-10"></div>
 						<ul class="list-unstyled info">
-							<li><a href="#"><i class="fas fa-phone-square"></i> <strong>Phone:</strong><br />
+							<li><a href="tel:{{ $clinic->phone_number }}"><i class="fas fa-phone-square"></i> <strong>Phone:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->phone_number }}</span></a></li>
-							<li><a href="#"><i class="fas fa-phone-square"></i> <strong>Emergency:</strong><br />
+							<li><a href="tel:{{ $clinic->emergency_number }}"><i class="fas fa-phone-square"></i> <strong>Emergency:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->emergency_number }}</span></a></li>
-							<li><a href="#"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
+							<li><a href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
-							<li id="web-url-check"><a href="#"><i class="fas fa-globe"></i> <strong>Website:</strong><br />
+							<li id="web-url-check"><a href="{{ $clinic->url }}" target="_blank"><i class="fas fa-globe"></i> <strong>Website:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->url }}</span></a></li>
 							<li>
 								<div class="border-separator space-10"></div>
@@ -254,10 +254,9 @@
 							<li><i class="fas fa-map-marker-alt"></i>
 									<strong>Address:</strong>
 									<span>{{ $clinic->address }}</span>
-									<span>{{ $clinic->city }},</span>
-									<span>{{ $clinic->zip }}</span>
+									<span>{{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }}</span>
 							</li>
-							<li><a href="#"><i class="fas fa-map-signs"></i>
+							<li><a href="{{ $clinic->gmaps_link }}"><i class="fas fa-map-signs"></i>
 								<strong>Get Directions:</strong>
 								<span>{{ $clinic->gmaps_link }}</span></a>
 							</li>

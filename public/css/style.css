@@ -279,7 +279,9 @@ a,
     display: flex;
     position: absolute;
 }
-
+i.fa-phone {
+  transform: rotate(95deg);
+}
 /*Menu Btn*/
 #menu-btn {
   position: absolute;
@@ -835,7 +837,7 @@ article footer {
   border-radius: 5px;
   display: inline-block;
   position: absolute;
-  right: 30px;
+  right: 25px;
   top: 3px;
   width: 44px;
   height: 44px;
@@ -904,10 +906,10 @@ article footer {
   display: block;
 }
 .marker {
-  width: 30px;
-  height: 30px;
-  top: -15px;
-  left: -15px;
+  width: 25px;
+  height: 25px;
+  top: -12.5px;
+  left: -12.5px;
   background-color: #468a97;
   position: absolute;
   cursor: pointer;
@@ -929,8 +931,8 @@ article footer {
   bottom: -22px;
 }
 .marker > img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   position: absolute;
   top: 0;
   left: 0;
@@ -945,9 +947,9 @@ article footer {
   font-weight: 600;
   text-align: center;
   position: absolute;
-  width: 40px;
-  height: 40px;
-  line-height: 34px;
+  width: 35px;
+  height: 35px;
+  line-height: 29px;
   display: block;
   font-size: 15px;
   top: -5px;
@@ -1169,7 +1171,7 @@ article footer {
     margin-right: 10px;
 }
 #visual-resaults {
-    margin-top: 30px;
+    margin-top: 0;
     line-height: 1.5;
 }
 #visual-resaults > div {

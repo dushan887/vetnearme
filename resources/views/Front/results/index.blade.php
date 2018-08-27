@@ -6,6 +6,12 @@
 
 @section('AditionalHead')
 <style type="text/css">
+	.logo img {
+		max-width: 80%
+	}
+	.page-content {
+	    margin-top: 10px;
+	}
 	#search-toogle-btn {
 		display: none
 	}
@@ -14,15 +20,21 @@
 		display: none;
 	}
 	#toogle-search {
-    /*margin-top: -160px;*/
 	    display: block !important;
 	    position: absolute;
 	    top: -10px;
 	    right: 0;
-	    left: 400px;
+	    left: 0;
 	    z-index: 9999;
 	    background: transparent;
 	    border: 0 !important;
+	}
+	.page #search {
+		padding-left: 320px;
+	}
+	.page #search .search-wrapper {
+		max-width: none;
+		margin: auto;
 	}
 	.page #header {
 	    padding-top: 30px;
@@ -300,7 +312,8 @@ let markers     	= []
 let content     	= $('#content')
 let userCoordinates = content.data('usercoordinates')
 
-
+function initMap() {
+		
   // Create the map.
 	var pyrmont = userCoordinates
 	let options = {
@@ -325,14 +338,14 @@ let userCoordinates = content.data('usercoordinates')
 		if (status !== 'OK') return;
 		createMarkers(results);
 	});
-
+}
 
 function createMarkers(places) {
   var bounds = new google.maps.LatLngBounds();
 
   for (var i = 0, place; place = places[i]; i++) {
     var image = {
-      url: '/img/l1.png',
+      url: '/img/map-pin.png',
       size: new google.maps.Size(71, 71),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(17, 34),
@@ -403,7 +416,9 @@ function createMarkers(places) {
 }
 
 
-initMap();
+$(document).ready(function() {
+	initMap();
+})
 </script>
 @endif
 @stop
