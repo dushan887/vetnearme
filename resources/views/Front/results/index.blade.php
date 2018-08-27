@@ -5,54 +5,10 @@
 @stop
 
 @section('AditionalHead')
-<style type="text/css">
-	.logo img {
-		max-width: 80%
-	}
-	.page-content {
-	    margin-top: 10px;
-	}
-	#search-toogle-btn {
-		display: none
-	}
-	#toogle-search,
-	.page .search-title {
-		display: none;
-	}
-	#toogle-search {
-	    display: block !important;
-	    position: absolute;
-	    top: -10px;
-	    right: 0;
-	    left: 0;
-	    z-index: 9999;
-	    background: transparent;
-	    border: 0 !important;
-	}
-	.page #search {
-		padding-left: 320px;
-	}
-	.page #search .search-wrapper {
-		max-width: none;
-		margin: auto;
-	}
-	.page #header {
-	    padding-top: 30px;
-	    padding-bottom: 30px;
-	    overflow: visible;
-	}
-	.search-in.page .advanced-search-holder {
-		margin-left: 0
-	}
-	.page-search #search #address-input {
-		border-radius: 5px !important
-	}
-
-</style>
 @stop
 
 @section('BodySetup')
-	<body class="page">
+	<body class="page results-page">
 		<header id="header" class="has-border">
 			@include('Front.main.header')
 			@include('Front.results.partials.search')

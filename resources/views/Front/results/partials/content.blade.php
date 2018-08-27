@@ -69,10 +69,10 @@
 		</div>
 
 		<div id="visual-resaults" class="row">
-			<div class="clinics-container col-12 col-md-6 ds-col-45">
+			<div class="clinics-container col-12 col-lg-6 ds-col-45">
 				@include('Front.results.partials._clinics')
 			</div>
-			<div class="col-12 col-md-6 ds-col-55">
+			<div class="col-12 col-lg-6 ds-col-55">
 				<div class="inner">
 					<div id="map" style="width: 100%; height: 100%; display: block;"></div>
 				</div>
