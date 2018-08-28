@@ -7,15 +7,15 @@
 						if($clinics->currentPage() === 1):
 							$to = $clinics->perPage() >= $clinics->total() ? $clinics->total() :$clinics->perPage();
 
-							$showing = "1 - {$to}" ;
+							$showing = "1 - <span class=total-clinics>{$to}</span>" ;
 						else:
 							$from    = ($clinics->currentPage() * $clinics->perPage()) - 1;
 							$to      = ($from + $clinics->perPage()) - 1;
 							$to      = $clinics->total() <= $to ? $clinics->total() : $to;
-							$showing = "{$from} - <span class=total-clinics>{$to}</span>";
+							$showing = "{$from} - {$to}";
 						endif
 					?>
-					Showing <span id="clinics-showing">{{ $showing }}</span> of
+					Showing <span id="clinics-showing">{!! $showing !!}</span> of
 					<span class="resaults-found main-color">{{ $clinics->total() }}</span>
 
 					<span>nearby for search for</span> <span class="search-input">{{ $address }}</span>

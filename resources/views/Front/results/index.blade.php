@@ -248,7 +248,7 @@
 					lng: map.getCenter().lng(),
 				},
 				ids: clinicIDs,
-				radius: ('#radius').val(),
+				radius: $('#radius').val(),
 				working: $('input[name=working]:checked').val()
 			},
 				function (data, textStatus, jqXHR) {
@@ -257,6 +257,11 @@
 					let coordinates = JSON.parse(data.coordinates)
 
 					let count = data.count
+
+					console.log(data);
+
+					$('.total-clinics').text(data.clinicsTotal)
+					$('.resaults-found').text(data.clinicsTotal)
 
 					for(coordinate in coordinates){
 

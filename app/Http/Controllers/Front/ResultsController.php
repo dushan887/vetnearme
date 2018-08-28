@@ -66,8 +66,9 @@ class ResultsController extends Controller {
                         'currentDay'      => $currentDay,
                         'count'           => $count + 1,
                     ])->render(),
-                    'coordinates' => json_encode($clinicsCoordinates),
-                    'count'       => $count + 1,
+                    'coordinates'  => json_encode($clinicsCoordinates),
+                    'count'        => $count + 1,
+                    'clinicsTotal' => $clinics->total() + $count,
                 ]);
 
         }
