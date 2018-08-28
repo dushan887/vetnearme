@@ -1626,6 +1626,16 @@ article footer {
   margin-left: 320px;
   max-width: calc(100% - 320px)
 }
+@media screen and (min-width: 1400px) {
+   .page.results-page #search {
+    max-width: calc(100% - 640px)
+  }
+  .ds-flex-s {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  } 
+}
 .page.results-page #search .search-wrapper {
   max-width: none;
   margin: auto;
@@ -1697,6 +1707,10 @@ article footer {
   }
 }
 @media screen and (max-width: 778px) {
+  .row.inner-sections..ml-3.mr-0.{
+    margin-left: 15px !important;
+    margin-right: 15px !important;
+  }
   .home #search .field.submit-search input[type=submit] {
       cursor: pointer;
       border: none;

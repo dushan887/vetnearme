@@ -5,6 +5,17 @@
 @stop
 
 @section('AditionalHead')
+<style type="text/css">
+	.home-blog article header .cover-img {
+	    height: calc( ( 1400px / 18) * 2 );
+	}
+	@media screen and (min-width: 1200px) {
+		.container-1200 {
+		    max-width: 1200px;
+		}
+	}
+
+</style>
 @stop
 
 @section('BodySetup')
@@ -17,7 +28,7 @@
 
 		@include('Front.home.partials.banner')
 
-		<div class="container page-content container-1400">
+		<div class="container page-content container-1200">
 			<div class="row">
 				<div class="col-12">
 					<h2 class="main-color"><i class="fa fa-paper-plane"></i> Pet News &amp; Advice</h2>
