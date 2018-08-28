@@ -42,7 +42,7 @@
                         </div>
                         <div class="resault-address">
                             <span>{{ $clinic->address }}</span><br />
-                            <span>{{ $clinic->city  . " " . $clinic->zip}}</span><br />
+                            <span>{{ $clinic->city  . " " . $clinic->zip . ", " . $clinic->state}}</span><br />
                             <span>{{ str_replace('Commonwealth of ', '', $clinic->country) }}</span><br />
                         </div>
                     </div>

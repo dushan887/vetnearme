@@ -21,7 +21,7 @@
 						</div>
 						<div id="clinic-nav">
 							<ul>
-								
+
 
 							</ul>
 						</div>
@@ -255,6 +255,7 @@
 									<strong>Address:</strong>
 									<span>{{ $clinic->address }}</span>
 									<span>{{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }}</span>
+									<span>{{ $clinic->country->name }}</span>
 							</li>
 							<li><a href="{{ $clinic->gmaps_link }}"><i class="fas fa-map-signs"></i>
 								<strong>Get Directions:</strong>

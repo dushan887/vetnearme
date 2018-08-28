@@ -138,12 +138,12 @@ class ResultsController extends Controller {
         if($category === 'specialist')
             $conditionsQuery[] = "clinics.specialist_and_emergency = 1";
 
-        if($services):
-            foreach ($services as $service) {
-                $service = (int) $service;
-                $conditionsQuery[] = "clinics_services.service_id = {$service}";
-            }
-        endif;
+        // if($services):
+        //     foreach ($services as $service) {
+        //         $service = (int) $service;
+        //         $conditionsQuery[] = "clinics_services.service_id = {$service}";
+        //     }
+        // endif;
 
         $clinics     = [];
         $radiusCount = count($radiusList);
@@ -171,7 +171,7 @@ class ResultsController extends Controller {
         // 6378 is the circumvent of the Earth in km
         return \DB::select('SELECT * FROM
                 (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
-                clinics.logo, clinics.address, clinics.city, clinics.name, clinics.description,
+                clinics.logo, clinics.address, clinics.city, clinics.state, clinics.name, clinics.description,
                 clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
                 clinics.marker,
                 countries.full_name AS country,
