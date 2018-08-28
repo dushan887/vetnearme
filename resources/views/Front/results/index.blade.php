@@ -136,7 +136,6 @@
 
 			google.maps.event.addDomListener(div, "click", function(event) {
 
-				// alert('You clicked on a custom marker!');
 				google.maps.event.trigger(self, "click");
 
 					let infoIndex = $(this).attr('data-marker_id')
@@ -234,14 +233,46 @@
 
 		google.maps.event.addListener(map, 'dragend', function() {
 
+			let clinics   = $('.clinic')
+			let clinicIDs = []
+
+			for(i = 0; i < clinics.length; i++){
+
+				clinicIDs.push(clinics[i].dataset.id)
+
+			}
+
 			$.get("/results", {
 				coordinates: {
 					lat: map.getCenter().lat(),
 					lng: map.getCenter().lng(),
-				}
+				},
+				ids: clinicIDs,
+				radius: ('#radius').val(),
+				working: $('input[name=working]:checked').val()
 			},
 				function (data, textStatus, jqXHR) {
-					console.log(data);
+					$('#clinics').append(data.page)
+
+					let coordinates = JSON.parse(data.coordinates)
+
+					let count = data.count
+
+					for(coordinate in coordinates){
+
+						let marker = new CustomMarker (
+							new google.maps.LatLng(coordinates[coordinate].lat ,coordinates[coordinate].lng),
+							map,
+							{
+								marker_id: count,
+								marker_pin: count,
+							},
+						);
+
+						markers.push(marker)
+
+					}
+
 
 				},
 				"json"
@@ -249,6 +280,7 @@
 		});
 
 		bounds.extend(marker.latlng)
+
 		for(coordinate in coordinates){
 
 			let marker = new CustomMarker (
@@ -284,7 +316,7 @@ let content     	= $('#content')
 let userCoordinates = content.data('usercoordinates')
 
 function initMap() {
-		
+
   // Create the map.
 	var pyrmont = userCoordinates
 	let options = {
@@ -342,7 +374,7 @@ function createMarkers(places) {
 		    };
 
 		    service.getDetails(request, function(place, status){
-		    	console.log(place.opening_hours)
+
 			    	var content = '<div class="info"><h4 class="info-title main-color"><strong>' + place.name + '</strong></h4>'
 			        if(status == google.maps.places.PlacesServiceStatus.OK){
 			            if(typeof place.formatted_address !== 'undefined'){

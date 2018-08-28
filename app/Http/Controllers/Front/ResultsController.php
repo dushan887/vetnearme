@@ -36,8 +36,6 @@ class ResultsController extends Controller {
         $result  = $this->getClinics($request, $address, $coordinates, $currentDay);
         $clinics = $result['clinics'];
 
-
-
         if(!$coordinates) {
             $userCoordinates = json_encode(['lat' => '-33.8688197', 'lng' => '151.2092955']);
             return redirect()->route('home')->with(['message' => 'Address not valid!']);
@@ -55,25 +53,24 @@ class ResultsController extends Controller {
         }
 
         if($request->ajax()){
-            return response()
-                    ->json([
-                        'page' => view('Front.results.partials._clinics', [
-                            'clinics'         => $clinics,
-                            'coordinates'     => json_encode($clinicsCoordinates),
-                            'userCoordinates' => $userCoordinates,
-                            'address'         => $address,
-                            'currentHour'     => $currentHour,
-                            'currentDay'      => $currentDay,
 
-                        ])->render(),
-                        'total'   => $clinics->total(),
-                        'address' => $address,
-                        'radius'  => $result['radius'],
-                        'working' => $request->input('working') ?? 'all'
-                    ]);
+            $count = count($request->get('ids'));
+
+            return response()
+                ->json([
+                    'page' => view('Front.results.partials._clinics', [
+                        'clinics'         => $clinics,
+                        'userCoordinates' => $userCoordinates,
+                        'address'         => $address,
+                        'currentHour'     => $currentHour,
+                        'currentDay'      => $currentDay,
+                        'count'           => $count + 1,
+                    ])->render(),
+                    'coordinates' => json_encode($clinicsCoordinates),
+                    'count'       => $count + 1,
+                ]);
 
         }
-
 
         return view('Front.results.index',[
             'clinics'          => $clinics,
@@ -144,6 +141,15 @@ class ResultsController extends Controller {
         //         $conditionsQuery[] = "clinics_services.service_id = {$service}";
         //     }
         // endif;
+
+        if($request->input('ids') !== null){
+
+            foreach ($request->input('ids') as $id) {
+                $id = (int) $id;
+
+                $conditionsQuery[] = "clinics.id != {$id}";
+            }
+        }
 
         $clinics     = [];
         $radiusCount = count($radiusList);

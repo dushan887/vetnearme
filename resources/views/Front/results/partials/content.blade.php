@@ -12,7 +12,7 @@
 							$from    = ($clinics->currentPage() * $clinics->perPage()) - 1;
 							$to      = ($from + $clinics->perPage()) - 1;
 							$to      = $clinics->total() <= $to ? $clinics->total() : $to;
-							$showing = "{$from} - {$to}";
+							$showing = "{$from} - <span class=total-clinics>{$to}</span>";
 						endif
 					?>
 					Showing <span id="clinics-showing">{{ $showing }}</span> of
@@ -70,7 +70,19 @@
 
 		<div id="visual-resaults" class="row">
 			<div class="clinics-container col-12 col-lg-6 ds-col-45">
-				@include('Front.results.partials._clinics')
+				<div class="inner"
+				id="gmap-data"
+				data-coordinates="{{ $coordinates ?? '' }}"
+				data-usercoordinates="{{ $userCoordinates }}"
+				>
+					@php
+						$count = 0;
+					@endphp
+					<ul class="list-unstyled" id="clinics">
+						@include('Front.results.partials._clinics')
+					</ul>
+
+				</div>
 			</div>
 			<div class="col-12 col-lg-6 ds-col-55">
 				<div class="inner">
