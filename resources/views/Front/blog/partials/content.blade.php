@@ -8,14 +8,14 @@
 				<article class="border-main-color">
 
 					<header>
-						<a href="/blog/{{ $post->permalink }}">
+						<a href="/{{ $post->permalink }}">
 							<div class="cover-img"
 								style="background-image: url({{ asset('/postsCover/' . $post->cover_image) }});"></div>
 						</a>
 					</header>
 
 					<div class="article-body">
-						<h3><a href="/blog/{{ $post->permalink }}">{{ $post->title }}</a></h3>
+						<h3><a href="/{{ $post->permalink }}">{{ $post->title }}</a></h3>
 						<p>{{ $post->expert }}</p>
 					</div>
 
@@ -25,7 +25,7 @@
 								<a href="#">{{ $post->category->name }}</a>
 							</div>
 							<div class="col-12 col-md-6 align-right">
-								<a href="/blog/{{ $post->permalink }}">read more...</a>
+								<a href="/{{ $post->permalink }}">read more...</a>
 							</div>
 						</div>
 					</footer>

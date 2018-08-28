@@ -6,6 +6,6 @@
 
     Route::get('/blog', 'Front\BlogController@index')->name('blog');
 
-    Route::get('/blog/{slug}', 'Front\BlogController@show')->name('blog-single');
+    Route::get('/{slug}', 'Front\BlogController@show')->name('blog-single');
 
     Route::get('/blog/category/{name}', 'Front\BlogController@category')->name('blog-categories');

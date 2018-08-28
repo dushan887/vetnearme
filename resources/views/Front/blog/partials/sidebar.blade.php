@@ -26,7 +26,7 @@
 		@foreach($recentPosts as $recent)
 			<li>
 				<i class="fa fa-paper-plane"></i>
-				<a href="/blog/{{ $recent->permalink }}">{{ $recent->title }}</a>
+				<a href="/{{ $recent->permalink }}">{{ $recent->title }}</a>
 			</li>
 		@endforeach
 

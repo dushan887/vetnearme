@@ -27,7 +27,7 @@
 		@foreach($posts as $post)
 			<li>
 				<i class="fas fa-paw"></i>
-				<a href="/blog/{{ $post->permalink }}">{{ $post->title }}</a>
+				<a href="/{{ $post->permalink }}">{{ $post->title }}</a>
 			</li>
 		@endforeach
 

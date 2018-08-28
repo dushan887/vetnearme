@@ -7,7 +7,7 @@
 				<article>
 
 					<header>
-						<a href="/blog/{{ $post->permalink }}">
+						<a href="/{{ $post->permalink }}">
 							<div class="cover-img"
 								style="background-image: url({{ asset('/postsCover/thumbs/' . $post->cover_image) }});"></div>
 						</a>
@@ -15,7 +15,7 @@
 
 					<div class="article-body">
 						<h3>
-							<a href="/blog/{{ $post->permalink }}">{{ $post->title }}!</a>
+							<a href="/{{ $post->permalink }}">{{ $post->title }}!</a>
 						</h3>
 						{{-- <p>{{ $post->expert }}</p> --}}
 					</div>
