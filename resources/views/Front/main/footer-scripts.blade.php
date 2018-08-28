@@ -27,7 +27,7 @@
         var autocomplete = new google.maps.places.Autocomplete(input);
       }
 
-    var background = ["banner", "banner2", "banner3", "banner4", "banner5"];
+    var background = ["banner", "banner2", "banner3", "banner4", "banner5", "banner6"];
 	function getMessage() {
 	   return background[Math.floor(Math.random() * background.length)];
 	}

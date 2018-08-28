@@ -5,42 +5,10 @@
 @stop
 
 @section('AditionalHead')
-<style type="text/css">
-	#search-toogle-btn {
-		display: none
-	}
-	#toogle-search,
-	.page .search-title {
-		display: none;
-	}
-	#toogle-search {
-    /*margin-top: -160px;*/
-	    display: block !important;
-	    position: absolute;
-	    top: -10px;
-	    right: 0;
-	    left: 400px;
-	    z-index: 9999;
-	    background: transparent;
-	    border: 0 !important;
-	}
-	.page #header {
-	    padding-top: 30px;
-	    padding-bottom: 30px;
-	    overflow: visible;
-	}
-	.search-in.page .advanced-search-holder {
-		margin-left: 0
-	}
-	.page-search #search #address-input {
-		border-radius: 5px !important
-	}
-
-</style>
 @stop
 
 @section('BodySetup')
-	<body class="page">
+	<body class="page results-page">
 		<header id="header" class="has-border">
 			@include('Front.main.header')
 			@include('Front.results.partials.search')
@@ -315,7 +283,8 @@ let markers     	= []
 let content     	= $('#content')
 let userCoordinates = content.data('usercoordinates')
 
-
+function initMap() {
+		
   // Create the map.
 	var pyrmont = userCoordinates
 	let options = {
@@ -340,14 +309,14 @@ let userCoordinates = content.data('usercoordinates')
 		if (status !== 'OK') return;
 		createMarkers(results);
 	});
-
+}
 
 function createMarkers(places) {
   var bounds = new google.maps.LatLngBounds();
 
   for (var i = 0, place; place = places[i]; i++) {
     var image = {
-      url: '/img/l1.png',
+      url: '/img/map-pin.png',
       size: new google.maps.Size(71, 71),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(17, 34),
@@ -418,7 +387,9 @@ function createMarkers(places) {
 }
 
 
-initMap();
+$(document).ready(function() {
+	initMap();
+})
 </script>
 @endif
 @stop

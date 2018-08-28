@@ -15,3 +15,12 @@
 <!-- CUSTOM STYLES -->
 <link rel="stylesheet" href="{{ URL::asset('/css/style.css') }}">
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-124060217-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-124060217-1');
+</script>
