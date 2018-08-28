@@ -1,7 +1,7 @@
 
     <div class="inner"
         id="gmap-data"
-        data-coordinates="{{ $clinicsCoordinates ?? '' }}"
+        data-coordinates="{{ $coordinates ?? '' }}"
         data-usercoordinates="{{ $userCoordinates }}"
         >
         <ul class="list-unstyled" id="clinics">

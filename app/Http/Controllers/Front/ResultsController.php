@@ -21,19 +21,28 @@ class ResultsController extends Controller {
      */
     public function index(Request $request)
     {
+
         $address     = XSS::clean($request->input('address-input'));
-        $coordinates = Geolocation::guessCoordinates($address);
+        $coordinates = $request->get('coordinates') ?? Geolocation::guessCoordinates($address);
         $currentHour = date('H:i:s');
         $currentDay  = strtolower(date('l'));
 
+        if(is_object($coordinates))
+            $coordinates = [
+                'lat' => $coordinates->latitude(),
+                'lng' => $coordinates->longitude(),
+            ];
+
         $result  = $this->getClinics($request, $address, $coordinates, $currentDay);
         $clinics = $result['clinics'];
+
+
 
         if(!$coordinates) {
             $userCoordinates = json_encode(['lat' => '-33.8688197', 'lng' => '151.2092955']);
             return redirect()->route('home')->with(['message' => 'Address not valid!']);
         } else {
-            $userCoordinates = json_encode(['lat' => $coordinates->latitude(), 'lng' => $coordinates->longitude()]);
+            $userCoordinates = json_encode(['lat' => $coordinates['lat'], 'lng' => $coordinates['lng']]);
         }
 
         $clinicsCoordinates = [];
@@ -49,11 +58,12 @@ class ResultsController extends Controller {
             return response()
                     ->json([
                         'page' => view('Front.results.partials._clinics', [
-                            'clinics'            => $clinics,
-                            'clinicsCoordinates' => json_encode($clinicsCoordinates),
-                            'userCoordinates'    => $userCoordinates,
-                            'currentHour'        => $currentHour,
-                            'currentDay'         => $currentDay,
+                            'clinics'         => $clinics,
+                            'coordinates'     => json_encode($clinicsCoordinates),
+                            'userCoordinates' => $userCoordinates,
+                            'address'         => $address,
+                            'currentHour'     => $currentHour,
+                            'currentDay'      => $currentDay,
 
                         ])->render(),
                         'total'   => $clinics->total(),
@@ -109,8 +119,8 @@ class ResultsController extends Controller {
             $lat      = -33.8688197;
             $lng      = 151.2092955;
         } else {
-            $lat      = $coordinates->latitude();
-            $lng      = $coordinates->longitude();
+            $lat      = $coordinates['lat'];
+            $lng      = $coordinates['lng'];
         }
 
         if($request->input('advanced-search') && $request->input('advanced-search') === 'search')
@@ -118,9 +128,9 @@ class ResultsController extends Controller {
 
         $whereOpen = "";
 
-
         if($request->input('working') !== null && $request->input('working') === 'open')
-            $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') > '{$currentHour}'";
+            $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') > '{$currentHour}'
+            OR (JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') = '00:00' AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to2\"') = '00:00')" ;
 
         if($category === 'general')
             $conditionsQuery[] = "clinics.general_practice = 1";

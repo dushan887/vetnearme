@@ -49,7 +49,7 @@
 
 		<div id="wrapper">
 
-			
+
 			<div class="container page-content">
 				<div
 					id="content"
@@ -80,7 +80,6 @@
 
 @if ($clinics->total() > 0)
 <script type="text/javascript">
-
 
 	function initMap() {
 		let options = {
@@ -114,7 +113,7 @@
 
 			case 50:
 				zoom = 10;
-			break;			
+			break;
 		}
 
 		return zoom;
@@ -265,6 +264,22 @@
 
 			);
 
+		google.maps.event.addListener(map, 'dragend', function() {
+
+			$.get("/results", {
+				coordinates: {
+					lat: map.getCenter().lat(),
+					lng: map.getCenter().lng(),
+				}
+			},
+				function (data, textStatus, jqXHR) {
+					console.log(data);
+
+				},
+				"json"
+			);
+		});
+
 		bounds.extend(marker.latlng)
 		for(coordinate in coordinates){
 
@@ -287,10 +302,10 @@
 
 	}
 
-	google.maps.event.addDomListener(window, 'load', initialize);
-	$(document).ready(function() {
-		initMap();
-	})
+		google.maps.event.addDomListener(window, 'load', initialize);
+		$(document).ready(function() {
+			initMap();
+		})
 
 </script>
 @else
@@ -351,7 +366,7 @@ function createMarkers(places) {
 
     var content =  ''
 
-    google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+    google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
 	    return function() {
 	    	var request = {
 		        reference: this.reference
@@ -360,18 +375,18 @@ function createMarkers(places) {
 		    service.getDetails(request, function(place, status){
 		    	console.log(place.opening_hours)
 			    	var content = '<div class="info"><h4 class="info-title main-color"><strong>' + place.name + '</strong></h4>'
-			        if(status == google.maps.places.PlacesServiceStatus.OK){			            
+			        if(status == google.maps.places.PlacesServiceStatus.OK){
 			            if(typeof place.formatted_address !== 'undefined'){
 			                content += '<div class="info-det"><i class="fas fa-map-marker-alt"></i> ' + place.formatted_address + '</div>';
 			            }
-			            
+
 			            if(typeof place.formatted_phone_number !== 'undefined'){
 			                content += '<div class="info-det"><i class="fas fa-phone"></i> <a href="tel:' + place.formatted_phone_number + '">' + place.formatted_phone_number + '</a></div>';
 			            }
-			            
+
 			            if(typeof place.website !== 'undefined'){
 			                content += '<div class="info-det"><i class="fas fa-globe"></i> <a href="' + place.website + '">' + place.website + '</a></div>';
-			            
+
 			            }
 
 			            if(typeof place.opening_hours !== 'undefined'){
@@ -384,18 +399,18 @@ function createMarkers(places) {
 				               	content += hours;
 				            }
 			                content += '</ul>';
-			            
+
 			            }
 			            content +='</div>'
-			        }     
+			        }
 			        infowindow.setContent(content);
 	       			infowindow.open(map,marker);
 			});
-	        
-	    };
-	})(marker,content,infowindow));  
 
-    
+	    };
+	})(marker,content,infowindow));
+
+
 
     bounds.extend(place.geometry.location);
   }
