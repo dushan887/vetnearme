@@ -27,6 +27,8 @@ class ResultsController extends Controller {
         $currentHour = date('H:i:s');
         $currentDay  = strtolower(date('l'));
 
+        $count = $request->get('ids') ? count($request->get('ids')) : 0;
+
         if(is_object($coordinates))
             $coordinates = [
                 'lat' => $coordinates->latitude(),
@@ -54,8 +56,6 @@ class ResultsController extends Controller {
 
         if($request->ajax()){
 
-            $count = count($request->get('ids'));
-
             return response()
                 ->json([
                     'page' => view('Front.results.partials._clinics', [
@@ -82,12 +82,13 @@ class ResultsController extends Controller {
             'userCoordinates'  => $userCoordinates,
             'services'         => Service::where('priority', '=', 1)->orderBy('count', 'desc')->get(),
             'advancedSearch'   => $request->input('advanced-search') && $request->input('advanced-search') === 'search'
-                ? true : false,
+                ? true:           false,
             'selectedServices' => $request->input('services') ?? [],
             'category'         => XSS::clean($request->input('selector-category')),
             'radius'           => Radius::get(),
             'radiusSelected'   => $result['radius'],
-            'working'          => $request->input('working') ?? 'all'
+            'working'          => $request->input('working') ?? 'all',
+            'count'            => $count,
         ]);
     }
 

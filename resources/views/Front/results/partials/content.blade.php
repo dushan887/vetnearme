@@ -69,9 +69,6 @@
 				data-coordinates="{{ $coordinates ?? '' }}"
 				data-usercoordinates="{{ $userCoordinates }}"
 				>
-					@php
-						$count = 0;
-					@endphp
 					<ul class="list-unstyled" id="clinics">
 						@include('Front.results.partials._clinics')
 					</ul>
