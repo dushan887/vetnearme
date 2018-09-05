@@ -25,61 +25,77 @@
                     aria-label="Left Align">Export Practices</a>
 
                     <div class="box box-solid">
-                        <div class="box-header with-border">
-                        <h3 class="box-title">Filters</h3>
 
-                        <div class="box-tools">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        </div>
-                        <div class="box-body">
-                        <div class="form-group">
-                            <label for="filter-opt3">Show entries:</label>
-                            <select class="form-control" id="filter-opt3">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-opt1">Practice type:</label>
-                            <select class="form-control" id="filter-opt1">
-                            <option>Any</option>
-                            <option>General practice</option>
-                            <option>Specialist and Emergency </option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-opt2">Subscribed practice:</label>
-                            <select class="form-control" id="filter-opt2">
-                            <option>Any</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-opt5">Assigned admin:</label>
-                            <select class="form-control" id="filter-opt5">
-                            <option>Any</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="filter-opt4">Country:</label>
-                            <select class="form-control" id="filter-opt4">
-                            <option>Any</option>
-                            <option>Australia</option>
-                            <option>New Zealand</option>
-                            </select>
-                        </div>
-                        <div class="pull-right">
-                            <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-filter"></i> Apply Filter</button>
-                        </div>
+                        <form action="/admin/clinics/get"
+                            id="filter-form"
+                            role=form>
 
-                        </div>
+                            <input type="hidden" name="has-filter" id="has-filter" value="false">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Filters</h3>
+
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="limit">Show entries:</label>
+                                    <select class="form-control" name=limit id="limit">
+                                        <option value="10">10</option>
+                                        <option value="20">25</option>
+                                        <option value="30">50</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="type">Practice type:</label>
+                                    <select class="form-control" name=type id="type">
+                                        <option value="any">Any</option>
+                                        <option value="general_practice">General practice</option>
+                                        <option value="specialist_and_emergency">Specialist and Emergency </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="subscribed">Subscribed practice:</label>
+                                    <select class="form-control" name=subscribed id="subscribed">
+                                        <option value=any>Any</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="has-admin">Assigned admin:</label>
+                                    <select class="form-control" name="has-admin" id="has-admin">
+                                        <option value="any">Any</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="country">Country:</label>
+                                    <select class="form-control" name=country id="country">
+                                        <option value="any">Any</option>
+                                        <option value="australia">Australia</option>
+                                        <option value="new zealand">New Zealand</option>
+                                    </select>
+                                </div>
+
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary" @click.prevent="filter()">
+                                    <i class="fa fa-filter"></i> Apply Filter</button>
+                                </div>
+
+                            </div>
+
+                        </form>
                         <!-- /.box-body -->
                     </div>
                     <!-- /. box -->
@@ -96,7 +112,12 @@
 
                                 <div class="box-tools pull-right">
                                     <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="Search Practice">
+                                    <input type="text"
+                                        class="form-control input-sm"
+                                        id="search"
+                                        name="search"
+                                        @keyup="search($event.target.value)"
+                                        placeholder="Search Practice">
                                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                     </div>
                                 </div>
@@ -302,7 +323,17 @@ export default {
             if(!href)
                 return
 
-            axios.get(href, {
+            let filterForm = $('#filter-form')
+            let hasFilters = filterForm.find('#has-filter').val()
+            let nameSearch = $('#search').val()
+
+            let additionalData = hasFilters === 'true' ? '&' + filterForm.serialize() : ''
+
+            if(nameSearch.length >= 3 ){
+                additionalData += additionalData !== '' ? '&name=' + nameSearch : '?name=' + nameSearch
+            }
+
+            axios.get(href + additionalData, {
                 params: {role: this.clinicrole}
             })
             .then((response) => {
@@ -361,6 +392,23 @@ export default {
                 return null
 
             return "/admin/clinics/get?page=" + n
+        },
+        filter(){
+
+            let form = $('#filter-form')
+
+            axios.get(form.attr('action') + '?' + form.serialize(), {})
+            .then((response) => {
+                this.populateClinics(response.data)
+
+                form.find('#has-filter').val('true')
+            })
+
+        },
+        search(search){
+
+            if(!search.length !== search.length >= 3)
+                this.getClinics('/admin/clinics/get')
         }
     },
     computed: {

@@ -180,27 +180,56 @@ class ClinicsController extends Controller
 
     public function get(Request $request)
     {
-        $paginate = (int) $request->get('limit') ?? 10;
+        $paginate = $request->get('limit') ?? 10;
+        $type     = $request->get('type');
 
-        return response()
-                ->json(Clinic::orderBy('name', 'asc')->with(['users', 'country'])->paginate(10));
+        $clinics = Clinic::orderBy('name', 'asc')->with(['users', 'country']);
 
-        switch ($request->input('role')) {
-            case 'owner':
-                return response()
-                    ->json(Clinic::whereNull('owner_id')->orderBy('name', 'desc')->get());
-                break;
+        if($type && $type !== 'any'){
 
-             case 'user':
-                return response()
-                    ->json(Clinic::orderBy('name', 'desc')->with(['users', 'country'])->get());
-                break;
+            if($type === 'general_practice')
+                $clinics->where('general_practice', '=', 1);
 
-            default:
-                return response()
-                    ->json(Clinic::orderBy('name', 'desc')->with(['users', 'country'])->get());
-                break;
+            if($type === 'specialist_and_emergency')
+                $clinics->where('specialist_and_emergency', '=', 1);
+
         }
+
+        if($request->get('subscribed') && $request->get('subscribed') !== 'any'){
+
+            $clinics->where('subscribed', '=', (int) $request->get('subscribed'));
+
+        }
+
+        if($request->get('has-admin') && $request->get('has-admin') !== 'any'){
+
+            $hasOwner = null;
+
+            if($request->get('subscribed') === 'yes')
+                $hasOwner = 1;
+
+            if($request->get('subscribed') === 'no')
+                $hasOwner = 0;
+
+            if($hasOwner !== null)
+                $clinics->where('owner_id', '=', (int) $hasOwner);
+
+        }
+
+        if($request->get('country') && $request->get('country') !== 'any'){
+
+            $country = Country::where('name', '=', ucwords($request->get('country')))->first();
+
+            if($country)
+                $clinics->where('country_id', '=', (int) $country->id);
+
+        }
+
+        if($request->has('name') && strlen($request->get('name')) >= 3){
+            $clinics->whereRaw('LOWER(`name`) LIKE ? ', ['%'. trim(strtolower($request->get('name'))). '%']);
+        }
+
+        return response()->json($clinics->paginate((int) $paginate));
 
     }
 
