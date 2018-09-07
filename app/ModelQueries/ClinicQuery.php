@@ -92,6 +92,60 @@ class ClinicQuery extends Clinic
 
     }
 
+    static public function get($request)
+    {
+        $paginate = $request->get('limit') ?? 10;
+        $type     = $request->get('type');
+
+        $clinics = Clinic::orderBy('name', 'asc')->with(['users', 'country']);
+
+        if($type && $type !== 'any'){
+
+            if($type === 'general_practice')
+                $clinics->where('general_practice', '=', 1);
+
+            if($type === 'specialist_and_emergency')
+                $clinics->where('specialist_and_emergency', '=', 1);
+
+        }
+
+        if($request->get('subscribed') && $request->get('subscribed') !== 'any'){
+
+            $clinics->where('subscribed', '=', (int) $request->get('subscribed'));
+
+        }
+
+        if($request->get('has-admin') && $request->get('has-admin') !== 'any'){
+
+            $hasOwner = null;
+
+            if($request->get('subscribed') === 'yes')
+                $hasOwner = 1;
+
+            if($request->get('subscribed') === 'no')
+                $hasOwner = 0;
+
+            if($hasOwner !== null)
+                $clinics->where('owner_id', '=', (int) $hasOwner);
+
+        }
+
+        if($request->get('country') && $request->get('country') !== 'any'){
+
+            $country = Country::where('name', '=', ucwords($request->get('country')))->first();
+
+            if($country)
+                $clinics->where('country_id', '=', (int) $country->id);
+
+        }
+
+        if($request->has('name') && strlen($request->get('name')) >= 3){
+            $clinics->whereRaw('LOWER(`name`) LIKE ? ', ['%'. trim(strtolower($request->get('name'))). '%']);
+        }
+
+        return $clinics->paginate((int) $paginate);
+    }
+
     public function uploadImage($image, $clinicName, $directory)
     {
         $name = strtolower(str_replace(' ', '_', $clinicName)) . '.' . $image->getClientOriginalExtension();

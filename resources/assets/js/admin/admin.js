@@ -31,6 +31,7 @@ import Media from './components/Media.vue'
 import ClinicsList from './components/ClinicsList.vue'
 import PostCategories from './components/PostCategories.vue'
 import PostForm from './components/PostForm.vue'
+import PostsList from './components/PostsList.vue'
 
 let adminVue = new Vue({
     el: '#admin-app',
@@ -42,7 +43,8 @@ let adminVue = new Vue({
         adminAlerts: EventMessages,
         adminClinics: ClinicsList,
         adminPostCategories: PostCategories,
-        adminPostForm: PostForm
+        adminPostForm: PostForm,
+        adminPostsList: PostsList
     },
     methods: {
         notWorking(day){
@@ -145,6 +147,11 @@ let adminVue = new Vue({
 $('.timepicker').timepicker({
     timeFormat: 'HH:mm',
     interval: 5
+})
+
+$('.datepicker').datepicker({
+    autoclose: true,
+    todayHighlight: true
 })
 
 if (typeof tinymce !== 'undefined') {

@@ -6,7 +6,11 @@
 
                 <div class="box-tools pull-right">
                     <div class="has-feedback">
-                    <input type="text" class="form-control input-sm" placeholder="Search Services">
+                    <input type="text"
+                        id="search"
+                        class="form-control input-sm"
+                        placeholder="Search Services"
+                        @keyup="search($event.target.value)">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                 </div>
@@ -120,7 +124,16 @@ export default {
             Event.$emit('select:all', element)
         },
         getAll(){
-            axios.get('/admin/services/all', {})
+
+            let serviceName = $('#search').val()
+            let data        = ''
+
+            if(serviceName.length >= 3)
+            {
+                data = '?name=' + serviceName
+            }
+
+            axios.get('/admin/services/all' + data, {})
             .then((response) => {
                 this.services = response.data
             })
@@ -278,6 +291,11 @@ export default {
             .then((response) => {
                Event.$emit('modal:show', response.data)
             })
+        },
+        search(search){
+
+            if(!search.length !== search.length >= 3)
+                this.getAll()
         }
     },
     mounted(){

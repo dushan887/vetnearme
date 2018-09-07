@@ -147,8 +147,9 @@
 
                                     </div>
                                     <!-- /.btn-group -->
-                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-
+                                    <button type="button" class="btn btn-default btn-sm">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
                                     <div class="pull-right"></div>
                                     <!-- /.pull-right -->
                                 </div>

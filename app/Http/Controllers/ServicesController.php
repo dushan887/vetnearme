@@ -31,8 +31,14 @@ class ServicesController extends Controller
      */
     public function all(Request $request)
     {
+        $services = Service::orderBy('count', 'desc');
+        $name     = $request->get('name');
+
+        if($name && strlen($name) >= 3)
+            $services->whereRaw('LOWER(`name`) LIKE ? ', ['%'. trim(strtolower($name)). '%']);
+
         return response()
-            ->json(Service::orderBy('count', 'desc')->get());
+            ->json($services->get());
     }
 
     /**

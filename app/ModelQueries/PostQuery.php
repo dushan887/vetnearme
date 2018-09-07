@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Post;
 use App\Helpers\Strings;
+use App\Helpers\DateHelper;
 
 class PostQuery extends Post
 {
@@ -60,6 +61,32 @@ class PostQuery extends Post
 
         return false;
 
+    }
+
+    static public function get($request)
+    {
+        $name   = $request->get('name');
+        $status = $request->get('status');
+        $userID = $request->get('author');
+        $date   = $request->get('date');
+
+        $posts = Post::with(['user']);
+
+        if($name && strlen($name) >= 3)
+            $posts->whereRaw('LOWER(`name`) LIKE ? ', ['%'. trim(strtolower($name)). '%']);
+
+        if(is_int($status))
+            $posts->where('status', '=', (int) $status);
+
+        if(is_int($userID))
+            $posts->where('user_id', '=', (int) $userID);
+
+        $limit = $request->get('limit') ?? 10;
+
+        if($date && DateHelper::isValidDate($date))
+            $posts->whereDate('created_at', $date);
+
+        return $posts->paginate((int) $limit);
     }
 
     public function uploadCover($cover, $postTitle)

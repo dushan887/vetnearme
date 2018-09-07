@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\XSS;
 
 use App\Post;
+use App\User;
 use App\ModelQueries\PostQuery;
 use App\PostCategory;
 use App\Http\Requests\PostStoreRequest;
@@ -25,9 +26,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post/index', [
-            'posts' => Post::paginate(10),
-        ]);
+        return view('post/index');
     }
 
     /**
@@ -106,6 +105,17 @@ class PostController extends Controller
         ], 200);
     }
 
+    public function getAll(Request $request)
+    {
+        $posts = PostQuery::get($request);
+
+        return response()
+            ->json([
+                'posts'   => $posts,
+                'authors' => User::find(array_unique($posts->pluck('user_id')->all())),
+            ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -140,11 +150,24 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @integer $id
+     * @integer/array $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy($id)
     {
+        if(strpos($id, ','))
+            $id = explode(',', $id);
+
+        if( is_array($id) ){
+            array_filter($id, function ($k) {
+                     return is_numeric($k);
+                },
+            ARRAY_FILTER_USE_KEY
+            );
+        } else {
+            $id = (int) $id;
+        }
+
         $deleted = Post::destroy($id) ?
             $message = [
                 'messageTitle' => 'Post(s) Deleted',
