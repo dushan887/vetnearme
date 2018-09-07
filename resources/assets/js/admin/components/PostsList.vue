@@ -116,7 +116,7 @@
                                 <div class="has-feedback">
                                     <input type="text"
                                     id="search"
-                                    @keyup="search()"
+                                    @keyup="search($event.target.value)"
                                     class="form-control input-sm" placeholder="Search Posts">
                                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                                 </div>

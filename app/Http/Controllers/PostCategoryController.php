@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\XSS;
 use App\PostCategory;
 use Illuminate\Http\Request;
 
@@ -56,10 +57,17 @@ class PostCategoryController extends Controller
         ]);
     }
 
-    public function all()
+    public function all(Request $request)
     {
+        $name = $request->get('name');
+
+        $categories = PostCategory::orderBy('name', 'desc');
+
+        if($name && strlen($name) >= 3)
+            $categories->whereRaw('LOWER(`name`) LIKE ? ', ['%'. trim(strtolower(XSS::clean($name))). '%']);
+
         return response()
-            ->json(PostCategory::orderBy('name', 'desc')->get());
+            ->json($categories->get());
     }
 
     /**

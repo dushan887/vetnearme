@@ -6,7 +6,10 @@
 
                 <div class="box-tools pull-right">
                     <div class="has-feedback">
-                    <input type="text" class="form-control input-sm" placeholder="Search Post Categories">
+                    <input type="text"
+                        id=search
+                        @keyup="search($event.target.value)"
+                        class="form-control input-sm" placeholder="Search Post Categories">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                 </div>
@@ -105,7 +108,18 @@ export default {
     },
     methods: {
         getAll(){
-            axios.get('/admin/post-categories/all', {})
+
+            let data = {}
+            let name = $('#search').val()
+
+            if(name.length >= 3)
+            {
+                data.name = name
+            }
+
+            axios.get('/admin/post-categories/all', {
+                params: data
+            })
             .then((response) => {
                 this.categories = response.data
             })
@@ -210,10 +224,17 @@ export default {
             }
         },
         getData(url){
-            axios.get(url, {})
+            axios.get(url, {
+                params: data
+            })
             .then((response) => {
                Event.$emit('modal:show', response.data)
             })
+        },
+        search(search){
+
+            if(!search.length !== search.length >= 3)
+                this.getAll()
         }
     },
     mounted(){
