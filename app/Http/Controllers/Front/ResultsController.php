@@ -111,6 +111,7 @@ class ResultsController extends Controller {
         $currentHour = date('H:i');
 
         $conditionsQuery = [];
+        $servicesQuery   = '';
 
         $category = XSS::clean($request->input('selector-category'));
 
@@ -137,12 +138,15 @@ class ResultsController extends Controller {
         if($category === 'specialist')
             $conditionsQuery[] = "clinics.specialist_and_emergency = 1";
 
-        // if($services):
-        //     foreach ($services as $service) {
-        //         $service = (int) $service;
-        //         $conditionsQuery[] = "clinics_services.service_id = {$service}";
-        //     }
-        // endif;
+        if($services):
+            $condition = [];
+            foreach ($services as $service) {
+                $service         = (int) $service;
+                $condition[] = "clinics_services.service_id = {$service}";
+            }
+
+            $servicesQuery = " AND (" . implode(' AND ' , $condition) . ")";
+        endif;
 
         if($request->input('ids') !== null){
 
@@ -159,7 +163,7 @@ class ResultsController extends Controller {
 
         do {
 
-            $clinics = $this->clinicQuery($conditionsQuery, $lat, $lng, $radiusList[$i]);
+            $clinics = $this->clinicQuery($conditionsQuery, $servicesQuery, $lat, $lng, $radiusList[$i]);
 
             $i++;
 
@@ -172,7 +176,7 @@ class ResultsController extends Controller {
         ];
     }
 
-    private function clinicQuery($conditionsQuery, $lat, $lng, $radius)
+    private function clinicQuery($conditionsQuery, $servicesQuery, $lat, $lng, $radius)
     {
         $conditionsQuery = $conditionsQuery ? " WHERE " . implode(' AND ', $conditionsQuery) : "";
 
@@ -190,7 +194,7 @@ class ResultsController extends Controller {
                 AS distance
                 FROM clinics
                 JOIN countries ON countries.id = clinics.country_id
-                LEFT JOIN clinics_services ON clinics.id = clinics_services.clinic_id
+                LEFT JOIN clinics_services ON clinics.id = clinics_services.clinic_id' . $servicesQuery . '
                 ' . $conditionsQuery . '
                 GROUP BY clinics.id
                 ) AS distances
