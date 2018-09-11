@@ -19,4 +19,9 @@ class Service extends Model
     {
        return $this->hasMany(Clinic::class, 'clinics_services');
     }
+
+    static function updateCount(array $ids)
+    {
+        \DB::table('services')->whereIn('id', $ids)->increment('count');
+    }
 }

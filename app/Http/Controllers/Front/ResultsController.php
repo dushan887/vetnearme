@@ -146,6 +146,8 @@ class ResultsController extends Controller {
             }
 
             $servicesQuery = " AND (" . implode(' AND ' , $condition) . ")";
+
+            Service::updateCount(XSS::clean($services));
         endif;
 
         if($request->input('ids') !== null){
