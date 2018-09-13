@@ -77,14 +77,20 @@
                 </a>
             </div>
 
-            @if(isClinicOpen($hours, $currentDay, $currentHour))
-            <div class="resault-open align-right">
-                <span class="checked"></span>
-            </div>
+            <@php
+                $workingHours = isClinicOpen($hours, $currentDay, $currentHour);
+            @endphp
+
+            @if($workingHours['open'])
+                <div class="resault-open align-right">
+                    <span class="checked"></span>
+                    <span class="checked">{{ $workingHours['until'] }}</span>
+                </div>
             @else
-            <div class="resault-open align-right">
-                <span></span>
-            </div>
+                <div class="resault-open align-right">
+                    <span></span>
+                    <span>{{ $workingHours['until'] }}</span>
+                </div>
             @endif
         </div>
 
