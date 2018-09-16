@@ -5,6 +5,18 @@
 @stop
 
 @section('AditionalHead')
+<style type="text/css">
+	article {
+		height: calc(100% - 30px);
+		padding-bottom: 55px;
+	}
+	article footer{
+		position: absolute;
+		bottom: 0;
+		left: 15px;
+		right: 15px;
+	}
+</style>
 @stop
 
 @section('BodySetup')

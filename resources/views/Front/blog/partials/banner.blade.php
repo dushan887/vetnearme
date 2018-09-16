@@ -5,7 +5,7 @@
 				if(isset($categoryName))
 					$categoryName = ucfirst($categoryName);
 			?>
-			<h1>{{ $post->title ?? $categoryName ?? 'Blog' }}</h1>
+			<h1>{{ $post->title ?? $categoryName ?? 'Pet News & Advice' }}</h1>
 		</div>
 	</div>
 </section>

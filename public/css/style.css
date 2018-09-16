@@ -485,7 +485,7 @@ section:not(.page-search) #search .location-search:before,
   margin: 10px auto;
   padding: 5px 15px;
   font-size: 14px;
-  background-color: rgba(255,255,255,.9);
+  background-color: rgba(255,255,255,.7);
 
   -ms-transform: translate(0, -120%);
   -webkit-transform: translate(0, -120%);
@@ -629,6 +629,8 @@ section:not(.page-search) #search .location-search:before,
   -webkit-transition: all 0.25s linear;
   text-transform: lowercase;
   color: #000;
+
+  text-transform: capitalize;
 
   font-size: 14px;
 }

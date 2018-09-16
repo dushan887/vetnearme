@@ -68,7 +68,7 @@
 
               <div class="form-group {{ $errors->has('subscribe') ? 'has-error' : ''}}">
                 <label style="display: block">
-                      Subscribe
+                      Subscribe <em>For testing purposes</em>
                       <input type="checkbox"
                         value="true"
                         name="subscribe"
@@ -82,7 +82,7 @@
 
               <div class="form-group {{ $errors->has('accessibility') ? 'has-error' : ''}}">
                 <label style="display: block">
-                      Specialist and Emergency
+                      Wheelchair Accessible
                       <input type="checkbox"
                       value="true" name="accessibility"
                       class="minimal pull-right"

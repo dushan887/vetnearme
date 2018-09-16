@@ -5,6 +5,14 @@
 @stop
 
 @section('AditionalHead')
+<style type="text/css">
+	.page-search {
+    	padding: 30px 0 10px 0;
+	}
+	.search-in.page .advanced-search-holder {
+		width: 100%;
+	}
+</style>
 @stop
 
 @section('BodySetup')

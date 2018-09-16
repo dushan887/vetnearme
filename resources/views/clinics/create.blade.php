@@ -60,7 +60,7 @@
 
                   <div class="form-group {{ $errors->has('subscribe') ? 'has-error' : ''}}">
                     <label style="display: block">
-                      Subscribe
+                      Subscribe <em>For testing purposes</em>
                       <input type="checkbox" value="true" name="subscribe" checked class="minimal pull-right">
                     </label>
                     {!! $errors->first('subscribe', '<p class="help-block">:message</p>') !!}

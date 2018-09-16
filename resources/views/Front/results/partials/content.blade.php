@@ -42,7 +42,7 @@
 					</ul>
 				</div>
 				<div>
-					<?php
+					{{-- <?php
 						if($clinics->currentPage() === 1):
 							$to = $clinics->perPage() >= $clinics->total() ? $clinics->total() :$clinics->perPage();
 
@@ -53,11 +53,11 @@
 							$to      = $clinics->total() <= $to ? $clinics->total() : $to;
 							$showing = "{$from} - {$to}";
 						endif
-					?>
-					Showing <span id="clinics-showing">{!! $showing !!}</span> of
-					<span class="resaults-found main-color">{{ $clinics->total() }}</span>
+					?> --}}
+					{{-- Showing <span id="clinics-showing">{!! $showing !!}</span> of --}}
+					Showing <span class="resaults-found main-color">{{ $clinics->total() }}</span>
 
-					<span>nearby for search for</span> <span class="search-input">{{ $address }}</span>
+					<span>for search </span> <span class="search-input">{{ $address }}</span>
 				</div>
 			</div>
 		</div>

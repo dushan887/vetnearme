@@ -46,17 +46,18 @@
             <div class="resault-email">
                 <a href="mailto:{{ $clinic->email }}">
                                     <i class="fa fa-envelope"></i>
-                                    <span>{{ $clinic->email }}</span>
+                                    <span>Email Address</span>
                                 </a>
             </div>
             <div class="resault-web">
                 <a href="{{ $clinic->url }}" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa fa-globe"></i>
                     <span class="resault-web-address">
-                        <?php
+                        {{-- <?php
                             $domain = parse_url($clinic->url);
                             echo $domain['host'] ?? $domain['path'];
-                        ?>
+                        ?> --}}
+                        Website
                     </span>
                 </a>
             </div>

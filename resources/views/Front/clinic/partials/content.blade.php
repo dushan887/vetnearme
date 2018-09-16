@@ -50,19 +50,19 @@
 
 						  </ol>
 
-						  <div class="carousel-inner">
+						  <div class="carousel-inner clinic-gallery">
 							@foreach($clinic->gallery as $media)
 								<div class="carousel-item">
-									<img
-										class="d-block w-100"
+									<div
+										class="d-block w-100 gallery-item"
 
 										@if ($media->media->super_admin)
-											src="/media/general/{{ $media->media->name }}"
+											style="background-image: url('/media/general/{{ $media->media->name }}') !important"
 										@else
-											src="/media/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}/{{ $media->media->name }}"
+											style="background-image: url('/media/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}/{{ $media->media->name }}') !important"
 										@endif
-									>
-
+									></div>
+									
 								</div>
 							@endforeach
 						  </div>
@@ -257,7 +257,7 @@
 									<span>{{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }}</span>
 									<span>{{ $clinic->country->name }}</span>
 							</li>
-							<li><a href="{{ $clinic->gmaps_link }}"><i class="fas fa-map-signs"></i>
+							<li><a href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i>
 								<strong>Get Directions:</strong>
 								<span>{{ $clinic->gmaps_link }}</span></a>
 							</li>

@@ -5,7 +5,14 @@
 @stop
 
 @section('AditionalHead')
-
+<style type="text/css">
+	.clinic-gallery .gallery-item {
+		height: 400px;
+		background-size: cover !important;
+		background-position: center !important;
+		background-repeat: no-repeat !important;
+	}
+</style>
 @stop
 
 @section('BodySetup')
