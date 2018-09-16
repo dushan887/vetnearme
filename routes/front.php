@@ -9,3 +9,5 @@
     Route::get('/{slug}', 'Front\BlogController@show')->name('blog-single');
 
     Route::get('/blog/category/{name}', 'Front\BlogController@category')->name('blog-categories');
+
+	Route::get('/privacy-policy', 'Front\PrivacyController@privacy')->name('privacy');

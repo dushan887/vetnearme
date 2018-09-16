@@ -28,5 +28,4 @@ class FrontPartController extends Controller {
         ]);
     }
 
-
 }

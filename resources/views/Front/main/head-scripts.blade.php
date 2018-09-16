@@ -24,3 +24,17 @@
 
   gtag('config', 'UA-124060217-1');
 </script>
+<script type="text/javascript">
+(function($) {
+	$('a[href^="tel:"]').click(function(){
+		var telephonenumber=jQuery(this).attr('href');
+		gtag('event', 'contact', { 'event_category' : 'Phone_Call_Tracking', 'event_action' : 'Click_to_Call', 'event_label' : telephonenumber});
+		return true;
+	});	
+		$('a[href^="mailto:"]').click(function(){
+		var emaillink=jQuery(this).attr('href');
+		gtag('event', 'contact', { 'event_category' : 'Email_Click_Tracking', 'event_action' : 'Click_to_Email', 'event_label' : emaillink});
+		return true;
+	});	
+})(jQuery);
+</script>

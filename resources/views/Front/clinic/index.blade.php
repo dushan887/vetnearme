@@ -7,7 +7,7 @@
 @section('AditionalHead')
 <style type="text/css">
 	.clinic-gallery .gallery-item {
-		height: 400px;
+		height: 350px;
 		background-size: cover !important;
 		background-position: center !important;
 		background-repeat: no-repeat !important;
