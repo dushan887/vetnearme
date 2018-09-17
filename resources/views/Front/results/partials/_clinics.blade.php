@@ -80,12 +80,12 @@
 
             @if($workingHours['open'])
                 <div class="resault-open align-right">
-                    <span class="checked"></span>
+                    <!-- <span class="checked"></span> -->
                     <span class="checked">{{ $workingHours['until'] }}</span>
                 </div>
             @else
                 <div class="resault-open align-right">
-                    <span></span>
+                    <!-- <span></span> -->
                     <span>{{ $workingHours['until'] }}</span>
                 </div>
             @endif

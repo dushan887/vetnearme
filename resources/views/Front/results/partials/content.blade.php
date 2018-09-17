@@ -42,7 +42,7 @@
 					</ul>
 				</div>
 				<div>
-					{
+					
 					Showing <span class="resaults-found main-color">{{ $clinics->total() }}</span>
 
 					<span>for search </span> <span class="search-input">{{ $address }}</span>
