@@ -5,9 +5,10 @@
     Route::get('/clinic/{clinic}', 'Front\ClinicController@index')->name('clinic');
 
     Route::get('/blog', 'Front\BlogController@index')->name('blog');
+    Route::get('/privacy-policy', 'Front\PrivacyController@index')->name('privacy');
 
     Route::get('/{slug}', 'Front\BlogController@show')->name('blog-single');
 
     Route::get('/blog/category/{name}', 'Front\BlogController@category')->name('blog-categories');
 
-	Route::get('/privacy-policy', 'Front\PrivacyController@privacy')->name('privacy');
+
