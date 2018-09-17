@@ -38,7 +38,7 @@ class BlogController extends Controller
         ])->first();
 
         if(!$post)
-            return $this->redirect('/blog');
+            return redirect('/blog');
 
         return view('Front.blog.show',[
             'post'         => $post,

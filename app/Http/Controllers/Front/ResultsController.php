@@ -21,6 +21,8 @@ class ResultsController extends Controller {
      */
     public function index(Request $request)
     {
+        if(!$request->input('address-input'))
+            return redirect()->route('home')->with(['message' => 'Address not valid!']);
 
         $address     = XSS::clean($request->input('address-input'));
         $coordinates = $request->get('coordinates') ?? Geolocation::guessCoordinates($address);
