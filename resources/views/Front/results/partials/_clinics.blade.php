@@ -74,7 +74,7 @@
                 </a>
             </div>
 
-            <@php
+            @php
                 $workingHours = isClinicOpen($hours, $currentDay, $currentHour);
             @endphp
 
