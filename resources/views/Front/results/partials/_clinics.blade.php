@@ -53,10 +53,6 @@
                 <a href="{{ $clinic->url }}" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa fa-globe"></i>
                     <span class="resault-web-address">
-                        {{-- <?php
-                            $domain = parse_url($clinic->url);
-                            echo $domain['host'] ?? $domain['path'];
-                        ?> --}}
                         Website
                     </span>
                 </a>

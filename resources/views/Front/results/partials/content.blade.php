@@ -42,19 +42,7 @@
 					</ul>
 				</div>
 				<div>
-					{{-- <?php
-						if($clinics->currentPage() === 1):
-							$to = $clinics->perPage() >= $clinics->total() ? $clinics->total() :$clinics->perPage();
-
-							$showing = "1 - <span class=total-clinics>{$to}</span>" ;
-						else:
-							$from    = ($clinics->currentPage() * $clinics->perPage()) - 1;
-							$to      = ($from + $clinics->perPage()) - 1;
-							$to      = $clinics->total() <= $to ? $clinics->total() : $to;
-							$showing = "{$from} - {$to}";
-						endif
-					?> --}}
-					{{-- Showing <span id="clinics-showing">{!! $showing !!}</span> of --}}
+					{
 					Showing <span class="resaults-found main-color">{{ $clinics->total() }}</span>
 
 					<span>for search </span> <span class="search-input">{{ $address }}</span>
