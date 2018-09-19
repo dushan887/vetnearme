@@ -212,7 +212,7 @@
                                                         class="btn btn-default btn-sm"
                                                         rel="noopener noreferrer"
                                                         target="_blank"
-                                                        :href="'/clinic/' + clinic.name.toLowerCase().replace(/\s/g, '_')"
+                                                        :href="'/clinic/' + clinic.name.toLowerCase().replace(/\s/g, '-')"
                                                     >
                                                         <i class="fa fa-eye"></i>
                                                     </a>

@@ -15,7 +15,7 @@ class ClinicController extends Controller {
      */
     public function index($clinicName)
     {
-        $clinic = Clinic::whereRaw("LOWER(name) = ?", str_replace('_', ' ', $clinicName))->first();
+        $clinic = Clinic::whereRaw("LOWER(name) = ?", str_replace('-', ' ', $clinicName))->first();
 
         return view('Front.clinic.index', [
             'clinic' => $clinic,

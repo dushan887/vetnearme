@@ -7,11 +7,11 @@
         data-marker={{ $clinic->marker ?? 'none' }}
         class="item clinic"
         data-id="{{ $clinic->cid }}"
-        data-item-url="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
+        data-item-url="/clinic/{{ strtolower(str_replace(' ', '-', $clinic->name)) }}">
 
         <div class="resault">
             <div class="resault-logo">
-                <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">
+                <a href="/clinic/{{ strtolower(str_replace(' ', '-', $clinic->name)) }}">
                     <img src="{{ $clinic->logo ?
                         'img/logo/' . $clinic->logo :
                         'http://via.placeholder.com/120x80'}}"
@@ -21,12 +21,12 @@
             <div class="reasault-info">
                 <div class="resault-title">
                     <h4>
-                        <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">{{ $clinic->name }}</a>
+                        <a href="/clinic/{{ strtolower(str_replace(' ', '-', $clinic->name)) }}">{{ $clinic->name }}</a>
                     </h4>
                 </div>
                 <div class="resault-description">
                     <p>{{ str_limit($clinic->description, $limit = 60, $end = '...') }} </p>
-                    <a href="/clinic/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}">View more...</a>
+                    <a href="/clinic/{{ strtolower(str_replace(' ', '-', $clinic->name)) }}">View more...</a>
                 </div>
             </div>
             <div class="resault-address">

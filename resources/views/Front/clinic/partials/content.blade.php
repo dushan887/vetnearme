@@ -59,10 +59,10 @@
 										@if ($media->media->super_admin)
 											style="background-image: url('/media/general/{{ $media->media->name }}') !important"
 										@else
-											style="background-image: url('/media/{{ strtolower(str_replace(' ', '_', $clinic->name)) }}/{{ $media->media->name }}') !important"
+											style="background-image: url('/media/{{ strtolower(str_replace(' ', '-', $clinic->name)) }}/{{ $media->media->name }}') !important"
 										@endif
 									></div>
-									
+
 								</div>
 							@endforeach
 						  </div>
