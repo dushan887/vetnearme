@@ -424,8 +424,6 @@ function createMarkers(places) {
 	    };
 	})(marker,content,infowindow));
 
-
-
     bounds.extend(place.geometry.location);
   }
   map.fitBounds(bounds);
