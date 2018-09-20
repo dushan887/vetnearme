@@ -1241,10 +1241,14 @@ article footer {
     font-size: 13px;
     font-weight: 600;
 }
+#visual-resaults .resault .resault-book {
+  white-space: nowrap;
+}
 #visual-resaults .resault .resault-phone i,
 #visual-resaults .resault .resault-email i,
 #visual-resaults .resault .resault-web i,
-#visual-resaults .resault .resault-directions i {
+#visual-resaults .resault .resault-directions i,
+#visual-resaults .resault .resault-book i {
     font-size: 16px;
 }
 #visual-resaults .resault .resault-phone,
@@ -1252,7 +1256,8 @@ article footer {
 #visual-resaults .resault .resault-web,
 #visual-resaults .resault .rasault-rating,
 #visual-resaults .resault .resault-directions,
-#visual-resaults .resault .resault-open {
+#visual-resaults .resault .resault-open,
+#visual-resaults .resault .resault-book {
     color: #468a97;
     width: 30%;
     padding: 0 10px;
