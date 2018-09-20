@@ -52,7 +52,7 @@
 @stop
 
 @section('AditionalFoot')
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU&strictbounds"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU"></script>
 
 @if ($clinics->total() > 0)
 <script type="text/javascript">
@@ -338,6 +338,8 @@ function initMap() {
 	 };
 	let input        = document.getElementById('address-input');
 	let autocomplete = new google.maps.places.Autocomplete(input,options);
+	let autocomplete.setComponentRestrictions(
+            {'country': ['AU']});
   map = new google.maps.Map(document.getElementById('map'), {
     center: pyrmont,
     zoom: 15
