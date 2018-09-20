@@ -78,7 +78,7 @@ function initMap() {
 
 
     // Try HTML5 geolocation.
-    if (navigator.geolocation) {
+    // if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
@@ -87,9 +87,9 @@ function initMap() {
       }, function() {
         console.log(setCenter(pos))
       });
-    } else {
-      console.log("Browser doesn't support Geolocation")
-    }
+    // } else {
+      // console.log("Browser doesn't support Geolocation")
+    // }
 }
 $(document).ready(function() {
 	initMap();
