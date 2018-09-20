@@ -75,6 +75,21 @@ function initMap() {
 	 };
 	var input = document.getElementById('address-input');
 	var autocomplete = new google.maps.places.Autocomplete(input,options); 
+
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+      }, function() {
+        console.log(setCenter(pos))
+      });
+    } else {
+      console.log("Browser doesn't support Geolocation")
+    }
 }
 </script>
 @stop
