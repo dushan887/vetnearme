@@ -92,7 +92,7 @@ function initMap() {
     }
 }
 $(document).ready(function() {
-	function initMap();
+	initMap();
 	console.log('da')
 })
 </script>
