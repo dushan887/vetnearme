@@ -11,7 +11,7 @@ if (!function_exists('isClinicOpen')) {
     function isClinicOpen($hours, $currentDay, $currentHour)
     {
         $openUntil = null;
-        $nextDay   = \Carbon\Carbon::tomorrow()->format( 'l' );
+        $nextDay   = strtolower(\Carbon\Carbon::tomorrow()->format( 'l' ));
 
         // If the  -to hour slot is null the clinic is not working
         if(!$hours->{$currentDay . '-to'})
