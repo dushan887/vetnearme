@@ -181,8 +181,8 @@
                           </div>
 
                           <div class="form-group {{ $errors->has('gmaps_link') ? 'has-error' : ''}}">
-                            <label for= gmaps_link>Google Map URL</label>
-                            <input type="text" id= gmaps_link id= gmaps_link class="form-control" placeholder="Google Map URL" value="{{ old('gmaps_link') }}">
+                            <label for= gmaps_link>Booking URL</label>
+                            <input type="text" id= gmaps_link id= gmaps_link class="form-control" placeholder="Booking URL" value="{{ old('gmaps_link') }}">
                             {!! $errors->first('gmaps_link', '<p class="help-block">:message</p>') !!}
                           </div>
 
