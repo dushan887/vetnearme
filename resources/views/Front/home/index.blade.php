@@ -33,6 +33,7 @@
 	</header>
 
 	<div id="wrapper">
+		<div id="latitudeAndLongitude" style="visibility: hidden; opacity: 0; position: absolute;"></div>
 
 		@include('Front.home.partials.banner')
 
@@ -103,10 +104,10 @@ function getMyLocation () {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
                console.log(results[0].formatted_address); 
-               $('#address').html(results[0].formatted_address);
+               // $('#address').html(results[0].formatted_address);
              }
              else {
-              $('#address').html('Geocoding failed: '+status);
+              // $('#address').html('Geocoding failed: '+status);
               console.log("Geocoding failed: " + status);
              }
           }); //geocoder.geocode()
