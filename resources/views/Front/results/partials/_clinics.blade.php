@@ -73,6 +73,12 @@
                     Get Directions
                 </a>
             </div>
+            <div class="resault-book">
+                <a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer">
+                    <i class="fas fa-calendar-alt"></i>
+                    Book Now
+                </a>
+            </div>
 
             @php
                 $workingHours = isClinicOpen($hours, $currentDay, $currentHour);

@@ -9,6 +9,14 @@
 	.home-blog article header .cover-img {
 	    height: calc( ( 1400px / 18) * 2 );
 	}
+	.advanced-search-container {
+	  background-color: rgba(255,255,255,.5);
+	  font-weight: bold
+	}
+	.button-container .checked {
+	    background: rgba(255,255,255,.7);
+	    border-width: 2px
+	}
 	@media screen and (min-width: 1200px) {
 		.container-1200 {
 		    max-width: 1370px;

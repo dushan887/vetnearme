@@ -108,6 +108,13 @@
 										</li>
 
 									@endforeach
+									<li style="float: right;width: auto;">
+										
+											<a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer" style="white-space: nowrap; display: inline-block; float: right;">
+							                    <i class="fas fa-calendar-alt" style="white-space: nowrap; display: inline-block;"></i> <strong>Book Now</strong>
+							                    
+							                </a>
+									</li>
 
 								</ul>
 							</li>
