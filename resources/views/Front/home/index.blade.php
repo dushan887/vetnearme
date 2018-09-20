@@ -85,7 +85,7 @@ function initMap() {
           lng: position.coords.longitude
         };
       }, function() {
-        console.log(setCenter(pos))
+        console.log(pos)
       });
     // } else {
       // console.log("Browser doesn't support Geolocation")
