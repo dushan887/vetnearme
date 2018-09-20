@@ -91,5 +91,9 @@ function initMap() {
       console.log("Browser doesn't support Geolocation")
     }
 }
+$(document).ready(function() {
+	function initMap();
+	console.log('da')
+})
 </script>
 @stop
