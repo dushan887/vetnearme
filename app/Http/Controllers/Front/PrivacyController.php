@@ -1,4 +1,4 @@
-and<?php
+<?php
 namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;

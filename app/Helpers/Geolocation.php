@@ -36,4 +36,20 @@ class Geolocation
 
         return $response;
     }
+
+    public static function getTimezone($coordinates)
+    {
+        $time = time();
+        $url  = "https://maps.googleapis.com/maps/api/timezone/json?location={$coordinates['lat']},{$coordinates['lng']}&timestamp=$time&key=AIzaSyAcrIAbpZUflBVuRlUwYWfdRr_fmLy_sio";
+        $ch   = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $responseJson = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($responseJson);
+
+        dd($response);
+    }
 }
