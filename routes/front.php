@@ -6,6 +6,7 @@
 
     Route::get('/blog', 'Front\BlogController@index')->name('blog');
     Route::get('/privacy-policy', 'Front\PrivacyController@index')->name('privacy');
+    Route::get('/sitemap', 'Front\SiteMapController@index')->name('sitemap');
 
     Route::get('/{slug}', 'Front\BlogController@show')->name('blog-single');
 
