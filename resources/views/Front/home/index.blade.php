@@ -75,25 +75,46 @@ function initMap() {
 	 };
 	var input = document.getElementById('address-input');
 	var autocomplete = new google.maps.places.Autocomplete(input,options); 
+}
 
+function getMyLocation () {
+  var latitudeAndLongitude=document.getElementById("latitudeAndLongitude"),
+      location={
+          latitude:'',
+          longitude:''
+      };
 
-    // Try HTML5 geolocation.
-    // if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-      }, function() {
-        console.log(pos)
-      });
-    // } else {
-      // console.log("Browser doesn't support Geolocation")
-    // }
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+      else{
+        latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
+      }
+
+      function showPosition(position){ 
+          location.latitude=position.coords.latitude;
+          location.longitude=position.coords.longitude;
+          latitudeAndLongitude.innerHTML=position.coords.latitude + 
+          "," + position.coords.longitude; 
+          var geocoder = new google.maps.Geocoder();
+          var latLng = new google.maps.LatLng(location.latitude, location.longitude);
+
+       if (geocoder) {
+          geocoder.geocode({ 'latLng': latLng}, function (results, status) {
+             if (status == google.maps.GeocoderStatus.OK) {
+               console.log(results[0].formatted_address); 
+               $('#address').html(results[0].formatted_address);
+             }
+             else {
+              $('#address').html('Geocoding failed: '+status);
+              console.log("Geocoding failed: " + status);
+             }
+          }); //geocoder.geocode()
+        }      
+      } //showPosition
 }
 $(document).ready(function() {
-	initMap();
-	console.log('da')
+	getMyLocation();
 })
 </script>
 @stop
