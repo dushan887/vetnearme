@@ -114,7 +114,7 @@ function getMyLocation () {
         }      
       } //showPosition
 }
-$('h1').on('click', function() {
+$(document).ready(function() {
 	getMyLocation();
 })
 </script>
