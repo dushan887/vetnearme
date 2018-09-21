@@ -74,7 +74,7 @@
                 </a>
             </div>
             <div class="resault-book">
-                <a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer">
+                <a href="{{ $clinic->bookmark_url }}" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fas fa-calendar-alt"></i>
                     Book Now
                 </a>

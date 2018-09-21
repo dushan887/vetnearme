@@ -109,10 +109,10 @@
 
 									@endforeach
 									<li style="float: right;width: auto;">
-										
-											<a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer" style="white-space: nowrap; display: inline-block; float: right;">
+
+											<a href="{{ $clinic->bookmark_url }}" target="_blank" rel="nofollow noopener noreferrer" style="white-space: nowrap; display: inline-block; float: right;">
 							                    <i class="fas fa-calendar-alt" style="white-space: nowrap; display: inline-block;"></i> <strong>Book Now</strong>
-							                    
+
 							                </a>
 									</li>
 
@@ -265,8 +265,6 @@
 									<span>{{ $clinic->country->name }}</span>
 							</li>
 							<li><a href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i>
-								<strong>Get Directions:</strong>
-								<span>{{ $clinic->gmaps_link }}</span></a>
 							</li>
 						</ul>
 					</div>

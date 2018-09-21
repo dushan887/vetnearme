@@ -180,20 +180,20 @@
                               {!! $errors->first('state','<p class="help-block">:message</p>') !!}
                           </div>
 
-                          <div class="form-group {{ $errors->has('gmaps_link') ? 'has-error' : ''}}">
-                            <label for= gmaps_link>Booking URL</label>
-                            <input type="text" id= gmaps_link id= gmaps_link class="form-control" placeholder="Booking URL" value="{{ old('gmaps_link') }}">
-                            {!! $errors->first('gmaps_link', '<p class="help-block">:message</p>') !!}
+                          <div class="form-group {{ $errors->has('bookmark_url') ? 'has-error' : ''}}">
+                            <label for= bookmark_url>Booking URL</label>
+                            <input type="text" id= bookmark_url id= bookmark_url class="form-control" placeholder="Booking URL" value="{{ old('bookmark_url') }}">
+                            {!! $errors->first('bookmark_url', '<p class="help-block">:message</p>') !!}
                           </div>
 
                           <div class="form-group">
-                            <label for= gmaps_link>Latitude</label>
+                            <label for= latitude>Latitude</label>
                             <input type="text" id="latitude" class="form-control" placeholder="Latitude" value="">
                           </div>
 
                           <div class="form-group">
-                            <label for= gmaps_link>Longitude</label>
-                            <input type="text" id="Llngitude" class="form-control" placeholder="Longitude" value="">
+                            <label for=longitude>Longitude</label>
+                            <input type="text" id="longitude" class="form-control" placeholder="longitude" value="">
                           </div>
                         </div>
                       </div>

@@ -188,7 +188,7 @@ class ResultsController extends Controller {
         return \DB::select('SELECT * FROM
                 (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
                 clinics.logo, clinics.address, clinics.city, clinics.state, clinics.name, clinics.description,
-                clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.gmaps_link,
+                clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.bookmark_url,
                 clinics.marker,
                 countries.full_name AS country,
                 (6378 * acos(

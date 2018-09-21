@@ -212,12 +212,12 @@
                       {!! $errors->first('state','<p class="help-block">:message</p>') !!}
                   </div>
 
-                  <div class="form-group {{ $errors->has('gmaps_link') ? 'has-error' : ''}}">
-                    <label for=g maps_link>Booking URL URL</label>
-                    <input type="text" id=g maps_link id=g maps_link class="form-control"
-                      placeholder="Booking URL URL"
-                      value="{{ old('gmaps_link') ?? $clinic->gmaps_link }}">
-                      {!! $errors->first('gmaps_link', '<p class="help-block">:message</p>') !!}
+                  <div class="form-group {{ $errors->has('bookmark_url') ? 'has-error' : ''}}">
+                    <label for=g maps_link>Booking URL</label>
+                    <input type="text" id=bookmark_url id=bookmark_url class="form-control"
+                      placeholder="Booking URL"
+                      value="{{ old('bookmark_url') ?? $clinic->bookmark_url }}">
+                      {!! $errors->first('bookmark_url', '<p class="help-block">:message</p>') !!}
                   </div>
 
                   <div class="form-group">
