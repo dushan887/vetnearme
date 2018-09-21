@@ -89,7 +89,11 @@
 								<span style="margin-top: 0">{{ $clinic->emergency_number }}</span></a></li>
 							<li><a href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
-							<li id="web-url-check"><a href="{{ $clinic->url }}" target="_blank"><i class="fas fa-globe"></i> <strong>Website:</strong><br />
+							<li id="web-url-check">
+								<a href="{{ $clinic->url }}" target="_blank"
+									rel="nofollow noopener noreferrer"
+									onclick="handleOutboundLinkClicks(event)">
+									<i class="fas fa-globe"></i> <strong>Website:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->url }}</span></a></li>
 							<li>
 								<div class="border-separator space-10"></div>

@@ -50,7 +50,9 @@
                                 </a>
             </div>
             <div class="resault-web">
-                <a href="{{ $clinic->url }}" target="_blank" rel="nofollow noopener noreferrer">
+                <a href="{{ $clinic->url }}" target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    onclick="handleOutboundLinkClicks(event)">
                     <i class="fa fa-globe"></i>
                     <span class="resault-web-address">
                         Website
