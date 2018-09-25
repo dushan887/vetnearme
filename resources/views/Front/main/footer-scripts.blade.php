@@ -77,6 +77,16 @@
 		gtag('event', 'contact', { 'event_category' : 'Email_Click_Tracking', 'event_action' : 'Click_to_Email', 'event_label' : emaillink});
 		return true;
 	});
+
+	// Function which tracks when the link to the clinic url is clicked
+	function handleOutboundLinkClicks(event) {
+		ga('send', 'event', {
+			eventCategory: 'Outbound Link',
+			eventAction: 'click',
+			eventLabel: event.target.href,
+			transport: 'beacon'
+		});
+		}
 </script>
 
 

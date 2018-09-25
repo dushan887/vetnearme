@@ -89,7 +89,11 @@
 								<span style="margin-top: 0">{{ $clinic->emergency_number }}</span></a></li>
 							<li><a href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
-							<li id="web-url-check"><a href="{{ $clinic->url }}" target="_blank"><i class="fas fa-globe"></i> <strong>Website:</strong><br />
+							<li id="web-url-check">
+								<a href="{{ $clinic->url }}" target="_blank"
+									rel="nofollow noopener noreferrer"
+									onclick="handleOutboundLinkClicks(event)">
+									<i class="fas fa-globe"></i> <strong>Website:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->url }}</span></a></li>
 							<li>
 								<div class="border-separator space-10"></div>
@@ -109,10 +113,10 @@
 
 									@endforeach
 									<li style="float: right;width: auto;">
-										
-											<a href="{{ $clinic->gmaps_link }}" target="_blank" rel="nofollow noopener noreferrer" style="white-space: nowrap; display: inline-block; float: right;">
+
+											<a href="{{ $clinic->bookmark_url }}" target="_blank" rel="nofollow noopener noreferrer" style="white-space: nowrap; display: inline-block; float: right;">
 							                    <i class="fas fa-calendar-alt" style="white-space: nowrap; display: inline-block;"></i> <strong>Book Now</strong>
-							                    
+
 							                </a>
 									</li>
 
@@ -265,8 +269,6 @@
 									<span>{{ $clinic->country->name }}</span>
 							</li>
 							<li><a href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i>
-								<strong>Get Directions:</strong>
-								<span>{{ $clinic->gmaps_link }}</span></a>
 							</li>
 						</ul>
 					</div>
