@@ -31,6 +31,9 @@ class Geolocation
     {
         $response = \Geocode::make()->address($address);
 
+        if(!strpos($response->formattedAddress(), "Australia"))
+            $response = \Geocode::make()->address($address . " Australia");
+
         if(!$response)
             return null;
 

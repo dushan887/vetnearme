@@ -64,7 +64,7 @@
 @stop
 
 @section('AditionalFoot')
-<div id="map" style="visibility: hidden; width: 0; height: 0; opacity: 0;position: absolute;"></div> 
+<div id="map" style="visibility: hidden; width: 0; height: 0; opacity: 0;position: absolute;"></div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&callback=initMap"
         async defer></script>
 <script>
@@ -75,7 +75,7 @@ function initMap() {
 	  componentRestrictions: {country: ["AU", "NZ"]}
 	 };
 	var input = document.getElementById('address-input');
-	var autocomplete = new google.maps.places.Autocomplete(input,options); 
+	var autocomplete = new google.maps.places.Autocomplete(input,options);
 }
 
 function getMyLocation () {
@@ -92,26 +92,21 @@ function getMyLocation () {
         latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
       }
 
-      function showPosition(position){ 
+      function showPosition(position){
           location.latitude=position.coords.latitude;
           location.longitude=position.coords.longitude;
-          latitudeAndLongitude.innerHTML=position.coords.latitude + 
-          "," + position.coords.longitude; 
+          latitudeAndLongitude.innerHTML=position.coords.latitude +
+          "," + position.coords.longitude;
           var geocoder = new google.maps.Geocoder();
           var latLng = new google.maps.LatLng(location.latitude, location.longitude);
 
        if (geocoder) {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
-               console.log(results[0].formatted_address); 
                $('#address-input').val(results[0].formatted_address);
              }
-             else {
-              // $('#address').html('Geocoding failed: '+status);
-              console.log("Geocoding failed: " + status);
-             }
           }); //geocoder.geocode()
-        }      
+        }
       } //showPosition
 }
 $(document).ready(function() {

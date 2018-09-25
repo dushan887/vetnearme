@@ -330,23 +330,8 @@ let userCoordinates = content.data('usercoordinates')
 
 function initMap() {
 
-  	// Create the map.
-	// This are default Syndey coordinates
-	let center = {lat:-33.865143, lng: 151.209900}
-
-	// If the navigator function is present and enabled
-	// We will get the users coordinates
-	// If not, we will use default coordinates
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function(position) {
-
-			center.lat = position.coords.latitude
-			center.lng = position.coords.longitude
-
-		}, function() {
-			console.log('user denied request for position');
-		});
-	}
+  // Create the map.
+	var pyrmont = userCoordinates
 
 	let options = {
 	  types: ["(address)"],
@@ -355,11 +340,10 @@ function initMap() {
 	 };
 	let input        = document.getElementById('address-input');
 	let autocomplete = new google.maps.places.Autocomplete(input,options);
-
-	map = new google.maps.Map(document.getElementById('map'), {
-		center: center,
-		zoom: 15
-	});
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: pyrmont,
+    zoom: 15
+  });
 
   // Create the places service.
   var service = new google.maps.places.PlacesService(map);
@@ -367,7 +351,7 @@ function initMap() {
 
   // Perform a nearby search.
 	service.nearbySearch(
-		{location: center, radius: 5000, type: ['veterinary_care']},
+		{location: pyrmont, radius: 5000, type: ['veterinary_care']},
 		function(results, status) {
 		if (status !== 'OK') return;
 		createMarkers(results);
