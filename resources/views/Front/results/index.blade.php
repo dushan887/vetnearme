@@ -333,8 +333,9 @@ function initMap() {
   // Create the map.
 	var pyrmont = userCoordinates
 	let options = {
-	  types: ["(regions)"],
-	  componentRestrictions: {country: ["AU", "NZ"]}
+	  types: ["(address)"],
+	  componentRestrictions: {country: ["AU", "NZ"]},
+	  strictBounds : true
 	 };
 	let input        = document.getElementById('address-input');
 	let autocomplete = new google.maps.places.Autocomplete(input,options);
