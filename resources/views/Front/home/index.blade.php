@@ -105,11 +105,13 @@ function getMyLocation () {
              if (status == google.maps.GeocoderStatus.OK) {
                $('#address-input').val(results[0].formatted_address);
                var address = results[0].address_components;
-			   var zipcode = address[address.length - 1].long_name;
-			   var zipcode2 = address[address.length - 2].long_name;
+               var zipcode = address[address.length - 0].long_name;
+			   var zipcode2 = address[address.length - 1].long_name;
+			   var zipcode3 = address[address.length - 2].long_name;
 
-				console.log(zipcode)
+			   console.log(zipcode)
 				console.log(zipcode2)
+				console.log(zipcode3)
              }
           }); //geocoder.geocode()
         }
