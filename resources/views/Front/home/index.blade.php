@@ -105,20 +105,13 @@ function getMyLocation () {
              if (status == google.maps.GeocoderStatus.OK) {
                $('#address-input').val(results[0].formatted_address);
                var arrAddress = results[0].address_components;
-				var itemRoute='';
 				var itemLocality='';
 				var itemCountry='';
 				var itemPc='';
-				var itemSnumber='';
 
 				// iterate through address_component array
 				$.each(arrAddress, function (i, address_component) {
 				    console.log('address_component:'+i);
-
-				    if (address_component.types[0] == "route"){
-				        console.log(i+": route:"+address_component.long_name);
-				        itemRoute = address_component.long_name;
-				    }
 
 				    if (address_component.types[0] == "locality"){
 				        console.log("town:"+address_component.long_name);
@@ -134,13 +127,10 @@ function getMyLocation () {
 				        console.log("pc:"+address_component.long_name);  
 				        itemPc = address_component.long_name;
 				    }
-
-				    if (address_component.types[0] == "street_number"){ 
-				        console.log("street_number:"+address_component.long_name);  
-				        itemSnumber = address_component.long_name;
-				    }
 				    //return false; // break the loop   
 				});
+
+				console.log(itemLocality +' '+ itemPc+' '+itemCountry)
              }
           }); //geocoder.geocode()
         }
