@@ -114,17 +114,17 @@ function getMyLocation () {
 				    console.log('address_component:'+i);
 
 				    if (address_component.types[0] == "locality"){
-				        console.log("town:"+address_component.long_name);
+				        // console.log("town:"+address_component.long_name);
 				        itemLocality = address_component.long_name;
 				    }
 
 				    if (address_component.types[0] == "country"){ 
-				        console.log("country:"+address_component.long_name); 
+				        // console.log("country:"+address_component.long_name); 
 				        itemCountry = address_component.long_name;
 				    }
 
-				    if (address_component.types[0] == "postal_code_prefix"){ 
-				        console.log("pc:"+address_component.long_name);  
+				    if (address_component.types[0] == "postal_code"){ 
+				        // console.log("pc:"+address_component.long_name);  
 				        itemPc = address_component.long_name;
 				    }
 				    //return false; // break the loop   
