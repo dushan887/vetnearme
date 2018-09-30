@@ -104,7 +104,7 @@ function getMyLocation () {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
                $('#address-input').val(results[0].formatted_address);
-               console.log(results[0].types[])
+               console.log(results[0].formatted_address.types[])
              }
           }); //geocoder.geocode()
         }
