@@ -104,14 +104,43 @@ function getMyLocation () {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
                $('#address-input').val(results[0].formatted_address);
-               var address = results[0].address_components;
-               var zipcode = address[address.length].long_name;
-			   var zipcode2 = address[address.length - 1].long_name;
-			   var zipcode3 = address[address.length - 2].long_name;
+               var arrAddress = item.address_components;
+				var itemRoute='';
+				var itemLocality='';
+				var itemCountry='';
+				var itemPc='';
+				var itemSnumber='';
 
-			   console.log(zipcode)
-				console.log(zipcode2)
-				console.log(zipcode3)
+				// iterate through address_component array
+				$.each(arrAddress, function (i, address_component) {
+				    console.log('address_component:'+i);
+
+				    if (address_component.types[0] == "route"){
+				        console.log(i+": route:"+address_component.long_name);
+				        itemRoute = address_component.long_name;
+				    }
+
+				    if (address_component.types[0] == "locality"){
+				        console.log("town:"+address_component.long_name);
+				        itemLocality = address_component.long_name;
+				    }
+
+				    if (address_component.types[0] == "country"){ 
+				        console.log("country:"+address_component.long_name); 
+				        itemCountry = address_component.long_name;
+				    }
+
+				    if (address_component.types[0] == "postal_code_prefix"){ 
+				        console.log("pc:"+address_component.long_name);  
+				        itemPc = address_component.long_name;
+				    }
+
+				    if (address_component.types[0] == "street_number"){ 
+				        console.log("street_number:"+address_component.long_name);  
+				        itemSnumber = address_component.long_name;
+				    }
+				    //return false; // break the loop   
+				});
              }
           }); //geocoder.geocode()
         }
