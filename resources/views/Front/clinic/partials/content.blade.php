@@ -268,7 +268,7 @@
 									<span>{{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }}</span>
 									<span>{{ $clinic->country->name }}</span>
 							</li>
-							<li><a href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i>
+							<li><a id="ds-loc" href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}" ds-loc="{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i> <strong>Get Directions</strong>
 							</li>
 						</ul>
 					</div>

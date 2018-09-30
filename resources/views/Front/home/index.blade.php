@@ -17,6 +17,21 @@
 	    background: rgba(255,255,255,.7);
 	    border-width: 2px
 	}
+	section:not(.page-search) #search .location-search:before, .page-search #search .field.submit-search > .search-btn-icon:before,
+	.search-category.raido-checkbox.radio {
+		display: none;
+	}
+	#loc-btn {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 50px;
+	    height: 60px;
+	    padding: 13px 10px;
+	    z-index: 9999999;
+	    display: block;
+	    cursor: pointer;
+	}
 	@media screen and (min-width: 1200px) {
 		.container-1200 {
 		    max-width: 1370px;
@@ -103,8 +118,8 @@ function getMyLocation () {
        if (geocoder) {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
-               $('#address-input').val(results[0].formatted_address);
-               var arrAddress = results[0].address_components;
+               
+                var arrAddress = results[0].address_components;
 				var itemLocality='';
 				var itemCountry='';
 				var itemPc='';
@@ -130,14 +145,18 @@ function getMyLocation () {
 				    //return false; // break the loop   
 				});
 
-				console.log(itemLocality +' '+ itemPc+' '+itemCountry)
+				$('#address-input').val(itemLocality +' '+ itemPc+' '+itemCountry);
              }
           }); //geocoder.geocode()
         }
       } //showPosition
 }
 $(document).ready(function() {
-	getMyLocation();
+	$('.field.location-search').append('<div id="loc-btn"><img src="/img/gps-fixed-indicator.png"></div>');
+	$(document).on("click", "#loc-btn", function(){
+	    getMyLocation();
+	});
+	
 })
 </script>
 @stop

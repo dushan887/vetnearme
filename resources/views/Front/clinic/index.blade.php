@@ -151,5 +151,44 @@
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 
+	function getMyLocation () {
+  var latitudeAndLongitude=document.getElementById("latitudeAndLongitude"),
+      location={
+          latitude:'',
+          longitude:''
+      };
+
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+      else{
+        latitudeAndLongitude.innerHTML="Geolocation is not supported by this browser.";
+      }
+
+      function showPosition(position){
+          location.latitude=position.coords.latitude;
+          location.longitude=position.coords.longitude;
+          latitudeAndLongitude.innerHTML=position.coords.latitude +
+          "," + position.coords.longitude;
+          var geocoder = new google.maps.Geocoder();
+          var latLng = new google.maps.LatLng(location.latitude, location.longitude);
+
+       if (geocoder) {
+          geocoder.geocode({ 'latLng': latLng}, function (results, status) {
+             if (status == google.maps.GeocoderStatus.OK) {
+               
+                var arrAddress = results[0].formatted_address;
+				var getDestination = $('#ds-loc').attr('ds-loc')
+
+				$('#ds-loc').attr('href', 'https://www.google.com/maps/dir/'+arrAddress+'/'+getDestination);
+             }
+          }); //geocoder.geocode()
+        }
+      } //showPosition
+}
+$(document).ready(function() {
+	    getMyLocation();	
+})
+
 </script>
 @stop
