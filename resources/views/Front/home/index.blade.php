@@ -104,7 +104,10 @@ function getMyLocation () {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
                $('#address-input').val(results[0].formatted_address);
-               console.log(results[0].address_components.address[address.length - 1].long_name)
+               var address = results[0].address_components;
+				var zipcode = address[address.length - 1].long_name;
+
+				console.log(zipcode)
              }
           }); //geocoder.geocode()
         }
