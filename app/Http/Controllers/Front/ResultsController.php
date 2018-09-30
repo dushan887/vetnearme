@@ -29,7 +29,7 @@ class ResultsController extends Controller {
         $currentHour = date('H:i:s');
         $currentDay  = strtolower(date('l'));
 
-        $count = $request->get('ids') ? count($request->get('ids')) : 0;
+        $count = $request->get('ids') ? count($request->get('ids')) - 1 : 0;
 
         if(is_object($coordinates))
             $coordinates = [
