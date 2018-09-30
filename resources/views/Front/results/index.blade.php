@@ -127,6 +127,7 @@
 			div.className = 'marker';
 
 			if(self.args.marker_id !== 'start'){
+				console.log(self.args.marker_id);
 
 				// MARKER IKONICA IDE OVDE
 				let clinicMarker = $('#clinic-' + self.args.marker_id).data('marker')
@@ -266,8 +267,6 @@
 
 					let count = data.count
 
-					console.log(data);
-
 					$('.total-clinics').text(data.clinicsTotal)
 					$('.resaults-found').text(data.clinicsTotal)
 
@@ -281,7 +280,7 @@
 								marker_pin: count,
 							},
 						);
-
+						count++;
 						markers.push(marker)
 
 					}

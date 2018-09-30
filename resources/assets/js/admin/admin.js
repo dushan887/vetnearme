@@ -158,8 +158,8 @@ if (typeof tinymce !== 'undefined') {
 
     tinymce.init({
         selector: '.editor',
-        toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code',
-        plugins: 'code'
+        toolbar: 'undo redo | styleselect | formatselect | bold italic | link | alignleft aligncenter alignright bullist numlist outdent indent',
+        plugins: 'code link'
       });
 
 }

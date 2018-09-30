@@ -86,6 +86,8 @@ class PostQuery extends Post
         if($date && DateHelper::isValidDate($date))
             $posts->whereDate('created_at', $date);
 
+        $posts->orderBy('created_at', 'desc');
+
         return $posts->paginate((int) $limit);
     }
 

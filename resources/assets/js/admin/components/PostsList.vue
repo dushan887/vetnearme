@@ -141,7 +141,7 @@
                             </div>
 
                             <button type="button" class="btn btn-default btn-sm"
-                                @click="this.getAll()">
+                                @click="getAll()">
                                 <i class="fa fa-refresh"></i>
                             </button>
                             <div class="pull-right"></div>
@@ -198,7 +198,9 @@
                                             <div class="btn-group pull-right">
                                                 <a type="button"
                                                     class="btn btn-default btn-sm"
-                                                    :href="'/admin/posts/show/' + post.id">
+                                                    :href="'/' + post.permalink"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
 
