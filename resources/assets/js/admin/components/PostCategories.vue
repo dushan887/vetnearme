@@ -21,7 +21,7 @@
 
                 <div class="btn-group">
 
-                    <button type="button" class="btn btn-default btn-sm" @click="openModal('create')">
+                    <button type="button" class="btn btn-default btn-sm" @click="openModal('create', $event)">
                         <i class="fa fa-edit"></i>
                     </button>
 
@@ -76,13 +76,13 @@
 
                                 <button type="button"
                                     class="btn btn-default btn-sm"
-                                    @click="openModal('edit')"
+                                    @click="openModal('edit', $event)"
                                     :data-id=category.id
                                 ><i class="fa fa-edit"></i></button>
 
                                 <button type="button"
                                     class="btn btn-default btn-sm"
-                                     @click="openModal('delete')"
+                                     @click="openModal('delete', $event)"
                                     :data-id=category.id>
                                     <i class="fa fa-trash-o"></i>
                                 </button>
@@ -161,7 +161,7 @@ export default {
                 Event.$emit('form:errors:show', form, error.response.data.errors)
             })
         },
-        openModal(action){
+        openModal(action, event){
 
             let url;
             let data = {}

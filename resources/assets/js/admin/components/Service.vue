@@ -22,7 +22,7 @@
 
                 <div class="btn-group">
 
-                    <button type="button" class="btn btn-default btn-sm" @click="openModal('store')">
+                    <button type="button" class="btn btn-default btn-sm" @click="openModal('store', $event)">
                         <i class="fa fa-edit"></i>
                     </button>
 
@@ -79,7 +79,7 @@
 
                                 <button type="button"
                                     class="btn btn-default btn-sm"
-                                    @click="openModal('priority')"
+                                    @click="openModal('priority', $event)"
                                     :data-id=service.id
                                     :data-priority=service.priority
                                     title="Priority Status"
@@ -90,13 +90,13 @@
 
                                 <button type="button"
                                     class="btn btn-default btn-sm"
-                                    @click="openModal('edit')"
+                                    @click="openModal('edit', $event)"
                                     :data-id=service.id
                                 ><i class="fa fa-edit"></i></button>
 
                                 <button type="button"
                                     class="btn btn-default btn-sm"
-                                     @click="openModal('delete')"
+                                     @click="openModal('delete', $event)"
                                     :data-id=service.id>
                                     <i class="fa fa-trash-o"></i>
                                 </button>
@@ -138,7 +138,7 @@ export default {
                 this.services = response.data
             })
         },
-        openModal(action){
+        openModal(action, event){
 
             let url;
             let data = {}

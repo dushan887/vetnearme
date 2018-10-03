@@ -34,7 +34,7 @@
                                             <button
                                             type="button"
                                             class="btn btn-sm btn-primary"
-                                            @click="openModal('galery')"
+                                            @click="openModal('galery', $event)"
                                             v-if="!file.gallery && !file.gallery_images.length"
                                             data-action=put
                                             :data-id=file.id>Put in gallery</button>
@@ -42,7 +42,7 @@
                                             <button
                                             type="button"
                                             class="btn btn-sm btn-primary"
-                                            @click="openModal('galery')"
+                                            @click="openModal('galery', $event)"
                                             data-action=remove
                                             v-else
                                             :data-id=file.id>Remove from gallery</button>
@@ -52,13 +52,13 @@
                                             <button
                                             type="button"
                                             class="btn btn-sm btn-primary"
-                                            @click="openModal('galery')"
+                                            @click="openModal('galery', $event)"
                                             :data-id=file.id>Update Gallery</button>
                                         </span>
                                     </span>
 
                                     <button type="button" class="btn btn-sm btn-danger"
-                                    @click="openModal('delete')"
+                                    @click="openModal('delete', $event)"
                                     :data-id=file.id>Delete</button>
                                 </th>
                             </tr>
@@ -117,7 +117,7 @@ export default {
                 this.files = response.data
             })
         },
-        openModal(action){
+        openModal(action, event){
 
             let url;
             let data = {}
@@ -174,7 +174,7 @@ export default {
                     break;
             }
         },
-        asSuperAdmin(){
+        asSuperAdmin(event){
             axios.get('/admin/clinic-gallery/get-clinics', {
                 params: {
                     mediaID: event.target.dataset.id
@@ -184,7 +184,7 @@ export default {
                 Event.$emit('modal:show', response.data)
             })
         },
-        asUser(){
+        asUser(event){
 
             if(event.target.dataset.action === 'put'){
                 let countGallery = this.files.filter(file => file.gallery)
