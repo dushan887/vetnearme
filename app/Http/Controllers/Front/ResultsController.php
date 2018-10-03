@@ -26,6 +26,7 @@ class ResultsController extends Controller {
 
         $address     = XSS::clean($request->input('address-input'));
         $coordinates = $request->get('coordinates') ?? Geolocation::guessCoordinates($address);
+        $timezone    = Geolocation::getTimezoneIP(request()->ip());
         $currentHour = date('H:i:s');
         $currentDay  = strtolower(date('l'));
 

@@ -40,9 +40,25 @@ class Geolocation
         return $response;
     }
 
-    public static function getTimezone($coordinates)
+    public static function getTimezoneIP(string $ip)
     {
-        $time = time();
+        $url = "https://api.ipgeolocation.io/ipgeo?apiKey=6cccfd52cc4940409fb57fa1a7739e96&ip={$ip}";
+
+        $ch   = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $responseJson = curl_exec($ch);
+        curl_close($ch);
+
+        $response = json_decode($responseJson);
+
+        if(isset($response->time_zone->name))
+            date_default_timezone_set($response->time_zone->name);
+    }
+
+    public static function getTimezoneCoordinates($coordinates)
+    {
         $url  = "https://maps.googleapis.com/maps/api/timezone/json?location={$coordinates['lat']},{$coordinates['lng']}&timestamp=$time&key=AIzaSyAcrIAbpZUflBVuRlUwYWfdRr_fmLy_sio";
         $ch   = curl_init();
 
