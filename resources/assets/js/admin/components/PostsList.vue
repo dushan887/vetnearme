@@ -134,7 +134,7 @@
 
                             <button type="button"
                                     class="btn btn-default btn-sm"
-                                    @click="openModal('delete-multiple')">
+                                    @click="openModal('delete-multiple', $event)">
                                     <i class="fa fa-trash-o"></i>
                                 </button>
 
@@ -212,10 +212,10 @@
                                                 <button type="button"
                                                     class="btn btn-default btn-sm"
                                                     :data-id="post.id"
+                                                    @click="openModal('delete-single', $event)"
                                                 >
                                                     <i class="fa fa-trash-o"
                                                         data-text="clinic"
-                                                        @click="openModal('delete-single')"
                                                     ></i>
                                                 </button>
 
@@ -346,7 +346,7 @@ export default {
             if(!search.length !== search.length >= 3)
                 this.getAll()
         },
-        openModal(action){
+        openModal(action, event){
 
             let url;
             let data = {}
