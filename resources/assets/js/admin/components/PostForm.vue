@@ -214,7 +214,7 @@ export default {
       }
   },
   methods: {
-    titleAction(){
+    titleAction(event){
 
       if(!this.postid){
         let title = event.target.value
@@ -253,8 +253,6 @@ export default {
           window.location.href = "/admin/posts"
       })
       .catch(function (error) {
-        console.log(error);
-
           Event.$emit('form:errors:show', form, error.response.data.errors)
       });
 
