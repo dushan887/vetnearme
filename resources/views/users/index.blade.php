@@ -163,7 +163,13 @@
                         <td>{{ $user->first_name }}</td>
                         <td>{{ $user->last_name }}</td>
                         <td>{{ $user->clinic->name ?? "Not associated with any clinic" }}</td>
-                        <td>{{ ucwords(str_replace('_', ' ', $user->roles[0]->name)) }}</td>
+                        <td>
+                            @if(isset($user->roles[0]->name))
+                              {{ ucwords(str_replace('_', ' ', $user->roles[0]->name)) }}
+                            @else
+                              "No role"
+                            @endif
+                        </td>
                         <td>{{ !$user->gender ? "Male" : "Female" }}</td>
                         <td width="150">
 
