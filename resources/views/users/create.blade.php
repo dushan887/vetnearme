@@ -21,12 +21,12 @@
     @if (Session::has('type'))
       @include('partials._alert')
     @endif
-    
+
     <form class="form-horizontal" action="/admin/users/store" method="post" enctype="multipart/form-data">
         @csrf
 
       <div class="col-md-4">
-        <button type="submit" class="btn btn-primary btn-block margin-bottom">Update</button>
+        <button type="submit" class="btn btn-primary btn-block margin-bottom">Create</button>
 
         <div class="box box-primary">
           <div class="box-header">
@@ -176,7 +176,7 @@
                   <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
                   <input type="text" class="form-control" name=social[facebook] id="socialFacebook" value="{{ old('social.facebook') }}" placeholder="Facebook URL">
                   {!! $errors->first('social.facebook', '<p class="help-block">:message</p>') !!}
-                </div> 
+                </div>
               </div>
 
               <div class="form-group {{ $errors->has('social.twitter') ? 'has-error' : '' }}">
@@ -207,9 +207,9 @@
           </div>
         </div>
       </div>
-        
 
-      
+
+
       <div class="col-md-4">
         @if(\Auth::user()->hasRole('super_admin', 'admin'))
         <div class="box box-primary">
