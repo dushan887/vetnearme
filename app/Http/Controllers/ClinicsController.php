@@ -72,7 +72,7 @@ class ClinicsController extends Controller
         }
 
         if(\Auth::user()->hasRole('super_admin'))
-            return redirect('admin/clinics/show/' . $clinicID);
+            return redirect('admin/clinics/edit/' . $clinicID);
 
         return redirect()->route('my-clinic');
     }
