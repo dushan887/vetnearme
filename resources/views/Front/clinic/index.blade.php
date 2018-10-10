@@ -1,7 +1,7 @@
 @extends('Front.main.main-template')
 
 @section('SEOinfo')
-	<title>Vet Near Me</title>
+	<title>{{ $clinic->name }}, {{ $clinic->city }}, {{ $clinic->zip }} - Vet Near Me</title>
 @stop
 
 @section('AditionalHead')
