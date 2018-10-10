@@ -31,6 +31,7 @@
 	    z-index: 9999999;
 	    display: block;
 	    cursor: pointer;
+	    opacity: 0.5
 	}
 	@media screen and (min-width: 1200px) {
 		.container-1200 {

@@ -5,6 +5,19 @@
 @stop
 
 @section('AditionalHead')
+<style type="text/css">
+	@media screen and (max-width: 992px) {
+		.page-content,
+		.page-content .container {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+		.inner-sections > div {
+		    padding-left: 15px !important;
+		    padding-right: 15px !important;
+		}
+	}
+</style>
 @stop
 
 @section('BodySetup')

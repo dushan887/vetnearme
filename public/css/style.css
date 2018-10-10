@@ -1712,6 +1712,9 @@ article footer {
   .container {
     max-width: 100% !important
   }
+  h1 {
+    font-size: 26px;
+  }
 }
 @media screen and (max-width: 778px) {
   .row.inner-sections..ml-3.mr-0.{

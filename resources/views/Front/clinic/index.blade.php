@@ -12,6 +12,32 @@
 		background-position: center !important;
 		background-repeat: no-repeat !important;
 	}
+	
+	@media screen and (max-width: 992px) {
+		.page-content,
+		.page-content .container {
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+		.inner-sections > div {
+		    padding-left: 15px !important;
+		    padding-right: 15px !important;
+		}
+		.wrapper .clinic-name h1 {
+			font-size: 24px !important;
+			padding: 45px 15px 0 15px;
+    		text-align: center;
+
+		}
+		.clinic-header .rasault-rating {
+		    left: 15px;
+		    margin: auto;
+		    text-align: center;
+		}
+		.service-list li { 
+			min-width: 48%
+		}
+	}
 </style>
 @stop
 
