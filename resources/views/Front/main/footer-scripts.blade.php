@@ -80,6 +80,8 @@
 
 	// Function which tracks when the link to the clinic url is clicked
 	function handleOutboundLinkClicks(event) {
+		console.log(30000);
+
 		ga('send', 'event', {
 			eventCategory: 'Outbound Link',
 			eventAction: 'click',
