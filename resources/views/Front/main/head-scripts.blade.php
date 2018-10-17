@@ -15,18 +15,12 @@
 		ga('send', 'pageview');
 
       // Function which tracks when the link to the clinic url is clicked
-    let trackOutboundLink = function(url, isExternal) {
-        let params = {};
-
-        if (!isExternal) {
-            params.hitCallback = function () {
-                document.location = url;
-            }
-        }
-        ga('send', 'event', 'outbound', 'click', url, params);
-
-        return isExternal;
-    }
+      let trackOutboundLink = function(url) {
+        ga('send', 'event', 'outbound', 'click', url, {
+          'transport': 'beacon',
+          'hitCallback': function(){document.location = url;}
+        });
+      }
   </script>
 
 <!-- BOOSTRAP 4 -->
