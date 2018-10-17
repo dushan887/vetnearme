@@ -15,15 +15,17 @@
 		ga('send', 'pageview');
 
       // Function which tracks when the link to the clinic url is clicked
-    function handleOutboundLinkClicks(event) {
-      console.log(event.target.dataset.url);
+    let trackOutboundLink = function(url, isExternal) {
+        let params = {};
 
-      ga('send', 'event', {
-        eventCategory: 'Outbound Link',
-        eventAction: 'click',
-        eventLabel: event.target.dataset.url,
-        transport: 'beacon'
-      });
+        if (!isExternal) {
+            params.hitCallback = function () {
+                document.location = url;
+            }
+        }
+        ga('send', 'event', 'outbound', 'click', url, params);
+
+        return isExternal;
     }
   </script>
 

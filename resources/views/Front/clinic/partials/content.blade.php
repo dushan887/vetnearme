@@ -92,9 +92,9 @@
 							<li id="web-url-check">
 								<a href="{{ $clinic->url }}" target="_blank"
 									rel="nofollow noopener noreferrer"
-									onclick="handleOutboundLinkClicks(event)">
+									onclick="return trackOutboundLink({{ $clinic->url }}, true)">
 									<i class="fas fa-globe"></i> <strong>Website:</strong><br />
-								<span style="margin-top: 0" data-url="{{ $clinic->url }}">{{ $clinic->url }}</span></a></li>
+								<span style="margin-top: 0"">{{ $clinic->url }}</span></a></li>
 							<li>
 								<div class="border-separator space-10"></div>
 								<strong class="main-color">Social:</strong>

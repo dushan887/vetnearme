@@ -52,9 +52,9 @@
             <div class="resault-web">
                 <a href="{{ $clinic->url }}" target="_blank"
                     rel="nofollow noopener noreferrer"
-                    onclick="handleOutboundLinkClicks(event)">
+                    onclick="return trackOutboundLink({{ $clinic->url }}, true)">
                     <i class="fa fa-globe"></i>
-                    <span class="resault-web-address" data-url="{{ $clinic->url }}>
+                    <span class="resault-web-address">
                         Website
                     </span>
                 </a>
