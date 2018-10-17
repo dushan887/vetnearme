@@ -54,7 +54,7 @@
                     rel="nofollow noopener noreferrer"
                     onclick="handleOutboundLinkClicks(event)">
                     <i class="fa fa-globe"></i>
-                    <span class="resault-web-address">
+                    <span class="resault-web-address" data-url="{{ $clinic->url }}>
                         Website
                     </span>
                 </a>

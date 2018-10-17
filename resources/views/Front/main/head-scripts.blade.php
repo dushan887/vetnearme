@@ -16,12 +16,12 @@
 
       // Function which tracks when the link to the clinic url is clicked
     function handleOutboundLinkClicks(event) {
-      console.log(event.target.href);
+      console.log(event.target.dataset.url);
 
       ga('send', 'event', {
         eventCategory: 'Outbound Link',
         eventAction: 'click',
-        eventLabel: event.target.href,
+        eventLabel: event.target.dataset.url,
         transport: 'beacon'
       });
     }
