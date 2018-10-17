@@ -33,9 +33,27 @@
 	    cursor: pointer;
 	    opacity: 0.5
 	}
+	.home #search .field.location-search:after {
+		content: '';
+		position: absolute;
+		display: block !important;
+	    top: 55px;
+    	left: 15px;
+	    width: 281px;
+	    height: 34px;
+	    background: url("/img/home-arrow.png");
+	    background-size: contain;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	}
 	@media screen and (min-width: 1200px) {
 		.container-1200 {
 		    max-width: 1370px;
+		}
+	}
+	@media screen and (max-width: 768px) {
+		h1 {
+			display: none;
 		}
 	}
 

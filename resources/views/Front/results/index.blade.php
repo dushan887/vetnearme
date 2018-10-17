@@ -12,6 +12,13 @@
 	.search-in.page .advanced-search-holder {
 		width: 100%;
 	}
+	.search-input {
+		text-transform: capitalize;
+	}
+	.search-category.raido-checkbox {
+		visibility: hidden;
+    	opacity: 0;
+	}
 </style>
 @stop
 
@@ -53,7 +60,13 @@
 
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU"></script>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		​$(".search-input").text(function () {
+		    return $(this).text().replace(", Australia", "").replace("Australia", ""); 
+		});​​​​​
+	})
+</script>
 @if ($clinics->total() > 0)
 <script type="text/javascript">
 

@@ -254,7 +254,7 @@
 			<div class="row inner-sections">
 				<div class="col-12 col-md-8">
 					<div class="inner empty">
-						<div id="map" class="clinic-map-pin" style="width: 100%; height:300px; display: block;"></div>
+						<div id="map" class="clinic-map-pin" style="width: 100%; height:340px; display: block;"></div>
 					</div>
 				</div>
 				<div class="col-12 col-md-4">
@@ -268,7 +268,13 @@
 									<span>{{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }}</span>
 									<span>{{ $clinic->country->name }}</span>
 							</li>
-							<li><a id="ds-loc" href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}" ds-loc="{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i> <strong>Get Directions</strong></a>
+							<li>
+								<div id="map2" style="opacity: 0;visibility: hidden;position: absolute;"></div>
+								<div class="location-search" style="position: relative; display: block">
+									<div id="loc-btn"><img src="/img/gps-fixed-indicator.png"></div>
+									<input id="address-input" type="text" placeholder="Your Address">
+								</div>
+								<a id="ds-loc" href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}" ds-loc="{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i> <strong> Get Directions</strong></a>
 							</li>
 						</ul>
 					</div>
