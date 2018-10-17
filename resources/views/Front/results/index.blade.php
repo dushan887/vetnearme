@@ -60,13 +60,7 @@
 
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		​$(".search-input").text(function () {
-		    return $(this).text().replace(", Australia", "").replace("Australia", ""); 
-		});​​​​​
-	})
-</script>
+
 @if ($clinics->total() > 0)
 <script type="text/javascript">
 
@@ -342,23 +336,26 @@ let userCoordinates = content.data('usercoordinates')
 function initMap() {
 
   // Create the map.
-	var pyrmont = userCoordinates
+	let pyrmont = userCoordinates
 
 	let options = {
-	  types: ["(address)"],
-	  componentRestrictions: {country: ["AU", "NZ"]},
-	  strictBounds : true
-	 };
+		  types: ["(regions)"],
+		  componentRestrictions: {country: ["AU", "NZ"]}
+		 };
 	let input        = document.getElementById('address-input');
 	let autocomplete = new google.maps.places.Autocomplete(input,options);
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: pyrmont,
-    zoom: 15
-  });
+
+	map = new google.maps.Map(document.getElementById('map'), {
+		center: pyrmont,
+		zoom: 12
+	});
+
 
   // Create the places service.
   var service = new google.maps.places.PlacesService(map);
   var getNextPage = null;
+
+
 
   // Perform a nearby search.
 	service.nearbySearch(
