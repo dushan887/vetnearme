@@ -274,7 +274,9 @@
 									<div id="loc-btn"><img src="/img/gps-fixed-indicator.png"></div>
 									<input id="address-input" type="text" placeholder="Your Address">
 								</div>
-								<a id="ds-loc" href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}" ds-loc="{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i> <strong> Get Directions</strong></a>
+								<div id="disable-loc">
+									<a id="ds-loc" href="https://www.google.com/maps/dir/{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}" ds-loc="{{ $clinic->address }} {{ $clinic->city }}, {{ $clinic->state }} {{ $clinic->zip }} {{ $clinic->country->name }}"><i class="fas fa-map-signs"></i> <strong> Get Directions</strong></a>
+								</div>
 							</li>
 						</ul>
 					</div>

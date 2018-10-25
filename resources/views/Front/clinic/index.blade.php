@@ -57,6 +57,23 @@
 	    padding: 7px 10px;
 	    border-radius: 5px;
 	}
+	#disable-loc {
+		position: relative;
+	}
+	#disable-loc:before {
+		content: '';
+		width: 100%;
+		z-index: 9999;
+		height: 100%;
+		display: none;
+		background: rgba(255,255,255,.5);
+		top: 0;
+		left: 0;
+		position: absolute;
+	}
+	#disable-loc.disable:before {
+		display: block;
+	}
 	@media screen and (max-width: 992px) {
 		.page-content,
 		.page-content .container {
@@ -270,6 +287,10 @@ $(document).ready(function() {
 		initMap();
 		$('#loc-btn').on('click', function() {
 			getMyLocation ();
+			$('#disable-loc').addClass('disable');
+			setTimeout(function(){
+			  $('#disable-loc').removeClass('disable');
+			}, 2000);
 		})
 		$('#ds-loc').on('click', function(e) {
 			e.preventDefault();

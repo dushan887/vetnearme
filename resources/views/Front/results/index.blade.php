@@ -60,6 +60,11 @@
 
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#search-resaults .search-input').text($('#search-resaults .search-input').text().replace(', Australia', '').replace('Australia', ''))
+	})
+</script>
 
 @if ($clinics->total() > 0)
 <script type="text/javascript">
