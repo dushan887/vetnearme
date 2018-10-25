@@ -175,6 +175,14 @@ $(document).ready(function() {
 	$(document).on("click", "#loc-btn", function(){
 	    getMyLocation();
 	});
+	if ($(window).width() < 992) {
+		$('form').find("input[type=text]").each(function(ev)
+		  {
+		      if(!$(this).val()) { 
+			     $(this).attr("placeholder", "Enter suburb, town or city");
+			  }
+		 })
+	}
 	
 })
 </script>

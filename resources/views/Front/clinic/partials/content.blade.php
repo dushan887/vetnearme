@@ -90,11 +90,11 @@
 							<li><a href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
 							<li id="web-url-check">
-								<a href="{{ $clinic->url }}" target="_blank"
-									rel="nofollow noopener noreferrer"
+								<a href="{{ $clinic->url }}" 
+									rel="nofollow noopener noreferrer" target="_blank"
 									onclick="trackOutboundLink('{{ $clinic->url }}'); return false">
 									<i class="fas fa-globe"></i> <strong>Website:</strong><br />
-								<span style="margin-top: 0"">{{ $clinic->url }}</span></a></li>
+								<span style="margin-top: 0">{{ $clinic->url }}</span></a></li>
 							<li>
 								<div class="border-separator space-10"></div>
 								<strong class="main-color">Social:</strong>

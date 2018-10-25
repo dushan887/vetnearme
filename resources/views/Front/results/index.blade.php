@@ -19,6 +19,13 @@
 		visibility: hidden;
     	opacity: 0;
 	}
+	@media screen and (min-width: 1200px) {
+		.page #search .search-wrapper .location-search {
+			max-width: 600px;
+		    margin-left: auto;
+		    margin-right: 0;
+		}
+	}
 </style>
 @stop
 
