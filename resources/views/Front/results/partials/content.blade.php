@@ -45,7 +45,7 @@
 					
 					Showing <span class="resaults-found main-color">{{ $clinics->total() }}</span>
 
-					<span>for search </span> <span class="search-input">{{ $address }}</span>
+					<span> vet<span class="show-plural">s</span> near </span> <span class="search-input">{{ $address }}</span> 
 				</div>
 			</div>
 		</div>

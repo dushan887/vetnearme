@@ -19,6 +19,13 @@
 		visibility: hidden;
     	opacity: 0;
 	}
+	@media screen and (min-width: 1200px) {
+		.page #search .search-wrapper .location-search {
+			max-width: 600px;
+		    margin-left: auto;
+		    margin-right: 0;
+		}
+	}
 </style>
 @stop
 
@@ -60,6 +67,15 @@
 
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#search-resaults .search-input').text($('#search-resaults .search-input').text().replace(', Australia', '').replace('Australia', ''))
+		
+		if ($('#search-resaults .resaults-found').text() == "1") {
+			$('#search-resaults .show-plural').hide()
+		}
+	})
+</script>
 
 <script>
 	$(document).ready(function () {
