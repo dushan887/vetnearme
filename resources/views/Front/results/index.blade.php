@@ -70,6 +70,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#search-resaults .search-input').text($('#search-resaults .search-input').text().replace(', Australia', '').replace('Australia', ''))
+		if ($('#search-resaults .search-input .resaults-found').text() == "1") {
+			$('.show-plural').hide()
+		}
 	})
 </script>
 
