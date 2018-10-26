@@ -70,9 +70,9 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#search-resaults .search-input').text($('#search-resaults .search-input').text().replace(', Australia', '').replace('Australia', ''))
-		console.log($('#search-resaults .search-input .resaults-found').text())
-		if ($('#search-resaults .search-input .resaults-found').text() == "1") {
-			$('#search-resaults .search-input .show-plural').hide()
+		console.log($('#search-resaults .resaults-found').text())
+		if ($('#search-resaults .resaults-found').text() == "1") {
+			$('#search-resaults .show-plural').hide()
 		}
 	})
 </script>
