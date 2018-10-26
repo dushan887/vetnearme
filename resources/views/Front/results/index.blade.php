@@ -61,6 +61,24 @@
 @section('AditionalFoot')
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHP8bVjaRJ6qoHssTHUDmjN-LEOJJrt2Q&libraries=places&region=AU"></script>
 
+<script>
+	$(document).ready(function () {
+		let searchForm = $('#address-input')
+		let term       = searchForm.val()
+
+		console.log(term);
+
+
+		let word = term.replace("Australia", "");
+		let secondWork = term.replace("australia", "");
+
+		console.log(secondWork);
+
+
+		searchForm.val(secondWork)
+	});
+</script>
+
 @if ($clinics->total() > 0)
 <script type="text/javascript">
 
