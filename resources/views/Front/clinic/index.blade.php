@@ -279,7 +279,7 @@ $(document).ready(function() {
 			var map = new google.maps.Map(document.getElementById('map2'), {});
 			var options = {
 			  types: ["(regions)"],
-			  componentRestrictions: {country: ["AU", "NZ"]}
+			  componentRestrictions: {country: ["AU"]}
 			 };
 			var input = document.getElementById('address-input');
 			var autocomplete = new google.maps.places.Autocomplete(input,options);
