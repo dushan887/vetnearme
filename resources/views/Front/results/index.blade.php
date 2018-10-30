@@ -77,6 +77,24 @@
 	})
 </script>
 
+<script>
+	$(document).ready(function () {
+		let searchForm = $('#address-input')
+		let term       = searchForm.val()
+
+		console.log(term);
+
+
+		let word = term.replace("Australia", "");
+		let secondWork = term.replace("australia", "");
+
+		console.log(secondWork);
+
+
+		searchForm.val(secondWork)
+	});
+</script>
+
 @if ($clinics->total() > 0)
 <script type="text/javascript">
 

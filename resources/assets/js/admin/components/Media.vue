@@ -166,9 +166,9 @@ export default {
                 case 'galery':
 
                    if(this.superadmin === 'yes'){
-                       this.asSuperAdmin()
+                       this.asSuperAdmin(event)
                    } else {
-                       this.asUser()
+                       this.asUser(event)
                    }
 
                     break;
