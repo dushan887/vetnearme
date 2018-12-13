@@ -1304,7 +1304,7 @@ article footer {
     text-align: right;
 }
 #visual-resaults .resault .resault-open span.checked:before {
-    content: 'OPEN';
+    content: 'OPEN NOW';
     color: green;
 }
 /*SINGLE CLINIC*/

@@ -33,7 +33,7 @@
 							</label>
 
 							<label for="clinics-open">
-								Open Clinics
+								Open Now
 								<input type="radio" name="working" value="open" id="clinics-open"
 								@if($working === 'open')
 									checked="checked"
