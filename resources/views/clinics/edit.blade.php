@@ -214,7 +214,7 @@
 
                   <div class="form-group {{ $errors->has('bookmark_url') ? 'has-error' : ''}}">
                     <label for=g maps_link>Booking URL</label>
-                    <input type="text" id=bookmark_url id=bookmark_url class="form-control"
+                    <input type="text" name=bookmark_url id=bookmark_url class="form-control"
                       placeholder="Booking URL"
                       value="{{ old('bookmark_url') ?? $clinic->bookmark_url }}">
                       {!! $errors->first('bookmark_url', '<p class="help-block">:message</p>') !!}
