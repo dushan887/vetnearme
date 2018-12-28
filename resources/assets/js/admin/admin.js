@@ -151,7 +151,11 @@ $('.timepicker').timepicker({
 
 $('.datepicker').datepicker({
     autoclose: true,
-    todayHighlight: true
+    todayHighlight: true,
+})
+
+$('.datepicker-with-clock').datetimepicker({
+    format:'YYYY-MM-DD HH:mm:ss'
 })
 
 if (typeof tinymce !== 'undefined') {

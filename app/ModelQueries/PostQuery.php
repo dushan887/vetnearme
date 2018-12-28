@@ -33,6 +33,9 @@ class PostQuery extends Post
 
         $data['body']    = clean($data['body']);
 
+        if($request->created_at)
+            $data['created_at'] = $request->created_at;
+
         $model = (new Post())->create($data);
 
         if($model->id)
@@ -55,6 +58,10 @@ class PostQuery extends Post
         }
 
         $data['body'] = clean($data['body']);
+
+        // dd($request->created_at);
+        if($request->created_at)
+            $data['created_at'] = $request->created_at;
 
         if($post->update($data))
             return $post->id;

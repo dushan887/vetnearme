@@ -80,6 +80,30 @@
           <!-- /. box -->
 
           <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Date of the post</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="input-group date">
+                  <div class="input-group-addon">
+                      <i class="fa fa-calendar"></i>
+                  </div>
+                  <input class="form-control pull-right datepicker-with-clock" name=date
+                  v-model=post.created_at
+                  id="date"
+                  type="text">
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+
+          <div class="box box-solid">
 
             <div class="box-header with-border">
               <h3 class="box-title">Category</h3>
@@ -207,6 +231,7 @@ export default {
             status: '',
             cover_image: '',
             category_id: null,
+            created_at: null,
           },
           categories:[],
           action: this.postid ? '/admin/posts/update/' + this.postid : '/admin/posts/store',
@@ -230,6 +255,9 @@ export default {
               this.categories = response.data
           })
     },
+    updateDate(date){
+      this.post.created_at = $('.datepicker-with-clock').data('date')
+    },
     save(status){
 
       let postData = new FormData()
@@ -242,6 +270,7 @@ export default {
       postData.set('expert', this.post.expert)
       postData.set('status', status === 'publish' ? 1 : 0)
       postData.set('category_id', $('#category_id').val())
+      postData.set('created_at', this.post.created_at)
       postData.append("cover_image", cover_image.files[0])
 
       axios.post(this.action, postData, {
@@ -297,6 +326,7 @@ export default {
               status: data.status,
               cover_image: data.cover_image,
               category_id: data.category_id,
+              created_at: data.created_at,
             }
         })
     }
@@ -308,6 +338,12 @@ export default {
     }
 
     this.getCategories()
+
+    let that = this
+
+    $('.datepicker-with-clock').on('dp.change', function(e){
+      that.updateDate();
+    })
   }
 }
 </script>
