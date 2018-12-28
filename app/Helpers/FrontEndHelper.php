@@ -8,10 +8,15 @@ if (!function_exists('isClinicOpen')) {
      * @param object $hours
      * @return boolean
      */
-    function isClinicOpen($hours, $currentDay, $currentHour)
+    function isClinicOpen($hours, $timezone)
     {
         $openUntil = null;
-        $nextDay   = strtolower(\Carbon\Carbon::tomorrow()->format( 'l' ));
+
+        $now     = \Carbon\Carbon::now($timezone);
+
+        $currentDay  = strtolower($now->format('l'));
+        $currentHour = $now->format('H:i:s');
+        $nextDay     = strtolower($now->tomorrow()->format( 'l' ));
 
         // If the  -to hour slot is null the clinic is not working
         if(!$hours->{$currentDay . '-to'})
@@ -28,6 +33,13 @@ if (!function_exists('isClinicOpen')) {
                 'open'  => true,
                 'until' => 'Opened 24h'
             ];
+
+        if (strtotime($hours->{$currentDay . '-from'}) > strtotime($currentHour)) {
+            return [
+                'open'  => false,
+                'until' => 'Opens at ' . $hours->{$currentDay . '-from'},
+            ];
+        }
 
         $openUntil = $hours->{$currentDay . '-to'} > $hours->{$currentDay . '-to2'} ?
                 $hours->{$currentDay . '-to'} : $hours->{$currentDay . '-to2'};

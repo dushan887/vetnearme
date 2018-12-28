@@ -165,6 +165,12 @@ class ClinicQuery extends Clinic
     {
         $coordinates = Geolocation::getCoordinates($data);
 
+        $data['timezone'] = Geolocation::getTimezoneCoordinates([
+            'lat' => $coordinates->latitude(),
+            'lng' => $coordinates->longitude(),
+        ]);
+
+
         $data['owner_id']      = \Auth::user()->hasRole('super_admin') ? null : \Auth::id();
         $data['opening_hours'] = $this->formatHours($data['hours'], $request);
         $data['social_media']  = Strings::arrayToJson($data['social']);

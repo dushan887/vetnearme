@@ -54,21 +54,24 @@ class Geolocation
         $response = json_decode($responseJson);
 
         if(isset($response->time_zone->name))
-            date_default_timezone_set($response->time_zone->name);
+            return $response->time_zone->name;
+
+        return null;
     }
 
-    public static function getTimezoneCoordinates($coordinates)
+    public static function getTimezoneCoordinates(array $coordinates)
     {
-        $url  = "https://maps.googleapis.com/maps/api/timezone/json?location={$coordinates['lat']},{$coordinates['lng']}&timestamp=$time&key=AIzaSyAcrIAbpZUflBVuRlUwYWfdRr_fmLy_sio";
+        $key = env('TIMEZONE_DB_KEY');
+
+        $url  = "http://api.timezonedb.com/v2.1/get-time-zone?key={$key}&lat={$coordinates['lat']}&lng={$coordinates['lng']}&by=position&format=json&fields=zoneName";
         $ch   = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $responseJson = curl_exec($ch);
+        $response = curl_exec($ch);
         curl_close($ch);
 
-        $response = json_decode($responseJson);
+        return json_decode($response);
 
-        dd($response);
     }
 }

@@ -26,7 +26,6 @@ class ResultsController extends Controller {
 
         $address     = XSS::clean($request->input('address-input'));
         $coordinates = $request->get('coordinates') ?? Geolocation::guessCoordinates($address);
-        $timezone    = Geolocation::getTimezoneIP(request()->ip());
         $currentHour = date('H:i:s');
         $currentDay  = strtolower(date('l'));
 
@@ -190,7 +189,7 @@ class ResultsController extends Controller {
                 (SELECT clinics.id as cid, clinics.lat, clinics.lng, clinics.opening_hours,
                 clinics.logo, clinics.address, clinics.city, clinics.state, clinics.name, clinics.description,
                 clinics.zip, clinics.phone_number, clinics.email, clinics.url, clinics.bookmark_url,
-                clinics.marker,
+                clinics.marker, timezone,
                 countries.full_name AS country,
                 (6378 * acos(
                     cos(radians(' . $lat . ')) * cos(radians(lat)) *

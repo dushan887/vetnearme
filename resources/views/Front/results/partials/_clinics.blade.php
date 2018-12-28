@@ -83,7 +83,7 @@
             </div>
 
             @php
-                $workingHours = isClinicOpen($hours, $currentDay, $currentHour);
+                $workingHours = isClinicOpen($hours, $clinic->timezone);
             @endphp
 
             @if($workingHours['open'])
