@@ -29,6 +29,8 @@ class PostStoreRequest extends FormRequest
             'permalink'   => 'required|min:3|max:255|unique:posts,permalink',
             'body'        => 'required|string',
             'expert'      => 'required|string',
+            'description' => 'nullable',
+            'keywords'    => 'nullable',
             'status'      => [Rule::in([0, 1])],
             'category_id' => 'required|integer'
         ];

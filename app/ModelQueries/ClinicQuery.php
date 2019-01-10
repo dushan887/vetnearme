@@ -168,7 +168,7 @@ class ClinicQuery extends Clinic
         $data['timezone'] = Geolocation::getTimezoneCoordinates([
             'lat' => $coordinates->latitude(),
             'lng' => $coordinates->longitude(),
-        ]);
+        ])->zoneName;
 
 
         $data['owner_id']      = \Auth::user()->hasRole('super_admin') ? null : \Auth::id();

@@ -48,6 +48,13 @@
                    v-model=post.body></textarea>
                 </div>
 
+                <div class="form-group" data-group=body>
+                  <label for="description">Description</label>
+                  <textarea id="description" name="body" class="form-control"
+                  style="height: 100px"
+                   v-model=post.description></textarea>
+                </div>
+
               </div>
               <!-- /.box-body -->
 
@@ -203,6 +210,27 @@
           </div>
           <!-- /. box -->
 
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Keywords</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <div class="form-group" data-group=keywords>
+                <textarea
+                  :value=post.keywords
+                  @keyup="post.keywords = $event.target.value"
+                  class="form-control" name=expert id=keywords rows="3" placeholder="Enter ..." ></textarea>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+
         </div>
         <!-- /.col -->
         </form>
@@ -268,6 +296,8 @@ export default {
       postData.set('permalink', this.post.permalink)
       postData.set('body', tinyMCE.activeEditor.getContent())
       postData.set('expert', this.post.expert)
+      postData.set('description', this.post.description)
+      postData.set('keywords', this.post.keywords)
       postData.set('status', status === 'publish' ? 1 : 0)
       postData.set('category_id', $('#category_id').val())
       postData.set('created_at', this.post.created_at)
@@ -323,6 +353,8 @@ export default {
               permalink: data.permalink,
               body: data.body,
               expert: data.expert,
+              description: data.description,
+              keywords: data.keywords,
               status: data.status,
               cover_image: data.cover_image,
               category_id: data.category_id,

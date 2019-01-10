@@ -51,7 +51,7 @@ class PostController extends Controller
 
         $model = new PostQuery;
 
-        if($model->store(XSS::clean($data, ['cover_image', 'body']), $request)){
+        if($model->store(XSS::clean($data, ['cover_image', 'body', 'description']), $request)){
             if($request->ajax()){
                 $request->session()->flash('alert', [
                     'message' => 'Post successfully created',
@@ -129,7 +129,7 @@ class PostController extends Controller
 
         $model = new PostQuery;
 
-        if($model->updatePost(XSS::clean($data, ['cover_image', 'body']), $request, $id)){
+        if($model->updatePost(XSS::clean($data, ['cover_image', 'body', 'description']), $request, $id)){
 
             if($request->ajax()){
                 $request->session()->flash('alert', [

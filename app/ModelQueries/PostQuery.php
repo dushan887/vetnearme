@@ -31,7 +31,8 @@ class PostQuery extends Post
 
         $data['user_id'] = \Auth::id();
 
-        $data['body']    = clean($data['body']);
+        $data['body']        = clean($data['body']);
+        $data['description'] = clean($data['description']);
 
         if($request->created_at)
             $data['created_at'] = $request->created_at;
@@ -57,7 +58,8 @@ class PostQuery extends Post
 
         }
 
-        $data['body'] = clean($data['body']);
+        $data['body']        = clean($data['body']);
+        $data['description'] = clean($data['description']);
 
         // dd($request->created_at);
         if($request->created_at)
