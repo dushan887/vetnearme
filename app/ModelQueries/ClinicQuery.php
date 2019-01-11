@@ -194,8 +194,10 @@ class ClinicQuery extends Clinic
 
         // Laravel validation will return null if empty
         // Text in mysql can't be null so we need to set it as the empty string
-        $data['description']   = $data['description']  ?? '';
-        $data['special_notes'] = $data['special_notes']  ?? '';
+        $data['description']      = $data['description']  ?? '';
+        $data['meta_description'] = $data['meta_description']  ?? '';
+        $data['keywords']         = $data['keywords']  ?? '';
+        $data['special_notes']    = $data['special_notes']  ?? '';
 
         return $data;
     }

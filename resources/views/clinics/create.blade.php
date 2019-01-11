@@ -104,6 +104,13 @@
                             {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
                           </div>
 
+                          <div class="form-group {{ $errors->has('meta_description') ? 'has-error' : ''}}">
+                            <label for=meta_description>Meta Description</label>
+                            <textarea class="form-control" id=meta_description name=meta_description
+                            placeholder="Meta Description">{{ old('meta_description') }}</textarea>
+                            {!! $errors->first('meta_description', '<p class="help-block">:message</p>') !!}
+                          </div>
+
                           <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                             <label for=email>Email Address</label>
                             <input type="email" id=email name=email class="form-control" placeholder="Email" value="{{ old('email')}}">
@@ -126,6 +133,12 @@
                             <label for=url>Web URL</label>
                             <input type="text" id=url name=url class="form-control" placeholder="Web URL" value="{{ old('url')}}">
                             {!! $errors->first('url', '<p class="help-block">:message</p>') !!}
+                          </div>
+
+                          <div class="form-group {{ $errors->has('keywords') ? 'has-error' : ''}}">
+                            <label for=url>Keywords</label>
+                            <textarea class="form-control" id=keywords name=keywords placeholder="Keywords">{{ old('keywords') }}</textarea>
+                            {!! $errors->first('keywords', '<p class="help-block">:message</p>') !!}
                           </div>
                         </div>
                       </div>
