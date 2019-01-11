@@ -15,7 +15,7 @@
 
 					<div class="article-body">
 						<h3>
-							<a href="/{{ $post->permalink }}">{{ $post->title }}!</a>
+							<a href="/{{ $post->permalink }}">{{ $post->title }}</a>
 						</h3>
 						{{-- <p>{{ $post->expert }}</p> --}}
 					</div>
