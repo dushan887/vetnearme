@@ -330,6 +330,9 @@
                               <input type="checkbox" name="not-working[monday]"
                                 value=monday
                                 id=not-working-monday
+                                @if (!$hours->{'monday-from'})
+                                  checked=checked
+                                @endif
                                 @change="notWorking('monday')">
                             </label>
                           </div>
@@ -389,7 +392,12 @@
                             <label for="not-working-tuesday" class="no-margin">
                                 <span>Closed</span>
                                 <input type="checkbox" name="not-working[tuesday]"
-                                  value=tuesday id=not-working-tuesday @change="notWorking('tuesday')">
+                                  @if (!$hours->{'tuesday-from'})
+                                    checked=checked
+                                  @endif
+                                  value=tuesday
+                                  id=not-working-tuesday
+                                  @change="notWorking('tuesday')">
                               </label>
                           </div>
                         </div>
@@ -447,7 +455,13 @@
                           <div class="col-xs-6" align="right">
                             <label for="not-working-wednesday" class="no-margin">
                               <span>Closed</span>
-                              <input type="checkbox" name="not-working[wednesday]" value=wednesday id=not-working-wednesday @change="notWorking('wednesday')">
+                              <input type="checkbox" name="not-working[wednesday]"
+                                @if (!$hours->{'wednesday-from'})
+                                  checked=checked
+                                @endif
+                                value=wednesday
+                                id=not-working-wednesday
+                                @change="notWorking('wednesday')">
                             </label>
                           </div>
                         </div>
@@ -506,7 +520,14 @@
                           <div class="col-xs-6" align="right">
                             <label for="not-working-thursday" class="no-margin">
                                 <span>Closed</span>
-                                <input type="checkbox" name="not-working[thursday]" value=thursday id=not-working-thursday @change="notWorking('thursday')">
+                                <input type="checkbox"
+                                  name="not-working[thursday]"
+                                  value=thursday
+                                  @if (!$hours->{'thursday-from'})
+                                    checked=checked
+                                  @endif
+                                  id=not-working-thursday
+                                  @change="notWorking('thursday')">
                               </label>
                           </div>
                         </div>
@@ -564,7 +585,14 @@
                           <div class="col-xs-6" align="right">
                             <label for="not-working-friday" class="no-margin">
                               <span>Closed</span>
-                              <input type="checkbox" name="not-working[friday]" value=friday id=not-working-friday @change="notWorking('friday')">
+                              <input type="checkbox"
+                                name="not-working[friday]"
+                                @if (!$hours->{'friday-from'})
+                                  checked=checked
+                                @endif
+                                value=friday
+                                id=not-working-friday
+                                @change="notWorking('friday')">
                             </label>
                           </div>
                         </div>
@@ -625,7 +653,14 @@
                           <div class="col-xs-6" align="right">
                             <label for="not-working-saturday" class="no-margin">
                                 <span>Closed</span>
-                                <input type="checkbox" name="not-working[saturday]" value=saturday id=not-working-saturday @change="notWorking('saturday')">
+                                <input type="checkbox"
+                                  name="not-working[saturday]"
+                                  @if (!$hours->{'saturday-from'})
+                                    checked=checked
+                                  @endif
+                                  value=saturday
+                                  id=not-working-saturday
+                                  @change="notWorking('saturday')">
                               </label>
                           </div>
                         </div>
@@ -684,7 +719,14 @@
                           <div class="col-xs-6" align="right">
                             <label for="not-working-sunday" class="no-margin">
                               <span>Closed</span>
-                              <input type="checkbox" name="not-working[sunday]" value=sunday id=not-working-sunday @change="notWorking('sunday')">
+                              <input type="checkbox"
+                                name="not-working[sunday]"
+                                value=sunday
+                                @if (!$hours->{'sunday-from'})
+                                  checked=checked
+                                @endif
+                                id=not-working-sunday
+                                @change="notWorking('sunday')">
                             </label>
                           </div>
                         </div>

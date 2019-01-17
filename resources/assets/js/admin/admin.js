@@ -125,6 +125,14 @@ let adminVue = new Vue({
     },
     mounted(){
 
+        let daysClosed = document.querySelectorAll('*[name^="not-working"]')
+
+        daysClosed.forEach((day) => {
+            if(day.checked){
+                this.notWorking(day.value)
+            }
+        })
+
         Event.$on('form:errors:show', (form, errors) => {
             Form.showErrors(form, errors)
         })
