@@ -90,7 +90,7 @@
 							<li><a href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
 							<li id="web-url-check">
-								<a href="{{ $clinic->url }}" 
+								<a href="{{ $clinic->url }}"
 									rel="nofollow noopener noreferrer" target="_blank"
 									onclick="trackOutboundLink('{{ $clinic->url }}'); return false">
 									<i class="fas fa-globe"></i> <strong>Website:</strong><br />
@@ -145,7 +145,13 @@
 									@if(!$hours->{'monday-from'})
 										Closed
 									@else
-										{{ $hours->{'monday-from'} }} - {{ $hours->{'monday-to'} }}
+
+										@if ($hours->{'monday-from'} === '00:00' && $hours->{'monday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'monday-from'} }} - {{ $hours->{'monday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'monday-from2'} !== '00:00' && $hours->{'monday-to2'} !== '00:00')
@@ -160,7 +166,13 @@
 									@if(!$hours->{'tuesday-from'})
 										Closed
 									@else
-										{{ $hours->{'tuesday-from'} }} - {{ $hours->{'tuesday-to'} }}
+
+										@if ($hours->{'tuesday-from'} === '00:00' && $hours->{'tuesday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'tuesday-from'} }} - {{ $hours->{'tuesday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'tuesday-from2'} !== '00:00' && $hours->{'tuesday-to2'} !== '00:00')
@@ -175,7 +187,13 @@
 									@if(!$hours->{'wednesday-from'})
 										Closed
 									@else
-										{{ $hours->{'wednesday-from'} }} - {{ $hours->{'wednesday-to'} }}
+
+										@if ($hours->{'wednesday-from'} === '00:00' && $hours->{'wednesday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'wednesday-from'} }} - {{ $hours->{'wednesday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'wednesday-from2'} !== '00:00' && $hours->{'wednesday-to2'} !== '00:00')
@@ -190,7 +208,13 @@
 									@if(!$hours->{'thursday-from'})
 										Closed
 									@else
-										{{ $hours->{'thursday-from'} }} - {{ $hours->{'thursday-to'} }}
+
+										@if ($hours->{'thursday-from'} === '00:00' && $hours->{'thursday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'thursday-from'} }} - {{ $hours->{'thursday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'thursday-from2'} !== '00:00' && $hours->{'thursday-to2'} !== '00:00')
@@ -205,7 +229,13 @@
 									@if(!$hours->{'friday-from'})
 										Closed
 									@else
-										{{ $hours->{'friday-from'} }} - {{ $hours->{'friday-to'} }}
+
+										@if ($hours->{'friday-from'} === '00:00' && $hours->{'friday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'friday-from'} }} - {{ $hours->{'friday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'friday-from2'} !== '00:00' && $hours->{'friday-to2'} !== '00:00')
@@ -220,7 +250,13 @@
 									@if(!$hours->{'saturday-from'})
 										Closed
 									@else
-										{{ $hours->{'saturday-from'} }} - {{ $hours->{'saturday-to'} }}
+
+										@if ($hours->{'saturday-from'} === '00:00' && $hours->{'saturday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'saturday-from'} }} - {{ $hours->{'saturday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'saturday-from2'} !== '00:00' && $hours->{'saturday-to2'} !== '00:00')
@@ -235,7 +271,13 @@
 									@if(!$hours->{'sunday-from'})
 										Closed
 									@else
-										{{ $hours->{'sunday-from'} }} - {{ $hours->{'sunday-to'} }}
+
+										@if ($hours->{'sunday-from'} === '00:00' && $hours->{'sunday-to'})
+											Open 24 hours
+										@else
+											{{ $hours->{'sunday-from'} }} - {{ $hours->{'sunday-to'} }}
+										@endif
+
 									@endif
 
 									@if ($hours->{'sunday-from2'} !== '00:00' && $hours->{'sunday-to2'} !== '00:00')

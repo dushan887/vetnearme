@@ -70,7 +70,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#search-resaults .search-input').text($('#search-resaults .search-input').text().replace(', Australia', '').replace('Australia', ''))
-		
+
 		if ($('#search-resaults .resaults-found').text() == "1") {
 			$('#search-resaults .show-plural').hide()
 		}
@@ -82,14 +82,8 @@
 		let searchForm = $('#address-input')
 		let term       = searchForm.val()
 
-		console.log(term);
-
-
 		let word = term.replace("Australia", "");
 		let secondWork = term.replace("australia", "");
-
-		console.log(secondWork);
-
 
 		searchForm.val(secondWork)
 	});
@@ -389,18 +383,16 @@ function initMap() {
   var service = new google.maps.places.PlacesService(map);
   var getNextPage = null;
 
-
-
   // Perform a nearby search.
 	service.nearbySearch(
 		{location: pyrmont, radius: 5000, type: ['veterinary_care']},
 		function(results, status) {
 		if (status !== 'OK') return;
-		createMarkers(results);
+		createMarkers(results, service);
 	});
 }
 
-function createMarkers(places) {
+function createMarkers(places, service) {
   var bounds = new google.maps.LatLngBounds();
 
   for (var i = 0, place; place = places[i]; i++) {
@@ -422,13 +414,13 @@ function createMarkers(places) {
 
     var infowindow = new google.maps.InfoWindow()
 
-    var content =  ''
+	var content =  ''
 
     google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){
 	    return function() {
 	    	var request = {
 		        reference: this.reference
-		    };
+			};
 
 		    service.getDetails(request, function(place, status){
 

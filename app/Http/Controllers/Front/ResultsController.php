@@ -131,7 +131,11 @@ class ResultsController extends Controller {
         $whereOpen = "";
 
         if($request->input('working') !== null && $request->input('working') === 'open')
-            $conditionsQuery[] = "JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') > '{$currentHour}'
+            $conditionsQuery[] = "
+                (CAST(JSON_UNQUOTE(JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-from\"')) AS time)
+                <= CAST('{$currentHour}' as time)
+                AND CAST('{$currentHour}' as time) <=
+                CAST(JSON_UNQUOTE(JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"')) AS time))
             OR (JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to\"') = '00:00' AND JSON_EXTRACT(`opening_hours`, '$.\"{$currentDay}-to2\"') = '00:00')" ;
 
         if($category === 'general')
