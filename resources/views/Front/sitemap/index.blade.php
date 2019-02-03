@@ -178,7 +178,7 @@
 <a href="https://vetnearme.com.au/results?address-input=Newtown+NSW+2042&selector-category=all">https://vetnearme.com.au/results?address-input=Newtown+NSW+2042&selector-category=all</a>
 <a href="https://vetnearme.com.au/results?address-input=Erskineville+NSW+2043&selector-category=all">https://vetnearme.com.au/results?address-input=Erskineville+NSW+2043&selector-category=all</a>
 <a href="https://vetnearme.com.au/results?address-input=St+Peters+NSW+2044&selector-category=all">https://vetnearme.com.au/results?address-input=St+Peters+NSW+2044&selector-category=all</a>
-<a href="https://vetnearme.com.au/results?address-input=Chatswood+NSW+2057&selector-category=all">https://vetnearme.com.au/results?address-input=Chatswood+NSW+2057&selector-category=all</a>
+<a href="https://vetnearme.com.au/results?address-input=Chatswood+NSW+2067&selector-category=all">https://vetnearme.com.au/results?address-input=Chatswood+NSW+2067&selector-category=all</a>
 <a href="https://vetnearme.com.au/results?address-input=Cammeray+NSW+2062&selector-category=all">https://vetnearme.com.au/results?address-input=Cammeray+NSW+2062&selector-category=all</a>
 <a href="https://vetnearme.com.au/results?address-input=Lane+Cove+West+NSW+2066&selector-category=all">https://vetnearme.com.au/results?address-input=Lane+Cove+West+NSW+2066&selector-category=all</a>
 <a href="https://vetnearme.com.au/results?address-input=Northwood+NSW+2066&selector-category=all">https://vetnearme.com.au/results?address-input=Northwood+NSW+2066&selector-category=all</a>
