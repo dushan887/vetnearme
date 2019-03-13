@@ -28,6 +28,7 @@ class PostUpdateRequest extends FormRequest
             'title'       => 'required|min:3|max:255|unique:posts,title,' . $this->route('id'),
             'permalink'   => 'required|min:3|max:255|unique:posts,permalink,' . $this->route('id'),
             'body'        => 'required|string',
+            'description' => 'required|string',
             'expert'      => 'required|string',
             'status'      => [Rule::in([0, 1])],
             'category_id' => 'required|integer'

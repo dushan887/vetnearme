@@ -170,6 +170,8 @@ class ClinicQuery extends Clinic
             'lng' => $coordinates->longitude(),
         ])->zoneName;
 
+        $data['general_practice'] = 0;
+        $data['specialist_and_emergency'] = 0;
 
         $data['owner_id']      = \Auth::user()->hasRole('super_admin') ? null : \Auth::id();
         $data['opening_hours'] = $this->formatHours($data['hours'], $request);

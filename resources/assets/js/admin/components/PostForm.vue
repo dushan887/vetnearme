@@ -255,6 +255,7 @@ export default {
             title: '',
             permalink: '',
             body: '',
+            description: '',
             expert: '',
             status: '',
             cover_image: '',

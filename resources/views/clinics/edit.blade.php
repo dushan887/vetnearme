@@ -57,7 +57,8 @@
                 <label style="display: block">
                       Specialist and Emergency
                       <input type="checkbox"
-                      value="true" name="specialist_and_emergency"
+                      value="true"
+                      name="specialist_and_emergency"
                       class="minimal pull-right"
                       @if($clinic->specialist_and_emergency)
                         checked
