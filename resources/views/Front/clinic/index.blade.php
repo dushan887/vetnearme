@@ -2,6 +2,20 @@
 
 @section('SEOinfo')
 	<title>{{ $clinic->name }}, {{ $clinic->city }}, {{ $clinic->zip }} - Vet Near Me</title>
+
+	<meta name="description" content="{{ $clinic->meta_description }}">
+	<meta name="keywords" content="{{ $clinic->keywords }}">
+	<meta name="author" content="Vet Near Me">
+
+	<meta property="og:title" content="{{ $clinic->name }}, {{ $clinic->city }}, {{ $clinic->zip }} - Vet Near Me">
+	<meta property="og:description" content="{{ $clinic->meta_description }}">
+	<meta property="og:image" content="{{ url($metaImage) }}">
+	<meta property="og:url" content="{{ $clinic->url }}">
+
+	<meta name="twitter:title" content="{{ $clinic->name }}, {{ $clinic->city }}, {{ $clinic->zip }} - Vet Near Me ">
+	<meta name="twitter:description" content="{{ $clinic->meta_description }}">
+	<meta name="twitter:image" content="{{ url($metaImage) }}">
+	<meta name="twitter:card" content="summary_large_image">
 @stop
 
 @section('AditionalHead')
@@ -95,7 +109,7 @@
 		    margin: auto;
 		    text-align: center;
 		}
-		.service-list li { 
+		.service-list li {
 			min-width: 48%
 		}
 	}
@@ -264,7 +278,7 @@
 	       if (geocoder) {
 	          geocoder.geocode({ 'latLng': latLng}, function (results, status) {
 	             if (status == google.maps.GeocoderStatus.OK) {
-	               
+
 	                var arrAddress = results[0].formatted_address;
 					$('#address-input').val(arrAddress)
 	             }
@@ -273,7 +287,7 @@
 	      } //showPosition
 	}
 $(document).ready(function() {
-	    
+
 
 	    function initMap() {
 			var map = new google.maps.Map(document.getElementById('map2'), {});
@@ -306,7 +320,7 @@ $(document).ready(function() {
 			} else {
 				alert( "Please input correct location!" );
 			}
-		}) 
+		})
 })
 
 </script>
