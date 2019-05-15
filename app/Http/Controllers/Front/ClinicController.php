@@ -22,7 +22,7 @@ class ClinicController extends Controller {
             "/media/general/{$clinic->gallery[0]->media->name}" :
             "/media/" . strtolower(str_replace(' ', '-', $clinic->name)) . "/" . $clinic->gallery[0]->media->name;
         else
-            $metaImage = null;
+            $metaImage = '';
 
         return view('Front.clinic.index', [
             'clinic'    => $clinic,

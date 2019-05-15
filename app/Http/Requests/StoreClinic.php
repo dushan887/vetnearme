@@ -44,8 +44,8 @@ class StoreClinic extends FormRequest
             'special_notes'            => 'nullable|string|max:1024',
             'logo'                     => 'nullable|image',
             'marker'                   => 'nullable|image',
-            'general_practice'         => 'required_without_all:specialist_and_emergency',
-            'specialist_and_emergency' => 'required_without_all:general_practice',
+            'general_practice'         => 'nullable|boolean',
+            'specialist_and_emergency' => 'nullable|boolean',
 
         ];
     }
