@@ -44,8 +44,8 @@ class UpdateClinicRequest extends FormRequest
             'special_notes'            => 'nullable|string|max:1024',
             'logo'                     => 'nullable|image',
             'marker'                   => 'nullable|image',
-            'general_practice'         => 'nullable|boolean',
-            'specialist_and_emergency' => 'nullable|boolean',
+            'general_practice'         => 'nullable',
+            'specialist_and_emergency' => 'nullable',
 
         ];
     }

@@ -2,6 +2,7 @@
 
 @section('SEOinfo')
 	<title>Vet Near Me</title>
+	<meta name="robots" content="noindex" />
 @stop
 
 @section('AditionalHead')
