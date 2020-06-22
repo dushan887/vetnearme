@@ -32,4 +32,9 @@ class ClinicController extends Controller {
         ]);
     }
 
+    public function old_clinic_url($clinicName)
+    {
+        return redirect('/vet-clinic/'.$clinicName);
+    }
+
 }
