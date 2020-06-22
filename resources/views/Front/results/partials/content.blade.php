@@ -1,5 +1,5 @@
 <section id="search-resaults">
-	<div class="container">
+	<div class="container-fluid">
 
 		<div class="row">
 			<div class="col-12 ds-flex-s">

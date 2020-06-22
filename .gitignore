@@ -4,6 +4,10 @@
 /public/avatars
 /public/postsCover
 /public/img/logo
+/public/media
+/public/img/markers/
+/public/sitemap.html
+/storage/debugbar/
 /storage/*.key
 /vendor
 /.idea

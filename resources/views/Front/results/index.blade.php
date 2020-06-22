@@ -40,7 +40,7 @@
 		<div id="wrapper">
 
 
-			<div class="container page-content">
+			<div class="container-fluid page-content">
 				<div
 					id="content"
 					data-coordinates="{{ $coordinates }}"
