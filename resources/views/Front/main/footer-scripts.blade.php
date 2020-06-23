@@ -36,7 +36,7 @@
 
 	// Get the clinics based on radius
 
-	$('body').on('change', '#radius, input[name=working], input[name="services[]"]', function(){
+	$('body').on('change', '#radius, input[name=working], #toogle-search input[name="services[]"]', function(){
 
 		let data  = $('#search').serialize() + '&radius=' + $('#radius').val() + '&working=' + $('input[name=working]:checked').val()
 
