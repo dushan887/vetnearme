@@ -21,6 +21,10 @@
 
 @section('BodySetup')
 	<body class="page post">
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB8N57T"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<header id="header">
 		@include('Front.main.header')
 	</header>

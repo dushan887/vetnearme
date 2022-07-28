@@ -62,6 +62,10 @@
 
 @section('BodySetup')
 	<body class="home">
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TB8N57T"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 	<header id="header">
 		@include('Front.main.header')
 	</header>
@@ -137,7 +141,7 @@ function getMyLocation () {
        if (geocoder) {
           geocoder.geocode({ 'latLng': latLng}, function (results, status) {
              if (status == google.maps.GeocoderStatus.OK) {
-               
+
                 var arrAddress = results[0].address_components;
 				var itemLocality='';
 				var itemCountry='';
@@ -152,16 +156,16 @@ function getMyLocation () {
 				        itemLocality = address_component.long_name;
 				    }
 
-				    if (address_component.types[0] == "country"){ 
-				        // console.log("country:"+address_component.long_name); 
+				    if (address_component.types[0] == "country"){
+				        // console.log("country:"+address_component.long_name);
 				        itemCountry = address_component.long_name;
 				    }
 
-				    if (address_component.types[0] == "postal_code"){ 
-				        // console.log("pc:"+address_component.long_name);  
+				    if (address_component.types[0] == "postal_code"){
+				        // console.log("pc:"+address_component.long_name);
 				        itemPc = address_component.long_name;
 				    }
-				    //return false; // break the loop   
+				    //return false; // break the loop
 				});
 
 				$('#address-input').val(itemLocality +' '+ itemPc+' '+itemCountry);
@@ -178,12 +182,12 @@ $(document).ready(function() {
 	if ($(window).width() < 992) {
 		$('form').find("input[type=text]").each(function(ev)
 		  {
-		      if(!$(this).val()) { 
+		      if(!$(this).val()) {
 			     $(this).attr("placeholder", "Enter suburb, town or city");
 			  }
 		 })
 	}
-	
+
 })
 </script>
 @stop
