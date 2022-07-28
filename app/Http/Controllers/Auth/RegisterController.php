@@ -120,8 +120,8 @@ class RegisterController extends Controller
         return redirect('/login')->with('status', 'We sent you an activation code. Check your email and click on the link to verify.');
     }
 
-     /**
-     * Show the application registration form.
+    /**
+    * Show the application registration form.
      *
      * @return \Illuminate\Http\Response
      */
@@ -130,3 +130,4 @@ class RegisterController extends Controller
         abort(404);
     }
 }
+
