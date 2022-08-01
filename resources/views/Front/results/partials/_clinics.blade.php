@@ -44,7 +44,7 @@
                                 </a>
             </div>
             <div class="resault-email">
-                <a href="mailto:{{ $clinic->email }}">
+                <a id="mailto" href="mailto:{{ $clinic->email }}">
                                     <i class="fa fa-envelope"></i>
                                     <span>Email Address</span>
                                 </a>
