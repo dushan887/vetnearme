@@ -87,7 +87,7 @@
 								<span style="margin-top: 0">{{ $clinic->phone_number }}</span></a></li>
 							<li><a href="tel:{{ $clinic->emergency_number }}"><i class="fas fa-phone-square"></i> <strong>Emergency:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->emergency_number }}</span></a></li>
-							<li><a href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
+							<li><a id="mailto" href="mailto:{{ $clinic->email }}"><i class="fas fa-envelope-square"></i> <strong>Email:</strong><br />
 								<span style="margin-top: 0">{{ $clinic->email }}</span></a></li>
 							<li id="web-url-check">
 								<a href="{{ $clinic->url }}"
