@@ -38,7 +38,7 @@
         <div class="border-separator space-12"></div>
         <div class="resault">
             <div class="resault-phone">
-                <a href="tel:{{ preg_replace('/\D/', '', $clinic->phone_number) }}">
+                <a id="clinic_phone" href="tel:{{ preg_replace('/\D/', '', $clinic->phone_number) }}">
                                     <i class="fa fa-phone"></i>
                                     <span>{{ $clinic->phone_number }}</span>
                                 </a>
@@ -50,7 +50,7 @@
                                 </a>
             </div>
             <div class="resault-web">
-                <a href="{{ $clinic->url }}" target="_blank"
+                <a id="clinic_web_site" href="{{ $clinic->url }}" target="_blank"
                     rel="nofollow noopener noreferrer"
                     onclick="trackOutboundLink('{{ $clinic->url }}'); return false">
                     <i class="fa fa-globe"></i>
@@ -70,13 +70,13 @@
                 <span class="fa fa-star checked"></span>
             </div>
             <div class="resault-directions">
-                <a href="https://www.google.com/maps/dir/{{ strtolower(str_replace([':', '"', '{', '}', 'lat', 'lng', ']', '['], '', $userCoordinates)) }}/{{ $clinic->lat }},{{ $clinic->lng }}" target="_blank" rel="nofollow noopener noreferrer">
+                <a id="clinic_direction" href="https://www.google.com/maps/dir/{{ strtolower(str_replace([':', '"', '{', '}', 'lat', 'lng', ']', '['], '', $userCoordinates)) }}/{{ $clinic->lat }},{{ $clinic->lng }}" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fa fa-map-signs"></i>
                     Get Directions
                 </a>
             </div>
             <div class="resault-book">
-                <a href="{{ $clinic->bookmark_url }}" target="_blank" rel="nofollow noopener noreferrer">
+                <a id="clinic_book" href="{{ $clinic->bookmark_url }}" target="_blank" rel="nofollow noopener noreferrer">
                     <i class="fas fa-calendar-alt"></i>
                     Book Now
                 </a>
