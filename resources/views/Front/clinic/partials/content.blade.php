@@ -102,7 +102,7 @@
 									@foreach($social as $key => $value)
 
 										<li>
-											<a id="{{ $key . $square }}"
+											<a id="clinic_{{ $square }}"
 											href="{{ $value }}">
 												<?php $square = '' ?>
 												@if(in_array($key, ['facebook', 'twitter', 'youtube']))
