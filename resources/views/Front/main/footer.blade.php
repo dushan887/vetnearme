@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-12 col-md-6">
-			<span>© <strong>Vet</strong> Near Me, 2018. All Rights Reserved.</span>
+			<span>© <strong>Vet</strong> Near Me, {{ date("Y") }}. All Rights Reserved.</span>
 		</div>
 		<div class="col-12 col-md-6">
 			<ul class="list-unstyled list-inline mb-0">
