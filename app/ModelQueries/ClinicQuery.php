@@ -165,10 +165,12 @@ class ClinicQuery extends Clinic
     {
         $coordinates = Geolocation::getCoordinates($data);
 
-        $data['timezone'] = Geolocation::getTimezoneCoordinates([
-            'lat' => $coordinates->latitude(),
-            'lng' => $coordinates->longitude(),
-        ])->zoneName;
+        if($coordinates){
+            $data['timezone'] = Geolocation::getTimezoneCoordinates([
+                'lat' => $coordinates->latitude(),
+                'lng' => $coordinates->longitude(),
+            ])->zoneName;
+        }
 
         $data['general_practice'] = 0;
         $data['specialist_and_emergency'] = 0;
